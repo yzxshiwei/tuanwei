@@ -1,0 +1,344 @@
+
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src='js-lib/jquery-2.1.1.min.js'></script>
+	<script src='js-lib/jquery.base64.js'></script>
+				
+	<link rel="stylesheet" href="css/background/css/normalize.css" />
+	<link rel="stylesheet" href="css/background/css/style.css" />
+	<link rel="stylesheet" href="css/background/css/font-awesome.min.css" />
+	
+	<script src='my-js/root_ui/root_ui.js'></script>
+	<script src='my-js/root_ui/file_upload.js'></script>
+
+	<link href="js-lib/jquery-ui.min.css" rel="stylesheet">
+	<script src="js-lib/jquery-ui.min.js"></script>
+
+        <script src="../js/baidu.js"></script>
+			
+	<link rel="stylesheet" type="text/css" href="css/style_wang.css">
+</head>
+
+<body>
+	<div class="htmleaf-container">
+	
+		<div class="container pb30">
+			<div class="clear-backend">
+			<div class="avatar">
+				<div>
+					<a href="index.html" >
+
+					
+						<img src="images/back-logo.jpg" alt="logo"/>
+					</a>
+				</div>
+			</div>
+
+			<!-- tab-menu -->
+			<div class="aaa"></div>
+
+			
+
+
+
+
+			<span>
+			<a href="user_manage.html">人员管理</a>
+			</span>
+			<i class="fa fa-user"></i>
+
+			<span>
+			<a href="team_manage.html">团队管理</a>
+			</span>
+			<i class="fa fa-users"></i>
+			<span>
+			<a href="new_news.html">创建信息</a>
+			</span>
+			<i class="fa fa-lightbulb-o"></i>
+
+			<span>
+			<a href="new_match.html">创建比赛</a>
+			</span>
+			<i class="fa fa-lightbulb-o"></i>
+
+			<span>
+			<a href="match_manage.html">比赛管理</a>
+			</span>
+			<i class="fa fa-futbol-o"></i>
+
+			<span>
+			<a href="news_manage.html">信息管理</a>
+			</span>
+			<i class="fa fa-cubes"></i>
+
+			
+		
+			
+			
+			<div class='side_bar'></div>
+			
+			<!-- tab-top-bar -->
+			<div class="top-bar">
+				<ul>
+					<li>
+						<a href="javascript:void(0)" title="Log Out" onclick="logout()">
+							<i class="fa fa-sign-out"></i>
+						</a>
+					</li>
+					<li><span class="user_name" style='padding:0 10px'></span></li>
+				</ul>
+			</div>
+
+			<!-- tab-content -->
+			<div class="tab-content">
+				
+					<div class='tool_bar'>
+						
+						<a title='增加用户' class='a_user_add'><i class='fa fa-user-plus'></i>点击增加用户</a>	
+					</div>
+					
+					<table class="user_table hover_table">
+						<tbody>
+							<tr style='background:#aaa;color:#fff'>
+								<th width='7%'>ID</th>
+								<th width='30%'>用户名</th>
+								<th width='10%'>身份</th>
+								<th width='33%'>Email</th>
+								<th class='user_set'>设置</th>
+							</tr>
+						</tbody>
+					</table>
+			
+			</div>
+		</div>
+	</div>
+	
+	<div class='login_div'>
+		<i class='fa fa-close'></i>
+		<form id='user_add_form' method='post' onsubmit="return false;">
+			<h2 class="login-heading">注 册</h2>			
+			<div class='reg_lable'>电子邮件</div><input name='email' type="email" id="input-email" placeholder="电子邮件地址（必填）" required='required' autofocus='autofocus' />
+			<br/>
+			<div class='reg_lable'>证件类型</div>
+			<select name='id_type'> 
+				<option value='0'>学生证</option> 
+				<option value='1'>身份证</option> 
+			</select> 
+			<input name='id_no' type="text" id="input-id" placeholder="证件号（必填）" required='required' />
+			<br/>
+			<div class='reg_lable'>身份</div>
+			<select id='s_type' name='role'> 
+				<option value='0'>学生个人</option> 
+				<option value='1'>工作人员</option> 
+				<option value='2'>指导老师</option>
+				<option value='3'>评审专家</option> 
+				<option value='4'>投资人</option> 
+			</select>
+			
+			<div class='reg_lable'>性别</div>
+			<select name='sex' style='width:108px'> 
+				<option value='0'>女</option> 
+				<option value='1'>男</option> 
+			</select>
+			
+			<br/>
+			<div class='reg_lable'>密码</div><input name='password' type="password" id="input-password" placeholder="密码（必填）" required='required' />
+			<br/>
+			<div class='reg_lable'>密码确认</div><input name='password2' type="password" id="input-password" placeholder="再次输入密码（必填）" required='required' />
+			
+			<br/><br/><br/>
+			<div class='reg_lable'>学院/机构</div><input name='com' type="text" id="input-com" placeholder="所在学院或单位" />
+			<br/>
+			<div class='reg_lable'>姓名</div><input name='real_name' type="text" id="input-name" placeholder="您真实姓名" />
+			<br/>
+			<button id='user_add_b' class="btn btn-lg btn-primary btn-block">提 交</button>
+			<span id='user_add_res' style='margin-left:20px'></span>
+		</form>
+	</div>
+</div>
+
+<div class="pop_layer" style="display:none">
+	
+	<a href="javascript:void(0)" style="position:absolute;right:10px;top:10px;line-height:20px;font-size:20px;" onclick="close_layer()">x</a>
+	<div class="layer_body"></div>
+
+</div>
+<!-- 卡片视图模板 -->
+<script type="text/html" id="user_card">
+		用户名  : <%=user_info_["name"]%><br>
+		邮箱地址  :<%=user_info_["email"]%><br>
+		用户组  :<%=user_info_["identity"]%><br>
+		所属团队ID  :<%=user_info_["team_info"]%><br>
+		
+</script>
+
+<!-- 卡片视图模板 -->
+
+<!-- <script src="my-js/template.js"></script>
+
+<script src="my-js/logic.js"></script> -->
+<script>
+
+// function append_user( tbody, user_data, d ) {
+// 	$.each( user_data, function(i,v) {
+// 		var tr = $('<tr class="user_info" id="'+v.u_id+'"></tr>');
+		
+// 		tbody.append( tr );
+		
+// 		tr.append( $('<td>'+(parseInt(i)+1)+'</td>') );
+// 		tr.append( $('<td><a class="user_name" u_id='+i+' onclick="show_people_info(this)">'+v.name+'</a></td>') );
+// 		tr.append( $('<td><a class="user_identity">'+v.identity+'</a></td>') );
+// 		tr.append( $('<td><a class="user_email">'+v.email+'</a></td>') );
+// 		tr.append( $('<td class="user_set"><input type="checkbox" class="user_valid"/>禁止<a class="delete">删除</a></td>') );
+// 		if( v.state=='disable' )
+// 			tr.find( 'input[type=checkbox]' )[0].checked = true; 
+// 	} );
+
+// 	$('a.delete').click( function() {
+// 		var t = $(this).parents('tr');
+// 		var uid = t.attr('id');
+		
+// 		$.post( 'my-php/root_ui/change_user_state.php', {u_id:uid,state:'delete'} );
+		
+// 		$.each( user_info, function(i,v) {
+// 			if( v.u_id==uid ) {
+// 				user_info.splice( i, 1 );
+// 				t.hide( 400, function() { $(this).remove(); } );	
+// 				ii = i;
+// 				return false;
+// 			}	
+// 		} );	
+		
+// 	} );
+
+	
+// 	$('input[type=checkbox].user_valid').click( function() {
+// 		var t = $(this).parents('tr');
+// 		var uid = t.attr('id');
+		
+// 		var s = this.checked;
+// 		if( s )
+// 			s = 'disable';
+// 		else
+// 			s = 'enable';
+		
+// 		$.post( 'my-php/root_ui/change_user_state.php', {"u_id":uid,"state":s} );
+// 	} );
+	
+// }
+
+
+// function list_user( j_obj ) {
+// 	var tbody = j_obj.children('tbody');
+// 	append_user( tbody, user_info, 0 );
+// }
+
+// function show_people_info(e){
+
+// 	$('.layer_body').html();
+// 	var info_index = $(e).attr("u_id")
+// 	var user_info_ = {"user_info_":user_info[info_index]}
+// 	var bt_user_info = baidu.template;
+// 	var header_temp = bt_user_info('user_card', user_info_);
+// 	$('.layer_body').html(header_temp);
+// $('.pop_layer').show()
+	
+
+// }
+// function close_layer(){
+// 	$('.pop_layer').hide()
+// }
+
+
+
+
+
+
+
+// 	$('.login_div').draggable();
+// 			$('.login_div i.fa-close').click( function() { $('.login_div').hide(); } );
+// 		$(document).ready(function(){		
+// 			// get user info
+// 			$.post( 'my-php/root_ui/get_user.php', function( data ) {
+
+
+
+// 				console.log(data)
+// 				user_info = data
+// 				var user_tab = $('.user_table');
+// 				list_user( user_tab );
+// 				console.log("1")
+// 			},"json");
+
+
+// 			})	
+					
+// 			$('a.a_user_add').click( function(e) {
+// 				var t = $('.login_div');
+// 				t.css( {'left':(e.pageX-469)+'px','top':e.pageY+'px'} );
+// 				t.show();
+// 			} );
+			
+// 			// 添加用户
+// 			$('#user_add_b').click( function() {
+// 				var t = $('#user_add_form');
+// 				var data = new Object();
+				
+// 				var p1 = $('input[name=password]').val();
+// 				var p2 = $('input[name=password2]').val();
+// 				if( p1!=p2 ) {
+// 					$('#user_add_res').text( '密码确认失败' );
+// 					setTimeout( function(){ $('#user_add_res').text('');}, 1000 );
+// 					return false;
+// 				}
+// 				else
+// 					data['password'] = p1;
+					
+// 				data['email'] = t.find('input[name=email]').val();
+// 				data['identity'] = t.find('#s_type option:selected').val();
+// 				switch( data['identity'] ) {
+// 					case '0':
+// 						data['identity'] = 'individual';
+// 						break;
+// 					case '1':
+// 						data['identity'] = 'admin';
+// 						break;
+// 					case '2':
+// 						data['identity'] = 'tutor';
+// 						break;
+// 					case '3':
+// 						data['identity'] = 'expert';
+// 						break;
+// 					case '4':
+// 						data['identity'] = 'investor';
+// 						break;
+// 				}
+				
+// 				if( t.find('select[name=id_type]').val()==0 )
+// 					data['id'] = 's' + t.find('input[name=id_no]').val();
+// 				else
+// 					data['id'] = 'i' + t.find('input[name=id_no]').val();
+				
+// 				if( t.find('select[name=sex]').val()==1 )
+// 					data['sex'] = 'M';
+// 				else
+// 					data['sex'] = 'F';
+				
+// 				data['com'] = t.find('input[name=com]').val();
+// 				data['name'] = t.find('input[name=real_name]').val();
+				
+// 				$.post( 'my-php/root_ui/add_user.php', data, function(res) {
+// 					$('#user_add_res').text( res );
+// 					setTimeout( function(){ $('#user_add_res').text('');}, 1000 );
+// 				} );
+// 			} );
+
+</script>
+</body>
+
+</html>

@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src='js-lib/jquery-2.1.1.min.js'></script>
+	<script src='js-lib/jquery.base64.js'></script>
+				
+	<link rel="stylesheet" href="css/background/css/normalize.css" />
+	<link rel="stylesheet" href="css/background/css/style.css" />
+	<link rel="stylesheet" href="css/background/css/font-awesome.min.css" />
+
+	<script  src='js-lib/ueditor1_4_3-utf8-php/ueditor.config.js'></script>
+    <script  src='js-lib/ueditor1_4_3-utf8-php/ueditor.all.min.js'> </script>
+	<script  src='js-lib/ueditor1_4_3-utf8-php/lang/zh-cn/zh-cn.js'></script>
+	
+	<script src='my-js/root_ui/root_ui.js'></script>
+	<script src='my-js/root_ui/file_upload.js'></script>
+
+	
+	
+
+	<link href="js-lib/jquery-ui.min.css" rel="stylesheet">
+	<script src="js-lib/jquery-ui.min.js"></script>
+
+        <script src="../js/baidu.js"></script>
+			
+	<link rel="stylesheet" type="text/css" href="css/style_wang.css">
+</head>
+
+<body>
+	<div class="htmleaf-container">
+	
+		<div class="container pb30">
+			<div class="clear-backend">
+			<div class="avatar">
+				<div>
+                        <a href="index.html" >
+
+						<img src="images/back-logo.jpg" alt="logo"/>
+					</a>
+				</div>
+			</div>
+
+			<!-- tab-menu -->
+			<div class="aaa"></div>
+
+			<span>
+			<a href="user_manage.html">人员管理</a>
+			</span>
+			<i class="fa fa-user"></i>
+
+			<span>
+			<a href="team_manage.html">团队管理</a>
+			</span>
+			<i class="fa fa-users"></i>
+
+			<span>
+			<a href="new_match.html">创建比赛</a>
+			</span>
+			<i class="fa fa-lightbulb-o"></i>
+
+			<span>
+			<a href="match_manage.html">比赛管理</a>
+			</span>
+			<i class="fa fa-futbol-o"></i>
+
+			<span>
+			<a href="news_manage.html">信息管理</a>
+			</span>
+			<i class="fa fa-cubes"></i>
+
+			
+			
+			
+			
+			<div class='side_bar'></div>
+			
+			<!-- tab-top-bar -->
+			<div class="top-bar">
+				<ul>
+					<li>
+						<a href="javascript:void(0)" title="Log Out" onclick="logout()">
+						
+							<i class="fa fa-sign-out"></i>
+						</a>
+					</li>
+					<li><span class="user_name" style='padding:0 10px'></span></li>
+				</ul>
+			</div>
+
+			<!-- tab-content -->
+			<div class="tab-content">
+			
+				
+				
+				
+					<div id='expert_choose' class="hide comments"></div>
+					
+					<div class='race_set_div'>
+						<input type='file' id='f_u' name='selectFiles'/>
+						<form action='' method='post' onsubmit="return false;">
+							<h2 class='login-heading'>新建比赛</h2>
+							
+							<span class='race_set_lable'>比赛名称：</span><input type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' />
+							<br/>
+							<span class='race_set_lable'>副标题: </span><input type='text' id='input-race-sub' placeholder='副标题'  />
+							<br/>
+							<span class='race_set_lable'>比赛时间：</span>
+							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' />
+							<div class='line'></div>
+							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
+							<br/>
+							<p class='race_set_lable'>首页banner</p>
+							<div class='file_upload_plugin'>
+								<div id='file_upload_area' class='droppable' draggable='true'>
+									<img />
+									<a id='banner_close' class='fa fa-close'></a>
+								</div>
+								<!-- <a class='upload'>上传</a> -->
+								<a class='browse'>浏览</a>
+							</div>
+							<br/>
+							
+							<p class='race_set_lable'>比赛规程</p>
+							<script id='editor' type='text/plain' style='width:100%;height:500px;'></script>
+							<br/>
+							<p class='race_set_lable'>比赛相关表格上传</p>
+							<ul class='main_banner'></ul>
+							<input type='file' name='upload_template'/>
+							<br/>
+							
+							<p class='line' style='margin:30px 0 10px 0;width:100%;border-bottom:solid 10px #ccc'></p>
+							<span class='race_set_lable'>比赛报名</span>
+							<br/>
+							<span class='race_set_lable'>报名时间：</span>
+							<input type='date' id='input-reg-time1' name='reg-start-date' placeholder='报名开始时间' />
+							<div class='line'></div>
+							<input type='date' id='input-reg-time2' name='reg-end-date' placeholder='报名结束时间' />
+							<br/>
+							<p class='race_set_lable'>比赛首页模板上传</p>
+							<input type='file' name='upload_reg_page' />
+							<br/>
+							
+							<p class='line' style='margin:30px 0 10px 0;width:100%;border-bottom:solid 10px #ccc'></p>
+							<span class='race_set_lable'>比赛分组</span><a id='race_add_group' class='fa fa-plus'></a>
+							<br/>
+							<div class='race_group_div'>
+								<input class='race_group' type='text' placeholder='默认组' required='required' />
+							</div>
+							<br/>
+							<div class='list_div'></div>
+							<br/>
+							
+							<p class='line' style='margin:30px 0 10px 0;width:100%;border-bottom:solid 10px #ccc'></p>
+							<span class='race_set_lable'>作品评审</span><a id='race_expert_num_add' style='margin-left:18px' class='fa fa-plus'></a>
+							<br/>
+							<span class='race_set_lable'>每组由</span>
+							<span id='race_expert_num' style='font-size:18px;margin-right:18px;text-align:center;width:48px'>1</span>
+							<span class='race_set_lable'>位专家评审</span>
+							<br/>
+							<div id='race_expert_set_div'>
+								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' /><a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus'></a>
+							</div>
+							<br/>
+							
+							<p class='line' style='margin:30px 0 10px 0;width:100%;border-bottom:solid 10px #ccc'></p>
+													
+							<button id='b_ok'>确定</button>
+					
+						</form>
+					</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<!--  -->
+<script>
+// var main_banner;
+// var race_id;
+
+// $(document).ready(function() {
+	
+// 	UE.getEditor('editor');
+// 	race_id = 'race_' + $.now();
+	
+// 	$('#file_upload_area').bind( {
+// 		drop: function(e) {
+		
+// 			e.preventDefault();
+// 			var oe = e.originalEvent;
+// 			var file_list = oe.dataTransfer.files;
+// 			main_banner = file_list[0];
+// 			show_image( file_list, '#file_upload_area' );
+// 		},
+// 		dragover: function(e) {
+// 			e.preventDefault();
+// 			return true;
+// 		}
+// 	} );
+
+// 	$('.file_upload_plugin a.upload').click( function() {
+		
+// 		if( typeof(main_banner)!='undefined' ) {
+		
+// 			var banner = new Object();
+// 			var reader = new FileReader();
+			
+// 			reader.onload = function() {
+// 				banner['banner'] = $.base64( 'encode', this.result );
+// 				banner['banner_name'] = main_banner.name;
+// 				banner['race_id'] = race_id;
+// 				$.post( 'my-php/root_ui/add_race.php', banner, function() { alert('banner 上传成功'); } );	
+// 			};	
+			
+// 			reader.readAsBinaryString( main_banner );
+// 		}
+// 	} );
+	
+// 	$('.file_upload_plugin a.browse').click( function(e) {
+// 		$('#f_u').trigger('click');
+// 		console.log("upload_click")
+// 	} );
+	
+// 	$('#f_u').change( function(e) {	
+// 		main_banner = this.files[0];
+// 		show_image( this.files, '#file_upload_area');
+// 	} );
+		
+// 	$('#banner_close').click( function() {
+// 		var target = $(this);
+// 		target.prev('img').attr('src','');
+// 		target.prev('img').css( {'width':0,'height':0} );
+// 		main_banner = '';
+// 	} );
+
+// 	$('#race_add_group').click( function() {
+// 		var target = $('.race_group_div');
+// 		var num = target.children('input[type=text]').size();
+// 		target.append( $("<input type='text' class='race_group' placeholder='分组"+(num+1)+"' required='required' />") );
+// 		var del = $( "<a class='fa fa-minus race-group-del'></a>" );
+// 		target.append( del );
+		
+// 		del.click( function() {
+// 			var target = $( this );
+// 			target.prev('input[type=text]').remove();
+// 			target.remove();			
+// 		} );
+// 	} );
+
+// 	$('#race_expert_num_add').click( function() {
+
+// 		var target = $('#race_expert_set_div');
+		
+// 		var res = target.find('input.race_expert');
+// 		var num = res.length;
+		
+// 		target.append( $("<input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' />") );
+// 		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus'></a>" );
+// 		target.append( user_add );
+// 		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
+// 		target.append( minus );
+		
+// 		var inputs = target.children('input[type=text]');
+// 		$('#race_expert_num').html( inputs.size() );
+		
+// 		user_add.click( function(e) {
+// 			var div = $('#expert_choose');
+// 			div.css( 'top', e.pageY-100 );
+// 			div.toggleClass( 'hide' );
+// 			div.attr( 'num', $(this).attr('num') );
+// 		} );
+		
+// 		minus.click( function() {
+// 			var target = $( this );
+// 			target.prev('a.fa-user-plus' ).remove();
+// 			target.prev('input[type=text]').remove();
+// 			target.remove();
+			
+// 			var inputs = $('#race_expert_set_div').children('input[type=text]');
+// 			$('#race_expert_num').html( inputs.size() );
+// 		} );
+// 	} );
+	
+	
+	
+// 	// 上传新建的比赛信息
+// 	$('#b_ok').click( function() {
+// 		var data = new Object();
+	
+// 		data['race_id'] = race_id;
+// 		data['name'] = $('#input-race-name').val();
+// 		data["sub_title"] = $("#input-race-sub").val();
+// 		data['r_st'] = $('#input-race-time1').val();
+// 		data['r_et'] = $('#input-race-time2').val();
+		
+// 		if( data['name']=='' || data['r_st']=='' || data['r_et']=='' ) {
+// 			alert( '请完善比赛信息' );
+// 			return;
+// 		}
+		
+// 		data['s_st'] = $('#input-reg-time1').val();
+// 		data['s_et'] = $('#input-reg-time2').val();
+
+// 		var rg = $('input.race_group');
+// 		data['class'] = '[';//WTF?!!!
+// 		$.each( rg, function(i, v) {
+// 			data['class'] += '"' + $(v).val() + '",';
+// 		} );
+// 		data['class'] = data['class'].substring( 0, data['class'].length-1) + ']';
+		
+// 		var re = $('input.race_expert');
+// 		data['review'] = '[';
+// 		$.each( re, function(i, v) {
+// 			if (!$(v).prop('uid')) return true;
+			
+// 			var mstr = $(v).prop('uid').split( ',' );
+// 			data['review'] += '[';
+// 			$.each( mstr, function(i2,v2) {
+// 				data['review'] += '"' + v2 + '",';
+// 			} );
+// 			data['review'] = data['review'].substring( 0, data['review'].length-1) + '],';
+// 		} );
+// 		data['review'] = data['review'].substring( 0, data['review'].length-1)  + ']';
+			
+// 		// 先上传比赛基本信息
+// 		$.post( 'my-php/root_ui/add_race.php', data, function() {
+// 			// 再单独上传 banner
+// 			var banner = new Object();
+// 			if( typeof(main_banner)!='undefined' ) {
+// 				var reader = new FileReader();
+// 				reader.onload = function() {
+// 					banner['banner'] = $.base64( 'encode', this.result );
+// 					banner['banner_name'] = main_banner.name;
+// 					banner['race_id'] = data['race_id'];
+// 					$.post( 'my-php/root_ui/add_race.php', banner );	
+// 				};	
+// 				reader.readAsBinaryString( main_banner );
+// 			}
+			
+// 			// 单独上传rule
+// 			var rule = new Object();
+// 			rule['rule'] = UE.getEditor('editor').getContent();
+// 			rule['race_id'] = data['race_id'];
+// 			$.post( 'my-php/root_ui/add_race.php', rule );
+			
+// 			// 单独上传比赛用表格数据
+// 			var chart_f = $('input[name=upload_template]')[0].files[0];
+// 			if( chart_f ) {
+// 				var reader = new FileReader();
+// 				reader.onload = function() {
+// 					var chart = new Object();
+// 					chart['race_id'] = data['race_id'];
+// 					chart['chart'] = $.base64( 'encode', this.result );
+// 					chart['chart_name'] = chart_f.name;
+// 					$.post( 'my-php/root_ui/add_race.php', chart );	
+// 				};
+// 				reader.readAsBinaryString( chart_f );
+// 			}
+			
+// 			// 单独上传比赛展示界面
+// 			var temp_f = $('input[name=upload_template]')[0].files[0];
+// 			if( temp_f ) {
+// 			var reader = new FileReader();
+// 				reader.onload = function() {
+// 					var temp = new Object();
+// 					temp['race_id'] = data['race_id'];
+// 					temp['template'] = $.base64( 'encode', this.result );
+// 					$.post( 'my-php/root_ui/add_race.php', temp );	
+// 				};
+// 				reader.readAsBinaryString( temp_f );
+// 			}
+			
+// 			alert( '比赛创建成功' );
+// 			location.reload()
+// 		} );	
+// 	} );
+	
+	
+// } );
+
+	
+
+
+
+</script>
+</body>
+
+</html>

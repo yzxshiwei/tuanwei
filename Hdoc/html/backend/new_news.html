@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<script src='js-lib/jquery-2.1.1.min.js'></script>
+	<script src='js-lib/jquery.base64.js'></script>
+				
+	<link rel="stylesheet" href="css/background/css/normalize.css" />
+	<link rel="stylesheet" href="css/background/css/style.css" />
+	<link rel="stylesheet" href="css/background/css/font-awesome.min.css" />
+
+	<script  src='js-lib/ueditor1_4_3-utf8-php/ueditor.config.js'></script>
+    <script  src='js-lib/ueditor1_4_3-utf8-php/ueditor.all.min.js'> </script>
+	<script  src='js-lib/ueditor1_4_3-utf8-php/lang/zh-cn/zh-cn.js'></script>
+	
+	
+	<script src='my-js/root_ui/root_ui.js'></script>
+	<script src='my-js/root_ui/file_upload.js'></script>
+
+	<link href="js-lib/jquery-ui.min.css" rel="stylesheet">
+	<script src="js-lib/jquery-ui.min.js"></script>
+
+        <script src="../js/baidu.js"></script>
+			
+	<link rel="stylesheet" type="text/css" href="css/style_wang.css">
+</head>
+
+<body>
+	<div class="htmleaf-container">
+	
+		<div class="container pb30">
+			<div class="clear-backend">
+			<div class="avatar">
+				<div>
+					<a href="index.html" >
+
+					
+						<img src="images/back-logo.jpg" alt="logo"/>
+					</a>
+				</div>
+			</div>
+
+			<!-- tab-menu -->
+			<div class="aaa"></div>
+
+			<span>
+			<a href="user_manage.html">人员管理</a>
+			</span>
+			<i class="fa fa-user"></i>
+
+			<span>
+			<a href="team_manage.html">团队管理</a>
+			</span>
+			<i class="fa fa-users"></i>
+			<span>
+			<a href="new_news.html">创建信息</a>
+			</span>
+			<i class="fa fa-lightbulb-o"></i>
+
+			<span>
+			<a href="new_match.html">创建比赛</a>
+			</span>
+			<i class="fa fa-lightbulb-o"></i>
+
+			<span>
+			<a href="match_manage.html">比赛管理</a>
+			</span>
+			<i class="fa fa-futbol-o"></i>
+
+			<span>
+			<a href="news_manage.html">信息管理</a>
+			</span>
+			<i class="fa fa-cubes"></i>
+			
+			
+			<div class='side_bar'></div>
+			
+			<!-- tab-top-bar -->
+			<div class="top-bar">
+				<ul>
+					<li>
+						<a href="javascript:void(0)" title="Log Out" onclick="logout()">
+							<i class="fa fa-sign-out"></i>
+						</a>
+					</li>
+					<li><span class="user_name" style='padding:0 10px'></span></li>
+				</ul>
+			</div>
+
+			<!-- tab-content -->
+			<div class="tab-content">
+			
+				
+					<div class='race_set_div'>
+						<input type='file' id='f_u_2' name='selectFiles'/>
+						<form action='' onsubmit="return false;" method='post'>
+							<h2 class='login-heading'>信息发布</h2>
+							
+							<span class='race_set_lable'>选 &nbsp;栏 目：</span>
+							<select id='news_col' name='role'> 
+								<option value='1'>新闻主页</option> 
+								<option value='2'>创业政策</option> 
+								<option value='3'>讲座培训</option>
+								<option value='4'>学院风采</option> 
+								<option value='5'>资料库</option> 
+							</select>
+							<br/>
+							<span class='race_set_lable'>主 &nbsp;标 题：</span><input type='text' id='input-title-name' placeholder='主标题（必填）' required='required' autofocus='autofocus' />
+							<br/>
+							<span class='race_set_lable'>副 &nbsp;标 题：</span><input type='text' id='input-subtitle-name' placeholder='副标题' />
+							<br/>
+                            <span class='race_set_lable'>消息来源：</span><input type='text' id='input-from-name' value='四川大学教务处' />
+                            <br/>
+                            <span class='race_set_lable'>新闻类型：</span>
+                            <select name="" id="news_type" style="width: 120px">
+                            <option value="1">轮播图</option>
+                                <option value="2">普通新闻</option>
+                                <option value="3">图片新闻</option>
+                                
+                            </select>
+                            <br/>
+							<span class='race_set_lable'>置 &nbsp;顶 期：</span>
+							<input type='date' id='input-top-time1' name='race-start-date' placeholder='开始时间' />
+							<div class='line'></div>
+							<input type='date' id='input-top-time2' name='race-end-date' placeholder='结束时间'/>
+							<br/>
+							
+							<p class='race_set_lable'>标题图片</p>
+							<div class='title_img_upload_plugin'>
+								<div id='title_img_upload' class='droppable' draggable='true'>
+									<img />
+									<a id='title_img_close' class='fa fa-close'></a>
+								</div>
+								<a class='title_img_browse'>浏览</a>
+							</div>
+							<br/>
+							
+							<p class='race_set_lable'>编辑内容</p>
+							<script id='info_editor' type='text/plain' style='width:100%;height:800px;'></script>
+							<br/>
+							
+							<p class='line' style='margin:30px 0 10px 0;width:100%;border-bottom:solid 10px #ccc'></p>
+							<button class='news_b' id='news_submit'>提交</button>
+
+							
+						</form>
+					</div>
+				
+			
+				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<!-- <script src="my-js/template.js"></script>
+
+<script src="my-js/logic.js"></script> -->
+
+<script>
+	
+// var news_id = String(Math.round($.now()/1000)) + '_' + String(Math.round(Math.random()*1000));
+		
+// 		$( function() {
+		
+// 			UE.getEditor( 'info_editor' );
+			
+// 			// 新闻发布界面提交
+// 			$('button.news_b').click( function() { 
+
+// 				var in_p = new Object();
+// 				in_p['id'] = news_id;
+// 				in_p['col'] = $('#news_col option:selected').val();
+// 				in_p['title1'] = $('#input-title-name').val();
+// 				in_p['title2'] = $('#input-subtitle-name').val();
+// 				in_p['top_s'] = $('#input-top-time1').val();
+// 				in_p['top_e'] = $('#input-top-time2').val();		
+// 				in_p['news'] = UE.getEditor('info_editor').getContent();
+//                 in_p['from_name'] = $("#input-from-name").val();
+//                 in_p['news_type'] = $("#news_type").find("option:selected").attr("value");//性别
+//                 console.log(in_p['from_name'],in_p['news_type'])
+				
+// 				var id = $(this).attr('id');
+// 				if( id=='news_submit' ) 
+// 					in_p['flag'] = 0;
+// 				else
+// 					in_p['flag'] = 3;
+							
+// 				$.post( 'my-php/root_ui/add_news.php', in_p, function(data) {
+// 					if( data=='OK' ) {
+// 						if( main_banner_2 ) {
+// 							var reader = new FileReader();
+// 							reader.onload = function() {
+// 								var chart = new Object();
+// 								chart['id'] = news_id;
+// 								chart['data'] = $.base64( 'encode', this.result );
+// 								chart['name'] = main_banner_2.name;
+// 								$.post( 'my-php/root_ui/add_title_img.php', chart, function(data) {
+// 									if( data=='OK' )
+// 										alert( '提交新闻成功' );
+// 								} );	
+// 							}; 
+// 							reader.readAsBinaryString( main_banner_2 );
+// 						}
+// 						else
+// 							alert( '提交新闻成功' );
+// 						location.reload()
+// 					}
+
+
+// 				} );
+		
+// 			} );
+			
+			
+			
+// 		} );
+
+
+
+// var main_banner_2;
+		
+// 		$(document).ready(function() {
+		
+// 			$('#title_img_upload').bind( {
+// 				drop: function(e) {
+				
+// 					e.preventDefault();
+// 					var oe = e.originalEvent;
+// 					var file_list = oe.dataTransfer.files;
+// 					main_banner_2 = file_list[0];
+// 					show_image( file_list, '#title_img_upload' );
+// 				},
+// 				dragover: function(e) {
+// 					e.preventDefault();
+// 					return true;
+// 				}
+// 			} );
+					
+// 			$('.title_img_upload_plugin a.title_img_browse').click( function(e) {
+// 				$('#f_u_2').trigger('click');
+// 			} );
+			
+// 			$('#f_u_2').change( function(e) {	
+// 				main_banner_2 = this.files[0];
+// 				show_image( this.files, '#title_img_upload' );
+// 			} );
+
+// 			$('#title_img_close').click( function() {
+// 				var target = $(this);
+// 				target.prev('img').attr('src','');
+// 				target.prev('img').css( {'width':0,'height':0} );
+// 				main_banner_2 = '';
+// 			} );
+//             $('#news_col').change(function(){
+//                 var value=$("#news_col").find("option:selected").val();
+
+//                 if(value == "5"){
+//                     $("#news_type").html('<option value="3">图文新闻</option>')
+//                 }else{
+//                     $("#news_type").html('<option value="1">轮播图</option><option value="2">普通新闻</option><option value="3">图片新闻</option>')
+//                 }
+//             });
+			
+// 		} );
+
+</script>
+
+
+
+</body>
+
+</html>
