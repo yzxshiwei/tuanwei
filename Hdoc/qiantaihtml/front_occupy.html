@@ -14,7 +14,7 @@
     <div class="newsHeader">
         <div class="headerContent">
             <!--LOGO-->
-            <a href="front_index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+            <a href="index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
             <!--注册、登录-->
             <div class="rAndl">
                 <a href="front_login.html">登录</a> <span>|</span> <a href="front_personBm.html">注册</a>
@@ -24,45 +24,7 @@
     <!--头部导航-->
     <div id="headerNav">
         <div class="navContent">
-            <ul class="newsnav">
-                <li>
-                    <a href="front_news_homepage.html">新闻资讯</a>
-                    <ul class="dropNav">
-                        <!--<li><a href="">新闻</a></li>-->
-                        <li><a href="front_collegeStyle.html">学院风采</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="front_training.html">讲座培训</a>
-                    <ul class="dropNav">
-                        <li><a href="front_library.html">资料库</a></li>
-                        <li><a href="front_match.html">我要参加</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="front_businessPolicy.html">创业政策</a>
-                    <!--<ul class="dropNav">-->
-                        <!--<li><a href="">学校</a></li>-->
-                        <!--<li><a href="">地方</a></li>-->
-                        <!--<li><a href="">国家</a></li>-->
-                    <!--</ul>-->
-                </li>
-                <li>
-                    <a href="front_team_create.html">团队组建</a>
-                    <!--<ul class="dropNav">-->
-                    <!--<li><a href="">我要招人</a></li>-->
-                    <!--<li><a href="">发布需求</a></li>-->
-                    <!--</ul>-->
-                </li>
-                <!--<li><a href="front_occupy.html">场地申请</a></li>-->
-                <li>
-                    <a href="front_match_information.html">比赛信息</a>
-                    <ul class="dropNav">
-                        <!--<li><a href="front_past_activities.html">往期活动</a></li>-->
-                        <!--<li><a href="">正在进行</a></li>-->
-                    </ul>
-                </li>
-            </ul>
+            
         </div>
     </div>
     <div class="ad" id="ad">
@@ -73,7 +35,7 @@
 
     </div>
 
-    <div class="title" style="clear: both;margin-top: 5px">
+    <div class="title">
         <center>场地选择</center>
 
     </div>
@@ -337,42 +299,43 @@
 
 
 
-    <!--footer-->
-    <div id="footer">
-        <div id="f_center">
-            <ul>
-                <li class="f_main two_c">
-                    <a href="" class="f_title">友情链接</a>
-                    <ul class="f_content">
-                        <li><a href="">关于我们</a></li>
-                        <li><a href="">四川大学</a></li>
-                        <li><a href="">学堂在线</a></li>
-                    </ul>
-                    <ul class="f_content">
-                        <li><a href="">36氪/关注互联网创业</a></li>
-                        <li><a href="">清华X-LAB</a></li>
-                        <li><a href="">四川省科学技术厅</a></li>
-                    </ul>
-                </li>
-                <li class="f_main">
-                    <a href="" class="f_title">联系分享</a>
-                    <div class="f_content">
-                        <p><img src="img/footer/sina_weibo.png"/><img src="img/footer/QQ.png"/><img src="img/footer/微信%20-%20Assistor.png"/></p>
-                        <p><img src="img/footer/朋友圈%20-%20Assistor.png"/><img src="img/footer/豆瓣%20-%20Assistor.png"/><img src="img/footer/人人网%20-%20Assistor.png"/></p>
-                    </div>
-                </li>
-                <li class="f_main">
-                    <a href="" class="f_title">关注我们</a>
-                    <div class="f_content">
-                        <img src="img/code.png"/>
-                    </div>
-                </li>
-            </ul>
+    <div id="footer" class="footer">
+        <div class="footer-bag">
+           
         </div>
-    </div>
 
     </div>
     <script src="js/jquery.js"></script>
+        <script src="js/baidu.js"></script>
+<script type="text/html" id="header_temp">   
+    <ul class="newsnav">
+                <% for(x in header_list){%>
+                 <li>
+                     <a href="<%=header_list[x]['first_list_href']%>"><%=header_list[x]['first_list_name']%></a>
+                      <ul class="dropNav">
+                     <% for (y in header_list[x]['second']){%>
+                         <li><a href="<%=header_list[x]["second"][y]['second_list_href']%>"><%=header_list[x]["second"][y]['second_list_name']%></a></li>
+                     <%}%>
+                     </ul>
+                 </li>
+                 <%}%>
+             </ul>
+</script>
+<script id="footer_temp" type="text/html">
+    <% for(x in footer_list){%>
+                       <div class="footer-menu">
+                       <% for (y in footer_list[x]['second']){%>
+                <span><a href="<%=footer_list[x]['second'][y]['second_url']%>"><%=footer_list[x]['second'][y]['second_name']%></a></span>
+                
+                <%}%>
+
+            </div>
+                        
+                         
+    <%}%>                   
+                          
+</script>
+<script src="js/template.js"></script>
     <script>
 //        临时程序
         function print(x){
@@ -442,6 +405,7 @@
            });
        });
     </script>
+<script src="js/plugin.js"></script>
 
 </body>
 

@@ -11,55 +11,17 @@
 <div class="newsHeader">
     <div class="headerContent">
         <!--LOGO-->
-        <a href="front_index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+        <a href="index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
         <!--注册、登录-->
         <div class="rAndl">
-            <a href="front_login.html">登录</a> <span>|</span> <a href="front_personBm.html">注册</a>
+            <a href="front_login.html">登录</a>
         </div>
     </div>
 </div>
 <!--头部导航-->
 <div id="headerNav">
     <div class="navContent">
-        <ul class="newsnav">
-            <li>
-                <a href="front_news_homepage.html">新闻资讯</a>
-                <ul class="dropNav">
-                    <!--<li><a href="">新闻</a></li>-->
-                    <li><a href="front_collegeStyle.html">学院风采</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="front_training.html">讲座培训</a>
-                <ul class="dropNav">
-                    <li><a href="front_library.html">资料库</a></li>
-                    <li><a href="front_match.html">我要参加</a></li>
-                </ul>
-            </li>
-            <li>
-                <a href="front_businessPolicy.html">创业政策</a>
-                <!--<ul class="dropNav">-->
-                    <!--<li><a href="">学校</a></li>-->
-                    <!--<li><a href="">地方</a></li>-->
-                    <!--<li><a href="">国家</a></li>-->
-                <!--</ul>-->
-            </li>
-            <li>
-                <a href="front_team_create.html">团队组建</a>
-                <!--<ul class="dropNav">-->
-                <!--<li><a href="">我要招人</a></li>-->
-                <!--<li><a href="">发布需求</a></li>-->
-                <!--</ul>-->
-            </li>
-            <!--<li><a href="front_occupy.html">场地申请</a></li>-->
-            <li>
-                <a href="front_match_information.html">比赛信息</a>
-                <ul class="dropNav">
-                    <!--<li><a href="front_past_activities.html">往期活动</a></li>-->
-                    <!--<li><a href="">正在进行</a></li>-->
-                </ul>
-            </li>
-        </ul>
+        
     </div>
 </div>
 <!--poster-->
@@ -72,27 +34,37 @@
     <!--content-->
     <div class="content">
         <form action="" method="">
+            <div id="teamRegister">
+                <p class="teamName"><span>团队名称</span><input type="text" id="teamName" placeholder="团队名称（必填）"/></p>
+                <input type="hidden"/>
+                <label id="teamNameTs">123</label>
+                <h4>负责人注册</h4>
+            </div>
             <p><span>电子邮箱</span><input id="email" type="text" placeholder="电子邮件地址（必填）"/></p>
             <label id="emailTs">123</label>
             <p class="zjType">
                 <span>证件类型</span>
                 <select name="" id="idType">
-                    <option value="学生证">学生证</option>
-                    <option value="身份证">身份证</option>
+                    <option value="stucard">学生证</option>
+                    <option value="idcard">身份证</option>
                 </select>
                 <input id="idNum" type="text" placeholder="证件号（必填）"/>
             </p>
             <label id="idNumTs">123</label>
             <p class="sfAttribute">
                 <span>身份属性</span>
-                <select name="" class="sc">
-                    <option value="学生个人">学生个人</option>
-                    <option value="其他">其他</option>
+                <select name="" class="sc" id="Identity">
+                    <option value="individual">学生个人</option>
+                    <option value="chief">团队注册</option>
+                    
+                    <option value="tutor">指导老师</option>
+                    <option value="expert">评审专家</option>
+                    <option value="investor">投资人</option>
                 </select>
                 <button>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</button>
                 <select name="" class="sex">
-                    <option value="女">女</option>
-                    <option value="男">男</option>
+                    <option value="F">女</option>
+                    <option value="M">男</option>
                 </select>
             </p>
             <label>123</label>
@@ -100,54 +72,106 @@
             <label id="pwdTs">123</label>
             <p class="pwdAgain"><span>密码确认</span><input type="password" id="pwdAgain" placeholder="再次输入密码（必填）"/></p>
             <label id="pwdAgainTs">123</label>
-            <p><span>学院/机构</span><input type="text" placeholder="所在学院或单位"/></p>
+            <p><span>学院/机构</span><input type="text" id="school" placeholder="所在学院或单位"/></p>
             <label>123</label>
-            <p><span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" placeholder="您的真实姓名"/></p>
+            <p><span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" id="name" placeholder="您的真实姓名"/></p>
             <label>123</label>
-            <p class="birthDate"><span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input type="text" placeholder="您所属名族" class="mz"/><span class="birth">出生日期</span><input type="text" placeholder="您的出生日期"/></p>
+            <p class="birthDate"><span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" id="birthday" placeholder="您的出生日期"/></p>
+            <label id="birTs">123</label>
+            <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span>
+            <select id="major">
+                <option value="经济学院">经济学院</option>
+                <option value="建筑与环境学院">建筑与环境学院</option>
+                <option value="法学院">法学院</option>
+                <option value="化学工程学院">化学工程学院</option>
+                <option value="文学与新闻学院">文学与新闻学院</option>
+                <option value="轻纺与食品学院">轻纺与食品学院</option>
+                <option value="外国语学院">外国语学院</option>
+                <option value="高分子科学与工程学院">高分子科学与工程学院</option>
+                <option value="艺术学院">艺术学院</option>
+                <option value="华西基础医学与法医学院">华西基础医学与法医学院</option>
+                <option value="历史文化学院(旅游学院)">历史文化学院(旅游学院)</option>
+                <option value="华西临床医学院(华西医院)">华西临床医学院(华西医院)</option>
+                <option value="数学学院">数学学院</option>
+                <option value="华西第二医院">华西第二医院</option>
+                <option value="物理科学与技术学院（核科学与工程技术学院）">物理科学与技术学院（核科学与工程技术学院）</option>
+                <option value="华西口腔医学院（华西口腔医院）">华西口腔医学院（华西口腔医院）</option>
+                <option value="化学学院">化学学院</option>
+                <option value="华西公共卫生学院(华西第四医院)">华西公共卫生学院(华西第四医院)</option>
+                <option value="生命科学学院">生命科学学院</option>
+                <option value="华西药学院">华西药学院</option>
+                <option value="电子信息学院">电子信息学院</option>
+                <option value="公共管理学院">公共管理学院</option>
+                <option value="材料科学与工程学院">材料科学与工程学院</option>
+                <option value="商学院">商学院</option>
+                <option value="制造科学与工程学院">制造科学与工程学院</option>
+                <option value="马克思主义学院（政治学院）">马克思主义学院（政治学院）</option>
+                <option value="电气信息学院">电气信息学院</option>
+                <option value="体育学院">体育学院</option>
+                <option value="计算机学院">计算机学院</option>
+                <option value="灾后重建与管理学院">灾后重建与管理学院</option>
+                <option value="软件学院">软件学院</option>
+                <option value="空天科学与工程学院">空天科学与工程学院</option>
+                <option value="水利水电学院">水利水电学院</option>
+                <option value="匹兹堡学院">匹兹堡学院</option>
+            </select></p>
+
+            <!-- <input  type="text" placeholder="您的主修专业"/></p> -->
             <label>123</label>
-            <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span><input type="text" placeholder="您的主修专业"/></p>
-            <label>123</label>
-            <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><input type="text" placeholder="您的最高学历"/></p>
-            <input class="subBtn" type="submit" value="提交" style="margin-bottom: 50px"/>
+            <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="" id="degree">
+                <option value="本科">本科</option>
+                <option value="研究生">研究生</option>
+                <option value="博士生">博士生</option>
+                <option value="其他">其他</option>
+            </select>
+            </p>
+
+            <input class="subBtn" type="button" value="提交"/>
         </form>
     </div>
 </div>
 <!--footer-->
-<div id="footer">
-    <div id="f_center">
-        <ul>
-            <li class="f_main two_c">
-                <a href="" class="f_title">友情链接</a>
-                <ul class="f_content">
-                    <li><a href="">关于我们</a></li>
-                    <li><a href="">四川大学</a></li>
-                    <li><a href="">学堂在线</a></li>
-                </ul>
-                <ul class="f_content">
-                    <li><a href="">36氪/关注互联网创业</a></li>
-                    <li><a href="">清华X-LAB</a></li>
-                    <li><a href="">四川省科学技术厅</a></li>
-                </ul>
-            </li>
-            <li class="f_main">
-                <a href="" class="f_title">联系分享</a>
-                <div class="f_content">
-                    <p><img src="img/footer/sina_weibo.png"/><img src="img/footer/QQ.png"/><img src="img/footer/微信%20-%20Assistor.png"/></p>
-                    <p><img src="img/footer/朋友圈%20-%20Assistor.png"/><img src="img/footer/豆瓣%20-%20Assistor.png"/><img src="img/footer/人人网%20-%20Assistor.png"/></p>
-                </div>
-            </li>
-            <li class="f_main">
-                <a href="" class="f_title">关注我们</a>
-                <div class="f_content">
-                    <img src="img/code.png"/>
-                </div>
-            </li>
-        </ul>
+<div id="footer" class="footer footer2" style="clear: both">
+    <div class="footer-bag">
+        
     </div>
-</div></body>
+</div>
+
+</body>
 <script src="js/jquery.js"></script>
+<script src="js/plugin.js"></script>
+
 <script src="js/register.js"></script>
+    <script src="js/baidu.js"></script>
+<script type="text/html" id="header_temp">   
+    <ul class="newsnav">
+                <% for(x in header_list){%>
+                 <li>
+                     <a href="<%=header_list[x]['first_list_href']%>"><%=header_list[x]['first_list_name']%></a>
+                      <ul class="dropNav">
+                     <% for (y in header_list[x]['second']){%>
+                         <li><a href="<%=header_list[x]["second"][y]['second_list_href']%>"><%=header_list[x]["second"][y]['second_list_name']%></a></li>
+                     <%}%>
+                     </ul>
+                 </li>
+                 <%}%>
+             </ul>
+</script>
+<script id="footer_temp" type="text/html">
+    <% for(x in footer_list){%>
+                       <div class="footer-menu">
+                       <% for (y in footer_list[x]['second']){%>
+                <span><a href="<%=footer_list[x]['second'][y]['second_url']%>"><%=footer_list[x]['second'][y]['second_name']%></a></span>
+                
+                <%}%>
+
+            </div>
+                        
+                         
+    <%}%>                   
+                          
+</script>
+<script src="js/template.js"></script>
 <script>
     $(function(){
         $('.newsnav li').mouseenter(function(){
@@ -157,6 +181,59 @@
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
         });
+        $('#Identity').change(function(){
+            var value=$("#Identity").find("option:selected").val();
+
+            if(value == "chief"){
+                $('#teamRegister').show(300);
+                $('.title').html('团队注册')
+            }else{
+                $('#teamRegister').hide(300);
+                $('.title').html('个人注册')
+            }
+        });
+    });
+</script>
+<script>
+    //register ajax
+    $('.subBtn').click(function(){
+        var teamName = $('#teamName').val();//团队名称
+        var email = $('#email').val();//邮箱
+        var idType = $("#idType").find("option:selected").attr("value");//证件类型
+        var num = $('#idNum').val();//证件号
+        var Identity = $("#Identity").find("option:selected").attr("value");//身份属性
+        var sex = $(".sex").find("option:selected").attr("value");//性别
+        var pwd = $('#pwd').val();//密码
+        var school = $('#school').val();//学院或单位
+        var name = $('#name').val();//姓名
+        var nation = $('#nation').val();//民族
+        var birthday = $('#birthday').val();//出生日期
+        var major = $('#major').val();//专业
+        var degree = $('#degree').val();//学历
+        
+        var data = {
+            't_name':teamName,
+            'email':email,
+            'type':idType,
+            'num':num,
+            'identity':Identity,
+            'sex':sex,
+            'password':pwd,
+            'com':school,
+            'name':name,
+            'nation':nation,
+            'birthday':birthday,
+            'major':major,
+            'degree':degree
+        };
+        if(email == '' || idType == '' || num == '' || Identity == '' || sex == '' || pwd == '' || $('pwdAgain').val() == ''){
+            alert('您好，你还有相关信息未填写，请重新填写！');
+        }else{
+            $.post('backend/my-php/register/register.php',data,function(data,success){
+//                location.href = "front_login.html";
+                alert(data);
+            })
+        }
     });
 </script>
 </html>
