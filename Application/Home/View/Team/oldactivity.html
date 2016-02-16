@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>往期活动</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <!--比赛信息-->
+    <div id="information">
+        <!--轮播-->
+        <div class="unslider-news">
+            <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="center" data-theme="light" style="max-height:350px;width:100%">
+                <ul>
+                    <li data-background="__STATIC__/img/hlw+.png">
+                        <!--<div class="flick-title">主标题</div>-->
+                        <!--<div class="flick-sub-text">副标题</div>-->
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-2.jpg">
+                        <!--<div class="flick-title">主标题</div>-->
+                        <!--<div class="flick-sub-text">副标题</div>-->
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-3.jpg">
+                        <!--<div class="flick-title">主标题</div>-->
+                        <!--<div class="flick-sub-text">副标题</div>-->
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-3.jpg">
+                        <!--<div class="flick-title">主标题</div>-->
+                        <!--<div class="flick-sub-text">副标题</div>-->
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!--比赛信息标题-->
+        <div class="i_title">
+            <h2>往期比赛信息一览</h2>
+        </div>
+        <div class="content">
+            <!--详细信息-->
+            <ul class="i_des">
+                <li>
+                    <img src=""/>
+                    <label>
+                        <h5>中国“互联网+”大学生创新创业大赛</h5>
+                        <p>主题：“互联网+”成就梦想，创新创业开辟未来</p>
+                        <p>简介：</p>
+                        <span>
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。
+                        </span>
+                        <a href="{{:U('Team/matchdetails')}}" class="for_details">了解详情</a>
+                    </label>
+                </li>
+                <li>
+                    <img src=""/>
+                    <label>
+                        <h5>中国“互联网+”大学生创新创业大赛</h5>
+                        <p>主题：“互联网+”成就梦想，创新创业开辟未来</p>
+                        <p>简介：</p>
+                        <span>
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
+                            “互联网+”成就梦想，创新创业开辟未来。
+                        </span>
+                        <a href="{{:U('Team/matchdetails')}}" class="for_details">了解详情</a>
+                    </label>
+                </li>
+            </ul>
+            <div class="page">
+                <ul>
+                    <li class="onPage"> < 上一页</li>
+                    <li class="active">1</li>
+                    <li>2</li>
+                    <li>3</li>
+                    <li>4</li>
+                    <li class="nextPage">下一页 > </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <div id="footer" class="footer" style="margin-top: 70px">
+        <div id="f_center" style="text-align: left">
+
+        </div>
+    </div>
+    <!--js-->
+<include file='Public:header'/>
+<include file='Public:footer'/>
+    
+    <script type="text/template" id="list_item">
+<li>
+    <img src="{{img}}"/>
+    <label>
+        <h5>{{name}}</h5>
+        <a href="{{url}}" class="bmBtn">申请报名</a>
+        <p>{{rule}}</p>
+        <a href="{{url}}" class="for_details">了解详情</a>
+    </label>
+</li>
+    </script>
+    
+    <script>
+
+        $(function(){
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</body>
+</html>

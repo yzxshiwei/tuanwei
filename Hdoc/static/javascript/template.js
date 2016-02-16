@@ -1,8 +1,8 @@
 var header_list={"header_list":[
-    {"first_list_href":"front_news_homepage.html",
+    {"first_list_href":"/index.php?m=Home&c=News&a=dynamicbusiness",
      "first_list_name":"新闻资讯",
      "second":[
-        {"second_list_href":"front_collegeStyle.html","second_list_name":"学院风采"}
+        {"second_list_href":"/index.php?m=Home&c=News&a=teamstyle","second_list_name":"团队风采"}
           
      ]
     },
@@ -13,24 +13,24 @@ var header_list={"header_list":[
          
      ]
     },
-    {"first_list_href":"front_businessPolicy.html",
+    {"first_list_href":"index.php?m=Home&c=News&a=businesspolicy",
      "first_list_name":"创业政策",
      "second":[
-        {"second_list_href":"front_school.html","second_list_name":"学校"},
-          {"second_list_href":"front_place.html","second_list_name":"地方"},
-          {"second_list_href":"front_country.html","second_list_name":"国家"}
+        {"second_list_href":"index.php?m=Home&c=News&a=schoolspolicy","second_list_name":"学校"},
+          {"second_list_href":"index.php?m=Home&c=News&a=placespolicy","second_list_name":"地方"},
+          {"second_list_href":"index.php?m=Home&c=News&a=countryspolicy","second_list_name":"国家"}
      ]
     },
-    {"first_list_href":"front_team_create.html",
+    {"first_list_href":"index.php?m=Home&c=Team&a=teamcreate",
      "first_list_name":"团队组建",
      "second":[
         
      ]
     },
-    {"first_list_href":"front_match_information.html",
+    {"first_list_href":"index.php?m=Home&c=Team&a=matchlist",
      "first_list_name":"比赛信息",
      "second":[
-        {"second_list_href":"front_past_activities.html","second_list_name":"往期活动"}
+        {"second_list_href":"index.php?m=Home&c=Team&a=oldactivity","second_list_name":"往期活动"}
          
      ]
     }

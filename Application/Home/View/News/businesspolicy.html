@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+     <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+    <style>
+        .policy #p_center{
+            clear: both;
+            width: 960px;
+            padding-top: 2px;
+            font-family: "微软雅黑";
+            /*padding-bottom: 100px;*/
+        }
+        .policy a:hover{
+            text-decoration: underline;
+        }
+        .policy span:hover{
+            text-decoration: underline;
+        }
+        .policy #p_center .Title{
+            margin-top: 22px;
+        }
+        .policy #p_center .Title p span{
+            float: left;
+        }
+        .policy #p_center .Title p a{
+            float: right;
+            color: rgb(154,150,149);
+        }
+        .policy #p_center .Title p{
+            height:55px;
+            line-height: 55px;
+            border-bottom: 3px solid #9A9695;
+        }
+        .policy #p_center .Title p span{
+            width: 160px;
+            height:55px;
+            line-height: 55px;
+            text-align: center;
+            background: #9A9695;
+            font-size: 30px;
+            color: #fff;
+        }
+        .policy #p_center .Title p a{
+            font-size: 18px;
+        }
+        .policy #p_center .Title p a img{
+            position: relative;
+            top:5px;
+            margin-left: 8px;
+        }
+        .policy #p_center .Title li{
+            height: 44px;
+            line-height: 44px;
+            color: #444;
+            border-bottom: 1px dashed #ccc;
+            position: relative;
+        }
+        .policy #p_center .Title li span{
+            position: absolute;
+            left:0px;
+            color: #666;
+        }
+        .policy #p_center .Title li img{
+            position: absolute;
+            right:0px;
+            top:12px;
+            color: rgb(154,150,149);
+        }
+        .policy #p_center .place p{
+            border-bottom: 3px solid #7FACC0;
+        }
+        .policy #p_center .place p span{
+            background: #7FACC0;
+        }
+        .policy #p_center .place p a{
+            color: #7FACC0;
+        }
+        .policy #p_center .shcool{
+            padding-bottom: 25px;
+        }
+        .policy #p_center .shcool p{
+            border-bottom: 3px solid #6DBBB6;
+        }
+        .policy #p_center .shcool p span{
+            background: #6DBBB6;
+        }
+        .policy #p_center .shcool p a{
+            color: #6DBBB6;
+        }
+    </style>
+</head>
+<body>
+<include file='Public:headerhtml'/>
+     <!--内容1-->
+     <div id="content"  class="policy" >
+        <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
+            <ul class="slider_bag">
+
+                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+
+            </ul>
+        </div>
+         <div class="announcement" style="background: rgb(125,0,0);opacity: 0.5">
+             <p>创业<br/>政策</p>
+         </div>
+         <div id="p_center">
+             <div class="p_content">
+                 <ul>
+                     <li class="Title country">
+                         <p><span class="newTitle">国家支持</span><a class="more" href="front_country.html">更多 <img src="img/country.png" alt=""/></a></p>
+                         <ul>
+                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         </ul>
+                     </li>
+                     <li class="Title place">
+                         <p><span class="newTitle">地方支持</span><a class="more" href="front_place.html">更多 <img src="img/place.png" alt=""/></a></p>
+                         <ul>
+                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         </ul>
+                     </li>
+                     <li class="Title shcool">
+                         <p><span class="newTitle">学校支持</span><a class="more" href="front_shcool.html">更多 <img src="img/shcool.png" alt=""/></a></p>
+                         <ul>
+                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         </ul>
+                     </li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+    <!--footer-->
+    <div id="footer">
+        <div id="f_center">
+
+        </div>
+    </div>
+</body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+    
+<script>
+
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+    });
+</script>
+
+</html>

@@ -11,147 +11,275 @@
     <link rel="stylesheet" href="css/background/css/style.css" />
     <link rel="stylesheet" href="css/background/css/font-awesome.min.css" />
     <style>
-    #title {
-        margin: 20px 30px;
-    }
-    
-    .activities {
-        width: 800px;
-        overflow: auto;
-        margin: 20px 30px;
-        padding: 15px 20px;
-        border: 1px dashed #ccc;
-        border-radius: 5px;
-        position: relative;
-    }
-    
-    .activities p {
-        float: left;
-        margin-right: 10px;
-    }
-    
-    .activities p:nth-child(1) {
-        border: 1px solid #ccc;
-        height: 80px;
-        width: 10%;
-    }
-    
-    .activities p:nth-child(1) img {
-        height: 100%;
-        width: 100%;
-    }
-    
-    .activities p:nth-child(2) {
-        width: 78%;
-        padding: 5px 15px;
-    }
-    
-    .activities p:nth-child(2) span {
-        display: block;
-    }
-    
-    .activities p:nth-child(2) span:nth-child(1) {
-        font-size: 18px;
-        margin-bottom: 5px;
-    }
-    
-    .activities p:nth-child(3) {
-        height: 30px;
-        width: 60px;
-        text-align: center;
-        line-height: 30px;
-        background: darkseagreen;
-        border-radius: 5px;
-        position: absolute;
-        right: 0;
-        bottom: 15px;
-        color: #fff;
-        cursor: pointer;
-    }
-    
-    .project {
-        width: 800px;
-        overflow: auto;
-        margin: 20px 30px;
-        padding: 10px 20px;
-        border: 1px dashed #ccc;
-        border-radius: 5px;
-        position: relative;
-    }
-    
-    .project h2 {
-        text-align: center;
-        margin: 10px 0px;
-        padding-bottom: 15px;
-        border-bottom: 1px dashed #ccc;
-    }
-    
-    .project .des {
-        margin-bottom: 10px;
-        padding: 0px 15px 8px;
-        border-bottom: 1px dashed #ccc;
-    }
-    
-    .project h4 {
-        text-align: center;
-        font-size: 20px;
-        margin-bottom: 5px;
-    }
-    
-    .project .teacher {
-        overflow: auto;
-        padding: 0px 15px 8px;
-        border-bottom: 1px dashed #ccc;
-    }
-    
-    .project .teacher .image {
-        float: left;
-        width: 80%;
-    }
-    
-    .project .teacher img {
-        float: left;
-        height: 80px;
-        width: 80px;
-    }
-    
-    .project .update {
-        position: relative;
-        display: inline-block;
-        background: #D0EEFF;
-        border: 1px solid #99D3F5;
-        border-radius: 4px;
-        padding: 4px 12px;
-        overflow: hidden;
-        color: #1E88C7;
-        text-decoration: none;
-        text-indent: 0;
-        line-height: 20px;
-        text-align: center;
-        border-radius: 5px;
-        float: right;
-    }
-    
-    .project .update:hover {
-        background: #AADFFD;
-        border-color: #78C3F3;
-        color: #004974;
-        text-decoration: none;
-    }
-    
-    .upload_file {
-        height: auto;
-        padding: 20px 20px;
-        border-bottom: 1px dashed #ccc;
-    }
-    
-    .upload_btn {
-        position: absolute;
-        font-size: 100px;
-        right: 0;
-        top: 0;
-        opacity: 0;
-    }
+        .returnIndex img{
+            margin-right: 25px;
+        }
+        .returnIndex span{
+            font-size: 22px;
+            color:#666;
+        }
+        .tab-content .search{
+            float: left;
+            text-align: center;
+            width:80%;
+        }
+        .tab-content .search label{
+            display: block;
+            height:35px;
+            width:270px;
+            margin: 30px auto;
+            border:1px solid #ccc;
+            border-radius: 3px;
+            position: relative;
+
+        }
+        .tab-content .search label input{
+            height: 100%;
+            width: 85%;
+            font-size: 16px;
+            position: absolute;
+            top:0;
+            left:5px;
+        }
+        .tab-content .search label img{
+            position: absolute;
+            top:4px;
+            right:5px;
+        }
+        .b_page{
+            float: right;
+            margin: 30px;
+        }
+        .b_page li{
+            float: left;
+            margin-right: 10px;
+        }
+        .activities{
+            width:75%;
+            overflow: auto;
+            margin: 20px 30px;
+            padding: 15px 20px;
+            border:1px dashed #ccc;
+            border-radius: 5px;
+            position: relative;
+        }
+        .activities p{
+            float: left;
+            margin-right: 10px;
+        }
+        .activities p:nth-child(1){
+            border:1px solid #ccc;
+            height:80px;
+            width: 10%;
+        }
+        .activities p:nth-child(1) img{
+            height: 100%;
+            width: 100%;
+        }
+        .activities p:nth-child(2){
+            width: 78%;
+            padding:5px 15px;
+        }
+        .activities p:nth-child(2) span{
+            display: block;
+        }
+        .activities p:nth-child(2) span:nth-child(1){
+            font-size: 18px;
+            margin-bottom: 5px;
+        }
+        .activities .ac_title{
+            position: relative;
+            padding-bottom: 20px;
+            overflow: auto;
+        }
+        .activities .open{
+            height: 30px;
+            width: 60px;
+            text-align: center;
+            line-height: 30px;
+            background: darkseagreen;
+            border-radius: 5px;
+            position: absolute;
+            right: 0;
+            bottom: 15px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .p_content{
+            clear: both;
+            width: 98%;
+            margin: 0px auto;
+        }
+        .p_content .title{
+            font-size: 18px;
+            height:54px;
+            line-height: 54px;
+            background: rgb(153,153,153);
+            color: #fff;
+            font-weight: bold;
+            padding-left: 550px;
+        }
+        .p_content .c_title{
+            width: 1100px;
+            font-size: 18px;
+            height:44px;
+            line-height: 44px;
+            background: rgb(153,153,153);
+            color: #fff;
+            font-weight: bold;
+            padding-left: 550px;
+        }
+        .p_content .content{
+            overflow: auto;
+            padding-top: 30px;
+            margin-left: 40px;
+            display: none;
+            border-top:1px dashed #ccc;
+        }
+        .p_content .content .p_left_nav{
+            float: left;
+            width: 10%;
+            background: #f0f0f0;
+            text-align: center;
+            padding-top: 21px;
+        }
+        .p_content .p_left_nav h6{
+            margin-bottom: 21px;
+            font-size: 16px;
+            color: rgb(102,102,102);
+        }
+        .p_content .p_left_nav h6:nth-child(1),h6:nth-child(2){
+            height: 42px;
+            line-height: 42px;
+        }
+        .p_content .p_left_nav h6:nth-child(3){
+            height:180px;
+        }
+        .p_content .p_left_nav h6:nth-child(4){
+            height:42px;
+            line-height: 42px;
+        }
+        .p_content .p_left_nav h6:nth-child(5){
+            height:400px;
+        }
+        .p_content .content .p_right_input{
+            float: left;
+            padding-top: 21px;
+            margin-left: 22px;
+            width: 1000px;
+        }
+        .p_content .content .p_right_input label{
+            display: block;
+            margin-bottom: 21px;
+        }
+        .p_content .content .p_right_input b{
+            color: rgb(102,102,102);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .p_content .content .p_right_input label input[type="text"]{
+            height:42px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 22px;
+        }
+        .p_content .content .p_right_input label textarea{
+            height:180px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 21px;
+        }
+        .p_content .content .p_right_input label:nth-child(3){
+            line-height: 180px;
+        }
+        .p_content .content .p_right_input label input[type="file"]{
+            height:42px;
+            padding-top: 10px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 21px;
+            padding-left: 15px;
+            vertical-align: middle;
+        }
+        .p_right_input .p_team{
+            border:1px solid #ccc;
+            width: 810px;
+            padding: 19px 21px;
+            float: left;
+            margin-right: 21px;
+        }
+        .p_right_input .p_team .team_information{
+            float: left;
+            border:1px solid #ccc;
+            padding: 15px;
+            width: 90%;
+            margin-bottom: 15px;
+        }
+        .p_right_input .p_team .team_information img{
+            float: left;
+            width: 100px;
+            height:100px;
+            margin-right: 16px;
+            background: rgb(153,153,153);
+        }
+        .p_right_input .p_team li{
+            overflow: auto;
+        }
+        .p_right_input .p_team .team_information .people_information{
+            float: left;
+            width: 82%;
+            height:100px;
+            overflow: auto;
+            font-size: 12px;
+            color: rgb(102,102,102);
+        }
+        .p_right_input .p_team .team_information .people_information h5{
+            font-size: 12px;
+            color: rgb(102,102,102);
+            font-weight: 500;
+            width: 140px;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .p_right_input .p_team .team_information .people_information p{
+            line-height: 20px;
+        }
+        .p_right_input .p_delete{
+            height: 26px;
+            line-height: 0px;
+            font-size: 26px;
+            color: #fff;
+            width: 26px;
+            border-radius: 26px;
+            background: rgb(153,153,153);
+            position: relative;
+            top:50px;
+            left:30px;
+        }
+        .p_right_input .p_add{
+            float: left;
+            height: 26px;
+            line-height: 0px;
+            font-size: 26px;
+            color: #fff;
+            width: 26px;
+            border-radius: 26px;
+            background: rgb(153,153,153);
+        }
+        .p_content .p_right_input .btn{
+            width: 80%;
+            text-align: center;
+        }
+        .p_content .p_right_input .btn input[type="submit"]{
+            margin-top: 23px;
+            font-family: "微软雅黑";
+            width: 150px;
+            height: 42px;
+            background: rgb(0,153,153);
+            font-size: 18px;
+            color: #fff;
+        }
     </style>
     <script src='my-js/root_ui/root_ui.js'></script>
     <script src='my-js/root_ui/file_upload.js'></script>
@@ -174,21 +302,24 @@
                 </div>
                 <!-- tab-menu -->
                 <div class="aaa"></div>
-                <span>
-            <a href="back_add.html">队员管理</a>
-            </span>
-            <i class="fa fa-users"></i>
-
-            <span>
-            <a href="back_activities.html">项目管理</a>
-            </span>
-            <i class="fa fa-futbol-o"></i>
-
-
+                <script type="text/html" id="left_menu">
+                    <% for(var v in menu_list){%>
+                        <span>
+                    <a href="<%=menu_list[v].url%>"><%=menu_list[v]["name"]%></a>
+                    </span>
+                        <i class="fa <%=menu_list[v].class%>"></i>
+                        <%}%>
+                </script>
                 <div class='side_bar'></div>
                 <!-- tab-top-bar -->
                 <div class="top-bar">
                     <ul>
+                        <li class="returnIndex" style="float: left">
+                            <a href="javascript:void(0)" title="index">
+                                <img src="images/icon.png"/>
+                                <span>返回首页</span>
+                            </a>
+                        </li>
                         <li>
                             <a href="javascript:void(0)" title="Log Out" onclick="logout()">
                                 <i class="fa fa-sign-out"></i>
@@ -199,175 +330,168 @@
                 </div>
                 <!-- tab-content -->
                 <div class="tab-content">
-                    <h1 id="title">活动</h1>
-                   
-                            
-                                <div class="activities">
-                                    <p><img src=""></p>
-                                    <p>
-                                        <span>项目名称</span>
-                                        <span>项目副标题</span>
-                                    </p>
-                                    <p class="open" data-timestamp="1450767114180" toggle_card="1" onclick="toggle_card(this)">打开</p>
-                                </div>
-                                <div class="project timestamp-1450767114180" card_index="1" hidden>
-                                    <h2 class="title">项目名称</h2>
-                                    <div class="des">
-                                        <h4>项目副标题</h4>
-                                        <p>
-                                            <center>
-                                                项目的详细描述
-                                            </center>
-                                        </p>
+                    <!--<form class="search" action="">-->
+                        <!--<label><input type="text" placeholder="Search"/><img src="images/search.png" alt=""/></label>-->
+                    <!--</form>-->
+                    <ul class="b_page">
+                        <li><a href="javascript:void(0);">上一页</a></li>
+                        <li><a href="javascript:void(0);">下一页</a></li>
+                    </ul>
+                    <div class="p_content">
+                        <h3 class="title">团队项目编辑页面</h3>
+                        <!--编辑项目内容-->
+                        <div class="activities">
+                            <div class="ac_title">
+                                <p><img src=""/></p>
+                                <p>
+                                    <span>xx活动</span>
+                                    <span>xx内容</span>
+                                </p>
+                                <p class="open" open-id="0">打开</p>
+                            </div>
+                            <div class="content" style="clear: both;"  content-id="0">
+                                <h4 class="c_title">项目编辑</h4>
+                                <form action="">
+                                    <div class="p_left_nav">
+                                        <h6>项目名称</h6>
+                                        <h6>项目副标题</h6>
+                                        <h6>项目简介</h6>
+                                        <h6>上传附件</h6>
+                                        <h6>成员组成</h6>
                                     </div>
-                                    <div class="teacher">
-                                        
-                                            
-                                                <h4>指导老师</h4>
-                                                <div class="image">
-                                                    <p>用户名 : <span>老师名称</span></p>
-                                                    <p>邮箱 : <span>老师邮件</span></p>
-                                                    <p>性别 : <span>老师性别</span></p>
-                                                    <p>状态 : <span>未同意</span></p>
-                                                </div>
-                                                <img src="<%=teacher['photo']%>">
-                                                <br>
-                                               
-                                                    <div class="add_teacher" style="float:left;display:block">
-                                                        <input type="text" placeholder="请输入老师工号" style="width:300px;padding:9px;border:1px solid black;border-radius:3px" class="member_id_input" />
-                                                        <button onclick="add_teacher(this)" project_id="这里填充项目id" type="submit" style="margin-left:20px;padding:10px;border-radio:5px">添加指导老师</button>
-                                                    </div>
-                                                   
+                                    <div class="p_right_input">
+                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                        <label><input type="file"/><b>请将所有文件打包上传</b></label>
+                                        <label>
+                                            <div class="p_team">
+                                                <ul>
+                                                    <li>
+                                                        <div class="team_information">
+                                                            <img src="" alt=""/>
+                                                            <div class="people_information">
+                                                                <h5>张三</h5>
+                                                                <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
+                                                                <p>
+                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <button class="p_delete">-</button>
+                                                    </li>
+                                                    <li>
+                                                        <div class="team_information">
+                                                            <img src="" alt=""/>
+                                                            <div class="people_information">
+                                                                <h5>张三</h5>
+                                                                <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
+                                                                <p>
+                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。
+                                                                    请问从大选到今天，是否有启动热线？第二个问题是关于南海，除了马英九可能明天会登上太平岛之外，
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <button class="p_delete">-</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <button class="p_add">+</button>
+                                        </label>
+                                        <div class="btn">
+                                            <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
+                                        </div>
                                     </div>
+                                </form>
+                            </div>
+                        </div>
 
-                                    <div class="teacher">
-                                    <h4>团队成员</h4>
-                                       
-                                           
-                                                
-                                                <div class="image">
-                                                    <p>用户名 : <span>学生1</span></p>
-                                                    <p>邮箱 : <span>学生邮件</span></p>
-                                                    <p>性别 : <span>学生性别</span></p>
-                                                    <p>状态 : <span>同意加入</span></p>
-                                                </div>
-                                                <img src="<%=member['photo']%>">
-                                                <br><br>
-                                                 <div class="image">
-                                                    <p>用户名 : <span>学生2</span></p>
-                                                    <p>邮箱 : <span>学生邮件</span></p>
-                                                    <p>性别 : <span>学生性别</span></p>
-                                                    <p>状态 : <span>未同意</span></p>
-                                                </div>
-                                                <img src="<%=member['photo']%>">
-                                                <br>
-                                         
+                        <div class="activities">
+                            <div class="ac_title">
+                                <p><img src=""/></p>
+                                <p>
+                                    <span>xx活动</span>
+                                    <span>xx内容</span>
+                                </p>
+                                <p class="open" open-id="1">打开</p>
+                            </div>
+                            <div class="content" style="clear: both;"  content-id="1">
+                                <h4 class="c_title">项目编辑</h4>
+                                <form action="">
+                                    <div class="p_left_nav">
+                                        <h6>项目名称</h6>
+                                        <h6>项目副标题</h6>
+                                        <h6>项目简介</h6>
+                                        <h6>上传附件</h6>
+                                        <h6>成员组成</h6>
                                     </div>
-
-
-                                    <div class="upload_file">
-                                        <h4>项目文件</h4>
-                                        <a href="my-php/lee/<%=info['addr']%>" target="view_window"  style="color:red">点击下载项目文件</>
-                                        <a href="javascript:void(0)" class="update" project_id="<%=info['_id']%>" onclick="upload_file(this)" >上传<input type="button"  class="upload_btn" ></a>
-                                        <a href="javascript:void(0)" class="update select_file" >选择文件<input type="file" id="upload_file" name="file" class="upload_btn" ></a>
-
+                                    <div class="p_right_input">
+                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                        <label><input type="file"/><b>请将所有文件打包上传</b></label>
+                                        <label>
+                                            <div class="p_team">
+                                                <ul>
+                                                    <li>
+                                                        <div class="team_information">
+                                                            <img src="" alt=""/>
+                                                            <div class="people_information">
+                                                                <h5>张三</h5>
+                                                                <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
+                                                                <p>
+                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                        <button class="p_delete">-</button>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <button class="p_add">+</button>
+                                        </label>
+                                        <div class="btn">
+                                            <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
+                                        </div>
                                     </div>
-                                   <br>
-                                    
+                                </form>
+                            </div>
+                        </div>
 
-
-                                </div>
-                   
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-   
+    <script src="my-js/template.js"></script>
+    <script src="my-js/logic.js"></script>
 <script src="my-js/root_ui/jquery.ajaxupload.js"></script>
 
     <script>
-    //加载模板引擎
-//     $(document).ready(function() {
-//             $.get("my-php/lee/match_manage.php", function(data) {
-
-//                 if ("err" in data) {
-//                     alert(data["err"])
-//                     window.location.href = '../index.html'
-
-//                 } else {
-//                     var bt = baidu.template
-//                     var card_template = bt("project_card", data)
-//                     $(".tab-content").append(card_template)
-//                 }
-//             }, "json")
-
-//         })
-//         //其他js
-//     function add_teacher(e) {
-//         var member_id = $(".member_id_input").val()
-//         project_id = $(e).attr("project_id")
-//         if (member_id) {
-//             var url = "my-php/lee/add_teacher.php?id=" + member_id + "&project_id=" + project_id
-
-//             $.get(url, function(data) {
-//                 if ("err" in data) {
-//                     alert(data["err"])
-//                 } else {
-//                     window.location.href = "./back_activities.html"
-//                 }
-//             }, "json")
-//         } else {
-//             alert("服务器出现错误,请刷新重试")
-//         }
-//     }
-
-    function toggle_card(e) {
-        var card_index = $(e).attr("toggle_card")
-        $("[card_index=" + card_index + "]").toggle()
-
-    }
-
-//     //上传项目文件
-//      function upload_file(e){
-//         if($("#upload_file").val()!=""){
-//         project_id = $(e).attr("project_id")
-
-
-//         $.ajaxFileUpload({
-//                     url:'my-php/lee/file_upload.php',//处理图片脚本
-//                     secureuri :false,
-//                     fileElementId :'upload_file',//file控件id
-//                     dataType : 'json',
-//                     success : function (data, status){
-//                        console.log(data)
-//                        $.post("my-php/lee/match_upload_file.php",{"project_id":project_id,"add":data["add"]},function(data,success){ 
-
-//                         if(success){
-//                             alert("更新项目文件成功")
-//                             console.log(data)
-//                         }
-//                         else{
-
-//                             alert("上传失败,请重新尝试")
-//                         }
-
-
-//                        })
-//                     },
-//                     error: function (data, status, e)//服务器响应失败处理函数
-//                     {
-//                         alert(e);
-//                     }
-//                 });
-// }
-// else{
-//     alert("请先选择文件")
-// }
-
-
-//     }
-    </script>
-    <script>
+        //添加
+        $('.p_add').click(function(){
+            $(this).parent().find('.p_team ul').append('<li><div class="team_information">' +
+                    '<img src="" alt=""/>' +
+                    '<div class="people_information">' +
+                    '<h5>是谁谁</h5>' +
+                    '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
+                    '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。' +
+                    '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
+                    '</div>' +
+                    '</div><button class="p_delete">-</button></li>');
+            return false;
+        });
+        //删除
+        $(document).on('click','.p_delete',function(){
+            $(this).parent().remove();
+            return false;
+        });
+        //项目编辑内容效果显示隐藏
+        $('.open').click(function(){
+            var openId = $(this).attr('open-id');
+            var content = $("div[content-id="+openId+"]");
+            content.toggle();
+        });
     </script>
 </body>
 

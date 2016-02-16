@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>新闻</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+     <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+    <style>
+        #n_center{
+        clear: both;
+        width: 960px;
+        padding-top: 2px;
+        font-family: "微软雅黑";
+        }
+        #n_center a:hover{
+        text-decoration: underline;
+        }
+        #n_center span:hover{
+        text-decoration: underline;
+        }
+        .news{
+        padding-top: 10px;
+        }
+        .news li{
+        height: 44px;
+        line-height: 44px;
+        color: #444;
+        border-bottom: 1px solid #ccc;
+        position: relative;
+        }
+        .news li a{
+        color: #666;
+        }
+        .news  li a span{
+        float: left;
+        color: #666;
+        }
+        .news li a img{
+        float: right;
+        position: relative;
+        top:8px;
+        color: rgb(154,150,149);
+        }
+    </style>
+</head>
+<body>
+<include file='Public:headerhtml'/>
+<!--内容1-->
+<div id="content">
+<div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
+    <ul class="slider_bag"> 
+      
+        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+       
+    </ul>
+</div>
+         <div class="announcement">
+             <p>团队<br/>风采</p>
+         </div>
+         <div id="n_center">
+             <div class="n_content">
+                 <ul class="news">
+                     <li><a href="{{:U('News/details')}}"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="__STATIC__/img/country.png"/></a></li>
+                 </ul>
+             </div>
+             <div class="page" style="margin: 40px 0px">
+                 <ul>
+                     <li class="onPage"> < 上一页</li>
+                     <li class="active">1</li>
+                     <li>2</li>
+                     <li>3</li>
+                     <li>4</li>
+                     <li class="nextPage">下一页 > </li>
+                 </ul>
+             </div>
+         </div>
+     </div>
+
+    <!--footer-->
+    <div id="footer" style="clear: both">
+        <div id="f_center">
+
+        </div>
+    </div>
+</body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+<script>
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+    });
+</script>
+<!-- 接下来是获取新闻的代码 -->
+</html>
