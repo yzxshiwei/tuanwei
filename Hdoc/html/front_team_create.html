@@ -12,7 +12,7 @@
     <div class="newsHeader">
         <div class="headerContent">
             <!--LOGO-->
-            <a href="index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+            <a href="front_index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
             <!--注册、登录-->
             <div class="rAndl">
                 <a href="front_login.html">登录</a> <span>|</span> <a href="front_personBm.html">注册</a>
@@ -65,19 +65,48 @@
             <div id="teamMessage">
                 <div class="teamMessage">
                     <!--团队信息-->
-                    <div class="text-area"></div>
+                    <div class="teamBox">
+                        <img class="radius" src="img/ceshi.jpg"/>
+                        <div class="teamZl">
+                            <h4>XX团队</h4>
+                            <h5>在XX领域XX，现需组织策划人才1员，XXXXXXXXXXXXXXXXXXXXXXXXX。</h5>
+                            <p>联系人：<span>XXX</span></p>
+                            <p>联系QQ：<span>1584678594</span></p>
+                            <p>联系电话：<span>15874568975</span></p>
+                            <p>联系邮箱：<span>cccc@email.com</span></p>
+                        </div>
+                    </div>
+                    <!--个人信息-->
+                    <div class="teamBox">
+                        <img class="radius" src="img/ceshi.jpg"/>
+                        <div class="teamZl">
+                            <h4>刘明</h4>
+                            <h5>XXX专业，曾经在XXX完成XXXXXXXXXXXXXXXXXXX，对XXX极有兴趣，希望在XXX领域从事XXXX工作，XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h5>
+                            <p>联系人：<span>XXX</span></p>
+                            <p>联系QQ：<span>1584678594</span></p>
+                            <p>联系电话：<span>15874568975</span></p>
+                            <p>联系邮箱：<span>cccc@email.com</span></p>
+                        </div>
+                    </div>
                     <!--分页-->
                     <div class="page">
-                        <ul class="page_select">
+                        <ul>
+                            <li class="onPage"> < 上一页</li>
+                            <li class="active">1</li>
+                            <li>2</li>
+                            <li>3</li>
+                            <li>4</li>
+                            <li class="nextPage">下一页 > </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div id="footer" class="footer" style="margin-top: 70px">
-        <div class="footer-bag">
-            
+    <!--footer-->
+    <div id="footer" style="margin-top: 70px" class="footer">
+        <div id="f_center" style="text-align: left">
+
         </div>
     </div>
     <!--js-->
@@ -100,20 +129,40 @@
                  <%}%>
              </ul>
 </script>
-<script id="footer_temp" type="text/html">
-    <% for(x in footer_list){%>
-                       <div class="footer-menu">
-                       <% for (y in footer_list[x]['second']){%>
-                <span><a href="<%=footer_list[x]['second'][y]['second_url']%>"><%=footer_list[x]['second'][y]['second_name']%></a></span>
-                
-                <%}%>
-
-            </div>
-                        
-                         
-    <%}%>                   
-                          
-</script>
+    <script type="text/html" id="footer_temp" >
+        <ul>
+            <li class="f_main">
+                <a href="" class="f_title">友情链接</a>
+                <ul class="f_content">
+                    <% for (x in footer_list){%>
+                    <%for (y in footer_list[x]){%>
+                    <li><a href="<%=footer_list[x][y]['second_list_href']%>"><%=footer_list[x][y]['second_list_name']%></a></li>
+                    <%}%>
+                    <%}%>
+                </ul>
+                <ul class="f_content" style="position: relative;bottom:13px;">
+                    <% for (x in footer_list){%>
+                    <%for (y in footer_list[x]){%>
+                    <li><a href="<%=footer_list[x][y]['third_list_href']%>"><%=footer_list[x][y]['third_list_name']%></a></li>
+                    <%}%>
+                    <%}%>
+                </ul>
+            </li>
+            <li class="f_main">
+                <a href="" class="f_title">联系分享</a>
+                <div class="f_content">
+                    <p><img src="img/footer/sina_weibo.png"/><img src="img/footer/QQ.png"/><img src="img/footer/微信%20-%20Assistor.png"/></p>
+                    <p><img src="img/footer/朋友圈%20-%20Assistor.png"/><img src="img/footer/豆瓣%20-%20Assistor.png"/><img src="img/footer/人人网%20-%20Assistor.png"/></p>
+                </div>
+            </li>
+            <li class="f_main">
+                <a href="" class="f_title">关注我们</a>
+                <div class="f_content">
+                    <img src="img/code.png"/>
+                </div>
+            </li>
+        </ul>
+    </script>
 <script src="js/template.js"></script>
     <script>
         $(function(){

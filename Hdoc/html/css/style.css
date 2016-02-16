@@ -160,6 +160,18 @@ a:active {
     transition: all .2s;
     color: gray; }
 
+
+/*========================carousel===========================*/
+#carousel{
+    margin: 0px;
+    height:350px;
+}
+#carousel .dot {
+    background-color: #fff; }
+#carousel .dot.active {
+    background-color: #49A9A5;
+    border: 2px solid #fff; }
+
 .ad {
     height: 210px;
     font-size: 0px;
@@ -225,24 +237,6 @@ a:active {
     font-size: 20px;
     color: #FFF; }
 
-.body-ad-cover {
-    margin-top: 30px;
-    width: 100%;
-    text-align: center;
-    font-size: 0px;
-    min-width: 960px;
-    height: 210px; }
-
-.body-ad {
-    width: 960px;
-    display: inline-block;
-    position: relative;
-    text-align: left;
-    height: 100%;
-    background-color: #000; }
-.body-ad img {
-    height: 210px;
-    width: 960px; }
 
 .index-line {
     width: 100%;
@@ -758,3 +752,55 @@ a:active {
     display: inline-block; }
 
 /*# sourceMappingURL=style.css.map */
+/*=====================footer======================*/
+#footer{
+    margin-top: 40px;
+    overflow: auto;
+    background-color: rgb(72,170,164);
+    font-family: "微软雅黑";
+    padding-bottom: 60px;
+}
+#footer #f_center{
+    width: 960px;
+    margin: 0 auto;
+    padding-top: 40px;
+}
+#footer #f_center a:hover{
+    text-decoration: underline;
+}
+#footer #f_center .f_main{
+    float: left;
+    width: 210px;
+    margin-right: 40px;
+}
+#footer #f_center .f_main:first-child{
+    width: 460px;
+}
+#footer #f_center li:first-child ul{
+    float: left;
+    margin-right: 190px;
+}
+#footer #f_center li:first-child ul:last-child{
+    margin-right: 0;
+}
+#footer #f_center .f_main:last-child{
+    margin-right: 0px;
+}
+#footer #f_center .f_title{
+    display: block;
+    font-size: 20px;
+    padding-bottom: 7px;
+    margin-bottom: 28px;
+    border-bottom:1px solid #fff;
+}
+#footer #f_center .f_content a{
+    display: block;
+    margin-bottom: 13px;
+    font-size: 15px;
+}
+#footer #f_center .f_content p{
+    margin-bottom: 13px;
+}
+#footer #f_center .f_content p img{
+    margin-right: 29px;
+}

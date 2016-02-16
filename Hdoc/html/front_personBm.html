@@ -5,13 +5,15 @@
     <title>个人报名</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style-fcl.css">
+    <link rel="stylesheet" href="css/mobiscroll.custom-2.5.2.min.css"/>
+    <link href="css/mobiscroll.android-ics-2.5.2.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
 <!--头部-->
 <div class="newsHeader">
     <div class="headerContent">
         <!--LOGO-->
-        <a href="index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+        <a href="front_index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
         <!--注册、登录-->
         <div class="rAndl">
             <a href="front_login.html">登录</a>
@@ -76,10 +78,10 @@
             <label>123</label>
             <p><span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" id="name" placeholder="您的真实姓名"/></p>
             <label>123</label>
-            <p class="birthDate"><span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" id="birthday" placeholder="您的出生日期"/></p>
+            <p class="birthDate"><span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="appDate" id="appDate" placeholder="你的出生日期"/></p>
             <label id="birTs">123</label>
             <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span>
-            <select id="major">
+            <select id="major" style="width: 525px;position: relative;right:5px;">
                 <option value="经济学院">经济学院</option>
                 <option value="建筑与环境学院">建筑与环境学院</option>
                 <option value="法学院">法学院</option>
@@ -118,7 +120,7 @@
 
             <!-- <input  type="text" placeholder="您的主修专业"/></p> -->
             <label>123</label>
-            <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="" id="degree">
+            <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="" id="degree" style="width: 530px;">
                 <option value="本科">本科</option>
                 <option value="研究生">研究生</option>
                 <option value="博士生">博士生</option>
@@ -131,9 +133,9 @@
     </div>
 </div>
 <!--footer-->
-<div id="footer" class="footer footer2" style="clear: both">
-    <div class="footer-bag">
-        
+<div id="footer" style="clear: both">
+    <div id="f_center">
+
     </div>
 </div>
 
@@ -157,19 +159,39 @@
                  <%}%>
              </ul>
 </script>
-<script id="footer_temp" type="text/html">
-    <% for(x in footer_list){%>
-                       <div class="footer-menu">
-                       <% for (y in footer_list[x]['second']){%>
-                <span><a href="<%=footer_list[x]['second'][y]['second_url']%>"><%=footer_list[x]['second'][y]['second_name']%></a></span>
-                
+<script type="text/html" id="footer_temp" >
+    <ul>
+        <li class="f_main">
+            <a href="" class="f_title">友情链接</a>
+            <ul class="f_content">
+                <% for (x in footer_list){%>
+                <%for (y in footer_list[x]){%>
+                <li><a href="<%=footer_list[x][y]['second_list_href']%>"><%=footer_list[x][y]['second_list_name']%></a></li>
                 <%}%>
-
+                <%}%>
+            </ul>
+            <ul class="f_content" style="position: relative;bottom:13px;">
+                <% for (x in footer_list){%>
+                <%for (y in footer_list[x]){%>
+                <li><a href="<%=footer_list[x][y]['third_list_href']%>"><%=footer_list[x][y]['third_list_name']%></a></li>
+                <%}%>
+                <%}%>
+            </ul>
+        </li>
+        <li class="f_main">
+            <a href="" class="f_title">联系分享</a>
+            <div class="f_content">
+                <p><img src="img/footer/sina_weibo.png"/><img src="img/footer/QQ.png"/><img src="img/footer/微信%20-%20Assistor.png"/></p>
+                <p><img src="img/footer/朋友圈%20-%20Assistor.png"/><img src="img/footer/豆瓣%20-%20Assistor.png"/><img src="img/footer/人人网%20-%20Assistor.png"/></p>
             </div>
-                        
-                         
-    <%}%>                   
-                          
+        </li>
+        <li class="f_main">
+            <a href="" class="f_title">关注我们</a>
+            <div class="f_content">
+                <img src="img/code.png"/>
+            </div>
+        </li>
+    </ul>
 </script>
 <script src="js/template.js"></script>
 <script>
@@ -236,4 +258,28 @@
         }
     });
 </script>
+<!--出生日期选择-->
+<script src="js/min/mobiscroll.core-2.5.2.js" type="text/javascript"></script>
+<script src="js/min/mobiscroll.core-2.5.2-zh.js" type="text/javascript"></script>
+<script src="js/min/mobiscroll.datetime-2.5.1.js" type="text/javascript"></script>
+<script src="js/min/mobiscroll.datetime-2.5.1-zh.js" type="text/javascript"></script>
+<script type="text/javascript">
+    $(function () {
+        var currYear = (new Date()).getFullYear();
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            lang:'zh',
+            startYear:currYear - 10, //开始年份
+            endYear:currYear + 60 //结束年份
+        };
+
+        $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+
+    });
+</script>
+
 </html>

@@ -5,13 +5,76 @@
     <title>资料库</title>
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/style-fcl.css">
+    <style>
+        #library{
+            margin-top: 40px;
+        }
+        #library .classification{
+            margin-bottom: 35px;
+            overflow: auto;
+        }
+        #library .classification li{
+            float:left;
+            width: 25%;
+            background: #7FC3BF;
+            text-align: center;
+        }
+        #library .classification li:nth-child(1) img{
+            height:170px;
+            width: 108px;
+        }
+        #library .classification li:nth-child(2) img{
+            height:170px;
+        }
+        #library .classification li:nth-child(3) img{
+            height:170px;
+            width: 150px;
+        }
+        #library .classification li:nth-child(4) img{
+            height:170px;
+            width: 152px;
+        }
+        #library .classification li img{
+            margin: 16px 0px;
+        }
+        #library .classification li p{
+            height:50px;
+            font-size: 25px;
+            color: #fff;
+            line-height: 50px;
+            background: #48AAA4;
+        }
+        .news{
+            padding-top: 10px;
+        }
+        .news li{
+            height: 44px;
+            line-height: 44px;
+            color: #444;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .news li a{
+            color: #666;
+        }
+        .news  li a span{
+            float: left;
+            color: #666;
+        }
+        .news li a img{
+            float: right;
+            position: relative;
+            top:11px;
+            color: rgb(154,150,149);
+        }
+    </style>
 </head>
 <body>
 <!--头部-->
 <div class="newsHeader">
     <div class="headerContent">
         <!--LOGO-->
-        <a href="index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+        <a href="front_index.html"><img src="img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
         <!--注册、登录-->
         <div class="rAndl">
             <a href="front_login.html">登录</a> <span>|</span> <a href="front_personBm.html">注册</a>
@@ -25,20 +88,45 @@
         </div>
     </div>
     <!--资料库内容-->
-    <div id="content2">
-         <div class="center">
-            <div class="contentTitle">
-                <span>图文新闻</span>
-                <b></b>
-            </div>
-            <ul class="tpxw">
-                
+    <div id="library">
+        <ul class="classification">
+            <li><img src="img/icon-03.png" alt=""/><p>工具</p></li>
+            <li><img src="img/icon-04.png" alt=""/><p>方法</p></li>
+            <li><img src="img/icon-01-01.png" alt=""/><p>书籍</p></li>
+            <li><img src="img/icon-02.png" alt=""/><p>网络课程</p></li>
+        </ul>
+        <ul class="news" style="clear: both;">
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="img/country.png"/></a></li>
+        </ul>
+        <div class="page" style="margin: 50px 0px">
+            <ul>
+                <li class="onPage"> < 上一页</li>
+                <li class="active">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li class="nextPage">下一页 > </li>
             </ul>
         </div>
-        </div>
-    <div id="footer" class="footer">
-        <div class="footer-bag">
-            
+    </div>
+    <!--footer-->
+    <div id="footer" style="clear: both">
+        <div id="f_center">
+
         </div>
     </div>
 </body>
@@ -58,19 +146,39 @@
                  <%}%>
              </ul>
 </script>
-<script id="footer_temp" type="text/html">
-    <% for(x in footer_list){%>
-                       <div class="footer-menu">
-                       <% for (y in footer_list[x]['second']){%>
-                <span><a href="<%=footer_list[x]['second'][y]['second_url']%>"><%=footer_list[x]['second'][y]['second_name']%></a></span>
-                
+<script type="text/html" id="footer_temp" >
+    <ul>
+        <li class="f_main">
+            <a href="" class="f_title">友情链接</a>
+            <ul class="f_content">
+                <% for (x in footer_list){%>
+                <%for (y in footer_list[x]){%>
+                <li><a href="<%=footer_list[x][y]['second_list_href']%>"><%=footer_list[x][y]['second_list_name']%></a></li>
                 <%}%>
-
+                <%}%>
+            </ul>
+            <ul class="f_content" style="position: relative;bottom:13px;">
+                <% for (x in footer_list){%>
+                <%for (y in footer_list[x]){%>
+                <li><a href="<%=footer_list[x][y]['third_list_href']%>"><%=footer_list[x][y]['third_list_name']%></a></li>
+                <%}%>
+                <%}%>
+            </ul>
+        </li>
+        <li class="f_main">
+            <a href="" class="f_title">联系分享</a>
+            <div class="f_content">
+                <p><img src="img/footer/sina_weibo.png"/><img src="img/footer/QQ.png"/><img src="img/footer/微信%20-%20Assistor.png"/></p>
+                <p><img src="img/footer/朋友圈%20-%20Assistor.png"/><img src="img/footer/豆瓣%20-%20Assistor.png"/><img src="img/footer/人人网%20-%20Assistor.png"/></p>
             </div>
-                        
-                         
-    <%}%>                   
-                          
+        </li>
+        <li class="f_main">
+            <a href="" class="f_title">关注我们</a>
+            <div class="f_content">
+                <img src="img/code.png"/>
+            </div>
+        </li>
+    </ul>
 </script>
 <script src="js/template.js"></script>
 
