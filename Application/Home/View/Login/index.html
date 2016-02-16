@@ -1,38 +1,100 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
+<!DOCTYPE html>
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <title>登录中心</title>
-    <script type="text/javascript" src="__JS__jquery.min.js"></script>
-    <script type="text/javascript" src="__JS__jquery.form.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $("form").submit(function(){
-                $(this).ajaxSubmit({
-                    dataType: "json",
-                    success: function (json) {
-                        if ("status" in json && json.status == 1) {
-                            alert(json.msg || "登录成功");
-                            window.location = json.url || "{{:U("Index/Index")}}";
-                        }else{
-                            alert(json.msg || "登录错误");
-                        }
-                    },
-                    error:function(){
-                        alert("发生错误");
-                    }
-                });
-                return false;
-            });
-        });
-    </script>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <style>
+        #team h5{
+            clear: both;
+            text-align: center;
+            color: #48AAA4;
+            margin-bottom: 50px;
+            font-size: 24px;
+        }
+        #team h6{
+            clear: both;
+            color: #48AAA4;
+            margin-bottom: 5px;
+        }
+    </style>
 </head>
 <body>
-    <form action="{{:U("Login/Login",array("jump"=>I("get.jump")))}}" method="POST">
-        <input type="text" name="user"/> <br />
-        <input type="password" name="pwd"/><br />
-        <button type="submit">登录</button>
-    </form>
+    <!--头部-->
+    <div class="newsHeader">
+        <div class="headerContent">
+            <!--LOGO-->
+            <a href="front_index.html"><img src="__STATIC__/img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
+            <!--注册、登录-->
+            <div class="rAndl">
+                <a href="front_personBm.html">注册</a>
+            </div>
+        </div>
+    </div>
+    <!--头部导航-->
+    <div id="headerNav">
+        <div class="navContent">
+            
+        </div>
+    </div>
+    <!--poster-->
+    <div id="team">
+        <div class="poster">
+            <div class="center"><img src="__STATIC__/img/banner-1.jpg"/></div>
+        </div>
+        <!--title-->
+        <div class="title">成员登录</div>
+        <!--content-->
+        <div class="content">
+            <form action="" method="">
+                <p><span>电子邮箱</span><input id="email" type="text" placeholder="电子邮件地址"/></p>
+                <label id="emailTs">123</label>
+                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" type="password" placeholder="密码"/></p>
+                <label id="pwdTs">123</label>
+                <input class="subBtn" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
+                <h5>忘记密码?</h5>
+                <p><span>电子邮箱</span><input id="wj_email" type="text" placeholder="电子邮件地址"/></p>
+                <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
+                <h6>注意:</h6>
+                <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
+            </form>
+        </div>
+    </div>
+    <!--footer-->
+    <div id="footer" style="clear: both">
+        <div id="f_center">
+
+        </div>
+    </div>
 </body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+<script>
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+    });
+    //ajax 提交
+    $('.subBtn').click(function(){
+        var email = $('#email').val();
+        var password = $('#pwd').val();
+        var data = {
+            'email':email,
+            'password':password
+        };
+        $.post('backend/my-php/login/login.php',data,function(data,success){
+            if(data != 300){
+                location.href = 'index.html?name='+data;
+            }else{
+                alert('密码或用户名错误!');
+            }
+        });
+    });
+</script>
 </html>

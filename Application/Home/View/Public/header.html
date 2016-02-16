@@ -1,0 +1,18 @@
+<script src="__JS__jquery.js"></script>
+<script src="__JS__register.js"></script>
+<script src="__JS__baidu.js"></script>
+<script type="text/html" id="header_temp">   
+    <ul class="newsnav">
+                <% for(x in header_list){%>
+                 <li>
+                     <a href="<%=header_list[x]['first_list_href']%>"><%=header_list[x]['first_list_name']%></a>
+                      <ul class="dropNav">
+                     <% for (y in header_list[x]['second']){%>
+                         <li><a href="<%=header_list[x]["second"][y]['second_list_href']%>"><%=header_list[x]["second"][y]['second_list_name']%></a></li>
+                     <%}%>
+                     </ul>
+                 </li>
+                 <%}%>
+             </ul>
+</script>
+<script src="__JS__template.js"></script>
