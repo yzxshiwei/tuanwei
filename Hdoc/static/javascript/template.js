@@ -6,10 +6,10 @@ var header_list={"header_list":[
           
      ]
     },
-    {"first_list_href":"front_training.html",
+    {"first_list_href":"/index.php?m=Home&c=News&a=train",
      "first_list_name":"讲座培训",
      "second":[
-        {"second_list_href":"front_library.html","second_list_name":"资料库"}
+        {"second_list_href":"index.php?m=Home&c=News&a=library","second_list_name":"资料库"}
          
      ]
     },
@@ -68,5 +68,4 @@ $('.navContent').html(header_temp);
 var bt_2=baidu.template;
 
 var footer_temp=bt_2('footer_temp',footer_list);
-console.log(footer_temp)
 $('#f_center').html(footer_temp);

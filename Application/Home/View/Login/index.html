@@ -21,23 +21,7 @@
     </style>
 </head>
 <body>
-    <!--头部-->
-    <div class="newsHeader">
-        <div class="headerContent">
-            <!--LOGO-->
-            <a href="front_index.html"><img src="__STATIC__/img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
-            <!--注册、登录-->
-            <div class="rAndl">
-                <a href="front_personBm.html">注册</a>
-            </div>
-        </div>
-    </div>
-    <!--头部导航-->
-    <div id="headerNav">
-        <div class="navContent">
-            
-        </div>
-    </div>
+   <include file='Public:headerhtml'/>
     <!--poster-->
     <div id="team">
         <div class="poster">
@@ -52,10 +36,10 @@
                 <label id="emailTs">123</label>
                 <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" type="password" placeholder="密码"/></p>
                 <label id="pwdTs">123</label>
-                <input class="subBtn" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
+                <input class="subBtn" type="button" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
                 <h5>忘记密码?</h5>
                 <p><span>电子邮箱</span><input id="wj_email" type="text" placeholder="电子邮件地址"/></p>
-                <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
+                <input class="subBtn" type="button" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
                 <h6>注意:</h6>
                 <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
             </form>
@@ -88,7 +72,7 @@
             'email':email,
             'password':password
         };
-        $.post('backend/my-php/login/login.php',data,function(data,success){
+        $.post("{{:U('Login/login')}}",data,function(data,success){
             if(data != 300){
                 location.href = 'index.html?name='+data;
             }else{

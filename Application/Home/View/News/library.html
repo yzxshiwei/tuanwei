@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>资料库</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <style>
+        #library{
+            margin-top: 40px;
+        }
+        #library .classification{
+            margin-bottom: 35px;
+            overflow: auto;
+        }
+        #library .classification li{
+            float:left;
+            width: 25%;
+            background: #7FC3BF;
+            text-align: center;
+        }
+        #library .classification li:nth-child(1) img{
+            height:170px;
+            width: 108px;
+        }
+        #library .classification li:nth-child(2) img{
+            height:170px;
+        }
+        #library .classification li:nth-child(3) img{
+            height:170px;
+            width: 150px;
+        }
+        #library .classification li:nth-child(4) img{
+            height:170px;
+            width: 152px;
+        }
+        #library .classification li img{
+            margin: 16px 0px;
+        }
+        #library .classification li p{
+            height:50px;
+            font-size: 25px;
+            color: #fff;
+            line-height: 50px;
+            background: #48AAA4;
+        }
+        .news{
+            padding-top: 10px;
+        }
+        .news li{
+            height: 44px;
+            line-height: 44px;
+            color: #444;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .news li a{
+            color: #666;
+        }
+        .news  li a span{
+            float: left;
+            color: #666;
+        }
+        .news li a img{
+            float: right;
+            position: relative;
+            top:11px;
+            color: rgb(154,150,149);
+        }
+    </style>
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <!--资料库内容-->
+    <div id="library">
+        <ul class="classification">
+            <li><img src="__STATIC__/img/icon-03.png" alt=""/><p>工具</p></li>
+            <li><img src="__STATIC__/img/icon-04.png" alt=""/><p>方法</p></li>
+            <li><img src="__STATIC__/img/icon-01-01.png" alt=""/><p>书籍</p></li>
+            <li><img src="__STATIC__/img/icon-02.png" alt=""/><p>网络课程</p></li>
+        </ul>
+        <ul class="news" style="clear: both;">
+            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="__STATIC__/img/country.png"/></a></li>
+        </ul>
+        <div class="page" style="margin: 50px 0px">
+            <ul>
+                <li class="onPage"> < 上一页</li>
+                <li class="active">1</li>
+                <li>2</li>
+                <li>3</li>
+                <li>4</li>
+                <li class="nextPage">下一页 > </li>
+            </ul>
+        </div>
+    </div>
+    <!--footer-->
+    <div id="footer" style="clear: both">
+        <div id="f_center">
+
+        </div>
+    </div>
+</body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+
+<script>
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+    });
+</script>
+</html>
