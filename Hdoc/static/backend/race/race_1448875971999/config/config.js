@@ -1,0 +1,1 @@
+var config='{"race_id":"race_1448875971999","name":"\u674e\u5927\u732b\u7b2c\u4e8c\u6761\u6d4b\u8bd5\u526f\u6807\u9898","class":["asd"],"chart":"..","banner_path":"banner_01.png","s_st":"0","s_et":"0","rule":"<p><img src=\"\/tuan_final\/backend\/ueditor_pic\/20151130\/1448876024632281.jpg\" title=\"1448876024632281.jpg\" alt=\"5f0d48600f5752a16092cc406c9ad0e3_b.jpg\"\/><\/p>"}';

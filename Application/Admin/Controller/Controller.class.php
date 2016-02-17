@@ -15,7 +15,7 @@ class Controller extends \Common\Helper\Controller{
     public function __construct()
     {
         parent::__construct();
-        $allows = C("allows_login");
+     /*    $allows = C("allows_login");
         $info = \Common\Helper\RunUser::newInstantiation()->getInfo();
         $isAllowsLogin = $info && in_array(intval($info["user_type"]),$allows);
         if(!$isAllowsLogin && \Common\Helper\RunUser::newInstantiation()->isTourist() && IS_AJAX ){//游客AJAX
@@ -26,6 +26,6 @@ class Controller extends \Common\Helper\Controller{
             return $this->ajaxReturn(array("status"=>0,"msg"=>"当前用户不能进行后台操作"));
         }elseif(!$isAllowsLogin){//非法用户类型访问页面
             return $this->redirect("Home/Index/Index");
-        }
+        } */
     }
 }

@@ -1,0 +1,1 @@
+var config='{"race_id":"race_1448870782634","name":" \u963f\u8428\u8fbe","class":null,"chart":"..","banner_path":"banner_3b0d603365b9646b900abf9e956b5e34_b.jpg","s_st":"1447776000","s_et":"1446652800","rule":"<p>\u6309\u65f6\u5927\u5927<\/p>"}';
