@@ -7,7 +7,8 @@ return array(
     "TMPL_R_DELIM"=>"}}",
     "TMPL_PARSE_STRING"=>array(
         "__STATIC__"=>WEB_ROOT."static",
-        "__JS__"=>WEB_ROOT."static/javascript/"
+        "__JS__"=>WEB_ROOT."static/javascript/",
+        "__STATICBK__"=>WEB_ROOT."static/backend"
     ),
     "SESSION_AUTO_START"=>true
 );
