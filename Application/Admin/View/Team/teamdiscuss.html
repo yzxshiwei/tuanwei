@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    	
+    <include file='Public:file'/>
+    
+    <style>
+        .team_jl{
+            clear: both;
+            width: 70%;
+            margin-left: 50px;
+            padding-top: 20px;
+        }
+        .team_jl .title{
+            font-size: 18px;
+            height:54px;
+            line-height: 54px;
+            background: rgb(153,153,153);
+            color: #fff;
+            font-weight: bold;
+            padding-left: 550px;
+        }
+        .team_jl ul{
+            padding: 0px 30px;
+        }
+        .team_jl ul li{
+            float: left;
+            width: 31.5%;
+            font-size: 18px;
+            text-align: center;
+            height:50px;
+            line-height: 50px;
+            border:1px dashed #999;
+            margin-left: 20px;
+            margin-bottom: 20px;
+            color: #666;
+        }
+        .communicationBox{
+            clear: both;
+            width:65%;
+            border:1px dashed #ccc;
+            padding:15px;
+            margin-left: 100px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .communicationBox .input_comm{
+            position: relative;
+            height:150px;
+            border:1px dashed #999;
+            padding: 15px;
+        }
+        .communicationBox .input_comm textarea{
+            height:100px;
+            width: 100%;
+        }
+        .communicationBox .input_comm input[type="submit"]{
+            position: absolute;
+            right:30px;
+            bottom:10px;
+            height:30px;
+            width: 70px;
+        }
+        .communicationBox .show_comm{
+            border:1px dashed #999;
+            margin-top: 15px;
+            padding: 10px;
+            overflow: auto;
+        }
+        .communicationBox .show_comm img{
+            float: left;
+            height:100px;
+            width: 100px;
+            border-radius: 100px;
+            margin-right: 10px;
+        }
+        .communicationBox .show_comm .show_content{
+            float: left;
+            width: 81%;
+        }
+        .communicationBox .show_comm .show_content h3{
+            height:20px;
+            margin: 10px 0px;
+        }
+        .communicationBox .show_comm .show_content p{
+            margin: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="htmleaf-container">
+        <div class="container pb30">
+            <include file='Public:navigation'/>
+                <!-- tab-content -->
+                <div class="tab-content">
+                    <div class="team_jl">
+                        <h3 class="title">团队交流页面</h3>
+                        <ul class="project">
+                            <li open-id="0">实唯科技1</li>
+                            <li open-id="1">实唯科技2</li>
+                            <li open-id="2">实唯科技3</li>
+                            <li open-id="3">实唯科技4</li>
+                            <li open-id="4">实唯科技5</li>
+                        </ul>
+                    </div>
+                    <!--弹出交流框-->
+                    <div class="communicationBox" comm-id="0">
+                        <!--输入的内容框-->
+                        <div class="input_comm">
+                            <form action="">
+                                <textarea placeholder="请输入交流内容"></textarea>
+                                <input type="submit" value="发送"/>
+                            </form>
+                        </div>
+                        <!--显示内容-->
+                        <div class="showBox">
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>
+                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communicationBox" comm-id="1">
+                        <!--输入的内容框-->
+                        <div class="input_comm">
+                            <form action="">
+                                <textarea placeholder="请输入交流内容"></textarea>
+                                <input type="submit" value="发送"/>
+                            </form>
+                        </div>
+                        <!--显示内容-->
+                        <div class="showBox">
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>
+                                        其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>其他其他其他其他其他其他其他其他其他其他</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communicationBox" comm-id="2">
+                        <!--输入的内容框-->
+                        <div class="input_comm">
+                            <form action="">
+                                <textarea placeholder="请输入交流内容"></textarea>
+                                <input type="submit" value="发送"/>
+                            </form>
+                        </div>
+                        <!--显示内容-->
+                        <div class="showBox">
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>
+                                        不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道不知道
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>不知道不知道不知道不知道不知道不知道不知道不知道</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communicationBox" comm-id="3">
+                        <!--输入的内容框-->
+                        <div class="input_comm">
+                            <form action="">
+                                <textarea placeholder="请输入交流内容"></textarea>
+                                <input type="submit" value="发送"/>
+                            </form>
+                        </div>
+                        <!--显示内容-->
+                        <div class="showBox">
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>
+                                        啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="communicationBox" comm-id="4">
+                        <!--输入的内容框-->
+                        <div class="input_comm">
+                            <form action="">
+                                <textarea placeholder="请输入交流内容"></textarea>
+                                <input type="submit" value="发送"/>
+                            </form>
+                        </div>
+                        <!--显示内容-->
+                        <div class="showBox">
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>
+                                        噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="show_comm">
+                                <img src=""/>
+                                <div class="show_content">
+                                    <h3>标题</h3>
+                                    <p>噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        //关闭所有弹出框
+        function closeAll(){
+            $('.communicationBox').hide();
+        }
+        $('.project li').click(function(){
+            closeAll();
+            var openId = $(this).attr('open-id');
+            var content = $("div[comm-id="+openId+"]");
+            content.toggle();
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<include file='Public:file'/>
+	
+</head>
+
+<body>
+	<div class="htmleaf-container">
+	
+		<div class="container pb30">
+			<include file='Public:navigation'/>
+
+			<!-- tab-content -->
+			<div class="tab-content">
+				
+				
+					<a id='race_refresh' class='page'>刷新</a>
+					
+					<table class="race_table user_table hover_table">
+						<tbody>
+							<tr style='background:#aaa;color:#fff'>
+								<th width='5%'>ID</th>
+								<th width='33%'>比赛名称</th>
+								<th width='20%'>比赛时间</th>
+								<th width='20%'>报名时间</th>
+								<th class='user_set'>设置</th>
+							</tr>
+							<tr>
+								<td>123132</td>
+							<td><a class="race_name" target="_blank" href="race_enroll.html?race_id='+v.race_id+'&race_name='+v.name+'">物联网+创业大赛</a></td>
+		
+
+							<td><a class="race_time">2016-2-1</a></td>
+							<td><a class="race_stime">2016-2-5</a></td>	
+							<td class="race_set">
+								<a href="{{:U('Match/editmatch')}}" class="race_edit">编辑</a>
+								<input type="checkbox" class="race_valid"/>发布<a class="race_delete">删除</a>
+							</td>
+							</tr>
+							
+						</tbody>
+					</table>
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+
+<script>
+// //强行代码
+// function append_race( tbody, race_data, d ) {
+								
+// 	$.each( race_data, function(i,v) {
+// 		var tr = $('<tr class="race_info" id="'+v.race_id+'"></tr>');
+// 		if( d==0 )
+// 			tbody.append( tr );
+// 		else
+// 			tbody.children('tr:first').after( tr );
+		
+// 		tr.append( $('<td>'+v.race_id+'</td>') );
+// 		tr.append( $('<td><a class="race_name" target="_blank" href="race_enroll.html?race_id='+v.race_id+'&race_name='+v.name+'">'+v.name+'</a></td>') );
+		
+// 		var race_time_str = formatDate( parseFloat(v.r_st) ) + '-' + formatDate( parseFloat(v.r_et) );
+// 		var s_time_str = formatDate( parseFloat(v.s_st) ) + '-' + formatDate( parseFloat(v.s_et) );
+		
+// 		tr.append( $('<td><a class="race_time">' + race_time_str + '</a></td>') );
+// 		tr.append( $('<td><a class="race_stime">' + s_time_str + '</a></td>') );		
+// 		tr.append( $('<td class="race_set"><a target="_blank" href="edit_race.html?race_id='+v.race_id+'" class="race_edit">编辑</a><input type="checkbox" class="race_valid"/>发布<a class="race_delete">删除</a></td>') );
+		
+// 		if( v.flag=='1' )
+// 			tr.find('input[type=checkbox].race_valid')[0].checked = true;	
+// 	} );
+	
+// 	$('input[type=checkbox].race_valid').click( function() {
+// 		var t = $(this).parents('tr');
+// 		var rid = t.attr('id');	
+// 		var s = this.checked;
+// 		if( s )
+// 			s = '1';
+// 		else
+// 			s = '0';
+// 		$.post( 'my-php/root_ui/change_race_state.php', {race_id:rid,flag:s} );
+// 	} );
+	
+// 	$('a.race_delete').click( function() {
+// 		var t = $(this).parents('tr');
+// 		var rid = t.attr('id');
+// 		$.post( 'my-php/root_ui/change_race_state.php', {race_id:rid,flag:'2'}, function() {	
+// 			$.each( race_info, function(i,v) {
+// 				if( v.race_id==rid ) {
+// 					race_info.splice( i, 1 );
+// 					t.hide( 400, function() { $(this).remove(); } );	
+// 					ii = i;
+// 					return false;
+// 				}	
+// 			} );
+// 		} ); 
+		
+// 	} );
+// }
+// //强行函数
+
+// 	// 比赛管理
+// 	var post_data = {"action":"manage"}
+// 				$(document).ready(function(){
+// 				$.post( 'my-php/root_ui/get_race.php',post_data, function( data ) {
+// 					race_info = data
+// 					console.log(data)
+// 					var race_tab = $('table tbody');
+// 					append_race( race_tab, race_info, 0 );					
+// 				},"json");
+			
+// 			$('#race_refresh').click( function() {
+			
+// 				$.post( 'my-php/root_ui/get_race.php', function( data ) {
+// 					if( data ) {
+// 						race_info = $.parseJSON( data );
+// 						var race_tab = $('.tab-content .tab-item-7 .race_table tbody');
+// 						race_tab.find('tr.race_info').remove();
+// 						append_race( race_tab, race_info, 0 );	
+// 					}					
+// 				} );
+				
+// 			} );
+
+// 	})
+	
+</script>
+
+
+</body>
+
+</html>

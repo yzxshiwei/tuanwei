@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<include file='Public:file'/>
+</head>
+
+<body>
+	<div class="htmleaf-container">
+		<div class="container pb30">
+			<include file='Public:navigation'/>
+			<!-- tab-content -->
+			<div class="tab-content">
+			<div class='tool_bar'>
+						
+						<a title='next_page' class='page a_team_next'>下一页</a>
+						<a title='next_page' class='page a_team_pre'>上一页</a>
+					</div>
+					
+					<table class="team_table user_table hover_table">
+						<tbody>
+							<tr style='background:#aaa;color:#fff'>
+								<th width='7%'>ID</th>
+								<th width='30%'>团队名称</th>
+								<th width='10%'>负责人</th>
+								<th width='20%'>注册时间</th>
+								<th width='13%'>公司</th>
+								<th class='user_set'>设置</th>
+							</tr>
+							 <tr class="user_info" id="'+v.u_id+'">
+                                <td>1143111164</td>
+                                <td><a class="user_name" u_id="+i+" onclick="show_people_info(this)">实唯科技</a></td>
+                                <td><a class="user_identity">冯军帅</a></td>
+                                
+                                <td>1997</td>
+                                <td>实唯</td>
+                                <td class="user_set">
+                                    <input type="checkbox" class="user_valid">禁止<a class="delete">删除</a></td>
+                            </tr>
+						</tbody>
+					</table>
+					
+			</div>	
+				
+				
+				
+			</div>
+		</div>
+	</div>
+	
+	
+</div>
+
+<!-- <script src="my-js/template.js"></script>
+
+<script src="my-js/logic.js"></script> -->
+<script>
+// 
+</script>
+
+
+</body>
+
+</html>
