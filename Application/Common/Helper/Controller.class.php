@@ -10,5 +10,7 @@ class Controller extends \Think\Controller{
     public function __construct()
     {
         parent::__construct();
+        $user = \Common\Helper\RunUser::newInstantiation()->getInfo();
+        $this->assign('user',$user);
     }
 }

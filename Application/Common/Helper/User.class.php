@@ -42,7 +42,7 @@ class User{
         if(!$exModel){
             return $info;
         }
-        $exInfo = $exModel->find(array("user_id"=>$userid));
+        $exInfo = $exModel->where(array("user_id"=>$userid))->find();
         return array_merge($info,$exInfo?$exInfo:array());
     }
 
@@ -53,7 +53,7 @@ class User{
      */
     public function getBaseInfo($userid){
         $userModel = D("Users");
-        $info = $userModel->find(array("user_id"=>$userid));
+        $info = $userModel->where(array("user_id"=>$userid))->find();
         return $info ? $info : false;
     }
 

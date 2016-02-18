@@ -4,10 +4,16 @@
             <!--LOGO-->
             <a href="{{:U('Index/index')}}"><img src="__STATIC__/img/SCU_logo.png" width="200px" alt=""> <span> · 团委创立方教育平台</span></a>
             <!--注册、登录-->
-            <div class="rAndl">
-                <a href="{{:U('User/register')}}">注册</a> |
-                <a href="{{:U('Login/index')}}">登录</a>
-            </div>
+            <if condition="$user.user_id elt 0">
+	            <div class="rAndl">
+	                <a href="{{:U('User/register')}}">注册</a> |
+	                <a href="{{:U('Login/index')}}">登录</a>
+	            </div>
+	            <else />
+	            <div class="rAndl">
+	                <a href="{{:U('Admin/Index/Index')}}">{{$user.user_name}}</a>
+	            </div>
+            </if>
         </div>
     </div>
     <!--头部导航-->

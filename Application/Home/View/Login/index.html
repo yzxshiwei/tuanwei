@@ -31,12 +31,13 @@
         <div class="title">成员登录</div>
         <!--content-->
         <div class="content">
-            <form action="" method="">
-                <p><span>电子邮箱</span><input id="email" type="text" placeholder="电子邮件地址"/></p>
+            <form action="{{:U('Login/login')}}" method="post">
+                <p><span>电子邮箱</span><input id="email" name="user" type="text" placeholder="电子邮件地址"/></p>
                 <label id="emailTs">123</label>
-                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" type="password" placeholder="密码"/></p>
+                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" name="pwd" type="password" placeholder="密码"/></p>
                 <label id="pwdTs">123</label>
-                <input class="subBtn" type="button" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
+                <input class="subBtn" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
+                
                 <h5>忘记密码?</h5>
                 <p><span>电子邮箱</span><input id="wj_email" type="text" placeholder="电子邮件地址"/></p>
                 <input class="subBtn" type="button" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
@@ -62,22 +63,6 @@
         });
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
-        });
-    });
-    //ajax 提交
-    $('.subBtn').click(function(){
-        var email = $('#email').val();
-        var password = $('#pwd').val();
-        var data = {
-            'email':email,
-            'password':password
-        };
-        $.post("{{:U('Login/login')}}",data,function(data,success){
-            if(data != 300){
-                location.href = 'index.html?name='+data;
-            }else{
-                alert('密码或用户名错误!');
-            }
         });
     });
 </script>
