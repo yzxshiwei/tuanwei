@@ -46,25 +46,25 @@
         </div>
         <div class='login_div'>
             <i class='fa fa-close'></i>
-            <form id='user_add_form' method='post' onsubmit="return false;">
+            <form id='user_add_form' action="{{:U('User/register')}}" method='post'>
                 <h2 class="login-heading">注 册</h2>
                 <div class='reg_lable'>电子邮件</div>
                 <input name='email' type="email" id="input-email" placeholder="电子邮件地址（必填）" required='required' autofocus='autofocus' />
                 <br/>
                 <div class='reg_lable'>证件类型</div>
-                <select name='id_type'>
+                <select name='card_type'>
                     <option value='0'>学生证</option>
                     <option value='1'>身份证</option>
                 </select>
-                <input name='id_no' type="text" id="input-id" placeholder="证件号（必填）" required='required' />
+                <input name='card_id' type="text" id="input-id" placeholder="证件号（必填）" required='required' />
                 <br/>
                 <div class='reg_lable'>身份</div>
                 <select id='s_type' name='role'>
-                    <option value='0'>学生个人</option>
-                    <option value='1'>工作人员</option>
-                    <option value='2'>指导老师</option>
-                    <option value='3'>评审专家</option>
-                    <option value='4'>投资人</option>
+                	<option value="1">管理人员</option>
+                    <option value="6">学生个人</option>
+                    <option value="3">指导老师</option>
+                    <option value="4">评审专家</option>
+                    <option value="5">投资人</option>
                 </select>
                 <div class='reg_lable'>性别</div>
                 <select name='sex' style='width:108px'>
@@ -81,10 +81,10 @@
                 <br/>
                 <br/>
                 <div class='reg_lable'>学院/机构</div>
-                <input name='com' type="text" id="input-com" placeholder="所在学院或单位" />
+                <input name='college' type="text" id="input-com" placeholder="所在学院或单位" />
                 <br/>
                 <div class='reg_lable'>姓名</div>
-                <input name='real_name' type="text" id="input-name" placeholder="您真实姓名" />
+                <input name='user_name' type="text" id="input-name" placeholder="您真实姓名" />
                 <br/>
                 <button id='user_add_b' class="btn btn-lg btn-primary btn-block">提 交</button>
                 <span id='user_add_res' style='margin-left:20px'></span>
@@ -148,48 +148,10 @@
                 $('#user_add_res').text('');
             }, 1000);
             return false;
-        } else
-            data['password'] = p1;
-
-        data['email'] = t.find('input[name=email]').val();
-        data['identity'] = t.find('#s_type option:selected').val();
-        switch (data['identity']) {
-            case '0':
-                data['identity'] = 'individual';
-                break;
-            case '1':
-                data['identity'] = 'admin';
-                break;
-            case '2':
-                data['identity'] = 'tutor';
-                break;
-            case '3':
-                data['identity'] = 'expert';
-                break;
-            case '4':
-                data['identity'] = 'investor';
-                break;
+        } else{
+        	$('form').submit();
         }
 
-        if (t.find('select[name=id_type]').val() == 0)
-            data['id'] = 's' + t.find('input[name=id_no]').val();
-        else
-            data['id'] = 'i' + t.find('input[name=id_no]').val();
-
-        if (t.find('select[name=sex]').val() == 1)
-            data['sex'] = 'M';
-        else
-            data['sex'] = 'F';
-
-        data['com'] = t.find('input[name=com]').val();
-        data['name'] = t.find('input[name=real_name]').val();
-
-        $.post('my-php/root_ui/add_user.php', data, function(res) {
-            $('#user_add_res').text(res);
-            setTimeout(function() {
-                $('#user_add_res').text('');
-            }, 1000);
-        });
     });
         $(function(){
             $('#page_div a,span').click(function(){
