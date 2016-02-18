@@ -1,0 +1,21 @@
+#page_div{
+    position: fixed;
+    right:100px;
+    margin-top: 30px;
+}
+#page_div a,span{
+    display: inline-block;
+    height:22px;
+    width:25px;
+    text-align: center;
+    line-height: 22px;
+    border:1px solid #ccc;
+    border-radius: 3px;
+    color: #777;
+    margin-right: 5px;
+}
+#page_div .current{
+    background: darkseagreen;
+    border:0;
+    color: #fff;
+}
