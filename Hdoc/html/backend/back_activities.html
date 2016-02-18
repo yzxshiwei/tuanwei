@@ -97,7 +97,7 @@
             width: 60px;
             text-align: center;
             line-height: 30px;
-            background: darkseagreen;
+            background:  rgb(0,153,153);
             border-radius: 5px;
             position: absolute;
             right: 0;
@@ -167,6 +167,7 @@
             padding-top: 21px;
             margin-left: 22px;
             width: 1000px;
+            position: relative;
         }
         .p_content .content .p_right_input label{
             display: block;
@@ -279,6 +280,59 @@
             background: rgb(0,153,153);
             font-size: 18px;
             color: #fff;
+        }
+        .memberBox{
+            display: none;
+            border:1px dashed #ccc;
+            width: 300px;
+            position: absolute;
+            bottom:18%;
+            right:0%;
+            z-index: 1000;
+            padding:10px;
+            background: #fff;
+        }
+        .memberBox .m_close{
+            width: 20px;
+            height:20px;
+            border-radius: 20px;
+            background: #aaa;
+            position: absolute;
+            top:10px;
+            right:10px;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+        .memberBox .m_title{
+            margin-top: 30px;
+            background: #999;
+            height:40px;
+            width: 100%;
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+        }
+        .memberBox form{
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .memberBox form label{
+            display: block;
+            margin-bottom: 10px;
+        }
+        .memberBox form select{
+            height: 30px;
+            width: 63%;
+            padding-left: 30px;
+            border:1px solid #999;
+        }
+        .memberBox input[type="submit"]{
+            height:30px;
+            width: 80px;
+            margin: 50px 0px 10px;
         }
     </style>
     <script src='my-js/root_ui/root_ui.js'></script>
@@ -396,13 +450,28 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <button class="p_add">+</button>
+                                            <button class="p_add" add-id="0" style="position: relative;">+</button>
                                         </label>
                                         <div class="btn">
                                             <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                         </div>
                                     </div>
                                 </form>
+                                <div class="memberBox" add-dy-id="0">
+                                    <b class="m_close">X</b>
+                                    <h3 class="m_title">成员选择</h3>
+                                    <form action="">
+                                        <label>
+                                            <span>请选择成员 : </span>
+                                            <select>
+                                                <option value="成员1">成员1</option>
+                                                <option value="成员1">成员1</option>
+                                                <option value="成员1">成员1</option>
+                                            </select>
+                                        </label>
+                                        <input class="sureBtn" type="submit" value="确定"/>
+                                    </form>
+                                </div>
                             </div>
                         </div>
 
@@ -448,16 +517,29 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <button class="p_add">+</button>
+                                            <button class="p_add" add-id="1">+</button>
                                         </label>
                                         <div class="btn">
                                             <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                         </div>
                                     </div>
                                 </form>
+                                <!--成员选择弹出框-->
+                                <div class="memberBox" add-dy-id="1">
+                                    <b class="m_close">X</b>
+                                    <h3 class="m_title">成员选择</h3>
+                                    <form action="">
+                                        <label>
+                                            <span>请选择成员 : </span>
+                                            <select>
+                                                <option value="成员1">成员1</option>
+                                            </select>
+                                        </label>
+                                        <input class="sureBtn" type="submit" value="确定"/>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -468,9 +550,16 @@
 <script src="my-js/root_ui/jquery.ajaxupload.js"></script>
 
     <script>
-        //添加
+        //弹出框显示
         $('.p_add').click(function(){
-            $(this).parent().find('.p_team ul').append('<li><div class="team_information">' +
+            var addId = $(this).attr('add-id');
+            var member = $("div[add-dy-id="+addId+"]");
+            member.toggle();
+            return false;
+        });
+        //添加成员选择
+        $('.sureBtn').click(function(){
+            $(this).parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
                     '<img src="" alt=""/>' +
                     '<div class="people_information">' +
                     '<h5>是谁谁</h5>' +
@@ -480,6 +569,9 @@
                     '</div>' +
                     '</div><button class="p_delete">-</button></li>');
             return false;
+        });
+        $('.m_close').click(function(){
+            $(this).parent().toggle();
         });
         //删除
         $(document).on('click','.p_delete',function(){
