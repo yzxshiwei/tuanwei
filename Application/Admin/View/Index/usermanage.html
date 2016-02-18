@@ -27,24 +27,19 @@
                                 <th width='33%'>Email</th>
                                 <th class='user_set'>设置</th>
                             </tr>
-                            <tr class="user_info" id="'+v.u_id+'">
-                                <td>1143111164</td>
-                                <td><a class="user_name" u_id="+i+" onclick="show_people_info(this)">点赞狂魔李大猫</a></td>
-                                <td><a class="user_identity">学生</a></td>
-                                <td><a class="user_email">110@163.com</a></td>
+                            <foreach name="list_data" key="key" item="vo">
+                            <tr class="user_info" id="{{$vo.user_id}}">
+                                <td>{{$vo.user_id}}</td>
+                                <td><a class="user_name" >{{$vo.user_name}}</a></td>
+                                <td><a class="user_identity">{{$vo.user_type}}</a></td>
+                                <td><a class="user_email">{{$vo.email}}</a></td>
                                 <td class="user_set">
-                                    <input type="checkbox" class="user_valid">禁止<a class="delete">删除</a></td>
+                                    <input type="checkbox" value="{{$vo.user_id}}" class="user_valid">禁止<a class="delete">删除</a></td>
                             </tr>
-                            <tr class="user_info" id="'+v.u_id+'">
-                                <td>1143111165</td>
-                                <td><a class="user_name" u_id="+i+" onclick="show_people_info(this)">冯军帅</a></td>
-                                <td><a class="user_identity">投资人</a></td>
-                                <td><a class="user_email">110@163.com</a></td>
-                                <td class="user_set">
-                                    <input type="checkbox" class="user_valid">禁止<a class="delete">删除</a></td>
-                            </tr>
+                            </foreach>
                         </tbody>
                     </table>
+                    {{$Page}}
                 </div>
             </div>
         </div>
@@ -95,73 +90,13 @@
             </form>
         </div>
     </div>
-    <div class="pop_layer" style="display:none">
+   <!--  <div class="pop_layer" style="display:none">
         <a href="javascript:void(0)" style="position:absolute;right:10px;top:10px;line-height:20px;font-size:20px;" onclick="close_layer()">x</a>
         <div class="layer_body"></div>
-    </div>
+    </div> -->
     <!-- 卡片视图模板 -->
-  
-    <!-- <script src="my-js/template.js"></script>
-
-<script src="my-js/logic.js"></script> -->
+    
     <script>
-    // function append_user(tbody, user_data, d) {
-    //     $.each(user_data, function(i, v) {
-    //         var tr = $('<tr class="user_info" id="' + v.u_id + '"></tr>');
-
-    //         tbody.append(tr);
-
-    //         tr.append($('<td>' + (parseInt(i) + 1) + '</td>'));
-    //         tr.append($('<td><a class="user_name" u_id=' + i + ' onclick="show_people_info(this)">' + v.name + '</a></td>'));
-    //         tr.append($('<td><a class="user_identity">' + v.identity + '</a></td>'));
-    //         tr.append($('<td><a class="user_email">' + v.email + '</a></td>'));
-    //         tr.append($('<td class="user_set"><input type="checkbox" class="user_valid"/>禁止<a class="delete">删除</a></td>'));
-    //         if (v.state == 'disable')
-    //             tr.find('input[type=checkbox]')[0].checked = true;
-    //     });
-
-    //     $('a.delete').click(function() {
-    //         var t = $(this).parents('tr');
-    //         var uid = t.attr('id');
-
-    //         $.post('my-php/root_ui/change_user_state.php', {
-    //             u_id: uid,
-    //             state: 'delete'
-    //         });
-
-    //         $.each(user_info, function(i, v) {
-    //             if (v.u_id == uid) {
-    //                 user_info.splice(i, 1);
-    //                 t.hide(400, function() {
-    //                     $(this).remove();
-    //                 });
-    //                 ii = i;
-    //                 return false;
-    //             }
-    //         });
-
-    //     });
-
-
-    //     $('input[type=checkbox].user_valid').click(function() {
-    //         var t = $(this).parents('tr');
-    //         var uid = t.attr('id');
-
-    //         var s = this.checked;
-    //         if (s)
-    //             s = 'disable';
-    //         else
-    //             s = 'enable';
-
-    //         $.post('my-php/root_ui/change_user_state.php', {
-    //             "u_id": uid,
-    //             "state": s
-    //         });
-    //     });
-
-    // }
-
-
     function list_user(j_obj) {
         var tbody = j_obj.children('tbody');
         append_user(tbody, user_info, 0);
@@ -186,32 +121,10 @@
         $('.pop_layer').hide()
     }
 
-
-
-
-
-
-
     $('.login_div').draggable();
     $('.login_div i.fa-close').click(function() {
         $('.login_div').hide();
     });
-    // $(document).ready(function() {
-    //     // get user info
-    //     $.post('my-php/root_ui/get_user.php', function(data) {
-
-
-
-    //         console.log(data)
-    //         user_info = data
-    //         var user_tab = $('.user_table');
-    //         list_user(user_tab);
-    //         console.log("1")
-    //     }, "json");
-
-
-    // })
-
     $('a.a_user_add').click(function(e) {
         var t = $('.login_div');
         t.css({

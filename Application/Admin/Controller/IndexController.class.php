@@ -24,6 +24,10 @@ class IndexController extends \Admin\Controller\Controller {
      * @author yzx
      */
     public function usermanage() {
+        $user = new \Common\Helper\User();
+        $result = $user->getUserList();
+        $this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
 	/**

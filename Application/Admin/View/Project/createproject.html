@@ -1,0 +1,407 @@
+<!doctype html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <include file='Public:file'/>
+    <style>
+        .returnIndex img{
+            margin-right: 25px;
+        }
+        .returnIndex span{
+            font-size: 22px;
+            color:#666;
+        }
+        .tab-content .search{
+            float: left;
+            text-align: center;
+            width:80%;
+        }
+        .tab-content .search label{
+            display: block;
+            height:35px;
+            width:270px;
+            margin: 30px auto;
+            border:1px solid #ccc;
+            border-radius: 3px;
+            position: relative;
+
+        }
+        .tab-content .search label input{
+            height: 100%;
+            width: 85%;
+            font-size: 16px;
+            position: absolute;
+            top:0;
+            left:5px;
+        }
+        .tab-content .search label img{
+            position: absolute;
+            top:4px;
+            right:5px;
+        }
+        .b_page{
+            float: right;
+            margin: 30px;
+        }
+        .b_page li{
+            float: left;
+            margin-right: 10px;
+        }
+        .p_content{
+            clear: both;
+            width: 98%;
+            margin: 0px auto;
+        }
+        .p_content .title{
+            font-size: 18px;
+            height:54px;
+            line-height: 54px;
+            background: rgb(153,153,153);
+            color: #fff;
+            font-weight: bold;
+            padding-left: 550px;
+        }
+        .p_content .c_title{
+            width: 100%;
+            font-size: 18px;
+            height:44px;
+            line-height: 44px;
+            background: rgb(153,153,153);
+            color: #fff;
+            font-weight: bold;
+            padding-left: 550px;
+        }
+        .p_content .content{
+            overflow: auto;
+            padding: 30px;
+            margin-left: 40px;
+            border:1px dashed #ccc;
+            width:73%;
+            position: relative;
+        }
+        .p_content .content .p_left_nav{
+            float: left;
+            width: 10%;
+            background: #f0f0f0;
+            text-align: center;
+            padding-top: 21px;
+        }
+        .p_content .p_left_nav h6{
+            margin-bottom: 21px;
+            font-size: 16px;
+            color: rgb(102,102,102);
+        }
+        .p_content .p_left_nav h6:nth-child(1),h6:nth-child(2){
+            height: 42px;
+            line-height: 42px;
+        }
+        .p_content .p_left_nav h6:nth-child(3){
+            height:180px;
+        }
+        .p_content .p_left_nav h6:nth-child(4){
+            height:42px;
+            line-height: 42px;
+        }
+        .p_content .p_left_nav h6:nth-child(5){
+            height:400px;
+        }
+        .p_content .content .p_right_input{
+            float: left;
+            padding-top: 21px;
+            margin-left: 22px;
+            width: 1000px;
+            position: relative;
+        }
+        .p_content .content .p_right_input label{
+            display: block;
+            margin-bottom: 21px;
+        }
+        .p_content .content .p_right_input b{
+            color: rgb(102,102,102);
+            font-size: 16px;
+            font-weight: 500;
+        }
+        .p_content .content .p_right_input label input[type="text"]{
+            height:42px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 22px;
+        }
+        .p_content .content .p_right_input label textarea{
+            height:180px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 21px;
+        }
+        .p_content .content .p_right_input label:nth-child(3){
+            line-height: 180px;
+        }
+        .p_content .content .p_right_input label input[type="file"]{
+            height:42px;
+            padding-top: 10px;
+            width: 810px;
+            border:1px solid #ccc;
+            margin-right: 21px;
+            padding-left: 15px;
+            vertical-align: middle;
+        }
+        .p_right_input .p_team{
+            border:1px solid #ccc;
+            width: 810px;
+            padding: 19px 21px;
+            float: left;
+            margin-right: 21px;
+        }
+        .p_right_input .p_team .team_information{
+            float: left;
+            border:1px solid #ccc;
+            padding: 15px;
+            width: 90%;
+            margin-bottom: 15px;
+        }
+        .p_right_input .p_team .team_information img{
+            float: left;
+            width: 100px;
+            height:100px;
+            margin-right: 16px;
+            background: rgb(153,153,153);
+        }
+        .p_right_input .p_team li{
+            overflow: auto;
+        }
+        .p_right_input .p_team .team_information .people_information{
+            float: left;
+            width: 82%;
+            height:100px;
+            overflow: auto;
+            font-size: 12px;
+            color: rgb(102,102,102);
+        }
+        .p_right_input .p_team .team_information .people_information h5{
+            font-size: 12px;
+            color: rgb(102,102,102);
+            font-weight: 500;
+            width: 140px;
+            padding-bottom: 5px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #ccc;
+        }
+        .p_right_input .p_team .team_information .people_information p{
+            line-height: 20px;
+        }
+        .p_right_input .p_delete{
+            height: 26px;
+            line-height: 0px;
+            font-size: 26px;
+            color: #fff;
+            width: 26px;
+            border-radius: 26px;
+            background: rgb(153,153,153);
+            position: relative;
+            top:50px;
+            left:30px;
+        }
+        .p_right_input .p_add{
+            float: left;
+            height: 26px;
+            line-height: 0px;
+            font-size: 26px;
+            color: #fff;
+            width: 26px;
+            border-radius: 26px;
+            background: rgb(153,153,153);
+        }
+        .p_content .p_right_input .btn{
+            width: 80%;
+            text-align: center;
+        }
+        .p_content .p_right_input .btn input[type="submit"]{
+            margin-top: 23px;
+            font-family: "微软雅黑";
+            width: 150px;
+            height: 42px;
+            background: rgb(0,153,153);
+            font-size: 18px;
+            color: #fff;
+        }
+        .memberBox{
+            display: none;
+            border:1px dashed #ccc;
+            width: 300px;
+            position: absolute;
+            bottom:18%;
+            right:1%;
+            z-index: 1000;
+            padding:10px;
+            background: #fff;
+        }
+        .memberBox .m_close{
+            width: 20px;
+            height:20px;
+            border-radius: 20px;
+            background: #aaa;
+            position: absolute;
+            top:10px;
+            right:10px;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+        }
+        .memberBox .m_title{
+            margin-top: 30px;
+            background: #999;
+            height:40px;
+            width: 100%;
+            font-size: 18px;
+            text-align: center;
+            line-height: 40px;
+            color: #fff;
+        }
+        .memberBox form{
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .memberBox form label{
+            display: block;
+            margin-bottom: 10px;
+        }
+        .memberBox form select{
+            height: 30px;
+            width: 63%;
+            padding-left: 30px;
+            border:1px solid #999;
+        }
+        .memberBox input[type="submit"]{
+            height:30px;
+            width: 80px;
+            margin: 50px 0px 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="htmleaf-container">
+        <div class="container pb30">
+            <include file='Public:navigation'/>
+                <!-- tab-content -->
+                <div class="tab-content">
+                    <ul class="b_page">
+                        <li><a href="javascript:void(0);">上一页</a></li>
+                        <li><a href="javascript:void(0);">下一页</a></li>
+                    </ul>
+                    <div class="p_content">
+                        <h3 class="title">团队项目编辑页面</h3>
+                        <!--编辑项目内容-->
+                        <div class="content" style="clear: both;">
+                            <h4 class="c_title">项目编辑</h4>
+                            <form action="">
+                                <div class="p_left_nav">
+                                    <h6>项目名称</h6>
+                                    <h6>项目副标题</h6>
+                                    <h6>项目简介</h6>
+                                    <h6>上传附件</h6>
+                                    <h6>成员组成</h6>
+                                </div>
+                                <div class="p_right_input">
+                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                    <label><input type="file"/><b>请将所有文件打包上传</b></label>
+                                    <label>
+                                        <div class="p_team">
+                                            <ul>
+                                                <li>
+                                                    <div class="team_information">
+                                                        <img src="" alt=""/>
+                                                        <div class="people_information">
+                                                            <h5>张三</h5>
+                                                            <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
+                                                            <p>
+                                                                刚刚有提到热线，在大选前一天，陆委会主委夏
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <button class="p_delete">-</button>
+                                                </li>
+                                                <li>
+                                                    <div class="team_information">
+                                                        <img src="" alt=""/>
+                                                        <div class="people_information">
+                                                            <h5>张三</h5>
+                                                            <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
+                                                            <p>
+                                                                刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。
+                                                                请问从大选到今天，是否有启动热线？第二个问题是关于南海，除了马英九可能明天会登上太平岛之外，
+                                                            </p>
+                                                        </div>
+                                                    </div>
+                                                    <button class="p_delete">-</button>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <button class="p_add" add-id="0" style="position: relative;">+</button>
+                                    </label>
+                                    <div class="btn">
+                                        <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="memberBox" add-dy-id="0">
+                                <b class="m_close">X</b>
+                                <h3 class="m_title">成员选择</h3>
+                                <form action="">
+                                    <label>
+                                        <span>请选择成员 : </span>
+                                        <select>
+                                            <option value="成员1">成员1</option>
+                                            <option value="成员1">成员1</option>
+                                            <option value="成员1">成员1</option>
+                                        </select>
+                                    </label>
+                                    <input class="sureBtn" type="submit" value="确定"/>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        //弹出框显示
+        $('.p_add').click(function(){
+            var addId = $(this).attr('add-id');
+            var member = $("div[add-dy-id="+addId+"]");
+            member.toggle();
+            return false;
+        });
+        //添加成员选择
+        $('.sureBtn').click(function(){
+            $(this).parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
+                    '<img src="" alt=""/>' +
+                    '<div class="people_information">' +
+                    '<h5>是谁谁</h5>' +
+                    '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
+                    '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。' +
+                    '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
+                    '</div>' +
+                    '</div><button class="p_delete">-</button></li>');
+            return false;
+        });
+        $('.m_close').click(function(){
+            $(this).parent().toggle();
+        });
+        //删除
+        $(document).on('click','.p_delete',function(){
+            $(this).parent().remove();
+            return false;
+        });
+    </script>
+</body>
+
+</html>

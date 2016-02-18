@@ -142,5 +142,25 @@ class User{
         $userModel->commit();
         return true;
     }
+    /**
+     * 获取全部用户数据列表
+     * 添加时间15:54:13
+     * 
+     * @author yzx
+     * @return multitype:string Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
+     */
+    public function getUserList(){
+        $userModel = new \Common\Model\UsersModel();
+        $count = $userModel->count();
+        $Page = new \Think\Page($count,2);
+        $page_show = $Page->show();
+        $list_data = $userModel->limit($Page->firstRow.','.$Page->listRows)->select();
+        if (!empty($list_data)){
+            foreach ($list_data as $k => $v){
+                $list_data[$k]['user_type'] = $userModel::$user_type[$v['user_type']];
+            }
+        }
+        return array('Page' => $page_show,'list_data' => $list_data);
+    } 
 
 }

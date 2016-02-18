@@ -19,4 +19,13 @@ class ProjectController extends Controller{
     public function workreview() {
         $this->display();
     }
+    /**
+     * 创建项目
+     * 添加时间15:34:58
+     * 
+     * @author yzx
+     */
+    public function createproject() {
+        $this->display();
+    }
 }
