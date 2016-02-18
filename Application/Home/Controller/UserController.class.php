@@ -28,6 +28,9 @@ class UserController extends \Common\Helper\Controller{
             $input_data['birth'] = I('post.birth','','string');
             $input_data['major'] = I('post.major',0,'intval');
             $input_data['degree'] = I('post.degree',0,'intval');
+            if ($input_data['user_name'] == ''){
+                $input_data['user_name'] = $input_data['email'];
+            }
             $result = $userModel->addUser($input_data);
             if ($result['status']){
                 $this->success('注册成功',U('Index/index'));
