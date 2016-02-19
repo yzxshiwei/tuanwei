@@ -21,7 +21,28 @@ class ProjectController extends Controller{
      * @author yzx
      */
     public function workreview() {
-        $this->display();
+        if (IS_POST){
+            $input_data = array();
+            $input_data['project_id'] = I('post.id',0,'intval');
+            $input_data['officer'] = $this->user()['user_id'];
+            $input_data['content'] = I('post.content','','string');
+            $input_data['score'] = I('post.score','','intval');
+            $input_data['created_time'] = time();
+            $projectStatus = D('project_status');
+            $result = $projectStatus->add($input_data);
+            if ($result){
+                $this->success('评审成功',U('Project/projectmanage'));
+            }else {
+                $this->error('评审失败');
+            }
+        }else {
+            $id = I('id',0,'intval');
+            $project = new \Common\Helper\Project();
+            $result = $project->getData($id);
+            $this->assign('result',$result);
+            $this->assign('id',$id);
+            $this->display();
+        }
     }
     /**
      * 创建项目
