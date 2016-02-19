@@ -34,7 +34,7 @@ function uploadFile($file,$path='file')
             $time = date("YmdHis{$time[1]}", $time[0]);
 
             $filename = $time . '.' . $extName;
-            $dest = WEB_ROOT."/Upload/{$path}/" . $filename;
+            $dest = "Upload/{$path}/" . $filename;
             $result = move_uploaded_file($file['tmp_name'], $dest);
             if ($result){
                 return array(

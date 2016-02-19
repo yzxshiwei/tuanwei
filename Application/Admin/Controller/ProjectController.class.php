@@ -26,6 +26,26 @@ class ProjectController extends Controller{
      * @author yzx
      */
     public function createproject() {
+        if (IS_POST){
+           $file_res = uploadFile('project_file');
+           if (!$file_res['status']){
+               $this->error($file_res['msg']);
+           }else {
+               $posjectModel = new \Common\Model\ProjectModel();
+               $post_data = array();
+               $post_data['name'] = I('post.name','','string');
+               $post_data['sub_title'] = I('post.sub_title','','string');
+               $post_data['file_url'] = $file_res['file_path'];
+               $post_data['intro'] = I('post.intro','','string');
+               
+               $result = $posjectModel->addPorject($post_data);
+               if ($result){
+                   $this->success('创建项目成功',U('Project/projectmanage'));
+               }else {
+                   $this->error('创建项目失败');
+               }
+           }
+        }
         $this->display();
     }
 }

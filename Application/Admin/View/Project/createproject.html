@@ -297,7 +297,7 @@
                         <h3 class="title">团队项目添加</h3>
                         <!--编辑项目内容-->
                         <div class="content" style="clear: both;">
-                            <form action="">
+                            <form action="{{:U('Project/createproject')}}" method="post" enctype="multipart/form-data">
                                 <div class="p_left_nav">
                                     <h6>项目名称</h6>
                                     <h6>项目副标题</h6>
@@ -306,10 +306,10 @@
                                     <h6>成员组成</h6>
                                 </div>
                                 <div class="p_right_input">
-                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
-                                    <label><input type="file"/><b>请将所有文件打包上传</b></label>
+                                    <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><input type="text" name="sub_title" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                    <label><input name="project_file" type="file"/><b>请将所有文件打包上传</b></label>
                                     <label>
                                         <div class="p_team">
                                             <ul>
@@ -351,14 +351,14 @@
                             </form>
                             <div class="memberBox" add-dy-id="0">
                                 <b class="m_close">X</b>
-                                <h3 class="m_title">成员选择</h3>
+                                <h3 class="m_title">团队选择</h3>
                                 <form action="">
                                     <label>
-                                        <span>请选择成员 : </span>
-                                        <select>
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
+                                        <span>请选择团队 : </span>
+                                        <select name="team_id">
+                                            <option value="团队1">团队1</option>
+                                            <option value="团队1">团队1</option>
+                                            <option value="团队1">团队1</option>
                                         </select>
                                     </label>
                                     <input class="sureBtn" type="submit" value="确定"/>
