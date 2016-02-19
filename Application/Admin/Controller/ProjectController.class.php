@@ -45,7 +45,8 @@ class ProjectController extends Controller{
                    $this->error('创建项目失败');
                }
            }
+        }else {
+            $this->display();
         }
-        $this->display();
     }
 }
