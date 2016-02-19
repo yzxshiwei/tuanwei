@@ -98,62 +98,81 @@
     <!-- 卡片视图模板 -->
     
     <script>
-    function list_user(j_obj) {
-        var tbody = j_obj.children('tbody');
-        append_user(tbody, user_info, 0);
-    }
-
-    function show_people_info(e) {
-
-        $('.layer_body').html();
-        var info_index = $(e).attr("u_id")
-        var user_info_ = {
-            "user_info_": user_info[info_index]
+        function list_user(j_obj) {
+            var tbody = j_obj.children('tbody');
+            append_user(tbody, user_info, 0);
         }
-        var bt_user_info = baidu.template;
-        var header_temp = bt_user_info('user_card', user_info_);
-        $('.layer_body').html(header_temp);
-        $('.pop_layer').show()
+
+        function show_people_info(e) {
+
+            $('.layer_body').html();
+            var info_index = $(e).attr("u_id")
+            var user_info_ = {
+                "user_info_": user_info[info_index]
+            }
+            var bt_user_info = baidu.template;
+            var header_temp = bt_user_info('user_card', user_info_);
+            $('.layer_body').html(header_temp);
+            $('.pop_layer').show()
 
 
-    }
+        }
 
-    function close_layer() {
-        $('.pop_layer').hide()
-    }
+        function close_layer() {
+            $('.pop_layer').hide()
+        }
 
-    $('.login_div').draggable();
-    $('.login_div i.fa-close').click(function() {
-        $('.login_div').hide();
-    });
-    $('a.a_user_add').click(function(e) {
-        var t = $('.login_div');
-        t.css({
-            'left': (e.pageX - 469) + 'px',
-            'top': e.pageY + 'px'
+        $('.login_div').draggable();
+        $('.login_div i.fa-close').click(function() {
+            $('.login_div').hide();
         });
-        t.show();
-    });
+        $('a.a_user_add').click(function(e) {
+            var t = $('.login_div');
+            t.css({
+                'left': (e.pageX - 469) + 'px',
+                'top': e.pageY + 'px'
+            });
+            t.show();
+        });
 
-    // 添加用户
-    $('#user_add_b').click(function() {
-        var t = $('#user_add_form');
-        var data = new Object();
+        // 添加用户
+        $('#user_add_b').click(function() {
+            var t = $('#user_add_form');
+            var data = new Object();
 
-        var p1 = $('input[name=password]').val();
-        var p2 = $('input[name=password2]').val();
-        if (p1 != p2) {
-            $('#user_add_res').text('密码确认失败');
-            setTimeout(function() {
-                $('#user_add_res').text('');
-            }, 1000);
-            return false;
-        } else{
-        	$('form').submit();
-        }
+            var p1 = $('input[name=password]').val();
+            var p2 = $('input[name=password2]').val();
+            if (p1 != p2) {
+                $('#user_add_res').text('密码确认失败');
+                setTimeout(function() {
+                    $('#user_add_res').text('');
+                }, 1000);
+                return false;
+            } else{
+                $('form').submit();
+            }
 
-    });
-       
+        });
+        //ajax请求
+       $(function(){
+            var user_valid = $('.user_valid');
+           $.ajax({
+               type:'post',
+               url:'index.php',
+               data:{
+                   user_valid:user_valid.val()
+               },
+               cache:false,
+               dataType:'json',
+               success:function(data,status){
+                   if(user_valid.checked == true){
+                       status = 1;
+                   }else{
+                        status = 0;
+                   }
+               }
+           });
+       });
     </script>
 </body>
 
