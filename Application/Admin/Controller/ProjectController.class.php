@@ -8,6 +8,10 @@ class ProjectController extends Controller{
      * @author yzx
      */
     public function projectmanage() {
+        $project = new \Common\Helper\Project();
+        $result = $project->listData();
+        $this->assign('Page' , $result['Page']);
+        $this->assign('list_data',$result['list_data']);
         $this->display();
     }
     /**
