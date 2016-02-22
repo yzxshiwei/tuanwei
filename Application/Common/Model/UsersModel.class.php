@@ -11,7 +11,7 @@ namespace Common\Model;
  * @package Common\Model
  */
 class UsersModel extends \Common\Helper\Model{
-
+    protected $tableName = 'users';
     /*
      * 用户类型
      */
@@ -205,5 +205,4 @@ class UsersModel extends \Common\Helper\Model{
         $this->commit();
         return array('status'=>$user_id,'msg'=>'添加教师信息失败');
     }
-    
 }

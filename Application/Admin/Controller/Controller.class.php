@@ -12,6 +12,9 @@ namespace Admin\Controller;
  * @package Admin
  */
 class Controller extends \Common\Helper\Controller{
+    public function user(){
+        return \Common\Helper\RunUser::newInstantiation()->getInfo();
+    }
     public function __construct()
     {
         parent::__construct();

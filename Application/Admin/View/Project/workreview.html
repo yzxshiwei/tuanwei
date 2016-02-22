@@ -242,10 +242,10 @@
                                 <h6>成员组成</h6>
                             </div>
                             <div class="p_right_input">
-                                <label><span>xx作品</span></label>
-                                <label><span>xx标题</span></label>
-                                <label><span>xx简介</span></label>
-                                <label><a href="">项目下载</a></label>
+                                <label><span>{{$result.name}}</span></label>
+                                <label><span>{{$result.sub_title}}</span></label>
+                                <label><span>{{$result.intro}}</span></label>
+                                <label><a href="{{$result.file_url}}">项目下载</a></label>
                                 <label>
                                     <div class="p_team">
                                         <ul>
@@ -279,9 +279,10 @@
                                 </label>
                             </div>
                         </div>
-                        <form action="" class="review_content">
-                            <label><span>请评定分数:</span><input type="text" placeholder="0-10分"/></label>
-                            <label><span>请输入评语:</span><textarea></textarea></label>
+                        <form action="{{:U('Project/workreview')}}" method="post" class="review_content">
+                        	<input type="hidden" value="{{$id}}" name="id"/>
+                            <label><span>请评定分数:</span><input type="text" name="score" placeholder="0-10分"/></label>
+                            <label><span>请输入评语:</span><textarea name="content"></textarea></label>
                             <div class="btn">
                                 <input type="submit" value="提 &nbsp;&nbsp;&nbsp;&nbsp;交"/>
                             </div>

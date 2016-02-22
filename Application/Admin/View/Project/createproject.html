@@ -294,11 +294,10 @@
                         <li><a href="javascript:void(0);">下一页</a></li>
                     </ul>
                     <div class="p_content">
-                        <h3 class="title">团队项目编辑页面</h3>
+                        <h3 class="title">团队项目添加</h3>
                         <!--编辑项目内容-->
                         <div class="content" style="clear: both;">
-                            <h4 class="c_title">项目编辑</h4>
-                            <form action="">
+                            <form action="{{:U('Project/createproject')}}" method="post" enctype="multipart/form-data">
                                 <div class="p_left_nav">
                                     <h6>项目名称</h6>
                                     <h6>项目副标题</h6>
@@ -307,40 +306,13 @@
                                     <h6>成员组成</h6>
                                 </div>
                                 <div class="p_right_input">
-                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
-                                    <label><input type="file"/><b>请将所有文件打包上传</b></label>
+                                    <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><input type="text" name="sub_title" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                    <label><input name="project_file" type="file"/><b>请将所有文件打包上传</b></label>
                                     <label>
                                         <div class="p_team">
                                             <ul>
-                                                <li>
-                                                    <div class="team_information">
-                                                        <img src="" alt=""/>
-                                                        <div class="people_information">
-                                                            <h5>张三</h5>
-                                                            <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
-                                                            <p>
-                                                                刚刚有提到热线，在大选前一天，陆委会主委夏
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <button class="p_delete">-</button>
-                                                </li>
-                                                <li>
-                                                    <div class="team_information">
-                                                        <img src="" alt=""/>
-                                                        <div class="people_information">
-                                                            <h5>张三</h5>
-                                                            <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
-                                                            <p>
-                                                                刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。
-                                                                请问从大选到今天，是否有启动热线？第二个问题是关于南海，除了马英九可能明天会登上太平岛之外，
-                                                            </p>
-                                                        </div>
-                                                    </div>
-                                                    <button class="p_delete">-</button>
-                                                </li>
                                             </ul>
                                         </div>
                                         <button class="p_add" add-id="0" style="position: relative;">+</button>
@@ -356,10 +328,10 @@
                                 <form action="">
                                     <label>
                                         <span>请选择成员 : </span>
-                                        <select>
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
+                                        <select name="team_id">
+                                        <foreach name="list_data" key="key" item="vo">
+                                            <option value="{{$vo.user_id}}">{{$vo.user_name}}</option>
+                                        </foreach>
                                         </select>
                                     </label>
                                     <input class="sureBtn" type="submit" value="确定"/>

@@ -342,23 +342,21 @@
                     <!--<form class="search" action="">-->
                         <!--<label><input type="text" placeholder="Search"/><img src="images/search.png" alt=""/></label>-->
                     <!--</form>-->
-                    <ul class="b_page">
-                        <li><a href="javascript:void(0);">上一页</a></li>
-                        <li><a href="javascript:void(0);">下一页</a></li>
-                    </ul>
                     <div class="p_content">
                         <h3 class="title">团队项目编辑页面</h3>
                         <!--编辑项目内容-->
+                        <foreach name="list_data" key="key" item="vo">
                         <div class="activities">
+                        	
                             <div class="ac_title">
                                 <p><img src=""/></p>
                                 <p>
-                                    <span>xx活动</span>
-                                    <span>xx内容</span>
+                                    <a href="{{:U('Project/workreview',array('id'=>$vo['id']))}}"><span>{{$vo.name}}</span></a>
+                                    <span>{{$vo.sub_title}}</span>
                                 </p>
-                                <p class="open" open-id="0">打开</p>
+                                <p class="open" open-id="{{$vo.id}}">打开</p>
                             </div>
-                            <div class="content" style="clear: both;"  content-id="0">
+                            <div class="content" style="clear: both;"  content-id="{{$vo.id}}">
                                 <h4 class="c_title">项目编辑</h4>
                                 <form action="">
                                     <div class="p_left_nav">
@@ -369,9 +367,9 @@
                                         <h6>成员组成</h6>
                                     </div>
                                     <div class="p_right_input">
-                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                        <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                        <label><input type="text" name="name" value="{{$vo.name}}" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><input type="text" name="sub_title" value="{{$vo.sub_title}}" maxlength="15"/><b>限制在15字内</b></label>
+                                        <label><textarea maxlength="1000" name="intro">{{$vo.intro}}</textarea><b>限制在1000字内</b></label>
                                         <label><input type="file"/><b>请将所有文件打包上传</b></label>
                                         <label>
                                             <div class="p_team">
@@ -429,72 +427,10 @@
                                 </div>
                             </div>
                         </div>
-
-                        <div class="activities">
-                            <div class="ac_title">
-                                <p><img src=""/></p>
-                                <p>
-                                    <span>xx活动</span>
-                                    <span>xx内容</span>
-                                </p>
-                                <p class="open" open-id="1">打开</p>
-                            </div>
-                            <div class="content" style="clear: both;"  content-id="1">
-                                <h4 class="c_title">项目编辑</h4>
-                                <form action="">
-                                    <div class="p_left_nav">
-                                        <h6>项目名称</h6>
-                                        <h6>项目副标题</h6>
-                                        <h6>项目简介</h6>
-                                        <h6>上传附件</h6>
-                                        <h6>成员组成</h6>
-                                    </div>
-                                    <div class="p_right_input">
-                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                        <label><input type="text" maxlength="15"/><b>限制在15字内</b></label>
-                                        <label><textarea maxlength="1000"></textarea><b>限制在1000字内</b></label>
-                                        <label><input type="file"/><b>请将所有文件打包上传</b></label>
-                                        <label>
-                                            <div class="p_team">
-                                                <ul>
-                                                    <li>
-                                                        <div class="team_information">
-                                                            <img src="" alt=""/>
-                                                            <div class="people_information">
-                                                                <h5>张三</h5>
-                                                                <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
-                                                                <p>
-                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <button class="p_delete">-</button>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                            <button class="p_add" add-id="1">+</button>
-                                        </label>
-                                        <div class="btn">
-                                            <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
-                                        </div>
-                                    </div>
-                                </form>
-                                <!--成员选择弹出框-->
-                                <div class="memberBox" add-dy-id="1">
-                                    <b class="m_close">X</b>
-                                    <h3 class="m_title">成员选择</h3>
-                                    <form action="">
-                                        <label>
-                                            <span>请选择成员 : </span>
-                                            <select>
-                                                <option value="成员1">成员1</option>
-                                            </select>
-                                        </label>
-                                        <input class="sureBtn" type="submit" value="确定"/>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
+					</foreach>
+             		<div id="page_div">
+                        {{$Page}}
+                    </div>
                     </div>
                 </div>
             </div>
