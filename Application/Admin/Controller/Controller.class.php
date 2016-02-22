@@ -12,14 +12,13 @@ namespace Admin\Controller;
  * @package Admin
  */
 class Controller extends \Common\Helper\Controller{
-    public function user(){
-        return \Common\Helper\RunUser::newInstantiation()->getInfo();
-    }
+    public $user = null;
     public function __construct()
     {
         parent::__construct();
         $allows = C("allows_login");
         $info = \Common\Helper\RunUser::newInstantiation()->getInfo();
+        $this->user = $info;
         $isAllowsLogin = $info && in_array(intval($info["user_type"]),$allows);
         if(!$isAllowsLogin && \Common\Helper\RunUser::newInstantiation()->isTourist() && IS_AJAX ){//游客AJAX
             return $this->error("请登录后在操作");
