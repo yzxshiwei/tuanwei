@@ -113,13 +113,17 @@
 	
 	
 </div>
-<div class="add_teacher_card" style="display:none">
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
-
-</div>
+    <div class="add_teacher_card" style="display:none;">
+        <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
+        <div style="margin-top: 20px;">
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+        </div>
+    </div>
 
 <script>
 var main_banner;
@@ -340,9 +344,12 @@ $(document).ready(function() {
 	
 } );
 
-	
 
 
+
+$('#close').click(function(){
+    $(this).parent().toggle();
+});
 
 </script>
 </body>
