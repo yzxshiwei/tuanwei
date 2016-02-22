@@ -71,6 +71,9 @@ class ProjectController extends Controller{
                }
            }
         }else {
+            $userModel = D('users');
+            $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
+            $this->assign("list_data",$list_data);
             $this->display();
         }
     }

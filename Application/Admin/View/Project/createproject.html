@@ -329,9 +329,9 @@
                                     <label>
                                         <span>请选择成员 : </span>
                                         <select name="team_id">
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
-                                            <option value="成员1">成员1</option>
+                                        <foreach name="list_data" key="key" item="vo">
+                                            <option value="{{$vo.user_id}}">{{$vo.user_name}}</option>
+                                        </foreach>
                                         </select>
                                     </label>
                                     <input class="sureBtn" type="submit" value="确定"/>
