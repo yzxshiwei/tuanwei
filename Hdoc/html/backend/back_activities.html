@@ -619,6 +619,7 @@
     <script>
         //成员弹出框显示
         $('.p_comm').click(function(){
+            alert(123);
             var addId = $(this).attr('add-id');
             var member = $("div[add-dy-id="+addId+"]");
             member.toggle();
@@ -648,7 +649,7 @@
         $('.sureBtn').click(function(){
             $(this).parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
                     '<img src="" alt=""/>' +
-                    '<div class="people_information">' +
+                    '<div class="people_information">' + bn
                     '<h5>是谁谁</h5>' +
                     '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
                     '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。' +
