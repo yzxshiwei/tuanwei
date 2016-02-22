@@ -18,7 +18,7 @@
 				
 					<div class='race_set_div'>
 						<input type='file' id='f_u_2' name='selectFiles'/>
-						<form action='' onsubmit="return false;" method='post'>
+						<form action='{{:U('News/createnews')}}'  method='post'>
 							<h2 class='login-heading'>信息发布</h2>
 							
 							<span class='race_set_lable'>选 &nbsp;栏 目：</span>
@@ -36,14 +36,14 @@
 								<option value='3'>国家</option>
 							</select>
 							<br/>
-							<span class='race_set_lable'>主 &nbsp;标 题：</span><input type='text' id='input-title-name' placeholder='主标题（必填）' required='required' autofocus='autofocus' />
+							<span class='race_set_lable'>主 &nbsp;标 题：</span><input type='text' name='input-title-name' id='input-title-name' placeholder='主标题（必填）' required='required' autofocus='autofocus' />
 							<br/>
-							<span class='race_set_lable'>副 &nbsp;标 题：</span><input type='text' id='input-subtitle-name' placeholder='副标题' />
+							<span class='race_set_lable'>副 &nbsp;标 题：</span><input type='text' name='input-subtitle-name' id='input-subtitle-name' placeholder='副标题' />
 							<br/>
-                            <span class='race_set_lable'>消息来源：</span><input type='text' id='input-from-name' value='四川大学教务处' />
+                            <span class='race_set_lable'>消息来源：</span><input type='text' name='input-from-name' id='input-from-name' value='四川大学教务处' />
                             <br/>
                             <span class='race_set_lable'>新闻类型：</span>
-                            <select name="" id="news_type" style="width: 120px">
+                            <select name="news_type" id="news_type" style="width: 120px">
                             <option value="1">轮播图</option>
                                 <option value="2">普通新闻</option>
                                 <option value="3">图片新闻</option>
@@ -69,10 +69,7 @@
 							<p class='race_set_lable'>编辑内容</p>
 							<script id='info_editor' type='text/plain' style='width:100%;height:800px;'></script>
 							<br/>
-							
-							<button class='news_b' id='news_submit'>提交</button>
-
-							
+							<button class='news_b' type='submit' id='news_submit'>提交</button>
 						</form>
 					</div>
 				
@@ -99,9 +96,8 @@ var news_id = String(Math.round($.now()/1000)) + '_' + String(Math.round(Math.ra
 			
 			// 新闻发布界面提交
 			$('button.news_b').click( function() { 
-
 				var in_p = new Object();
-				in_p['id'] = news_id;
+				//in_p['id'] = news_id;
 				in_p['col'] = $('#news_col option:selected').val();
 				in_p['title1'] = $('#input-title-name').val();
 				in_p['title2'] = $('#input-subtitle-name').val();
@@ -110,9 +106,11 @@ var news_id = String(Math.round($.now()/1000)) + '_' + String(Math.round(Math.ra
 				in_p['news'] = UE.getEditor('info_editor').getContent();
                 in_p['from_name'] = $("#input-from-name").val();
                 in_p['news_type'] = $("#news_type").find("option:selected").attr("value");//性别
-                console.log(in_p['from_name'],in_p['news_type'])
-				
-				var id = $(this).attr('id');
+                console.log(in_p['news']);
+                return;
+                console.log(in_p['from_name'],in_p['news_type']);
+				return ;
+                var id = $(this).attr('id');
 				if( id=='news_submit' ) 
 					in_p['flag'] = 0;
 				else
