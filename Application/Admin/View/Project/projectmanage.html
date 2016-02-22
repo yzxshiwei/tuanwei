@@ -14,11 +14,6 @@
             font-size: 22px;
             color:#666;
         }
-        .tab-content .search{
-            float: left;
-            text-align: center;
-            width:80%;
-        }
         .tab-content .search label{
             display: block;
             height:35px;
@@ -277,7 +272,7 @@
             font-size: 18px;
             color: #fff;
         }
-        .memberBox{
+        .mt{
             display: none;
             border:1px dashed #ccc;
             width: 300px;
@@ -288,7 +283,7 @@
             padding:10px;
             background: #fff;
         }
-        .memberBox .m_close{
+        .mt .m_close{
             width: 20px;
             height:20px;
             border-radius: 20px;
@@ -300,7 +295,7 @@
             text-align: center;
             line-height: 20px;
         }
-        .memberBox .m_title{
+        .mt .m_title{
             margin-top: 30px;
             background: #999;
             height:40px;
@@ -310,25 +305,57 @@
             line-height: 40px;
             color: #fff;
         }
-        .memberBox form{
+        .mt form{
             width: 80%;
             margin: 0 auto;
             text-align: center;
         }
-        .memberBox form label{
+        .mt form label{
             display: block;
             margin-bottom: 10px;
         }
-        .memberBox form select{
+        .mt .s_btn{
+            width: 100%;
+            text-align: center;
+        }
+        .p_teacher{
+            position: absolute;
+            right:0;
+            top:18px;
+        }
+        .mt .teacherBtn{
+            height:30px;
+            width: 80px;
+            margin: 50px 0px 10px;
+        }
+        .mt form select{
             height: 30px;
             width: 63%;
             padding-left: 30px;
             border:1px solid #999;
         }
-        .memberBox input[type="submit"]{
+        .mt input[type="submit"]{
             height:30px;
             width: 80px;
             margin: 50px 0px 10px;
+        }
+        .teacherBox{
+            position: absolute;
+            bottom:1%;
+            right:1%;
+            height:260px;
+        }
+        .teacherBox .c_val{
+            text-align: left;
+            width: 90%;
+            margin: 0 auto;
+        }
+        .teacherBox .c_val input[type="checkbox"]{
+            vertical-align: middle;
+            margin-right: 1px;
+        }
+        .teacherBox .c_val b{
+            margin-right: 5px;
         }
     </style>
 </head>
@@ -347,7 +374,7 @@
                         <!--编辑项目内容-->
                         <foreach name="list_data" key="key" item="vo">
                         <div class="activities">
-                        	
+
                             <div class="ac_title">
                                 <p><img src=""/></p>
                                 <p>
@@ -403,20 +430,25 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <button class="p_add" add-id="0" style="position: relative;">+</button>
+                                            <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
+                                        </label>
+                                        <label style="clear:both;position: relative;width: 87.5%;">
+                                            <input type="text" placeholder="老师" class="get_t_val" style="margin-top: 10px;padding-left: 15px" get-t-id="0"/>
+                                            <button class="p_add p_teacher" add-teacher-id="0">+</button>
                                         </label>
                                         <div class="btn">
                                             <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                         </div>
                                     </div>
                                 </form>
-                                <div class="memberBox" add-dy-id="0">
+                                <!--成员选择弹出框-->
+                                <div class="mt memberBox" add-dy-id="0">
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">成员选择</h3>
                                     <form action="">
                                         <label>
                                             <span>请选择成员 : </span>
-                                            <select>
+                                            <select class="ch_member">
                                                 <option value="成员1">成员1</option>
                                                 <option value="成员1">成员1</option>
                                                 <option value="成员1">成员1</option>
@@ -424,6 +456,20 @@
                                         </label>
                                         <input class="sureBtn" type="submit" value="确定"/>
                                     </form>
+                                </div>
+                                <!--老师选择弹出框-->
+                                <div class="mt teacherBox" add-th-dy-id="0">
+                                    <b class="m_close">X</b>
+                                    <h3 class="m_title">老师选择</h3>
+                                    <form action="" class="c_val">
+                                        <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
+                                        <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
+                                        <input type="checkbox" name="teacher" value="胡老师"/><b>胡老师</b>
+                                        <input type="checkbox" name="teacher" value="范老师"/><b>范老师</b>
+                                    </form>
+                                    <div class="s_btn">
+                                        <button class="teacherBtn" t-id="0">确定</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -437,40 +483,74 @@
         </div>
     </div>
        <script>
-        //弹出框显示
-        $('.p_add').click(function(){
-            var addId = $(this).attr('add-id');
-            var member = $("div[add-dy-id="+addId+"]");
-            member.toggle();
-            return false;
-        });
-        //添加成员选择
-        $('.sureBtn').click(function(){
-            $(this).parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
-                    '<img src="" alt=""/>' +
-                    '<div class="people_information">' +
-                    '<h5>是谁谁</h5>' +
-                    '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
-                    '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。' +
-                    '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
-                    '</div>' +
-                    '</div><button class="p_delete">-</button></li>');
-            return false;
-        });
-        $('.m_close').click(function(){
-            $(this).parent().toggle();
-        });
-        //删除
-        $(document).on('click','.p_delete',function(){
-            $(this).parent().remove();
-            return false;
-        });
-        //项目编辑内容效果显示隐藏
-        $('.open').click(function(){
-            var openId = $(this).attr('open-id');
-            var content = $("div[content-id="+openId+"]");
-            content.toggle();
-        });
+           //成员弹出框显示
+           $('.p_comm').click(function(){
+               var addId = $(this).attr('add-id');
+               var member = $("div[add-dy-id="+addId+"]");
+               member.toggle();
+               return false;
+           });
+           //老师弹出框显示
+           $('.p_teacher').click(function(){
+               var addTeacherId = $(this).attr('add-teacher-id');
+               var teacher = $("div[add-th-dy-id="+addTeacherId+"]");
+               teacher.toggle();
+               return false;
+           });
+           //老师选中的值
+           var teacher_val = "";
+           $('.teacherBtn').click(function(){
+               var c_val = document.getElementsByName("teacher");
+               var t_id = $(this).attr('t-id');
+               var get_t_val = $('input[get-t-id='+t_id+']');
+               for(var i=0; i<c_val.length; i++){
+                   if(c_val[i].checked){ //判断复选框是否选中
+                       teacher_val=teacher_val+c_val[i].value + ","; //值的拼凑,
+                   }
+               }
+               get_t_val.val(teacher_val);
+           });
+           //添加成员选择
+           $('.sureBtn').click(function(){
+               var that = $(this);
+               var m_val = $('.ch_member').val();
+               $.ajax({
+                   type:'post',
+                   'url':'',
+                   data:{
+                       m_val:m_val
+                   },
+                   cache:false,
+                   dataType:'json',
+                   success:function(data){
+                       that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
+                               '<img src="" alt=""/>' +
+                               '<div class="people_information">' +
+                               '<h5>是谁谁</h5>' +
+                               '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
+                               '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不' +
+                               '排除在选后就两岸局势会有一次热线沟通。' +
+                               '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
+                               '</div>' +
+                               '</div><button class="p_delete">-</button></li>');
+                   }
+               });
+               return false;
+           });
+           $('.m_close').click(function(){
+               $(this).parent().toggle();
+           });
+           //删除
+           $(document).on('click','.p_delete',function(){
+               $(this).parent().remove();
+               return false;
+           });
+           //项目编辑内容效果显示隐藏
+           $('.open').click(function(){
+               var openId = $(this).attr('open-id');
+               var content = $("div[content-id="+openId+"]");
+               content.toggle();
+           });
     </script>
 </body>
 
