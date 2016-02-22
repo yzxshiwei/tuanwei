@@ -11,6 +11,7 @@ class ProjectModel extends \Common\Helper\Model{
      * @return int
      */
     public function addPorject($data) {
+        $this->getDbFields();
         $result = $this->add($data);
         return $result;
     }
