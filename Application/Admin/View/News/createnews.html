@@ -29,7 +29,7 @@
 								<option value='4'>学院风采</option> 
 								<option value='5'>资料库</option> 
 							</select>
-							<select id='sub_col' name='sub_role' style="margin-left: 20px;width: 120px">
+							<select id='sub_col' name='sub_role' style="margin-left: 20px;width: 120px;display: none">
 								<option value='0'>选择副类型</option>
 								<option value='1'>学校</option> 
 								<option value='2'>地方</option> 
@@ -195,7 +195,17 @@ var main_banner_2;
             });
 			
 		} );
-
+        //栏目效果
+        $(function(){
+            $('#news_col').click(function(){
+                var r_val = $(this).val();
+                if(r_val == 2){
+                    $('#sub_col').show();
+                }else if(r_val != 2){
+                    $('#sub_col').hide();
+                }
+            });
+        });
 </script>
 
 
