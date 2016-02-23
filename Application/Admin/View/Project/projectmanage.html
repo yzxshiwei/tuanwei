@@ -455,7 +455,7 @@
                                     <form action="">
                                         <label>
                                             <span>请选择成员 : </span>
-                                            <input type="text" name="nope" class="nope"/>
+                                            <input type="text" name="nope" class="nope" class="ch_member"/>
                                         </label>
                                         <input class="sureBtn" type="submit" value="确定"/>
                                     </form>
@@ -538,6 +538,7 @@
                var content = $("div[content-id="+openId+"]");
                content.toggle();
            });
+           //选择老师
            var teacher_select_id;
            function add_teacher_(e){
                var content_ = $(e).html();

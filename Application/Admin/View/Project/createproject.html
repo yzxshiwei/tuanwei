@@ -223,7 +223,7 @@
             width: 300px;
             position: absolute;
             bottom:18%;
-            right:1%;
+            right:0%;
             z-index: 1000;
             padding:10px;
             background: #fff;
@@ -259,29 +259,28 @@
             display: block;
             margin-bottom: 10px;
         }
-        .mt form select{
-            height: 30px;
-            width: 63%;
-            padding-left: 30px;
-            border:1px solid #999;
-        }
         .mt .s_btn{
             width: 100%;
             text-align: center;
-        }
-        .mt .teacherBtn{
-            height:30px;
-            width: 80px;
-            margin: 50px 0px 10px;
         }
         .p_teacher{
             position: absolute;
             right:0;
             top:18px;
         }
+        .mt .teacherBtn{
+            height:30px;
+            width: 80px;
+            margin: 50px 0px 10px;
+        }
+        .mt input[type="submit"]{
+            height:30px;
+            width: 80px;
+            margin: 50px 0px 10px;
+        }
         .teacherBox{
             position: absolute;
-            bottom:0%;
+            bottom:1%;
             right:1%;
             height:260px;
         }
@@ -290,17 +289,18 @@
             width: 90%;
             margin: 0 auto;
         }
-        .memberBox input[type="submit"]{
-            height:30px;
-            width: 80px;
-            margin: 50px 0px 10px;
-        }
         .teacherBox .c_val input[type="checkbox"]{
             vertical-align: middle;
             margin-right: 1px;
         }
         .teacherBox .c_val b{
             margin-right: 5px;
+        }
+        .nope{
+            height: 30px;
+            width: 63%;
+            padding-left: 10px;
+            border:1px solid #999;
         }
     </style>
 </head>
@@ -355,11 +355,7 @@
                                 <form action="">
                                     <label>
                                         <span>请选择成员 : </span>
-                                        <select name="team_id" class="ch_member">
-                                        <foreach name="list_data" key="key" item="vo">
-                                            <option value="{{$vo.user_id}}">{{$vo.user_name}}</option>
-                                        </foreach>
-                                        </select>
+                                        <input type="text" name="nope" class="nope" class="ch_member"/>
                                     </label>
                                     <input class="sureBtn" type="submit" value="确定"/>
                                 </form>
@@ -368,15 +364,12 @@
                             <div class="mt teacherBox" add-th-dy-id="0">
                                 <b class="m_close">X</b>
                                 <h3 class="m_title">老师选择</h3>
-                                <form action="" class="c_val">
-                                    <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
-                                    <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
-                                    <input type="checkbox" name="teacher" value="胡老师"/><b>胡老师</b>
-                                    <input type="checkbox" name="teacher" value="范老师"/><b>范老师</b>
-                                </form>
-                                <div class="s_btn">
-                                    <button class="teacherBtn">确定</button>
-                                </div>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
                             </div>
                         </div>
                     </div>
@@ -446,6 +439,84 @@
             $(this).parent().remove();
             return false;
         });
+        //选择老师
+        var teacher_select_id;
+        function add_teacher_(e){
+            var content_ = $(e).html();
+            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
+            console.log(teacher_select_id);
+            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
+            console.log(teacher_in);
+            $(teacher_in).val($(teacher_in).val()+content_+",")
+        }
+    </script>
+    <!--搜索-->
+    <script>
+        var colors =
+                [
+                    {
+                        "label": "风扇"
+                    },
+                    {
+                        "label": "Antique Brass"
+                    },
+                    {
+                        "label": "Apricot"
+                    },
+                    {
+                        "label": "Aquamarine"
+                    },
+                    {
+                        "label": "Asparagus"
+                    },
+                    {
+                        "label": "Atomic Tangerine"
+                    },
+                    {
+                        "label": "Banana Mania"
+                    },
+                    {
+                        "label": "Beaver"
+                    },
+                    {
+                        "label": "Bittersweet"
+                    },
+                    {
+                        "label": "Black"
+                    },
+                    {
+                        "label": "Blizzard Blue"
+                    }
+                ];
+
+        $(function () {
+            $('.nope').autocompleter({
+                // marker for autocomplete matches
+                highlightMatches: true,
+
+                // object to local or url to remote search
+                source: colors,
+
+                // custom template
+                template: '{{ label }}',
+
+                // show hint
+                hint: true,
+
+                // abort source if empty field
+                empty: false,
+
+                // max results
+                limit: 5,
+
+                callback: function (value, index, selected) {
+//            if (selected) {
+//                $('.icon').css('background-color', selected.hex);
+//            }
+                }
+            });
+        });
+
     </script>
 </body>
 
