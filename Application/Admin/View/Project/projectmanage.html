@@ -548,6 +548,74 @@
                $(teacher_in).val($(teacher_in).val()+content_+",")
            }
     </script>
+    <!--搜索-->
+    <script>
+        var colors =
+                [
+                    {
+                        "label": "风扇"
+                    },
+                    {
+                        "label": "Antique Brass"
+                    },
+                    {
+                        "label": "Apricot"
+                    },
+                    {
+                        "label": "Aquamarine"
+                    },
+                    {
+                        "label": "Asparagus"
+                    },
+                    {
+                        "label": "Atomic Tangerine"
+                    },
+                    {
+                        "label": "Banana Mania"
+                    },
+                    {
+                        "label": "Beaver"
+                    },
+                    {
+                        "label": "Bittersweet"
+                    },
+                    {
+                        "label": "Black"
+                    },
+                    {
+                        "label": "Blizzard Blue"
+                    }
+                ];
+
+        $(function () {
+            $('.nope').autocompleter({
+                // marker for autocomplete matches
+                highlightMatches: true,
+
+                // object to local or url to remote search
+                source: colors,
+
+                // custom template
+                template: '{{ label }}',
+
+                // show hint
+                hint: true,
+
+                // abort source if empty field
+                empty: false,
+
+                // max results
+                limit: 5,
+
+                callback: function (value, index, selected) {
+//            if (selected) {
+//                $('.icon').css('background-color', selected.hex);
+//            }
+                }
+            });
+        });
+
+    </script>
 </body>
 
 </html>
