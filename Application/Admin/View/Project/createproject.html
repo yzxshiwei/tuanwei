@@ -340,7 +340,7 @@
                                         <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
                                     </label>
                                     <label style="clear:both;position: relative;width: 87.5%;">
-                                        <input type="text" placeholder="老师" class="get_t_val" style="margin-top: 10px;padding-left: 15px"/>
+                                        <input type="text" placeholder="老师" class="get_t_val" style="margin-top: 10px;padding-left: 15px" get-t-id="0"/>
                                         <button class="p_add p_teacher" add-teacher-id="0">+</button>
                                     </label>
                                     <div class="btn">
@@ -355,7 +355,7 @@
                                 <form action="">
                                     <label>
                                         <span>请选择成员 : </span>
-                                        <input type="text" name="nope" class="nope" class="ch_member"/>
+                                        <input type="text" name="nope" class="nope ch_member"/>
                                     </label>
                                     <input class="sureBtn" type="submit" value="确定"/>
                                 </form>
@@ -393,17 +393,16 @@
             teacher.toggle();
             return false;
         });
-        //老师选中的值
-        var teacher_val = "";
-        $('.teacherBtn').click(function(){
-            var c_val = document.getElementsByName("teacher");
-            for(var i=0; i<c_val.length; i++){
-                if(c_val[i].checked){ //判断复选框是否选中
-                    teacher_val=teacher_val+c_val[i].value + ","; //值的拼凑,
-                }
-            }
-            $('.get_t_val').val(teacher_val);
-        });
+        //选择老师
+        var teacher_select_id;
+        function add_teacher_(e){
+            var content_ = $(e).html();
+            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
+            console.log(teacher_select_id);
+            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
+            console.log(teacher_in);
+            $(teacher_in).val($(teacher_in).val()+content_+",")
+        }
         //添加成员选择
         $('.sureBtn').click(function(){
             var that = $(this);
@@ -439,16 +438,6 @@
             $(this).parent().remove();
             return false;
         });
-        //选择老师
-        var teacher_select_id;
-        function add_teacher_(e){
-            var content_ = $(e).html();
-            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
-            console.log(teacher_select_id);
-            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
-            console.log(teacher_in);
-            $(teacher_in).val($(teacher_in).val()+content_+",")
-        }
     </script>
     <!--搜索-->
     <script>
