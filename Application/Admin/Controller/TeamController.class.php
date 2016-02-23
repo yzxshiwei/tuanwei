@@ -15,6 +15,10 @@ class TeamController extends Controller{
      * @author yzx
      */
    public function teamdiscuss() {
+       $team = new \Common\Helper\Team();
+       $user_id = $this->user['user_id'];
+       $list_data = $team->teamList($user_id); 
+       $this->assign('list_data',$list_data);
        $this->display();
    }
 }

@@ -103,81 +103,17 @@
                     <div class="team_jl">
                         <h3 class="title">团队交流页面</h3>
                         <ul class="project">
-                            <li get_open-id="0" open-id="0" class="hoverThis">实唯科技1</li>
-                            <li get_open-id="1" open-id="1">实唯科技2</li>
-                            <li get_open-id="2" open-id="2">实唯科技3</li>
-                            <li get_open-id="3" open-id="3">实唯科技4</li>
-                            <li get_open-id="4" open-id="4">实唯科技5</li>
+                        	<foreach name="list_data" key="key" item="vo">
+                            <li get_open-id="{{$vo.id}}" open-id="{{$vo.id}}">{{$vo.name}}</li>
+                           </foreach>
                         </ul>
                     </div>
                     <!--弹出交流框-->
-                    <div class="communicationBox" comm-id="0">
-                        <!--输入的内容框-->
-                        <div class="input_comm">
-                            <form action="">
-                                <textarea placeholder="请输入交流内容"></textarea>
-                                <input type="submit" s-open-id="0" class="send" value="发送"/>
-                            </form>
-                        </div>
-                        <!--显示内容-->
-                        <div class="showBox">
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                        内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                     <div class="communicationBox" comm-id="1">
                         <!--输入的内容框-->
                         <div class="input_comm">
-                            <form action="">
-                                <textarea placeholder="请输入交流内容"></textarea>
+                                <textarea id="content" placeholder="请输入交流内容"></textarea>
                                 <input type="submit" s-open-id="1" class="send" value="发送"/>
-                            </form>
-                        </div>
-                        <!--显示内容-->
-                        <div class="showBox">
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>
-                                        其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他其他
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>其他其他其他其他其他其他其他其他其他其他</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="communicationBox" comm-id="2">
-                        <!--输入的内容框-->
-                        <div class="input_comm">
-                            <form action="">
-                                <textarea placeholder="请输入交流内容"></textarea>
-                                <input type="submit"s-open-id="2" class="send" value="发送"/>
-                            </form>
                         </div>
                         <!--显示内容-->
                         <div class="showBox">
@@ -195,62 +131,6 @@
                                 <div class="show_content">
                                     <h3>标题</h3>
                                     <p>不知道不知道不知道不知道不知道不知道不知道不知道</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="communicationBox" comm-id="3">
-                        <!--输入的内容框-->
-                        <div class="input_comm">
-                            <form action="">
-                                <textarea placeholder="请输入交流内容"></textarea>
-                                <input type="submit" s-open-id="3" class="send" value="发送"/>
-                            </form>
-                        </div>
-                        <!--显示内容-->
-                        <div class="showBox">
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>
-                                        啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>啦啦啦啦啦啦啦啦啦啦啦阿拉啦啦啦</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="communicationBox" comm-id="4">
-                        <!--输入的内容框-->
-                        <div class="input_comm">
-                            <form action="">
-                                <textarea placeholder="请输入交流内容"></textarea>
-                                <input type="submit" s-open-id="4" class="send" value="发送"/>
-                            </form>
-                        </div>
-                        <!--显示内容-->
-                        <div class="showBox">
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>
-                                        噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦
-                                    </p>
-                                </div>
-                            </div>
-                            <div class="show_comm">
-                                <img src=""/>
-                                <div class="show_content">
-                                    <h3>标题</h3>
-                                    <p>噢噢噢噢噢噢噢噢哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦哦</p>
                                 </div>
                             </div>
                         </div>
@@ -275,17 +155,17 @@
         //ajax请求
         $('.send').click(function(){
             var s_get_id = $(this).attr('s-open-id');
-            var get_open_id = $("li[get_open-id="+s_get_id+"]");
+            var content = $('#content').val();
             $.ajax({
                 type:'post',
-                'url':'',
+                url:"{{:U('Message/teamcomment')}}",
                 data:{
-                    get_open_id:get_open_id
+                    team_id:s_get_id,content:content
                 },
                 cache:false,
                 dataType:'json',
                 success:function(data){
-                    alert('成功');
+                    alert(data.msg);
                 }
             });
         });

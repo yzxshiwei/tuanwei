@@ -24,7 +24,7 @@ class ProjectController extends Controller{
         if (IS_POST){
             $input_data = array();
             $input_data['project_id'] = I('post.id',0,'intval');
-            $input_data['officer'] = $this->user()['user_id'];
+            $input_data['officer'] = $this->user['user_id'];
             $input_data['content'] = I('post.content','','string');
             $input_data['score'] = I('post.score','','intval');
             $input_data['created_time'] = time();
