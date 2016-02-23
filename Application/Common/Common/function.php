@@ -23,7 +23,6 @@ function uploadFile($file,$path='file')
             'msg' => '请上传文件'
         );
     }
-
     foreach ($_FILES as $file) {
         if ($file['error'] == UPLOAD_ERR_OK) {
             // 取得扩展名
