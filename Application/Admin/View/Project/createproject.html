@@ -414,12 +414,12 @@
         //添加成员选择
         $('.sureBtn').click(function(){
             var that = $(this);
-            var m_val = $('.ch_member').val();
+            var user_id = $('.ch_member').val();
             $.ajax({
                 type:'post',
-                'url':'',
+                url:"{{:U(array('User/user'))}}",
                 data:{
-                    m_val:m_val
+                    user_id:user_id
                 },
                 cache:false,
                 dataType:'json',

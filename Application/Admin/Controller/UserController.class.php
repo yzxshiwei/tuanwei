@@ -48,4 +48,17 @@ class UserController extends Controller{
             $this->display();
         }
     }
+    /**
+     * 根据ID获取用户数据
+     * 添加时间数据
+     * 
+     * @author yzx
+     * @return Ambigous <mixed, boolean, NULL, string, unknown, multitype:, object>
+     */
+    public function user() {
+        $user_id = I('user_id');
+        $userModel = new \Common\Model\UsersModel();
+        $user_data = $userModel->where(array('user_id' => $user_id))->find();
+        return $user_data;
+    }
 }
