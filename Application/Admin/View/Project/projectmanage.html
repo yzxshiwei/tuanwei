@@ -14,6 +14,11 @@
             font-size: 22px;
             color:#666;
         }
+        .tab-content .search{
+            float: left;
+            text-align: center;
+            width:80%;
+        }
         .tab-content .search label{
             display: block;
             height:35px;
@@ -250,9 +255,11 @@
             left:30px;
         }
         .p_right_input .p_add{
+            display: inline-block;
             float: left;
             height: 26px;
-            line-height: 0px;
+            line-height: 20px;
+            text-align: center;
             font-size: 26px;
             color: #fff;
             width: 26px;
@@ -328,12 +335,6 @@
             width: 80px;
             margin: 50px 0px 10px;
         }
-        .mt form select{
-            height: 30px;
-            width: 63%;
-            padding-left: 30px;
-            border:1px solid #999;
-        }
         .mt input[type="submit"]{
             height:30px;
             width: 80px;
@@ -356,6 +357,12 @@
         }
         .teacherBox .c_val b{
             margin-right: 5px;
+        }
+        .nope{
+            height: 30px;
+            width: 63%;
+            padding-left: 10px;
+            border:1px solid #999;
         }
     </style>
 </head>
@@ -448,28 +455,21 @@
                                     <form action="">
                                         <label>
                                             <span>请选择成员 : </span>
-                                            <select class="ch_member">
-                                                <option value="成员1">成员1</option>
-                                                <option value="成员1">成员1</option>
-                                                <option value="成员1">成员1</option>
-                                            </select>
+                                            <input type="text" name="nope" class="nope"/>
                                         </label>
                                         <input class="sureBtn" type="submit" value="确定"/>
                                     </form>
                                 </div>
                                 <!--老师选择弹出框-->
-                                <div class="mt teacherBox" add-th-dy-id="0">
+                                <div class="mt teacherBox" add-th-dy-id="1">
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">老师选择</h3>
-                                    <form action="" class="c_val">
-                                        <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
-                                        <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
-                                        <input type="checkbox" name="teacher" value="胡老师"/><b>胡老师</b>
-                                        <input type="checkbox" name="teacher" value="范老师"/><b>范老师</b>
-                                    </form>
-                                    <div class="s_btn">
-                                        <button class="teacherBtn" t-id="0">确定</button>
-                                    </div>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+                                    <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
                                 </div>
                             </div>
                         </div>
@@ -496,19 +496,6 @@
                var teacher = $("div[add-th-dy-id="+addTeacherId+"]");
                teacher.toggle();
                return false;
-           });
-           //老师选中的值
-           var teacher_val = "";
-           $('.teacherBtn').click(function(){
-               var c_val = document.getElementsByName("teacher");
-               var t_id = $(this).attr('t-id');
-               var get_t_val = $('input[get-t-id='+t_id+']');
-               for(var i=0; i<c_val.length; i++){
-                   if(c_val[i].checked){ //判断复选框是否选中
-                       teacher_val=teacher_val+c_val[i].value + ","; //值的拼凑,
-                   }
-               }
-               get_t_val.val(teacher_val);
            });
            //添加成员选择
            $('.sureBtn').click(function(){
@@ -551,6 +538,15 @@
                var content = $("div[content-id="+openId+"]");
                content.toggle();
            });
+           var teacher_select_id;
+           function add_teacher_(e){
+               var content_ = $(e).html();
+               teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
+               console.log(teacher_select_id);
+               var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
+               console.log(teacher_in);
+               $(teacher_in).val($(teacher_in).val()+content_+",")
+           }
     </script>
 </body>
 
