@@ -558,9 +558,16 @@
            });
            //项目编辑内容效果显示隐藏
            $('.open').click(function(){
-               var openId = $(this).attr('open-id');
+               var _this = $(this);
+               var openId =_this.attr('open-id');
                var content = $("div[content-id="+openId+"]");
-               content.toggle();
+               if(_this.html()=='打开'){
+                    _this.html('关闭');
+                    content.css('display','block');
+               }else if(_this.html()=='关闭'){
+                   _this.html('打开');
+                   content.css('display','none');
+               }
            });
            //选择老师
            var teacher_select_id;
