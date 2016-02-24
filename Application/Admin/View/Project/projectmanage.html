@@ -312,14 +312,10 @@
             line-height: 40px;
             color: #fff;
         }
-        .mt form{
+        .mt .choose_m{
             width: 80%;
             margin: 0 auto;
             text-align: center;
-        }
-        .mt form label{
-            display: block;
-            margin-bottom: 10px;
         }
         .mt .s_btn{
             width: 100%;
@@ -335,10 +331,10 @@
             width: 80px;
             margin: 50px 0px 10px;
         }
-        .mt input[type="submit"]{
-            height:30px;
-            width: 80px;
-            margin: 50px 0px 10px;
+        .mt .choose_m{
+            width: 80%;
+            margin: 0 auto;
+            text-align: center;
         }
         .teacherBox{
             position: absolute;
@@ -452,13 +448,39 @@
                                 <div class="mt memberBox" add-dy-id="0">
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">成员选择</h3>
-                                    <form action="">
-                                        <label>
-                                            <span>请选择成员 : </span>
-                                            <input type="text" name="nope" class="nope ch_member"/>
-                                        </label>
-                                        <input class="sureBtn" type="submit" value="确定"/>
-                                    </form>
+                                    <div class="choose_m">
+                                        <span>请添加成员 : </span>
+                                        <select class="choose_s">
+                                            <option value="素材家园">素材家园</option>
+                                            <option value="BlackBerry">烦烦烦</option>
+                                            <option value="device">device</option>
+                                            <option value="with">with</option>
+                                            <option value="entertainment">entertainment</option>
+                                            <option value="and">and</option>
+                                            <option value="social">social</option>
+                                            <option value="networking">networking</option>
+                                            <option value="apps">apps</option>
+                                            <option value="or">or</option>
+                                            <option value="apps">apps</option>
+                                            <option value="that">that</option>
+                                            <option value="will">will</option>
+                                            <option value="boost">boost</option>
+                                            <option value="your">your</option>
+                                            <option value="productivity">productivity</option>
+                                            <option value="Download">Download</option>
+                                            <option value="or">好</option>
+                                            <option value="buy">buy</option>
+                                            <option value="apps">apps</option>
+                                            <option value="from">from</option>
+                                            <option value="Afbb">Afbb</option>
+                                            <option value="Akademie">Akademie</option>
+                                            <option value="Berlin">Berlin</option>
+                                            <option value="reviews">reviews</option>
+                                            <option value="by">by</option>
+                                            <option value="real">real</option>
+                                        </select>
+                                        <button class="sureBtn">确定</button>
+                                    </div>
                                 </div>
                                 <!--老师选择弹出框-->
                                 <div class="mt teacherBox" add-th-dy-id="1">
@@ -550,72 +572,11 @@
            }
     </script>
     <!--搜索-->
+    <!--搜索-->
     <script>
-        var colors =
-                [
-                    {
-                        "label": "风扇"
-                    },
-                    {
-                        "label": "Antique Brass"
-                    },
-                    {
-                        "label": "Apricot"
-                    },
-                    {
-                        "label": "Aquamarine"
-                    },
-                    {
-                        "label": "Asparagus"
-                    },
-                    {
-                        "label": "Atomic Tangerine"
-                    },
-                    {
-                        "label": "Banana Mania"
-                    },
-                    {
-                        "label": "Beaver"
-                    },
-                    {
-                        "label": "Bittersweet"
-                    },
-                    {
-                        "label": "Black"
-                    },
-                    {
-                        "label": "Blizzard Blue"
-                    }
-                ];
-
-        $(function () {
-            $('.nope').autocompleter({
-                // marker for autocomplete matches
-                highlightMatches: true,
-
-                // object to local or url to remote search
-                source: colors,
-
-                // custom template
-                template: '{{ label }}',
-
-                // show hint
-                hint: true,
-
-                // abort source if empty field
-                empty: false,
-
-                // max results
-                limit: 5,
-
-                callback: function (value, index, selected) {
-//            if (selected) {
-//                $('.icon').css('background-color', selected.hex);
-//            }
-                }
-            });
+        $(function(){
+            $('.choose_s').searchableSelect();
         });
-
     </script>
 </body>
 
