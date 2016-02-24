@@ -8,10 +8,17 @@ class ProjectController extends Controller{
      * @author yzx
      */
     public function projectmanage() {
+		
         $project = new \Common\Helper\Project();
         $result = $project->listData();
+		
+		$userModel = D('users');
+        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
+
         $this->assign('Page' , $result['Page']);
         $this->assign('list_data',$result['list_data']);
+		$this->assign('user_data',$user_data);
+		$this->assign("userid",$this->user["user_id"]);
         $this->display();
     }
     /**
@@ -44,7 +51,8 @@ class ProjectController extends Controller{
             $this->display();
         }
     }
-    /**
+     
+	/**
      * 创建项目
      * 添加时间15:34:58
      * 
@@ -111,4 +119,23 @@ class ProjectController extends Controller{
             $this->display();
         }
     }
+
+    /**
+	 * 查询项目团队成员
+	 * 添加时间 2016-2-24
+	 * 
+	 * @param pid int 项目id
+	 * @author zlj
+	 * @return array
+	 */
+	 public function find_user(){
+//	 	if(IS_AJAX){
+	 		
+	 		$pid = I("post.pid","","string");
+			$team = M("team");
+			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where(array("team.project_id"=>$pid))->select();
+			
+            echo json_encode($user_list);
+//	 	}
+	 }
 }

@@ -350,8 +350,10 @@
 
                                         <foreach name="list_data" item="vo">
                                             
-                                            <!--<if condition="$vo.user_id neq $userid"></if>-->
-                                    		<option value="{{$vo.user_id}}" >{{$vo.user_name}}</option>
+                                            <if condition="$vo.user_id neq $userid">
+                                            	<option value="{{$vo.user_id}}" >{{$vo.user_name}}</option>
+                                            </if>
+                                    		
                                     	</foreach>
 
                                     </select>

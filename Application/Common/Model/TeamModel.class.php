@@ -59,13 +59,22 @@ class TeamModel extends \Common\Helper\Model{
 			   break;
 		   }
 	    }
-	   //添加队长
-	   $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
-	   if($flag && $res){
-	   	   return True;
-	   }else{
-	   	   return FALSE;
-	   }
+	    //添加队长
+	    $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
+	    if($flag && $res){
+	    	   return True;
+	    }else{
+	    	   return FALSE;
+	    }
 	}
-	
+
+
+	 
+	 
+	 
+	 
+	 
+	 
+	 
+	 
 }

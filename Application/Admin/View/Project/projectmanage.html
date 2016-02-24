@@ -405,34 +405,21 @@
                                         <label><input type="file"/><b>请将所有文件打包上传</b></label>
                                         <label>
                                             <div class="p_team">
-                                                <ul>
-                                                    <li>
+                                                <ul class="ushow_{{$vo.id}}">
+                                                	
+                                                    <!--<li>
                                                         <div class="team_information">
                                                             <img src="" alt=""/>
                                                             <div class="people_information">
-                                                                <h5>张三</h5>
+                                                                <h5>张三122</h5>
                                                                 <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
-                                                                <p>
-                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏
-                                                                </p>
+                                                                <p>刚刚有提到热线，在大选前一天，陆委会主委夏</p>
                                                             </div>
                                                         </div>
                                                         <button class="p_delete">-</button>
-                                                    </li>
-                                                    <li>
-                                                        <div class="team_information">
-                                                            <img src="" alt=""/>
-                                                            <div class="people_information">
-                                                                <h5>张三</h5>
-                                                                <p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>
-                                                                <p>
-                                                                    刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不排除在选后就两岸局势会有一次热线沟通。
-                                                                    请问从大选到今天，是否有启动热线？第二个问题是关于南海，除了马英九可能明天会登上太平岛之外，
-                                                                </p>
-                                                            </div>
-                                                        </div>
-                                                        <button class="p_delete">-</button>
-                                                    </li>
+                                                    </li>-->
+                                                    
+                                                    
                                                 </ul>
                                             </div>
                                             <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
@@ -453,7 +440,16 @@
                                     <div class="choose_m">
                                         <span>请添加成员 : </span>
                                         <select class="choose_s">
-                                            <option value="素材家园">素材家园</option>
+                                        	
+	                                        <foreach name="user_data" item="vo">
+	                                            
+	                                            <if condition="$vo.user_id neq $userid">
+	                                            	<option value="{{$vo.user_id}}" >{{$vo.user_name}}</option>
+	                                            </if>
+	                                    		
+	                                    	</foreach>
+                                        	
+                                            <!--<option value="素材家园">素材家园</option>
                                             <option value="BlackBerry">烦烦烦</option>
                                             <option value="device">device</option>
                                             <option value="with">with</option>
@@ -479,7 +475,7 @@
                                             <option value="Berlin">Berlin</option>
                                             <option value="reviews">reviews</option>
                                             <option value="by">by</option>
-                                            <option value="real">real</option>
+                                            <option value="real">real</option>-->
                                         </select>
                                         <button class="sureBtn">确定</button>
                                     </div>
@@ -539,9 +535,6 @@
                                '<div class="people_information">' +
                                '<h5>是谁谁</h5>' +
                                '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
-                               '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不' +
-                               '排除在选后就两岸局势会有一次热线沟通。' +
-                               '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
                                '</div>' +
                                '</div><button class="p_delete">-</button></li>');
                    }
@@ -560,6 +553,32 @@
            $('.open').click(function(){
                var openId = $(this).attr('open-id');
                var content = $("div[content-id="+openId+"]");
+               
+               var ushow = $(".ushow_"+openId);
+
+               $.ajax({
+	               	type:"post",
+	               	url:"{{:U('Project/find_user')}}",
+	               	cache:false,
+	               	data:"pid="+openId,
+	               	success:function(data){
+	               		var datas = eval("("+data+")");
+	               		var len = datas.length;
+                        var str="";
+                        for(var i=0;i<len;i++){
+                          
+                          str +='<li><div class="team_information">' +
+                                '<img src="" alt=""/>' +
+                                '<div class="people_information">' +
+                                '<h5>'+datas[i].user_name+'</h5>' +
+                                '<p>学号:'+datas[i].stu_card+','+datas[i].college+'学院</p>' +
+                                '</div>' +
+                                '</div><button class="p_delete">-</button></li>';
+                        }
+                        ushow.html(str);
+	               	}
+               });
+               
                content.toggle();
            });
            //选择老师
