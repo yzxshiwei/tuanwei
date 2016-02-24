@@ -52,6 +52,36 @@ class NewsController extends Controller{
      * @author yzx
      */
     public function newsmanage() {
+        $news = new \Common\Helper\News();
+        $result = $news->listData();
+        $this->assign('Page' , $result['Page']);
+        $this->assign('list_data',$result['list_data']);
         $this->display();
+
     }
+	
+	
+	/**
+	 * 修改新闻状态
+	 * 添加时间 2016-2-23
+	 * 
+	 * @author zlj
+	 */
+	 public function new_flag(){
+	 	 if(IS_AJAX){
+	 	 	$nid = I("post.nid","","string");
+			 
+			// $type_new    1:允许通过 2：拒绝通过
+			$type_new = I("post.type_new","","string");
+			
+			$news = M("news");
+			$return = $news->where(array("id"=>$nid))->save(array("flag"=>$type_new));
+            
+			if($return){
+				echo 1;
+			}else{
+				echo 2;
+			}
+	 	 }
+	 }
 } 
