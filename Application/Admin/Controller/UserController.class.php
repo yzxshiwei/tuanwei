@@ -10,7 +10,7 @@ namespace Admin\Controller;
 class UserController extends Controller{
     public function logout() {
         \Common\Helper\RunUser::newInstantiation()->signOut();
-        $this->success('退出成功',U('Home/Index/Index'));
+        $this->success('退出成功',U('Home/Index/index'));
     }
     /**
      * 用户注册
