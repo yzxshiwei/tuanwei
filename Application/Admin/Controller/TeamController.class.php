@@ -21,5 +21,20 @@ class TeamController extends Controller{
        $this->assign('list_data',$list_data);
        $this->display();
    }
-   
+   /**
+    * 删除团队
+    * 添加时间2016-2-24
+    * 
+    * @author yzx
+    */
+   public function delete() {
+       $temModel = new \Common\Model\TeamModel();
+       $team_id = I('post.team_id',0,'intval');
+       $result = $temModel->deleteTeam($team_id);
+       if ($result){
+           $this->ajaxReturn(array('status' => 1));
+       }else {
+           $this->ajaxReturn(array('status' => 0));
+       }
+   }
 }

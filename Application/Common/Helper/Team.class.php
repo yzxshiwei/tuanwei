@@ -34,7 +34,7 @@ class Team{
         ->field('p.name,team.id,u.user_name,u.create_time')
         ->join('project as p on (team.project_id = p.id)','left')
         ->join("users as u on (team.user_id = u.user_id)",'left')
-        ->where(array('team.user_id'=>$user_id))
+        ->where(array('team.user_id' => $user_id,'team.user_type' => $teamModel::USER_TYPE_CAPTAIN))
         ->limit($Page->firstRow.','.$Page->listRows)
         ->select();
         return array("Page" => $Page_show,"list_data" => $result);
