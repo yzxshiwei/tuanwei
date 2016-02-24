@@ -17,7 +17,6 @@
 			<include file='Public:navigation'/>
 			<!-- tab-content -->
 			<div class="tab-content">
-					<a id='news_next_page' page='1' class='page'>下一页</a><a id='news_pre_page' page='0' class='page'>上一页</a><a id='news_refresh' class='page'>刷新</a>
 					<table class="user_table hover_table">
 						<tbody>
 							<tr style='background:#aaa;color:#fff'>
@@ -28,29 +27,81 @@
 								<th width='10%' class='user_set'>状态</th>
 								<th class='user_set'>操作</th>
 							</tr>
-							<tr>
-								<td><p class="text_left">2123</p></td>
-								<td><p class="text_left"><a class="a_news" target="_blank" href="news_review.html?id='+v.id+'">实唯科技于今日上市纽交所</a></p></td>
-								<td><p class="text_left">国内新闻</p></td>
-
-								<td><p class="time text_left">提交时间:</br>2017-2-1</p></td>
-								<td><p class="state text_left">待审查</p></td>
-								<td class="op team_set"><a class="pass race_edit">通过</a><a class="refuse race_edit">不通过</a></td>
-							</tr>
+							<foreach name="list_data" item="vo">
+								<tr nid="{{$vo.id}}">
+									<td><p class="text_left">{{$vo.id}}</p></td>
+									<td><p class="text_left"><a class="a_news" target="_blank" href="news_review.html?id='+v.id+'">{{$vo.title}}</a></p></td>
+									<td><p class="text_left">{{$vo.col}}</p></td>
+									<td><p class="time text_left">提交时间:</br>{{$vo.public_t|date="Y-m-d",###}}</p></td>
+									<td><p class="state text_left">
+										<if condition="$vo.flag eq 1"> 
+										            统一发布
+										<elseif condition="$vo.flag eq 2" /> 
+										            拒绝发布
+										<else />
+										             待处理
+										</if>
+									</p></td>
+									
+									<td class="op team_set">
+										<if condition="$vo.flag eq 2"> 
+										    <a class="pass race_edit">通过</a>
+										<elseif condition="$vo.flag eq 1" /> 
+										    <a class="refuse race_edit">不通过</a>
+										<else />
+										    <a class="pass race_edit">通过</a><a class="refuse race_edit">不通过</a>
+										</if>
+									</td>
+									
+								</tr>
+							</foreach>
 						</tbody>
 					</table>
-				
+				    <div id="page_div">
+                        {{$Page}}
+                    </div>
 			</div>
 		</div>
 	</div>
 	
-	
 </div>
 
 <script>
+     /*通过操作*/
+    $('.pass').click(function(){
+    	  var thiss = $(this);
+     	  var nid = thiss.parent().parent("tr").attr("nid");
+          $.ajax({
+               type:'post',
+               url:"{{:U('News/new_flag')}}",
+               data:"nid="+nid+"&type_new=1",
+               cache:false,
+               async:false,
+               dataType:'json',
+               success:function(data){
+               	   window.location.reload();
+               }
+           });
+    });
 
+     /*不通过操作*/
+    $('.refuse').on('click',function(){
+          
+     	  var thiss = $(this);
+     	  var nid = thiss.parent().parent("tr").attr("nid");
+          $.ajax({
+               type:'post',
+               url:"{{:U('News/new_flag')}}",
+               data:"nid="+nid+"&type_new=2",
+               cache:false,
+               async:false,
+               dataType:'json',
+               success:function(data){
+               	   window.location.reload();
+               }
+           });
+     });
 </script>
-
 
 
 </body>
