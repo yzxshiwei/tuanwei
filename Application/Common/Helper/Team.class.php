@@ -11,8 +11,26 @@ class Team{
      */
     public function teamList($user_id) {
         $teamModel = new \Common\Model\TeamModel();
-        $result = $teamModel->field("p.name,team.*")->join("project as p on(team.project_id=p.id)",'left')
+        $result = $teamModel->distinct(true)
+                            ->field("p.name,team.*")->join("project as p on(team.project_id=p.id)",'left')
                             ->where(array('user_id'=>$user_id))->select();
+        return $result;
+    }
+    /**
+     * 获取团队列表
+     * 添加时间2016-2-24
+     *
+     * @author yzx
+     * @param int $user_id
+     * @return array
+     */
+    public function listData($user_id) {
+        $teamModel = new \Common\Model\TeamModel();
+        $result = $teamModel->field('p.name,team.id,u.user_name,u.create_time')
+        ->join('project as p on (team.project_id = p.id)','left')
+        ->join("users as u on (team.user_id = u.user_id)",'left')
+        ->where(array('user_id'=>$user_id,'user_type' => $teamModel::USER_TYPE_CAPTAIN))
+        ->select();
         return $result;
     }
 }

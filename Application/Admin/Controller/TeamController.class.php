@@ -21,4 +21,5 @@ class TeamController extends Controller{
        $this->assign('list_data',$list_data);
        $this->display();
    }
+   
 }
