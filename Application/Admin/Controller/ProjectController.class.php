@@ -51,29 +51,63 @@ class ProjectController extends Controller{
      * @author yzx
      */
     public function createproject() {
+
         if (IS_POST){
+        	
            $file_res = uploadFile('project_file');
            if (!$file_res['status']){
                $this->error($file_res['msg']);
            }else {
                $posjectModel = new \Common\Model\ProjectModel();
+			   
+			   //开启事务
+			   $posjectModel->startTrans();
+			   
                $post_data = array();
                $post_data['name'] = I('post.name','','string');
                $post_data['sub_title'] = I('post.sub_title','','string');
                $post_data['file_url'] = $file_res['file_path'];
                $post_data['intro'] = I('post.intro','','string');
-               
+			   $teach_arr = I('post.teacher_id');
+			   
+			   //处理老师id
+			   $teachid = "";
+			   foreach($teach_arr as $_ky){
+			   	   $teachid .= $_ky.",";
+			   }
+			   $teachid = rtrim($teachid,",");
+			   
+               $post_data["teacher_id"] = $teachid; 
                $result = $posjectModel->addPorject($post_data);
                if ($result){
-                   $this->success('创建项目成功',U('Project/projectmanage'));
+               	   
+				   //添加项目团队信息(成员)
+				   $userid = I("post.userid");
+				   $team = new \Common\Model\TeamModel;
+				   $res = $team->addTeam($result,$userid,$this->user["user_id"]);
+				   
+				   if($res){
+				   	  $posjectModel->commit();
+				   	  $this->success('创建项目成功',U('Project/projectmanage'));
+				   }else{
+				   	  $posjectModel->rollback();
+				   	  $this->error('创建项目失败');
+				   }
+				   
                }else {
                    $this->error('创建项目失败');
                }
+			   
            }
         }else {
             $userModel = D('users');
             $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
+			
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->select();
+
+			$this->assign("teacher_list",$teacher_list);
             $this->assign("list_data",$list_data);
+			$this->assign("userid",$this->user["user_id"]);
             $this->display();
         }
     }

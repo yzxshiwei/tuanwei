@@ -347,33 +347,13 @@
                                 <div class="choose_m">
                                     <span>请添加成员 : </span>
                                     <select class="choose_s">
-                                        <option value="素材家园">素材家园</option>
-                                        <option value="BlackBerry">烦烦烦</option>
-                                        <option value="device">device</option>
-                                        <option value="with">with</option>
-                                        <option value="entertainment">entertainment</option>
-                                        <option value="and">and</option>
-                                        <option value="social">social</option>
-                                        <option value="networking">networking</option>
-                                        <option value="apps">apps</option>
-                                        <option value="or">or</option>
-                                        <option value="apps">apps</option>
-                                        <option value="that">that</option>
-                                        <option value="will">will</option>
-                                        <option value="boost">boost</option>
-                                        <option value="your">your</option>
-                                        <option value="productivity">productivity</option>
-                                        <option value="Download">Download</option>
-                                        <option value="or">好</option>
-                                        <option value="buy">buy</option>
-                                        <option value="apps">apps</option>
-                                        <option value="from">from</option>
-                                        <option value="Afbb">Afbb</option>
-                                        <option value="Akademie">Akademie</option>
-                                        <option value="Berlin">Berlin</option>
-                                        <option value="reviews">reviews</option>
-                                        <option value="by">by</option>
-                                        <option value="real">real</option>
+
+                                        <foreach name="list_data" item="vo">
+                                            
+                                            <!--<if condition="$vo.user_id neq $userid"></if>-->
+                                    		<option value="{{$vo.user_id}}" >{{$vo.user_name}}</option>
+                                    	</foreach>
+
                                     </select>
                                     <button class="sureBtn">确定</button>
                                 </div>
@@ -382,12 +362,11 @@
                             <div class="mt teacherBox" add-th-dy-id="0">
                                 <b class="m_close">X</b>
                                 <h3 class="m_title">老师选择</h3>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
-                                <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+                                
+                                <foreach name="teacher_list" item="vo" >
+                                	<a href="javascript:void(0)" onclick="add_teacher_(this)" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>
+                                </foreach>
+                                
                             </div>
                         </div>
                     </div>
@@ -415,30 +394,37 @@
         var teacher_select_id;
         function add_teacher_(e){
             var content_ = $(e).html();
+            
+            var teacher_id = $(e).attr("teacher_id");
+            var input_teacher = "<input type='hidden' name='teacher_id[]' value='"+teacher_id+"'>";
+            $(e).parent().parent().find(".p_right_input .p_teacher").append(input_teacher);
+            
             teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
-            console.log(teacher_select_id);
+//          console.log(teacher_select_id);
             var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
-            console.log(teacher_in);
+//          console.log(teacher_in);
             $(teacher_in).val($(teacher_in).val()+content_+",")
         }
         //添加成员选择
         $('.sureBtn').click(function(){
             var that = $(this);
-            var user_id = $('.ch_member').val();
+            var user_id = $('.choose_s').val();
+
             $.ajax({
                 type:'post',
-                url:"{{:U(array('User/user'))}}",
+                url:"{{:U('User/find_user')}}",
                 data:{
                     user_id:user_id
                 },
                 cache:false,
                 dataType:'json',
                 success:function(data){
+                	
                     that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
-                            '<img src="" alt=""/>' +
+                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
                             '<div class="people_information">' +
-                            '<h5>是谁谁</h5>' +
-                            '<p>学号:765756765765,四川大学2012届,xxxx学院,xxxx专业</p>' +
+                            '<h5>'+data.user_name+'</h5>' +
+                            '<p>学号:'+data.stu_card+','+data.college+'学院,'+data.major+'专业</p>' +
                             '<p>刚刚有提到热线，在大选前一天，陆委会主委夏立言曾经说不' +
                             '排除在选后就两岸局势会有一次热线沟通。' +
                             '请问从大选到今天，是否有启动热线？第二个问题是关于南海，</p>' +
