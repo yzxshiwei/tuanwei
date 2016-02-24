@@ -37,6 +37,10 @@ class IndexController extends \Admin\Controller\Controller {
 	 * @author yzx
 	 */
 	public function teammanage() {
+	    $team = new \Common\Helper\Team();
+	    $result = $team->listData($this->user['user_id']);
+	    $this->assign('list_data',$result['list_data']);
+	    $this->assign('Page', $result['Page']);
 		$this->display();
 	}
 	/**
