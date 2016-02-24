@@ -42,4 +42,16 @@ class MessageModel extends \Common\Helper\Model{
             return array('status' => false,'msg' => '消息类型错误');
         }
     }
+   /**
+    * 获取用户信息
+    * 添加时间2016-2-24
+    * 
+    * @author yzx
+    * @param int $user_id
+    * @return Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
+    */
+    public function getMessage($user_id) {
+        $result = $this->where(array('to_user' => $user_id))->select();
+        return $result;
+    }
 }
