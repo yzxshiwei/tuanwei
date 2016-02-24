@@ -10,7 +10,7 @@ namespace Admin\Controller;
 class UserController extends Controller{
     public function logout() {
         \Common\Helper\RunUser::newInstantiation()->signOut();
-        $this->success('退出成功',U('Home/Index/Index'));
+        $this->success('退出成功',U('Home/Index/index'));
     }
     /**
      * 用户注册
@@ -61,4 +61,20 @@ class UserController extends Controller{
         $user_data = $userModel->where(array('user_id' => $user_id))->find();
         return $user_data;
     }
+	
+	/**
+     * 根据ID获取用户数据
+     * 2016-02-24
+     * 
+     * @author zlj
+     * @return Ambigous <mixed, boolean, NULL, string, unknown, multitype:, object>
+     */
+    public function find_user() {
+        $user_id = I('user_id');
+        $userModel = new \Common\Model\UsersModel();
+        $user_data = $userModel->join('students on students.user_id=users.user_id')->where(array('users.user_id' => $user_id))->find();
+		
+		$this->ajaxReturn($user_data);
+    }
+	
 }

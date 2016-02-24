@@ -35,9 +35,9 @@ class LoginController extends \Common\Helper\Controller{
         $user = trim(I("post.user"));
         $pwd = trim(I("post.pwd"));
         $jump = trim(I("get.jump"));
-        $jump = $jump ? rawurldecode($jump) : U("Index/Index");
+        $jump = $jump ? rawurldecode($jump) : U("Index/index");
         if(!$user || !$pwd){
-            return $this->error("账号或密码不能为空",U("Login/Index"));
+            return $this->error("账号或密码不能为空",U("Login/index"));
         }
         $userModel = D("Users");
         $condition = array();
@@ -45,7 +45,7 @@ class LoginController extends \Common\Helper\Controller{
         $condition["_logic"] = "OR";
         $data = $userModel->where($condition)->find();
         if(!$data || create_password($pwd) != $data["passwd"]){
-            return $this->error("账号或密码错误",U("Login/Index"));
+            return $this->error("账号或密码错误",U("Login/index"));
         }
         \Common\Helper\RunUser::newInstantiation()->setUser($data["user_id"]);
         return $this->success("登录成功",U("Index/index"));
