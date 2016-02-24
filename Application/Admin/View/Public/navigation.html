@@ -78,6 +78,13 @@
 							<i class="fa  fa-user"></i>
 						</a>
 					</li>
+					<if condition="$message_count gt 0">
+					<li>
+						<a href="" title="消息条数{{$message_count}}">
+							<i class="fa fa-envelope"></i>
+						</a>
+					</li>
+					</if>
 					<li><span class="user_name" style='padding:0 10px'></span></li>
 				</ul>
 			</div>

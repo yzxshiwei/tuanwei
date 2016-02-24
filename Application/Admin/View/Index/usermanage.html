@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>人员管理</title>
     <include file='Public:file'/>
 </head>
 
@@ -165,7 +166,7 @@
                cache:false,
                dataType:'json',
                success:function(data,status){
-                   if(user_valid.checked == true){
+                   if(user_valid.is(':checked')){
                        status = 1;
                    }else{
                         status = 0;
