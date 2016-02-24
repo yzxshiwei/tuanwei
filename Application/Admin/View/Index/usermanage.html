@@ -166,7 +166,7 @@
                cache:false,
                dataType:'json',
                success:function(data,status){
-                   if(user_valid.checked == true){
+                   if(user_valid.is(':checked')){
                        status = 1;
                    }else{
                         status = 0;
