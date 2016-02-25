@@ -19,4 +19,16 @@ class MessageController extends Controller{
             $this->ajaxReturn(array('status'=>0,'msg'=>$result['msg']));
         }
     }
+    /**
+     * 获取团队交流信息
+     * 添加时间2016-2-25
+     * 
+     * @author yzx
+     */
+    public function teammsg() {
+        $user_id = I('post.user_id',0,'intval');
+        $messageModel = new \Common\Model\MessageModel();
+        $rersult = $messageModel->getMessage($user_id,$messageModel::TYPE_TEAM);
+        $this->ajaxReturn($rersult);
+    }
 }

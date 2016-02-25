@@ -56,7 +56,7 @@ class UserController extends Controller{
      * @return Ambigous <mixed, boolean, NULL, string, unknown, multitype:, object>
      */
     public function user() {
-        $user_id = I('user_id');
+        $user_id = I('post.team_id',0,'intval');
         $userModel = new \Common\Model\UsersModel();
         $user_data = $userModel->where(array('user_id' => $user_id))->find();
         return $user_data;

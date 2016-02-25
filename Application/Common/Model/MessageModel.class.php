@@ -50,8 +50,8 @@ class MessageModel extends \Common\Helper\Model{
     * @param int $user_id
     * @return Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
     */
-    public function getMessage($user_id) {
-        $result = $this->where(array('to_user' => $user_id))->select();
+    public function getMessage($user_id,$type = self::TYPE_USER) {
+        $result = $this->where(array('to_user' => $user_id,'msg_type'=>$type))->select();
         return $result;
     }
 }
