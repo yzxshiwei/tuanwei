@@ -123,9 +123,12 @@
         </div>
     </div>
     <script>
+        var this_id;
         $('.project li').click(function(){
+            $('.showBox').html("");
+            $('#content').val("");
             $(this).addClass('hoverThis').siblings().removeClass('hoverThis');
-            var this_id = $(this).attr('get_open-id');
+            this_id = $(this).attr('get_open-id');
             $.ajax({
                 type:'post',
                 url:"{{:U('Message/teammsg')}}",
@@ -135,6 +138,7 @@
                 cache:false,
                 dataType:'json',
                 success:function(data,success){
+                    $('.showBox').html("");
                     if(success){
                         for(var i=0 ; i<data.length ; i++){
                             var show = data[i];
@@ -149,15 +153,14 @@
         });
         //ajax请求
         $(document).on('click','.send',function(){
+            console.log(this_id);
             var this_ = $(this);
-            var s_get_id = $(this).attr('s-open-id');
-            var get_open_id = $("li[get_open-id="+s_get_id+"]");
             var content = $('#content').val();
             $.ajax({
                 type:'post',
                 url:"{{:U('Message/teamcomment')}}",
                 data:{
-                    team_id:s_get_id,content:content
+                    team_id:this_id,content:content
                 },
                 cache:false,
                 dataType:'json',
