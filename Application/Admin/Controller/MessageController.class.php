@@ -26,7 +26,7 @@ class MessageController extends Controller{
      * @author yzx
      */
     public function teammsg() {
-        $user_id = I('post.user_id',0,'intval');
+        $user_id = I('post.team_id',0,'intval');
         $messageModel = new \Common\Model\MessageModel();
         $rersult = $messageModel->getMessage($user_id,$messageModel::TYPE_TEAM);
         $this->ajaxReturn($rersult);
