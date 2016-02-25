@@ -171,9 +171,9 @@ class ProjectController extends Controller{
            }
         }else {
             $userModel = D('users');
-            $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
+            $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->field("user_id,user_name")->select();
 			
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
 
 			$this->assign("teacher_list",$teacher_list);
             $this->assign("list_data",$list_data);
