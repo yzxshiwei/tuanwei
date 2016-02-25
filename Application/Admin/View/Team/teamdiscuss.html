@@ -124,6 +124,7 @@
     </div>
     <script>
         $('.project li').click(function(){
+            $('.showBox').html("");
             $(this).addClass('hoverThis').siblings().removeClass('hoverThis');
             var this_id = $(this).attr('get_open-id');
             $.ajax({
@@ -135,6 +136,7 @@
                 cache:false,
                 dataType:'json',
                 success:function(data,success){
+                    console.log(data);
                     if(success){
                         for(var i=0 ; i<data.length ; i++){
                             var show = data[i];
