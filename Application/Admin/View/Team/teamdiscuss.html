@@ -127,6 +127,7 @@
             $('.showBox').html("");
             $(this).addClass('hoverThis').siblings().removeClass('hoverThis');
             var this_id = $(this).attr('get_open-id');
+            console.log(this_id);
             $.ajax({
                 type:'post',
                 url:"{{:U('Message/teammsg')}}",
@@ -136,6 +137,7 @@
                 cache:false,
                 dataType:'json',
                 success:function(data,success){
+                    $('.showBox').html("");
                     console.log(data);
                     if(success){
                         for(var i=0 ; i<data.length ; i++){
