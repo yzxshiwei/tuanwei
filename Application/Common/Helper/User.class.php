@@ -162,5 +162,64 @@ class User{
         }
         return array('Page' => $page_show,'list_data' => $list_data);
     } 
-
+    /**
+     * 发送邮件
+     * @param string $email
+     * @param string $content
+     * @return boolean
+     */
+    public function send_email($email,$content) {
+        Vendor('PHPMailer.Phpmailer');
+        $mail = new \PHPMailer();
+        
+        $mail->IsSMTP();
+        $mail->CharSet ="UTF-8";//编码
+        $mail->Debugoutput = 'html';// 支持HTML格式
+        $mail->Host = C('MAIL_HOST');//HOST 地址
+        $mail->Port = 25;//端口
+        $mail->SMTPAuth = C('MAIL_SMTPAUTH');
+        $mail->Username = C('MAIL_USERNAME');//用户名
+        $mail->Password = C('MAIL_PASSWORD');//密码
+        $mail->SetFrom(C('MAIL_USERNAME'),'团委');//发件人地址, 发件人名称
+        $mail->AddAddress($email);//收信人地址
+        $mail->Subject = '验证码';//邮件标题
+        $mail->MsgHTML($content);
+        return $mail->Send();
+    }
+    /**
+     * 生成邮箱验证码
+     * 添加时间2016-2-25 11:52:41
+     *
+     * @author yzx
+     */
+    public function rand_code($email){
+        $string = \Org\Util\String::randString(6);
+        session($email,$string);
+        return $string;
+    }
+    /**
+     * 找回密码
+     * 添加时间2016-2-25
+     * 
+     * @author yzx
+     * @param string $pwd
+     * @param string $code
+     * @param string $email
+     * @return bool
+     */
+    public function updatepwd($pwd,$code,$email) {
+        $userModel = new \Common\Model\UsersModel();
+        $save_data = array();
+        $session_code = session($email);
+        if ($code == $session_code){
+            $save_data['passwd'] = create_password($pwd);
+           $result = $userModel->where(array('email' => $email))->save($save_data);
+           if ($result){
+               session($email,null);
+               return true;
+           }
+           return false;
+        }
+        return false;
+    }
 }

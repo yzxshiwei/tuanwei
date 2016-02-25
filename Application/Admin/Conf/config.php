@@ -9,4 +9,12 @@ return array(
         \Common\Model\UsersModel::TYPE_INVESTMENT,//投资人
         \Common\Model\UsersModel::TYPE_STUDENT,//学生
     ),
+    'MAIL_HOST' =>'smtp.163.com',//smtp服务器的名称
+    'MAIL_SMTPAUTH' =>true, //启用smtp认证
+    'MAIL_USERNAME' =>'15884572902@163.com',//你的邮箱名
+    'MAIL_FROM' =>'15884572902@163.com',//发件人地址
+    'MAIL_FROMNAME'=>'校团委',//发件人姓名
+    'MAIL_PASSWORD' =>'luoli972479',//邮箱密码
+    'MAIL_CHARSET' =>'utf-8',//设置邮件编码
+    'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件
 );

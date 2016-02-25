@@ -54,4 +54,11 @@ class MessageModel extends \Common\Helper\Model{
         $result = $this->where(array('to_user' => $user_id,'msg_type'=>$type))->select();
         return $result;
     }
+    /**
+     * 发送邮箱验证码
+     * @param unknown $email
+     */
+    public function send_email($email) {
+        ;
+    }
 }
