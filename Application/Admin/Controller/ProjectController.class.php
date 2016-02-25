@@ -11,6 +11,7 @@ class ProjectController extends Controller{
 		
         $project = new \Common\Helper\Project();
 		$userModel = D('users');
+		$teacTeamModel = M("teacher_team");
 		
 		if(IS_POST){
 
@@ -29,26 +30,24 @@ class ProjectController extends Controller{
                $post_data['file_url'] = $file_res['file_path'];
                $post_data['intro'] = I('post.intro','','string');
 			   $pid = I("post.pid",'','string');
-			   $teach_arr = I('post.teacher_id');
 			   
-			   //处理老师id
-			   $teachid = "";
-			   foreach($teach_arr as $_ky){
-			   	   $teachid .= $_ky.",";
-			   }
-			   $teachid = rtrim($teachid,",");
-               $post_data["teacher_id"] = $teachid;
-			   $result = $posjectModel->where(array("id"=>$pid))->save($post_data);
-			   
+			   $result = $posjectModel->where(array("id"=>$pid))->save($post_data);  
 			   if ($result){
-				   //添加项目团队信息(成员)
+				   //先此项目的团队删除 再添加
 				   $userid = I("post.userid");
 				   $team = new \Common\Model\TeamModel;
-				   //先此项目的团队删除 再添加
+
 				   $team->where(array("project_id"=>$pid))->delete();
-				   $res = $team->addTeam($pid,$userid,$this->user["user_id"]);
+				   $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
 				   
-				   if($res){
+				   //将项目老师 删除 再添加
+				   $teach_id = I('post.teacher_id');
+				   $teachModel = new \Common\Model\Teacher_TeamModel;
+				   
+				   $teachModel->where(array("project_id"=>$pid,"team_type"=>1))->delete();
+				   $return = $teachModel->addTeam($teach_id,$pid,1);
+				   
+				   if($res && $return){
 				   	  $posjectModel->commit();
 				   	  $this->success('更新项目成功',U('Project/projectmanage'));
 				   }else{
@@ -65,16 +64,16 @@ class ProjectController extends Controller{
 			$result = $project->listData();
 	        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
 			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->select();
-	        
+
 			//拼 老师 姓名与id
 			foreach($result['list_data'] as $_k=>$v){
-				$map['user_id']  = array('in',$v['teacher_id']);
-				$teac = $userModel->where($map)->field("user_id,user_name")->select();
+
+				$team = $teacTeamModel->join("users on users.user_id=teacher_team.user_id")->where(array("teacher_team.project_id"=>13))->field("users.user_id,users.user_name")->select();
 				
-				foreach($teac as $_v){
-					$result['list_data'][$_k]['u_name'] .= $_v["user_name"].","; 
+				foreach($team as $_v){
+					$result['list_data'][$_k]['u_name'] .= $_v["user_name"].",";
 				}
-				$result['list_data'][$_k]['teac_info'] = $teac;
+				$result['list_data'][$_k]['teac_info'] = $team;
 			}
 
 			$this->assign("teacher_list",$teacher_list);
@@ -140,35 +139,33 @@ class ProjectController extends Controller{
                $post_data['sub_title'] = I('post.sub_title','','string');
                $post_data['file_url'] = $file_res['file_path'];
                $post_data['intro'] = I('post.intro','','string');
-			   $teach_arr = I('post.teacher_id');
 			   
-			   //处理老师id
-			   $teachid = "";
-			   foreach($teach_arr as $_ky){
-			   	   $teachid .= $_ky.",";
-			   }
-			   $teachid = rtrim($teachid,",");
 			   
-               $post_data["teacher_id"] = $teachid; 
                $result = $posjectModel->addPorject($post_data);
                if ($result){
                	   
 				   //添加项目团队信息(成员)
 				   $userid = I("post.userid");
 				   $team = new \Common\Model\TeamModel;
-				   $res = $team->addTeam($result,$userid,$this->user["user_id"]);
+				   $res = $team->addTeam($result,$userid,$this->user["user_id"],true);
 				   
-				   if($res){
+				   //添加项目团队 老师信息
+				   $teach_id = I('post.teacher_id');
+				   $teachModel = new \Common\Model\Teacher_TeamModel;
+				   $return = $teachModel->addTeam($teach_id,$result,1);
+				   
+				   if($res && $return){
 				   	  $posjectModel->commit();
 				   	  $this->success('创建项目成功',U('Project/projectmanage'));
 				   }else{
 				   	  $posjectModel->rollback();
+					  
 				   	  $this->error('创建项目失败');
 				   }
 				   
                }else {
                	   $posjectModel->rollback();
-                   $this->error('创建项目失败');
+                   $this->error('创建项目失败2');
                }
 			   
            }
@@ -199,8 +196,8 @@ class ProjectController extends Controller{
 	 		$pid = I("post.pid","","string");
 			$team = M("team");
 
-			$field = "users.user_id,users.user_name,students.college,students.stu_card";
-			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where(array("team.project_id"=>$pid))->field($_field)->select();
+			$field = "team.user_type,users.user_id,users.user_name,students.college,students.stu_card";
+			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where(array("team.project_id"=>$pid))->field($field)->select();
 
             echo json_encode($user_list);
 	 	}
