@@ -134,9 +134,16 @@
                 },
                 cache:false,
                 dataType:'json',
-                success:function(data){
-                    $('.communicationBox .showBox').append('<div class="show_comm">' +
-                            '<img src="" alt=""/><div class="show_content"><h3>标题</h3><p></p></div></div>');
+                success:function(data,success){
+                    if(success){
+                        for(var i=0 ; i<data.length ; i++){
+                            var show = data[i];
+                            $(".showBox").append('<div class="show_comm">' +
+                            '<img src="" alt=""/><div class="show_content"><h3>'+show['title']+'</h3><p>'+show['content']+'</p></div></div>')
+                        }
+                    }else{
+                        alert("没接收到值");
+                    }
                 }
             });
         });
