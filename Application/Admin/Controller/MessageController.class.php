@@ -9,8 +9,11 @@ class MessageController extends Controller{
      */
     public function teamcomment() {
         $post_data = array();
-        $post_data['content'] = I("post.content",'','string');
+        $post_data['content'] = I("post.content",null,'string');
         $post_data['team_id'] = I('post.team_id',0,'intval');
+        if ($post_data['content'] == null || $post_data['team_id'] == 0){
+            $this->ajaxReturn(array('status'=>0,'msg'=> "发送失败"));
+        }
         $messageModel = new \Common\Model\MessageModel();
         $result = $messageModel->send($post_data, $messageModel::TYPE_TEAM, $this->user['user_id']);
         if ($result['status']) {
