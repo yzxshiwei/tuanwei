@@ -45,13 +45,13 @@
 							<h2 class='login-heading'>比赛编辑</h2>
 							
 							<span class='race_set_lable'>比赛名称：</span>
-							<input type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' value="示例项目比赛名称"/>
+							<input type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' value="{{$minfo.name}}"/>
 							<br/>
-							<span class='race_set_lable'>副&nbsp;&nbsp;标&nbsp;&nbsp;题：</span><input type='text' id='input-race-sub' placeholder='副标题' value="示例项目比赛副标题" />
+							<span class='race_set_lable'>副&nbsp;&nbsp;标&nbsp;&nbsp;题：</span><input type='text' id='input-race-sub' placeholder='副标题' value="{{$minfo.sub_title}}" />
 							<br/>
 							<span class='race_set_lable'>比赛时间：</span>
-							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' />
-							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
+							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' value="{{$minfo.project_start_time|date='Y-m-d',###}}" />
+							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' value="{{$minfo.project_end_time|date='Y-m-d',###}}" />
 							<br/>
 							<p class='race_set_lable'>首页banner</p>
 							<div class='file_upload_plugin'>
@@ -65,7 +65,7 @@
 							<br/>
 							
 							<p class='race_set_lable'>比赛规程</p>
-							<script id='editor' type='text/plain' style='width:100%;height:500px;'></script>
+							<script id='editor' type='text/plain' style='width:100%;height:500px;'>{{$minfo.rules}}</script>
 							<br/>
 							<p class='race_set_lable'>比赛相关表格上传</p>
 							<ul class='main_banner'></ul>
@@ -75,8 +75,8 @@
 							<span class='race_set_lable'>比赛报名</span>
 							<br/>
 							<span class='race_set_lable'>报名时间：</span>
-							<input type='date' id='input-reg-time1' name='reg-start-date' placeholder='报名开始时间' />
-							<input type='date' id='input-reg-time2' name='reg-end-date' placeholder='报名结束时间' />
+							<input type='date' id='input-reg-time1' name='reg-start-date' value="{{$minfo.sign_start_time|date='Y-m-d',###}}" placeholder='报名开始时间' />
+							<input type='date' id='input-reg-time2' name='reg-end-date' value="{{$minfo.sign_end_time|date='Y-m-d',###}}" placeholder='报名结束时间' />
 							<br/>
 							<p class='race_set_lable'>比赛首页模板上传</p>
 							<input type='file' name='upload_reg_page' />
@@ -101,14 +101,11 @@
 								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' te-input='0'/><a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus' teacher-input='0' onclick="add_export(this)"></a>
 							</div>
 							<br/>
-							
-													
+
 							<button id='b_ok'>确定</button>
 					
 						</form>
 					</div>
-				
-				
 				
 			</div>
 		</div>

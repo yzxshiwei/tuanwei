@@ -38,7 +38,7 @@
 									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}</a></td>
 									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}</a></td>
 									<td class="race_set">
-										 <a href="{{:U('Match/editmatch')}}" class="race_edit">编辑</a>
+										 <a href="{{:U('Match/editmatch',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
 										 
 										 <if condition="$_v.state eq 1">
 										      <input type="checkbox" checked="checked"  class="race_valid"/>

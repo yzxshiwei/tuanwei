@@ -36,7 +36,7 @@ class MatchController extends Controller{
 				$data["name"] = I('post.name','','string');
 				$data["sub_title"] = I('post.sub_title','','string');
 				$data["project_start_time"] = strtotime(I('post.race-start-date','','string'));
-				$data["project_end_time"] = strtotime(I('post.project_end_time','','string'));
+				$data["project_end_time"] = strtotime(I('post.race-end-date','','string'));
 				$data["judge_amount"] = I("post.amount","","string");
 				$data["rules"] = htmlspecialchars(I('post.editorValue','','string'));
 				$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
@@ -91,8 +91,6 @@ class MatchController extends Controller{
 		$matchModel = new \Common\Helper\Match();
 		$result = $matchModel->listData();
 		
-
-		
 		$this->assign('list_data',$result['list_data']);
 		$this->assign('Page' , $result['Page']);
         $this->display();
@@ -104,7 +102,25 @@ class MatchController extends Controller{
      * @author yzx
      */
     public function editmatch() {
-        $this->display();
+    	
+    	$matchModel = new \Common\Model\MatchModel;
+		$packetModel = new \Common\Model\PacketModel;
+		$judgesModel = new \Common\Model\JudgesModel;
+		
+    	if(IS_POST){
+    		
+    	}else{
+    		$mid = I("get.mid","","string");
+			
+			$match_info = $matchModel->where(array("id"=>$mid))->find();
+			$packet_info = $packetModel->where(array("project_id"=>$mid))->select();
+			$judges_info = $judgesModel->where(array("project_id"=>$mid))->select();
+			
+			$match_info["rules"] = htmlspecialchars_decode($match_info["rules"]);
+			
+			$this->assign("minfo",$match_info);
+			$this->display();
+    	}
     }
 	
 	/**
