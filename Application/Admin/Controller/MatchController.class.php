@@ -16,9 +16,10 @@ class MatchController extends Controller{
     public function creatematch() {
     	
 	    $userModel = D('users');
+		$project = D('project');
 		
 		if(IS_POST){
-			
+
 			$match = M("match");
 			//开启事务
 		    $match->startTrans();
@@ -43,6 +44,7 @@ class MatchController extends Controller{
 				$data["cover_src"] = $file_res1['file_path'];
 				$data["start_file_src"] = $file_res2['file_path'];
 				$data["template_src"] = $file_res3['file_path'];
+				$data["project_id"] = I('post.proid','','string');
 				
 				$relust = $match->add($data);
 				
@@ -71,6 +73,9 @@ class MatchController extends Controller{
             }
 		}else{
 			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
+			$prolist = $project->field("id,name")->select();
+
+			$this->assign("prolist",$prolist);
 			$this->assign("teacher_list",$teacher_list);	
 			$this->display();
 		}

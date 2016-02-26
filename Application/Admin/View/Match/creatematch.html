@@ -47,12 +47,12 @@
 							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
 							<br/>
                             <span class='race_set_lable'>选择项目 : </span>
-                            <select name="" style="margin-left: 5px;width:120px;border-radius: 3px">
-                                <option value="请选择">请选择</option>
-                                <option value="请选择">请选择</option>
-                                <option value="请选择">请选择</option>
-                                <option value="请选择">请选择</option>
-                                <option value="请选择">请选择</option>
+                            <select name="proid" style="margin-left: 5px;width:120px;border-radius: 3px">
+                            	
+                            	<foreach item="_v" name="prolist">
+                            		<option value="{{$_v.id}}" >{{$_v.name}}</option>
+                            	</foreach>
+
                             </select>
                             <br/>
 							<p class='race_set_lable'>首页banner</p>
