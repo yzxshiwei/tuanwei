@@ -56,6 +56,7 @@ function uploadFile($file,$path='file'){
         }
     }
 }
+<<<<<<< HEAD
 
 
 /**
@@ -78,12 +79,34 @@ function uploadFile($file,$path='file'){
             $result = move_uploaded_file($tmp_name, $dest);
 			
 			if ($result){
+=======
+/**
+ * 上传多个文件调用
+ * @param unknown $file
+ * @param string $path
+ */
+function uploadFiles($file_data = array(),$path='file'){
+ foreach ($file_data as $file) {
+        if ($file['error'] == UPLOAD_ERR_OK) {
+            // 取得扩展名
+            $extName = strtolower(end(explode('.', $file['name'])));
+
+            $time = microtime(true);
+            $time = explode('.', $time);
+            $time = date("YmdHis{$time[1]}", $time[0]);
+
+            $filename = $time . '.' . $extName;
+            $dest = "Upload/{$path}/" . $filename;
+            $result = move_uploaded_file($file['tmp_name'], $dest);
+            if ($result){
+>>>>>>> 7386eec2eb889cdbda510ad188c1d5623ff938f6
                 return array(
                     'status' => true,
                     'msg' => '上传成功！',
                     'filename' => $filename,
                     'file_path' => $dest
                 );
+<<<<<<< HEAD
             }else{
 	            return array(
 	                'status' => false,
@@ -106,3 +129,18 @@ function v_dump($arr){
 }
  
 
+=======
+            }
+            return array(
+                'status' => false,
+                'msg' => '上传错误！'
+            );
+        } else {
+            return array(
+                'status' => false,
+                'msg' => '上传错误！'
+            );
+        }
+    }
+}
+>>>>>>> 7386eec2eb889cdbda510ad188c1d5623ff938f6
