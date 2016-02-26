@@ -87,6 +87,14 @@ class MatchController extends Controller{
      * @author yzx
      */
     public function matchmanage() {
+    	
+		$matchModel = new \Common\Helper\Match();
+		$result = $matchModel->listData();
+		
+
+		
+		$this->assign('list_data',$result['list_data']);
+		$this->assign('Page' , $result['Page']);
         $this->display();
     }
     /**
@@ -98,4 +106,53 @@ class MatchController extends Controller{
     public function editmatch() {
         $this->display();
     }
+	
+	/**
+	 * 删除比赛
+	 * @author zlj
+	 */
+	public function delMatch(){
+
+		if(IS_AJAX){
+			
+			$matchModel = M("match");
+			$judgesModel = M("judges");
+			$packetModel = M("packet");
+			
+			//开启事务
+		    $matchModel->startTrans();
+
+			$mid = I("post.mid","","string");
+			
+            //删除比赛 评委老师信息
+			$res2 = $judgesModel->where(array("project_id"=>$mid))->delete();
+			//删除比赛 组信息
+			$res3 = $packetModel->where(array("project_id"=>$mid))->delete();
+			//删除比赛信息
+			$res1 = $matchModel->where(array("id"=>$mid))->delete();
+			
+			if($res1 && $res2 && $res3){
+				$matchModel->commit();
+				echo 1;
+			}else{
+				$matchModel->rollback();
+				echo 2;
+			}
+		}
+	}
+
+
+    /**
+	 * 修改比赛的发布状态
+	 * @author zlj
+	 */
+	public function updateState(){
+		if(IS_AJAX){
+		    
+			$mid = I("post.mid","","string");
+			$type = I("post.types","","string");
+			$match = M("match");
+		    $match->where(array("id"=>$mid))->save(array("state"=>$type));
+		}
+	}
 }

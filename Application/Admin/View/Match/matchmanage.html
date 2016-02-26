@@ -30,22 +30,31 @@
 								<th width='20%'>报名时间</th>
 								<th class='user_set'>设置</th>
 							</tr>
-							<tr>
-								<td>123132</td>
-							<td><a class="race_name" target="_blank" href="race_enroll.html?race_id='+v.race_id+'&race_name='+v.name+'">物联网+创业大赛</a></td>
-		
-
-							<td><a class="race_time">2016-2-1</a></td>
-							<td><a class="race_stime">2016-2-5</a></td>	
-							<td class="race_set">
-								<a href="{{:U('Match/editmatch')}}" class="race_edit">编辑</a>
-								<input type="checkbox" class="race_valid"/>发布<a class="race_delete">删除</a>
-							</td>
-							</tr>
+							
+							<foreach name="list_data" item="_v">
+								<tr mid="{{$_v.id}}">
+									<td>{{$_v.id}}</td>
+									<td><a class="race_name" target="_blank" href="race_enroll.html?race_id='+v.race_id+'&race_name='+v.name+'">{{$_v.name}}</a></td>
+									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}</a></td>
+									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}</a></td>
+									<td class="race_set">
+										 <a href="{{:U('Match/editmatch')}}" class="race_edit">编辑</a>
+										 
+										 <if condition="$_v.state eq 1">
+										      <input type="checkbox" checked="checked"  class="race_valid"/>
+										 <else />
+										      <input type="checkbox" class="race_valid"/>
+										 </if>
+									         发布<a class="race_delete">删除</a>
+									</td>
+								</tr>
+							</foreach>
 							
 						</tbody>
 					</table>
-				
+				    <div id="page_div">
+                        {{$Page}}
+                    </div>
 				
 			</div>
 		</div>
@@ -56,6 +65,51 @@
 
 
 <script>
+    
+    /*删除操作*/
+	$('.race_delete').click( function() {
+	    var t = $(this).parents('tr');
+	    var mid = t.attr('mid');
+		
+		$.ajax({
+			type:"post",
+			url:"{{:U('Match/delMatch')}}",
+			cache:false,
+			data:"mid="+mid,
+			success:function(data){
+				if(data=='1'){
+					t.remove();
+				}else{
+					alert("操作失败,请重新操作！");
+				}
+			}
+		})
+		
+	} );
+
+    /*发布操作*/
+   $(".race_valid").change(function(){
+   	
+   	     var mid = $(this).parents("tr").attr("mid");
+   	     var types = "";
+   	     if($(".race_valid").prop("checked")){
+   	     	/*发布*/
+   	     	types = 1;
+   	     }else{
+   	     	/*不发布*/
+   	     	types = 2;
+   	     }
+   	     $.ajax({
+   	     	type:"post",
+   	     	url:"{{:U('Match/updateState')}}",
+   	     	data:"mid="+mid+"&types="+types,
+   	     	success:function(data){
+   	     	}
+   	     });
+   	     
+   });
+
+
 // //强行代码
 // function append_race( tbody, race_data, d ) {
 								
@@ -91,7 +145,7 @@
 // 		$.post( 'my-php/root_ui/change_race_state.php', {race_id:rid,flag:s} );
 // 	} );
 	
-// 	$('a.race_delete').click( function() {
+// 	$('.race_delete').click( function() {
 // 		var t = $(this).parents('tr');
 // 		var rid = t.attr('id');
 // 		$.post( 'my-php/root_ui/change_race_state.php', {race_id:rid,flag:'2'}, function() {	
@@ -104,7 +158,7 @@
 // 				}	
 // 			} );
 // 		} ); 
-		
+//		
 // 	} );
 // }
 // //强行函数
