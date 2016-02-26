@@ -15,8 +15,8 @@ function create_password($passwd){
 /**
  * 上传文件
  */
-function uploadFile($file,$path='file')
-{
+function uploadFile($file,$path='file'){
+	
     if (! count($_FILES[$file])) {
         return array(
             'status' => false,
@@ -30,11 +30,12 @@ function uploadFile($file,$path='file')
 
             $time = microtime(true);
             $time = explode('.', $time);
-            $time = date("YmdHis{$time[1]}", $time[0]);
+            $time = date("YmdHis{$time[1]}", $time[0]).rand(1,1000);
 
             $filename = $time . '.' . $extName;
             $dest = "Upload/{$path}/" . $filename;
             $result = move_uploaded_file($file['tmp_name'], $dest);
+
             if ($result){
                 return array(
                     'status' => true,
@@ -55,3 +56,53 @@ function uploadFile($file,$path='file')
         }
     }
 }
+
+
+/**
+ * 单文件上传
+ */
+ function Upload($upfile,$pass="file"){
+     
+ 	  if(is_uploaded_file($upfile['tmp_name'])){
+ 	  	
+			//获取数组里面的值 
+			$name=$upfile["name"];//上传文件的文件名 
+			$tmp_name=$upfile["tmp_name"];//上传文件的临时存放路径 
+			
+			$extName = strtolower(end(explode('.', $name)));//文件后缀名
+			$time = microtime(true);
+            $time = explode('.', $time);
+            $time = date("YmdHis{$time[1]}", $time[0]).rand(1,1000);
+            $filename = $time . '.' . $extName;
+			$dest = "Upload/$pass/" . $filename;
+            $result = move_uploaded_file($tmp_name, $dest);
+			
+			if ($result){
+                return array(
+                    'status' => true,
+                    'msg' => '上传成功！',
+                    'filename' => $filename,
+                    'file_path' => $dest
+                );
+            }else{
+	            return array(
+	                'status' => false,
+	                'msg' => '上传错误！'
+	            );
+            }
+	  }else{
+			return array(
+                'status' => false,
+                'msg' => '上传错误！'
+            );
+	  }
+ }
+ 
+ 
+function v_dump($arr){
+	echo "<pre>";
+	var_dump($arr);
+	echo "</pre>";
+}
+ 
+
