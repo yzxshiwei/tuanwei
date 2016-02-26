@@ -525,7 +525,7 @@
 	               	url:"{{:U('Project/find_user')}}",
 	               	cache:false,
 	               	data:"pid="+openId,
-	               	success:function(data){
+	               	success:function(data){ console.log(data);
 	               		var datas = eval("("+data+")");
 	               		var len = datas.length;
                         var str="";
@@ -536,8 +536,11 @@
                                 '<div class="people_information">' +
                                 '<h5>'+datas[i].user_name+'</h5>' +
                                 '<p>学号:'+datas[i].stu_card+','+datas[i].college+'学院</p>' +
-                                '</div>' +
-                                '</div><button class="p_delete">-</button></li>';
+                                '</div>';
+                          
+                          if(datas[i].user_type !=='captain'){
+                             str += '</div><button class="p_delete">-</button></li>';	   
+                          }
                         }
                         ushow.html(str);
 	               	}

@@ -44,12 +44,14 @@ class TeamModel extends \Common\Helper\Model{
 	 * @param projectid  int    项目id
 	 * @param userid     array  项目成员id
 	 * @param memberid   int    项目队长id
+	 * @param type       bool   ture 添加队长   false不添加
 	 * @author zlj
 	 * @return bool
 	 */
-	public function addTeam($projectid,$userid,$memberid){
+	public function addTeam($projectid,$userid,$memberid,$type){
 
         $flag = FALSE;
+		$res = true;
 		foreach($userid as $_k){
 	   	   $adduser = $this->data(array("user_id"=>$_k,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_MEMBER))->add();
 		   if($adduser){
@@ -59,8 +61,12 @@ class TeamModel extends \Common\Helper\Model{
 			   break;
 		   }
 	    }
-	    //添加队长
-	    $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
+		
+		//添加队长
+		if($type){   
+	        $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
+		}
+
 	    if($flag && $res){
 	    	   return True;
 	    }else{

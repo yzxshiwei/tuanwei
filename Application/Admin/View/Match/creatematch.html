@@ -34,18 +34,27 @@
 					<div id='expert_choose' class="hide comments"></div>
 					
 					<div class='race_set_div'>
-						<form action='' method='post' onsubmit="return false;">
+						<form action="{{:U(Match/creatematch)}}" method='post' enctype="multipart/form-data" >
 							<input type='file' id='f_u' name='selectFiles'/>
 							<h2 class='login-heading'>新建比赛</h2>
 							
-							<span class='race_set_lable'>比赛名称：</span><input type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' />
+							<span class='race_set_lable'>比赛名称：</span><input type='text' name='name' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' />
 							<br/>
-							<span class='race_set_lable'>副&nbsp标&nbsp;&nbsp;题： </span><input type='text' id='input-race-sub' placeholder='副标题'  />
+							<span class='race_set_lable'>副&nbsp标&nbsp;&nbsp;题： </span><input type='text' name="sub_title" id='input-race-sub' placeholder='副标题'  />
 							<br/>
 							<span class='race_set_lable'>比赛时间：</span>
 							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' />
 							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
 							<br/>
+                            <span class='race_set_lable'>选择项目 : </span>
+                            <select name="" style="margin-left: 5px;width:120px;border-radius: 3px">
+                                <option value="请选择">请选择</option>
+                                <option value="请选择">请选择</option>
+                                <option value="请选择">请选择</option>
+                                <option value="请选择">请选择</option>
+                                <option value="请选择">请选择</option>
+                            </select>
+                            <br/>
 							<p class='race_set_lable'>首页banner</p>
 							<div class='file_upload_plugin'>
 								<div id='file_upload_area' class='droppable' draggable='true'>
@@ -78,7 +87,7 @@
 							<span class='race_set_lable'>比赛分组</span><a id='race_add_group' class='fa fa-plus'></a>
 							<br/>
 							<div class='race_group_div'>
-								<input class='race_group' type='text' placeholder='默认组' required='required' />
+								<input class='race_group' type='text' name="packet[]" placeholder='默认组' required='required' />
 							</div>
 							<br/>
 							<div class='list_div'></div>
@@ -104,12 +113,11 @@
     <div class="add_teacher_card" style="display:none;">
         <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
         <div style="margin-top: 20px;">
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
-            <a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+            
+            <foreach name="teacher_list" item="vo" >
+            	<a href="javascript:void(0)" onclick="add_teacher_(this)" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>
+            </foreach>
+            
         </div>
     </div>
 
@@ -119,7 +127,7 @@ var race_id;
 var teacher_select_id;
 function add_export(e){
 	teacher_select_id = $(e).attr("teacher-input")
-	console.log(teacher_select_id)
+//	console.log(teacher_select_id)
 
 	$(".add_teacher_card").toggle()
 	
@@ -127,7 +135,7 @@ function add_export(e){
 function add_teacher_(e){
 		var content_ = $(e).html()
 		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
-		console.log(teacher_in)
+//		console.log(teacher_in)
 		$(teacher_in).val($(teacher_in).val()+content_+",")
 	}
 
@@ -162,7 +170,7 @@ $(document).ready(function() {
 				banner['banner'] = $.base64( 'encode', this.result );
 				banner['banner_name'] = main_banner.name;
 				banner['race_id'] = race_id;
-				$.post( 'my-php/root_ui/add_race.php', banner, function() { alert('banner 上传成功'); } );	
+//				$.post( 'my-php/root_ui/add_race.php', banner, function() { alert('banner 上传成功'); } );	
 			};	
 			
 			reader.readAsBinaryString( main_banner );
@@ -171,7 +179,7 @@ $(document).ready(function() {
 	
 	$('.file_upload_plugin a.browse').click( function(e) {
 		$('#f_u').trigger('click');
-		console.log("upload_click")
+//		console.log("upload_click")
 	} );
 	
 	$('#f_u').change( function(e) {	
@@ -189,7 +197,7 @@ $(document).ready(function() {
 	$('#race_add_group').click( function() {
 		var target = $('.race_group_div');
 		var num = target.children('input[type=text]').size();
-		target.append( $("<input type='text' class='race_group' placeholder='分组"+(num+1)+"' required='required' />") );
+		target.append( $("<input type='text' name='packet[]' class='race_group' placeholder='分组"+(num+1)+"' required='required' />") );
 		var del = $( "<a class='fa fa-minus race-group-del'></a>" );
 		target.append( del );
 		
@@ -277,56 +285,56 @@ $(document).ready(function() {
 		data['review'] = data['review'].substring( 0, data['review'].length-1)  + ']';
 			
 		// 先上传比赛基本信息
-		$.post( 'my-php/root_ui/add_race.php', data, function() {
-			// 再单独上传 banner
-			var banner = new Object();
-			if( typeof(main_banner)!='undefined' ) {
-				var reader = new FileReader();
-				reader.onload = function() {
-					banner['banner'] = $.base64( 'encode', this.result );
-					banner['banner_name'] = main_banner.name;
-					banner['race_id'] = data['race_id'];
-					$.post( 'my-php/root_ui/add_race.php', banner );	
-				};	
-				reader.readAsBinaryString( main_banner );
-			}
-			
-			// 单独上传rule
-			var rule = new Object();
-			rule['rule'] = UE.getEditor('editor').getContent();
-			rule['race_id'] = data['race_id'];
-			$.post( 'my-php/root_ui/add_race.php', rule );
-			
-			// 单独上传比赛用表格数据
-			var chart_f = $('input[name=upload_template]')[0].files[0];
-			if( chart_f ) {
-				var reader = new FileReader();
-				reader.onload = function() {
-					var chart = new Object();
-					chart['race_id'] = data['race_id'];
-					chart['chart'] = $.base64( 'encode', this.result );
-					chart['chart_name'] = chart_f.name;
-					$.post( 'my-php/root_ui/add_race.php', chart );	
-				};
-				reader.readAsBinaryString( chart_f );
-			}
-			
-			// 单独上传比赛展示界面
-			var temp_f = $('input[name=upload_template]')[0].files[0];
-			if( temp_f ) {
-			var reader = new FileReader();
-				reader.onload = function() {
-					var temp = new Object();
-					temp['race_id'] = data['race_id'];
-					temp['template'] = $.base64( 'encode', this.result );
-					$.post( 'my-php/root_ui/add_race.php', temp );	
-				};
-				reader.readAsBinaryString( temp_f );
-			}
-			
-			alert( '比赛创建成功' );
-			location.reload()
-		} );	
+//		$.post( 'my-php/root_ui/add_race.php', data, function() {
+//			// 再单独上传 banner
+//			var banner = new Object();
+//			if( typeof(main_banner)!='undefined' ) {
+//				var reader = new FileReader();
+//				reader.onload = function() {
+//					banner['banner'] = $.base64( 'encode', this.result );
+//					banner['banner_name'] = main_banner.name;
+//					banner['race_id'] = data['race_id'];
+//					$.post( 'my-php/root_ui/add_race.php', banner );	
+//				};	
+//				reader.readAsBinaryString( main_banner );
+//			}
+//			
+//			// 单独上传rule
+//			var rule = new Object();
+//			rule['rule'] = UE.getEditor('editor').getContent();
+//			rule['race_id'] = data['race_id'];
+//			$.post( 'my-php/root_ui/add_race.php', rule );
+//			
+//			// 单独上传比赛用表格数据
+//			var chart_f = $('input[name=upload_template]')[0].files[0];
+//			if( chart_f ) {
+//				var reader = new FileReader();
+//				reader.onload = function() {
+//					var chart = new Object();
+//					chart['race_id'] = data['race_id'];
+//					chart['chart'] = $.base64( 'encode', this.result );
+//					chart['chart_name'] = chart_f.name;
+//					$.post( 'my-php/root_ui/add_race.php', chart );	
+//				};
+//				reader.readAsBinaryString( chart_f );
+//			}
+//			
+//			// 单独上传比赛展示界面
+//			var temp_f = $('input[name=upload_template]')[0].files[0];
+//			if( temp_f ) {
+//			var reader = new FileReader();
+//				reader.onload = function() {
+//					var temp = new Object();
+//					temp['race_id'] = data['race_id'];
+//					temp['template'] = $.base64( 'encode', this.result );
+//					$.post( 'my-php/root_ui/add_race.php', temp );	
+//				};
+//				reader.readAsBinaryString( temp_f );
+//			}
+//			
+//			alert( '比赛创建成功' );
+//			location.reload()
+//		} );	
 	} );
 	
 	
