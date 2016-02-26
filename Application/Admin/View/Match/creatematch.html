@@ -88,6 +88,7 @@
 							<br/>
 							<span class='race_set_lable'>每组由</span>
 							<span id='race_expert_num' style='font-size:18px;margin-right:18px;text-align:center;width:48px'>1</span>
+							<input type="hidden" id='amount' name="amount" value="1">
 							<span class='race_set_lable'>位专家评审</span>
 							<br/>
 							<div id='race_expert_set_div'>
@@ -124,9 +125,13 @@ function add_export(e){
 	
 }
 function add_teacher_(e){
-		var content_ = $(e).html()
-		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
-//		console.log(teacher_in)
+		var content_ = $(e).html();
+		var teacherid = $(e).attr("teacher_id");
+		var teacher_input = "<input type='hidden' value='"+teacherid+"' name='teacherid[]'>";
+		$("#race_expert_set_div").append(teacher_input);
+		
+		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0];
+		
 		$(teacher_in).val($(teacher_in).val()+content_+",")
 	}
 
@@ -214,6 +219,7 @@ $(document).ready(function() {
 		target.append( minus );
 		
 		var inputs = target.children('input[type=text]');
+		$("#amount").attr("value",inputs.size())
 		$('#race_expert_num').html( inputs.size() );
 		
 		// user_add.click( function(e) {
@@ -230,6 +236,7 @@ $(document).ready(function() {
 			target.remove();
 			
 			var inputs = $('#race_expert_set_div').children('input[type=text]');
+			$("#amount").attr("value",inputs.size())
 			$('#race_expert_num').html( inputs.size() );
 		} );
 	} );
