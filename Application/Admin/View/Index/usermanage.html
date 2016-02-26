@@ -34,7 +34,9 @@
                                 <td><a class="user_identity">{{$vo.user_type}}</a></td>
                                 <td><a class="user_email">{{$vo.email}}</a></td>
                                 <td class="user_set">
-                                    <input type="checkbox" value="{{$vo.user_id}}" class="user_valid">禁止<a class="delete">删除</a></td>
+                                    <input type="checkbox" value="{{$vo.user_id}}" class="user_valid">禁止<a class="delete">删除</a>
+                                    <a href="{{:U('Permission/usergroup')}}&user_id={{$vo.user_id}}" class="">权限</a>
+                                </td>
                             </tr>
                             </foreach>
                         </tbody>
