@@ -1,5 +1,6 @@
 <?php
 namespace Admin\Controller;
+use Think\Upload;
 class ProjectController extends Controller{
     /**
      * 项目管理

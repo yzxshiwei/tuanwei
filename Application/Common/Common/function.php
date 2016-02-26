@@ -55,3 +55,41 @@ function uploadFile($file,$path='file')
         }
     }
 }
+/**
+ * 上传多个文件调用
+ * @param unknown $file
+ * @param string $path
+ */
+function uploadFiles($file_data = array(),$path='file'){
+ foreach ($file_data as $file) {
+        if ($file['error'] == UPLOAD_ERR_OK) {
+            // 取得扩展名
+            $extName = strtolower(end(explode('.', $file['name'])));
+
+            $time = microtime(true);
+            $time = explode('.', $time);
+            $time = date("YmdHis{$time[1]}", $time[0]);
+
+            $filename = $time . '.' . $extName;
+            $dest = "Upload/{$path}/" . $filename;
+            $result = move_uploaded_file($file['tmp_name'], $dest);
+            if ($result){
+                return array(
+                    'status' => true,
+                    'msg' => '上传成功！',
+                    'filename' => $filename,
+                    'file_path' => $dest
+                );
+            }
+            return array(
+                'status' => false,
+                'msg' => '上传错误！'
+            );
+        } else {
+            return array(
+                'status' => false,
+                'msg' => '上传错误！'
+            );
+        }
+    }
+}
