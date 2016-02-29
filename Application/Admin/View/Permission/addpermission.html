@@ -58,7 +58,7 @@
                         <form action="{{:U('Permission/addpermission')}}" method="post">
                         	<input type="hidden" name="group_id" value="{{$group_data.id}}" />
                         	<foreach name="list_data" key="key" item="vo">
-                            <input name="author[]" value="{{$key}}" type="checkbox"/>{{$vo}} <br/>
+                            <input name="author[]" value="{{$key}}" type="checkbox"/>{{$vo.name}} <br/>
                            </foreach>
                             <input type="submit" value="修改"/>
                         </form>
