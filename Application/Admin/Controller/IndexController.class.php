@@ -43,6 +43,25 @@ class IndexController extends \Admin\Controller\Controller {
 	    $this->assign('Page', $result['Page']);
 		$this->display();
 	}
+	
+	/**
+	 * 团队编辑
+	 * 添加时间2016-02-29
+	 * @author zlj
+	 */
+	public function updateteam(){
+		if(IS_POST){
+			
+		}else{
+			$tid = I("get.tid","","string");
+			$team = new \Common\Model\TeamModel();
+			$tinfo = $team->where(array("id"=>$tid))->select();
+
+			$this->assign("tinfo",$tinfo);
+			$this->display();
+		}
+	}
+	
 	/**
 	 * 个人信息
 	 * 添加时间15:27:05
