@@ -57,24 +57,17 @@
                                 </tr>
                             </thead>
                             <tbody>
+                            	<foreach name="list_data" key="key" item="vo">
                                 <tr>
-                                    <td>1</td>
-                                    <td>管理员</td>
+                                    <td>{{$vo.id}}</td>
+                                    <td>{{$vo.group_name}}</td>
                                     <td>
                                         <a href="javascript:void(0);">编辑</a>
                                         <a href="javascript:void(0);">权限</a>
-                                        <a href="javascript:void(0);">删除</a>
+                                        <a class="delete" data-id={{$vo.id}} href="javascript:void(0);">删除</a>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>普通用户</td>
-                                    <td>
-                                        <a href="javascript:void(0);">编辑</a>
-                                        <a href="javascript:void(0);">权限</a>
-                                        <a href="javascript:void(0);">删除</a>
-                                    </td>
-                                </tr>
+                               </foreach>
                             </tbody>
                         </table>
                     </div>
@@ -83,5 +76,25 @@
         </div>
     </div>
 </body>
-
+<script>
+	$('.delete').click(function(){
+		var id = $(this).attr('data-id');
+		     $.ajax({
+                type:'post',
+                url:"{{:U('Permission/delete')}}",
+                data:{
+                    id:id
+                },
+                cache:false,
+                dataType:'json',
+                success:function(data){
+                	if(data.status==1){
+                		location.reload();
+                	}else{
+                		alert('删除失败');
+                	}
+                }
+            });
+	});
+</script>
 </html>

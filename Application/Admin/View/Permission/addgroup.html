@@ -60,8 +60,8 @@
                 <div class="tab-content">
                     <div id="power_group">
                         <h3 class="title">添加分组</h3>
-                        <form action="">
-                            <label><span> &nbsp;&nbsp;&nbsp;组名称 : </span><input type="text" /></label>
+                        <form action="{{:U('Permission/addgroup')}}" method="post">
+                            <label><span> &nbsp;&nbsp;&nbsp;组名称 : </span><input name="name" type="text" /></label>
                             <input type="submit" value="添加"/>
                         </form>
                     </div>
