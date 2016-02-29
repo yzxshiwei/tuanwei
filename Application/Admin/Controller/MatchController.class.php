@@ -38,7 +38,7 @@ class MatchController extends Controller{
 				$data["project_start_time"] = strtotime(I('post.race-start-date','','string'));
 				$data["project_end_time"] = strtotime(I('post.race-end-date','','string'));
 				$data["judge_amount"] = I("post.amount","","string");
-				$data["rules"] = htmlspecialchars(I('post.editorValue','','string'));
+				$data["rules"] = htmlspecialchars(I('post.editorValue'));
 				$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
 				$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
 				$data["cover_src"] = $file_res1['file_path'];
@@ -106,18 +106,91 @@ class MatchController extends Controller{
     	$matchModel = new \Common\Model\MatchModel;
 		$packetModel = new \Common\Model\PacketModel;
 		$judgesModel = new \Common\Model\JudgesModel;
-		
+		$userModel = new \Common\Model\UsersModel;
+		$project = new \Common\Model\ProjectModel;
+
     	if(IS_POST){
     		
+    		$data = array();
+			//开启事务
+		    $matchModel->startTrans();
+			
+			if($_FILES['selectFiles']['tmp_name']){
+				$file_res1 = Upload($_FILES['selectFiles']);
+				if($file_res1["status"]){
+					$data["cover_src"] = $file_res1['file_path'];
+				}else{
+					$this->error($file_res1['msg']);
+				}
+			}
+			
+			if($_FILES['upload_template']['tmp_name']){
+				$file_res2 = Upload($_FILES['upload_template']);
+				if($file_res2["status"]){
+					$data["start_file_src"] = $file_res2['file_path'];
+				}else{
+					$this->error($file_res2['msg']);
+				}
+			}
+						
+			if($_FILES['upload_reg_page']['tmp_name']){
+				$file_res3 = Upload($_FILES['upload_reg_page']);
+				if($file_res3["status"]){
+					$data["template_src"] = $file_res3['file_path'];
+				}else{
+					$this->error($file_res3['msg']);
+				}
+			}
+			
+			$data["name"] = I('post.name','','string');
+			$data["sub_title"] = I('post.sub_title','','string');
+			$data["project_start_time"] = strtotime(I('post.race-start-date'));
+			$data["project_end_time"] = strtotime(I('post.race-end-date'));
+			$data["judge_amount"] = I("post.amount","","string");
+			$data["rules"] = I('post.editorValue');
+			$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
+			$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
+			$data["project_id"] = I('post.proid','','string');
+            $mid = I("post.mid","","string");
+
+			$relust = $matchModel->where(array("id"=>$mid))->save($data);
+			
+			$teacherid = I("post.teacherid");
+            $packet = I("post.packet");
+
+			//添加评委老师 
+			$judgesModel->where(array("project_id"=>$mid))->delete();
+			$j_res = $judgesModel->addJudges($teacherid,$mid);
+
+			//添加比赛组名称
+			$packetModel->where(array("project_id"=>$mid))->delete();
+			$p_res = $packetModel->addName($packet,$mid);
+
+		    if($j_res && $p_res){
+		    	$matchModel->commit();
+		    	$this->success('修改比赛成功',U('Match/matchmanage'));
+		    }else{
+		    	$matchModel->rollback();
+		    	$this->error('修改比赛失败');
+		    }
+			
     	}else{
     		$mid = I("get.mid","","string");
 			
 			$match_info = $matchModel->where(array("id"=>$mid))->find();
 			$packet_info = $packetModel->where(array("project_id"=>$mid))->select();
-			$judges_info = $judgesModel->where(array("project_id"=>$mid))->select();
+			
+			$judges_info = $judgesModel->join("users on user_id=judges.judge_id")->where(array("judges.project_id"=>$mid))->field("judges.judge_id,users.user_name")->select();
+			
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
 			
 			$match_info["rules"] = htmlspecialchars_decode($match_info["rules"]);
-			
+			$prolist = $project->field("id,name")->select();
+
+			$this->assign("prolist",$prolist);
+            $this->assign("glist",$teacher_list);
+            $this->assign("jinfo",$judges_info);
+			$this->assign("pinfo",$packet_info);
 			$this->assign("minfo",$match_info);
 			$this->display();
     	}

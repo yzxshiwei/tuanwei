@@ -34,29 +34,39 @@
 			<!-- tab-content -->
 			<div class="tab-content">
 			
-				
-				
-				
 					<div id='expert_choose' class="hide comments"></div>
 					
 					<div class='race_set_div'>
-						<form action='' method='post' onsubmit="return false;">
+						<form action="{{:U('Match/editmatch')}}" method='post'  enctype="multipart/form-data" >
 							<input type='file' id='f_u' name='selectFiles'/>
 							<h2 class='login-heading'>比赛编辑</h2>
 							
 							<span class='race_set_lable'>比赛名称：</span>
-							<input type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' value="{{$minfo.name}}"/>
+							<input type='text' id='input-race-name' placeholder='比赛名称（必填）' name='name' required='required' autofocus='autofocus' value="{{$minfo.name}}"/>
 							<br/>
-							<span class='race_set_lable'>副&nbsp;&nbsp;标&nbsp;&nbsp;题：</span><input type='text' id='input-race-sub' placeholder='副标题' value="{{$minfo.sub_title}}" />
+							<span class='race_set_lable'>副&nbsp;&nbsp;标&nbsp;&nbsp;题：</span><input type='text' name="sub_title" id='input-race-sub' placeholder='副标题' value="{{$minfo.sub_title}}" />
 							<br/>
 							<span class='race_set_lable'>比赛时间：</span>
 							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' value="{{$minfo.project_start_time|date='Y-m-d',###}}" />
 							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' value="{{$minfo.project_end_time|date='Y-m-d',###}}" />
 							<br/>
+							<span class='race_set_lable'>选择项目 1: </span>
+	                            <select name="proid" style="margin-left: 5px;width:120px;border-radius: 3px">
+	                            	
+	                            	<foreach item="_v" name="prolist">
+	                            		<if condition="$minfo['project_id'] eq $_v['id']">
+	                            		    <option value="{{$_v.id}}" selected="selected" >{{$_v.name}}</option>
+	                            		<else />
+	                            		    <option value="{{$_v.id}}" >{{$_v.name}}</option>
+	                            		</if>
+	                            	</foreach>
+	                            	
+	                            </select>
+                            <br/>
 							<p class='race_set_lable'>首页banner</p>
 							<div class='file_upload_plugin'>
 								<div id='file_upload_area' class='droppable' draggable='true'>
-									<img />
+									<img src="/{{$minfo.cover_src}}" width="323px" height="242px" />
 									<a id='banner_close' class='fa fa-close'></a>
 								</div>
 								<!-- <a class='upload'>上传</a> -->
@@ -85,7 +95,15 @@
 							<span class='race_set_lable'>比赛分组</span><a id='race_add_group' class='fa fa-plus'></a>
 							<br/>
 							<div class='race_group_div'>
-								<input class='race_group' type='text' placeholder='默认组' required='required' />
+								
+								<foreach name="pinfo" item="_v" key="k">
+									<if condition="$k eq 0">
+										<input class='race_group' type='text' name="packet[]" value="{{$_v.class_name}}" placeholder="默认组"  required='required' />
+									<else />
+									    <input class='race_group' type='text' name="packet[]" value="{{$_v.class_name}}" required='required' /><a class='fa fa-minus race-group-del'></a>
+									</if>
+								</foreach>
+								
 							</div>
 							<br/>
 							<div class='list_div'></div>
@@ -93,17 +111,25 @@
 							
 							<span class='race_set_lable'>作品评审</span><a id='race_expert_num_add' style='margin-left:18px' class='fa fa-plus'></a>
 							<br/>
-							<span class='race_set_lable'>每组由</span>
-							<span id='race_expert_num' style='font-size:18px;margin-right:18px;text-align:center;width:48px'>1</span>
+							<span class='race_set_lable'>由</span>
+							<span id='race_expert_num' style='font-size:18px;margin-right:18px;text-align:center;width:48px'>{{$minfo.judge_amount}}</span>
+							<input type="hidden" id='amount' name="amount" value="{{$minfo.judge_amount}}">
 							<span class='race_set_lable'>位专家评审</span>
 							<br/>
 							<div id='race_expert_set_div'>
-								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' te-input='0'/><a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus' teacher-input='0' onclick="add_export(this)"></a>
+                                <foreach name="jinfo" item="_vo" key="k">
+                                	<input type='hidden' value='{{$_vo.judge_id}}' class='dev_{{$k+1}}' name='teacherid[]'>
+									<input readonly id='{{$_vo.judge_id}}_expert_class' type="text" value="{{$_vo.user_name}}" class='race_expert' te-input='{{$k+1}}'/>
+									<a id='expert_add' style='margin-left:18px' num='{{$_vo.judge_id}}' class='fa fa-user-plus' teacher-input='{{$_vo.judge_id}}' onclick="add_export(this)"></a>
+									
+									<if condition="$k">
+										<a style="margin-left:18px" class="fa fa-minus"></a>
+									</if>
+								</foreach>
 							</div>
 							<br/>
-
+							<input type="hidden" name="mid" value="{{$minfo.id}}">
 							<button id='b_ok'>确定</button>
-					
 						</form>
 					</div>
 				
@@ -114,10 +140,11 @@
 	
 </div>
 <div class="add_teacher_card" style="display:none">
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">张老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">留老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">六老师</a>
-	<a href="javascript:void(0)" onclick="add_teacher_(this)">阿萨达老师</a>
+
+    <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
+	<foreach item="_l" name="glist">
+		<a href="javascript:void(0)" teacher_id="{{$_l.user_id}}" onclick="add_teacher_(this)">{{$_l.user_name}}</a>
+	</foreach>
 
 </div>
 
@@ -133,10 +160,13 @@ function add_export(e){
 	
 }
 function add_teacher_(e){
-		var content_ = $(e).html()
+		var content_ = $(e).html();
+		var teacherid = $(e).attr("teacher_id");
 		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
-		console.log(teacher_in)
-		$(teacher_in).val($(teacher_in).val()+content_+",")
+//		$(teacher_in).val($(teacher_in).val()+content_+",")
+        
+        $(".dev_"+teacher_select_id).attr("value",teacherid);
+        $(teacher_in).val(content_);
 	}
 
 $(document).ready(function() {
@@ -197,7 +227,7 @@ $(document).ready(function() {
 	$('#race_add_group').click( function() {
 		var target = $('.race_group_div');
 		var num = target.children('input[type=text]').size();
-		target.append( $("<input type='text' class='race_group' placeholder='分组"+(num+1)+"' required='required' />") );
+		target.append( $("<input type='text' class='race_group' name='packet[]' placeholder='分组"+(num+1)+"' required='required' />") );
 		var del = $( "<a class='fa fa-minus race-group-del'></a>" );
 		target.append( del );
 		
@@ -207,6 +237,12 @@ $(document).ready(function() {
 			target.remove();			
 		} );
 	} );
+	
+	$(".race-group-del").click( function() {
+		var target = $( this );
+		target.prev('input[type=text]').remove();
+		target.remove();			
+	} );
 
 	$('#race_expert_num_add').click( function() {
 		$(".add_teacher_card").hide()
@@ -214,15 +250,15 @@ $(document).ready(function() {
 		var target = $('#race_expert_set_div');
 		
 		var res = target.find('input.race_expert');
-		var num = res.length;
-		
-		target.append( $("<input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
+		var num = res.length+1;
+		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
 		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' teacher-input='0' onclick='add_export(this)''></a>" );
 		target.append( user_add );
 		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
 		target.append( minus );
 		
 		var inputs = target.children('input[type=text]');
+		$("#amount").attr("value",inputs.size())
 		$('#race_expert_num').html( inputs.size() );
 		
 		// user_add.click( function(e) {
@@ -237,13 +273,24 @@ $(document).ready(function() {
 			target.prev('a.fa-user-plus' ).remove();
 			target.prev('input[type=text]').remove();
 			target.remove();
-			
+			$(".dev_"+num).remove();
 			var inputs = $('#race_expert_set_div').children('input[type=text]');
+			$("#amount").attr("value",inputs.size())
 			$('#race_expert_num').html( inputs.size() );
 		} );
 	} );
 	
-	
+	$(".fa-minus").click( function() {
+		var target = $( this );
+		target.prev('a.fa-user-plus' ).remove();
+		target.prev('input[type=text]').remove();
+		target.remove();
+		var num = $('#race_expert_set_div').find('input.race_expert').length;
+		$(".dev_"+num).remove();
+		var inputs = $('#race_expert_set_div').children('input[type=text]');
+		$("#amount").attr("value",inputs.size())
+		$('#race_expert_num').html( inputs.size() );
+	} );
 	
 	// 上传新建的比赛信息
 	$('#b_ok').click( function() {
@@ -337,12 +384,11 @@ $(document).ready(function() {
 		} );	
 	} );
 	
-	
 } );
 
-	
-
-
+$('#close').click(function(){
+    $(this).parent().toggle();
+});
 
 </script>
 </body>

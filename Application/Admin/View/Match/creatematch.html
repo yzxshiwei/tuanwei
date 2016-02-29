@@ -48,7 +48,7 @@
 							<br/>
                             <span class='race_set_lable'>选择项目 : </span>
                             <select name="proid" style="margin-left: 5px;width:120px;border-radius: 3px">
-                            	
+                            	    <option vlue="0">请选择项目</option>
                             	<foreach item="_v" name="prolist">
                             		<option value="{{$_v.id}}" >{{$_v.name}}</option>
                             	</foreach>
@@ -95,13 +95,15 @@
 							
 							<span class='race_set_lable'>作品评审</span><a id='race_expert_num_add' style='margin-left:18px' class='fa fa-plus'></a>
 							<br/>
-							<span class='race_set_lable'>每组由</span>
+							<span class='race_set_lable'>由</span>
 							<span id='race_expert_num' style='font-size:18px;margin-right:18px;text-align:center;width:48px'>1</span>
 							<input type="hidden" id='amount' name="amount" value="1">
 							<span class='race_set_lable'>位专家评审</span>
 							<br/>
 							<div id='race_expert_set_div'>
-								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' te-input='0'/><a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus' teacher-input='0' onclick="add_export(this)"></a>
+								<input type='hidden' value='' class='dev_0' name='teacherid[]'>
+								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' te-input='0'/>
+								<a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus' teacher-input='0' onclick="add_export(this)"></a>
 							</div>
 							<br/>
 							<button id='b_ok'>确定</button>
@@ -136,13 +138,13 @@ function add_export(e){
 function add_teacher_(e){
 		var content_ = $(e).html();
 		var teacherid = $(e).attr("teacher_id");
-		var teacher_input = "<input type='hidden' value='"+teacherid+"' name='teacherid[]'>";
-		$("#race_expert_set_div").append(teacher_input);
-		
+//		var teacher_input = "<input type='hidden' class='dev_"+teacher_select_id+"' value='"+teacherid+"' name='teacherid[]'>";
+
+        $(".dev_"+teacher_select_id).attr("value",teacherid);
+//		$("#race_expert_set_div").append(teacher_input);
 		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0];
-		
-		$(teacher_in).val($(teacher_in).val()+content_+",")
-	}
+		$(teacher_in).val(content_);
+}
 
 $(document).ready(function() {
 	
@@ -213,7 +215,7 @@ $(document).ready(function() {
 		} );
 	} );
 
-	$('#race_expert_num_add').click( function() {
+	$('#race_expert_num_add').click( function(){
 		$(".add_teacher_card").hide()
 
 		var target = $('#race_expert_set_div');
@@ -221,11 +223,12 @@ $(document).ready(function() {
 		var res = target.find('input.race_expert');
 		var num = res.length;
 		
-		target.append( $("<input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
+		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
 		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' teacher-input='0' onclick='add_export(this)''></a>" );
 		target.append( user_add );
 		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
 		target.append( minus );
+		
 		
 		var inputs = target.children('input[type=text]');
 		$("#amount").attr("value",inputs.size())
@@ -243,7 +246,7 @@ $(document).ready(function() {
 			target.prev('a.fa-user-plus' ).remove();
 			target.prev('input[type=text]').remove();
 			target.remove();
-			
+			$(".dev_"+num).remove();
 			var inputs = $('#race_expert_set_div').children('input[type=text]');
 			$("#amount").attr("value",inputs.size())
 			$('#race_expert_num').html( inputs.size() );

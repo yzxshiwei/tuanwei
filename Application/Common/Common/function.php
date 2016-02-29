@@ -62,7 +62,14 @@ function uploadFile($file,$path='file'){
  * 单文件上传
  */
  function Upload($upfile,$pass="file"){
-     
+      
+	  if(!count($upfile)) {
+	       return array(
+	           'status' => false,
+	           'msg' => '请上传文件'
+	       );
+	   }
+	  
  	  if(is_uploaded_file($upfile['tmp_name'])){
  	  	
 			//获取数组里面的值 
