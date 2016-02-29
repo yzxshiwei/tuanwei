@@ -14,26 +14,47 @@ return array(
     //权限
     "PERMISSION"=>array(
         "usermanage" => array('name'=>"人员管理",
-                            'url'=>U('Index/usermanage')),
+                              'url'=>'Index/usermanage',
+                              'ico' => 'fa fa-user'),
+        
         "teammanage" => array('name' => "团队管理",
-                             'url'=>U('Index/teammanage')),
+                             'url'=>'Index/teammanage',
+                             'ico' => 'fa fa-users'),
+        
         "createnews" => array('name' => "创建信息",
-                              'url'=>U('News/createnews')),
+                              'url'=>'News/createnews',
+                              'ico' => 'fa fa-lightbulb-o'),
+        
         "creatematch" => array('name' => "创建比赛",
-                               'url' => U('Match/creatematch')),
+                               'url' => 'Match/creatematch',
+                               'ico' => 'fa  fa-graduation-cap'),
+        
         "createproject" => array('name' => "创建项目",
-                                 'url' => U('Project/createproject')),
+                                 'url' => 'Project/createproject',
+                                 'ico' => 'fa fa-bookmark-o'),
+        
         "matchmanage" => array('name' => "比赛管理",
-                               'url' => U('Match/matchmanage')),
+                               'url' => 'Match/matchmanage',
+                               'ico' => 'fa fa-futbol-o'),
+        
         "newsmanage" => array('name' => "信息管理",
-                              'url' => U('News/newsmanage')),
+                              'url' => 'News/newsmanage',
+                              'ico' => 'fa fa-cubes'),
+        
         "teamdiscuss" => array('name' => "团队交流",
-                               'url' => U('Team/teamdiscuss')),
+                               'url' => 'Team/teamdiscuss',
+                               'ico' => 'fa fa-language'),
+        
         "projectmanage" => array('name' => "项目管理",
-                                 'url' => U('Project/projectmanage')),
+                                 'url' => 'Project/projectmanage',
+                                 'ico' => 'fa fa-share-alt'),
+        
         "grouplist" => array('name' => "分组列表",
-                             'url' => U('Permission/grouplist')),
-        "addgroup" => array('name' => "添加分组",
-                            'url' => U('Permission/addgroup'))
+                             'url' => 'Permission/grouplist',
+                             'ico' => 'fa fa-bars'),
+        
+        "addgroup" => array('name' => "创建分组",
+                            'url' => 'Permission/addgroup',
+                            'ico' => 'fa fa-suitcase')
     ),
 );
