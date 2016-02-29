@@ -119,11 +119,16 @@
                 </div>
             </div>
             <div class="news-card">
+                <!--<span class="news-content"><a href="#" >暂无新闻</a></span>
                 <span class="news-content"><a href="#" >暂无新闻</a></span>
                 <span class="news-content"><a href="#" >暂无新闻</a></span>
                 <span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>
+                <span class="news-content"><a href="#" >暂无新闻</a></span>-->
+                
+                <foreach name="newList" item="_v">
+                	<span class="news-content"><a href="" >{{$_v.title}}</a></span>
+                </foreach>
+                
                 <span class="news-block">公告-新闻</span>
             </div>
         </div>

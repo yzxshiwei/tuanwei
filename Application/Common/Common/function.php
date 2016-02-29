@@ -107,6 +107,20 @@ function uploadFile($file,$path='file'){
  }
  
 
+/**
+ * 文件下载
+ * @pararm fileurl  文件url
+ */
+ function downloads($fileurl){
+         ob_start(); 
+		 $filename=$fileurl;
+		 $date=date("Ymd-H:i:m");
+		 header( "Content-type:  application/octet-stream "); 
+		 header( "Accept-Ranges:  bytes "); 
+		 header( "Content-Disposition:  attachment;  filename= {$date}.doc"); 
+		 $size=readfile($filename); 
+		 header( "Accept-Length: " .$size);
+ }
 
 function v_dump($arr){
 	echo "<pre>";

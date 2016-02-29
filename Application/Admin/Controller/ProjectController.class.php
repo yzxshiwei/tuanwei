@@ -110,6 +110,12 @@ class ProjectController extends Controller{
             $id = I('id',0,'intval');
             $project = new \Common\Helper\Project();
             $result = $project->getData($id);
+			
+			$teamModel = new \Common\Model\TeamModel;
+			$field = "users.user_id,users.user_name,students.stu_card,students.college";
+			$userList = $teamModel->join("users on users.user_id=team.user_id")->join("students on students.user_id=users.user_id")->where(array("project_id"=>$id))->field($field)->select();
+
+            $this->assign('ulist',$userList);
             $this->assign('result',$result);
             $this->assign('id',$id);
             $this->display();
@@ -203,4 +209,26 @@ class ProjectController extends Controller{
             echo json_encode($user_list);
 	 	}
 	 }
+	 
+	 
+	/**
+	 * 项目下载
+	 * 
+	 * @author zlj
+	 */
+	public function projectDown(){
+       if(IS_GET){
+       	
+       	    $pid = I("get.id","","string");
+			$project = new \Common\Helper\Project();
+            $result = $project->getData($id);
+            
+			downloads($result["file_url"]);
+       }
+	}
+	
+	
+	
+	
+	
 }
