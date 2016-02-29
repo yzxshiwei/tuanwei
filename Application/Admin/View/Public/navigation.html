@@ -13,61 +13,16 @@
 			<div class="aaa"></div>
 
 			
-
-		<span>
-			<a href="{{:U('Index/usermanage')}}">人员管理</a>
-			</span>
-			<i class="fa fa-user"></i>
-
-			<span>
-			<a href="{{:U('Index/teammanage')}}">团队管理</a>
-			</span>
-			<i class="fa fa-users"></i>
-			<span>
-			<a href="{{:U('News/createnews')}}">创建信息</a>
-			</span>
-			<i class="fa fa-lightbulb-o"></i>
-
-			<span>
-			<a href="{{:U('Match/creatematch')}}">创建比赛</a>
-			</span>
-			<i class="fa  fa-graduation-cap"></i>
-			
-			<span>
-			<a href="{{:U('Project/createproject')}}">创建项目</a>
-			</span>
-			<i class="fa fa-bookmark-o"></i>
-			
-			<span>
-			<a href="{{:U('Match/matchmanage')}}">比赛管理</a>
-			</span>
-			<i class="fa fa-futbol-o"></i>
-
-			<span>
-			<a href="{{:U('News/newsmanage')}}">信息管理</a>
-			</span>
-			<i class="fa fa-cubes"></i>
-			
-			<span>
-			<a href="{{:U('Team/teamdiscuss')}}">团队交流</a>
-			</span>
-			<i class="fa fa-language"></i>
-			
-			<span>
-			<a href="{{:U('Project/projectmanage')}}">项目管理</a>
-			</span>
-			<i class="fa fa-share-alt"></i>
-			
-			 <span>
-			<a href="{{:U('Permission/grouplist')}}">分组列表</a>
-			</span>
-			<i class="fa fa-bars"></i>
-			
-			<span>
-			<a href="{{:U('Permission/addgroup')}}">创建分组</a>
-			</span>
-			<i class="fa fa-suitcase"></i>
-			
+			<foreach name="navigation" key="key" item="vo">
+				<foreach name="user.author" key="akey" item="avo">
+					<if condition="$key eq $avo['permission']">
+						<span>
+						<a href="{{:U($vo['url'])}}">{{$vo.name}}</a>
+						</span>
+						<i class="{{$vo.ico}}"></i>
+					</if>
+				</foreach>
+			</foreach>
 			<div class='side_bar'></div>
 			
 			<!-- tab-top-bar -->

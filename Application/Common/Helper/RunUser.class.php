@@ -171,4 +171,20 @@ class RunUser{
         $userModel->where(array("user_id"=>$userid))->save(array("last_time"=>time(),"last_ip"=>get_client_ip()));
         return true;
     }
+    /**
+     * 获取用户权限
+     * 添加时间2016-2-29
+     * 
+     * @author yzx
+     * @return array
+     */
+    public function getAuthor() {
+        $user_info = $this->getInfo();
+        $PermissionModel = new \Common\Model\PermissionModel();
+        if (!empty($user_info)) {
+           $permission_info = $PermissionModel->where(array('group_id' => $user_info['group_id']))->select();
+           return $permission_info;
+        }
+        return array();
+    }
 }
