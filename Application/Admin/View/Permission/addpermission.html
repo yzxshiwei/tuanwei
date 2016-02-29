@@ -54,12 +54,12 @@
                 <div class="tab-content">
                     <div id="add_power">
                         <h3 class="title">添加权限</h3>
-                        <p>组名 : <b>管理员</b></p>
-                        <form action="">
-                            <input type="checkbox"/>查看列表 <br/>
-                            <input type="checkbox"/>删除列表 <br/>
-                            <input type="checkbox"/>创建比赛 <br/>
-                            <input type="checkbox"/>创建信息 <br/>
+                        <p>组名 : <b>{{$group_data.group_name}}</b></p>
+                        <form action="{{:U('Permission/addpermission')}}" method="post">
+                        	<input type="hidden" name="group_id" value="{{$group_data.id}}" />
+                        	<foreach name="list_data" key="key" item="vo">
+                            <input name="author[]" value="{{$key}}" type="checkbox"/>{{$vo}} <br/>
+                           </foreach>
                             <input type="submit" value="修改"/>
                         </form>
                     </div>

@@ -10,5 +10,19 @@ return array(
         "__JS__"=>WEB_ROOT."static/javascript/",
         "__STATICBK__"=>WEB_ROOT."static/backend"
     ),
-    "SESSION_AUTO_START"=>true
+    "SESSION_AUTO_START"=>true,
+    //权限
+    "PERMISSION"=>array(
+        "usermanage"=>"人员管理",
+        "teammanage"=>"团队管理",
+        "createnews"=>"创建信息",
+        "creatematch"=>"创建比赛",
+        "createproject"=>"创建项目",
+        "matchmanage"=>"比赛管理",
+        "newsmanage"=>"信息管理",
+        "teamdiscuss"=>"团队交流",
+        "projectmanage"=>"项目管理",
+        "grouplist"=>"分组列表",
+        "addgroup"=>"添加分组"
+    ),
 );

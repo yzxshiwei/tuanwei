@@ -52,7 +52,25 @@ class PermissionController extends Controller{
      * @author yzx
      */
     public function addpermission() {
-        $this->display();
+        if (IS_POST){
+            $author = I('post.author');
+            $group_id = I('post.group_id',0,'intval');
+            $PermissionModel = new \Common\Model\PermissionModel();
+            $result = $PermissionModel->addData($group_id, $author);
+            if ($result){
+                $this->success('添加成功',U('Permission/grouplist'));
+            }else {
+                $this->error('添加失败');
+            }
+        }else {
+            $id = I("id",0,'intval');
+            $groupModel = D('group');
+            $group_data = $groupModel->where(array('id'=>$id))->find();
+            $permission = C('PERMISSION');
+            $this->assign('list_data',$permission);
+            $this->assign('group_data',$group_data);
+            $this->display();
+        }
     }
     /**
      * 分组删除
