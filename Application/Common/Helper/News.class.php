@@ -8,12 +8,19 @@ class News{
      * @author zlj
      * @return Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
      */
-    public function listData(){
+    public function listData($where=NULL){
         $newsModel = new \Common\Model\NewsModel();
         $count = $newsModel->count();
         $Page = new \Think\Page($count,3);
         $page_show = $Page->show();
-        $list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->select();
+		
+		if($where){
+			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
+		}else{
+			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->select();
+		}
+		
+		
         return array('Page' => $page_show , 'list_data' => $list_data);
     }
 }

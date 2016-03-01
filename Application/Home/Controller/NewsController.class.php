@@ -8,6 +8,13 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function train(){
+    		
+    	$new = new \Common\Helper\News();
+		$where["col"] = \Common\Model\NewsModel::COL_3;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     /**
@@ -17,6 +24,15 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function details() {
+    	
+		$newModel = new \Common\Model\NewsModel;
+		
+		$nid = I("get.id","",'string');
+		$result = $newModel->where(array("id"=>$nid))->find();
+		
+        $result['content'] = htmlspecialchars_decode($result['content']);
+		
+		$this->assign("ninfo",$result);
         $this->display();
     }
     /**
@@ -26,6 +42,14 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function library() {
+		
+		
+		$new = new \Common\Helper\News();
+		$where["col"] = \Common\Model\NewsModel::COL_5;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     /**

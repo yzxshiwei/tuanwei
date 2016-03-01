@@ -80,17 +80,14 @@
             <li><img src="__STATIC__/img/icon-02.png" alt=""/><p>网络课程</p></li>
         </ul>
         <ul class="news" style="clear: both;">
-            <li><a href="front_news.html"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="__STATIC__/img/country.png"/></a></li>
+        	
+        	<foreach name="list_data" item="_v">
+        		<li><a href="{{:U('News/details',array('id'=>$_v['id']))}}"><span>{{$_v.title}}</span><img src="__STATIC__/img/country.png"/></a></li>
+        	</foreach>
+
         </ul>
         <div class="page" style="margin: 50px 0px">
-            <ul>
-                <li class="onPage"> < 上一页</li>
-                <li class="active">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li class="nextPage">下一页 > </li>
-            </ul>
+            {{$Page}}
         </div>
     </div>
     <!--footer-->
