@@ -119,11 +119,6 @@
                 </div>
             </div>
             <div class="news-card">
-                <!--<span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>
-                <span class="news-content"><a href="#" >暂无新闻</a></span>-->
                 
                 <foreach name="newList" item="_v">
                 	<span class="news-content"><a href="" >{{$_v.title}}</a></span>
@@ -139,26 +134,19 @@
     <div class="body-ad-cover">
         <div class="body-ad">
             <ul>
-                <li>
+            	<foreach name="teamList" item="_v">
+            		<li>
+            			<a href=""><img src="/{{$_v.img_url}}"></a>
+            			<h3>{{$_v.team_name}}</h3>
+            			<p>{{$_v.contents}}</p>
+            		</li>
+            	</foreach>
+                <!--<li>
                     <a href=""><img src="__STATIC__/img/sw_team1.jpg"/></a>
                     <h3>实唯团队</h3>
                     <p>实唯团队组建于 2014年,在创业实践类竞赛中,其项目“成都实唯物联网科技有限公司智农助手项目运营报告”荣获银奖。</p>
-                </li>
-                <li>
-                    <a href=""><img src="__STATIC__/img/sw_team2.jpg"/></a>
-                    <h3>实唯团队</h3>
-                    <p>实唯团队组建于 2014年,在创业实践类竞赛中,其项目“成都实唯物联网科技有限公司智农助手项目运营报告”荣获银奖。</p>
-                </li>
-                <li>
-                    <a href=""><img src="__STATIC__/img/sw_team3.jpg"/></a>
-                    <h3>实唯团队</h3>
-                    <p>实唯团队组建于 2014年,在创业实践类竞赛中,其项目“成都实唯物联网科技有限公司智农助手项目运营报告”荣获银奖。</p>
-                </li>
-                <li>
-                    <a href=""><img src="__STATIC__/img/sw_team4.jpg"/></a>
-                    <h3>实唯团队</h3>
-                    <p>实唯团队组建于 2014年,在创业实践类竞赛中,其项目“成都实唯物联网科技有限公司智农助手项目运营报告”荣获银奖。</p>
-                </li>
+                </li>-->
+
             </ul>
         </div>
     </div>

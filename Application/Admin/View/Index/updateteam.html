@@ -310,10 +310,12 @@
                         <div class="content" style="clear: both;">
                             <form action="{{:U('Index/updateteam')}}" method="post" enctype="multipart/form-data">
                                 <div class="p_left_nav">
+                                	<h6>团队名称</h6>
                                 	<h6>团队头像</h6>
                                     <h6>团队简介</h6>
                                 </div>
                                 <div class="p_right_input">
+                                	<label><input type="text" name="name" value="{{$tinfo['team_name']}}" maxlength="15"/><b>限制在15字内</b></label>
                                 	<label><input name="project_file" type="file"/><b>请将所有文件打包上传</b></label>
                                     <label><textarea name="intro" maxlength="1000">{{$tinfo['contents']}}</textarea><b>限制在1000字内</b></label>
                                     <div class="btn">

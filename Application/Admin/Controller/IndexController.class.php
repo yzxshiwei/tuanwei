@@ -66,6 +66,7 @@ class IndexController extends \Admin\Controller\Controller {
 				}
 			}
 			$data["contents"] = I("post.intro","","string");
+			$data["team_name"] = I("post.name","","string");
 			$id = I("post.id","","string");
 			$res = $team->where(array("id"=>$id))->save($data);
 		    if($res){
