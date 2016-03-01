@@ -52,11 +52,9 @@
 <div id="content">
 <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
     <ul class="slider_bag"> 
-      
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-       
+      	<foreach name="img_url" item="vo">
+        <li data-background="{{$vo['img_url']}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="{{:U('News/details',array('id'=>$vo['id']))}}"></a></div></li>
+       </foreach>
     </ul>
 </div>
       <div class="announcement">
@@ -65,11 +63,11 @@
       <div id="n_center">
           <div class="n_content">
               <ul class="news">
+                  <foreach name="data" item= "vo">
                   <li>
-                  	<a href="front_news.html">
-                  		<span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="__STATIC__/img/country.png"/>
-                  	</a>
+                  	<a herf="{{:U('News/details',array('id'=>$vo['id']))}}">{{$vo.title}}</a>
                   </li>
+                  </foreach>
               </ul>
           </div>
           <div class="page" style="margin: 40px 0px">

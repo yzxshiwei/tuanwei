@@ -12,7 +12,7 @@ class NewsController extends Controller{
      * 创建新闻
      * 添加时间13:07:23
      * 
-     * @author yzx
+     * @author MuTao
      */
     public function createnews() {
         if(IS_POST){
