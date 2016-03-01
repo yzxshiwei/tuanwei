@@ -16,8 +16,11 @@ class News{
         $Page = new \Think\Page($count,3);
         $page_show = $Page->show();
 		
-		$where["flag"] = 2;
-		$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
+		if($where){
+			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
+		}else{
+			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->select();
+		}
 
         return array('Page' => $page_show , 'list_data' => $list_data);
     }
@@ -31,9 +34,11 @@ class News{
 	public function newList($where=NULL,$field=NULL,$order=NULL,$limit=NULL){
 		
 	    $newsModel = new \Common\Model\NewsModel();
-	    $where["flag"] = 2;	
-		$thiss = $newsModel->where($where);
-     
+		$thiss = $newsModel;
+     	
+     	if($where){
+			$thiss = $thiss->where($where);
+		}
 		if($field){
 			$thiss = $thiss->field($field);
 		}
