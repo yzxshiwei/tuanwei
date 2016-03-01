@@ -17,6 +17,11 @@
             padding: 5px;
             margin-bottom: 5px;
             border-bottom:1px dashed #999;
+            position: relative;
+        }
+        .project li span{
+            position: absolute;
+            right:20px;
         }
     </style>
 </head>
@@ -47,7 +52,7 @@
                             <br/>
                             <ul class="project">
                             	<foreach name="list_data" item="_v">
-                                	<li><a href="{{:U('Project/workreview',array('id'=>$_v['id']))}}">{{$_v.name}}{{$_v.score}}</a></li>
+                                	<li><a href="{{:U('Project/workreview',array('id'=>$_v['id']))}}">{{$_v.name}}{{$_v.score}}</a><span>本次得分 : <b>1</b></span></li>
                                	</foreach>
                             </ul>
 
