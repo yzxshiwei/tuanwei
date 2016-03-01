@@ -8,7 +8,27 @@ class TeamController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function teamcreate() {
-        $this->display();
+
+		if(IS_POST){
+			$wordsModel = new \Common\Model\WordsModel;
+			
+			$data = array();
+			$data["user_id"] = $this->user["user_id"];
+			$data["words"] = I("post.contents","","string");
+			$res = $wordsModel->add($data);
+			if($res){
+				$this->success("添加成功",U('Team/teamcreate'));
+			}else{
+				$this->error("添加失败");
+			}
+		}else{
+			$words = new \Common\Helper\Words();
+			$result = $words->listData();
+
+			$this->assign('Page' , $result['Page']);
+			$this->assign('list_data',$result['list_data']);
+			$this->display();
+		}
     }
     /**
      * 比赛信息列表
