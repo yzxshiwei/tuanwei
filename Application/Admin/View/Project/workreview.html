@@ -267,8 +267,8 @@
                         </div>
                         <form action="{{:U('Project/workreview')}}" method="post" class="review_content">
                         	<input type="hidden" value="{{$id}}" name="id"/>
-                            <label><span>请评定分数:</span><input type="text" name="score" placeholder="0-10分"/></label>
-                            <label><span>请输入评语:</span><textarea name="content"></textarea></label>
+                            <label><span>请评定分数:</span><input value="{{$staus_data.score}}" type="text" name="score" placeholder="0-10分"/></label>
+                            <label><span>请输入评语:</span><textarea name="content">{{$staus_data.content}}</textarea></label>
                             <div class="btn">
                                 <input type="submit" value="提 &nbsp;&nbsp;&nbsp;&nbsp;交"/>
                             </div>
