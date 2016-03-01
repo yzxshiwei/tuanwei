@@ -50,12 +50,35 @@ class IndexController extends \Admin\Controller\Controller {
 	 * @author zlj
 	 */
 	public function updateteam(){
+		
+		$team = new \Common\Model\TeamModel();
+		
 		if(IS_POST){
+			//开启事务
+			$team->startTrans();
+			$data = array();
+			if($_FILES['project_file']['tmp_name']){
+				$file_res = Upload($_FILES['project_file']);
+				if($file_res["status"]){
+					$data["img_url"] = $file_res['file_path'];
+				}else{
+					$this->error($file_res['msg']);
+				}
+			}
+			$data["contents"] = I("post.intro","","string");
+			$id = I("post.id","","string");
+			$res = $team->where(array("id"=>$id))->save($data);
+		    if($res){
+		        $team->commit();
+		    	$this->success('更新团队成功',U('Index/teammanage'));
+		    }else{
+		   	    $team->rollback();
+		   	    $this->error('更新团队失败');
+		    }
 			
 		}else{
 			$tid = I("get.tid","","string");
-			$team = new \Common\Model\TeamModel();
-			$tinfo = $team->where(array("id"=>$tid))->select();
+			$tinfo = $team->where(array("id"=>$tid))->find();
 
 			$this->assign("tinfo",$tinfo);
 			$this->display();
