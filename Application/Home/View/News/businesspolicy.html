@@ -101,7 +101,9 @@
             <ul class="slider_bag">
             	
 	            <foreach name="img" item="_v">
+	            	<if condition="$_v.img_url eq true">
 	        		<li data-background="/{{$_v.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>
+	        		</if>
 	        	</foreach>
 
             </ul>
