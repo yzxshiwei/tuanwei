@@ -10,16 +10,15 @@ class News{
      * @return Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
      */
     public function listData($where=NULL){
+
         $newsModel = new \Common\Model\NewsModel();
         $count = $newsModel->count();
         $Page = new \Think\Page($count,3);
         $page_show = $Page->show();
 		
-		if($where){
-			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
-		}else{
-			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->select();
-		}
+		$where["flag"] = 2;
+		$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
+
         return array('Page' => $page_show , 'list_data' => $list_data);
     }
 	
@@ -32,10 +31,9 @@ class News{
 	public function newList($where=NULL,$field=NULL,$order=NULL,$limit=NULL){
 		
 	    $newsModel = new \Common\Model\NewsModel();
-		$thiss = $newsModel;
-		if($where){
-			$thiss = $thiss->where($where);
-		}
+	    $where["flag"] = 2;	
+		$thiss = $newsModel->where($where);
+     
 		if($field){
 			$thiss = $thiss->field($field);
 		}
