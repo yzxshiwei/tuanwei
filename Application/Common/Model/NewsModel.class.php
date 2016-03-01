@@ -12,7 +12,8 @@ class NewsModel extends \Common\Helper\Model{
     
     const SUB_COL_1 = 1;
     const SUB_COL_2 = 2;
-    const SUB_COL_3 = 2;
+    const SUB_COL_3 = 3;
+	
     /**
      * 新闻栏目
      * @var unknown
@@ -29,8 +30,8 @@ class NewsModel extends \Common\Helper\Model{
      * @var unknown
      */
     public $sub_col = array(
-        self::SUB_COL_1 => '轮播图',
-        self::SUB_COL_2 => '普通新闻',
-        self::SUB_COL_3 => '图片新闻'
+        self::SUB_COL_1 => '学校',
+        self::SUB_COL_2 => '地方',
+        self::SUB_COL_3 => '国家'
     );
 }
