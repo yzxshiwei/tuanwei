@@ -88,9 +88,9 @@
     <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
         <ul class="slider_bag">
 
-            <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-            <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-            <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+            <foreach name="list_data" item="_v">
+            	<li data-background="/{{$_v.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>
+            </foreach>
 
         </ul>
     </div>
@@ -103,20 +103,15 @@
                 <li class="Title place">
                     <p><span class="newTitle">地方支持</span></p>
                     <ul>
-                        <li><a href="{{:U('News/details')}}"><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                        <foreach name="list_data" item="_v">
+                    		<li><a href="{{:U('News/details',array('id'=>$_v['id']))}}"><span>{{$_v.title}}</span><img src="__STATIC__/img/country.png"/></a></li>
+                    	</foreach>
                     </ul>
                 </li>
             </ul>
         </div>
         <div class="page" style="margin: 40px 0px">
-            <ul>
-                <li class="onPage"> < 上一页</li>
-                <li class="active">1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-                <li class="nextPage">下一页 > </li>
-            </ul>
+            {{$Page}}
         </div>
     </div>
 </div>
@@ -140,5 +135,21 @@
             $(this).slideUp(200);
         });
     });
+    
+    $(document).ready(function(){
+	    $('.flicker-example').flickerplate(
+	            {
+	                arrows: false,
+	                arrows_constraint: false,
+	                auto_flick: true,
+	                auto_flick_delay: 10,
+	                block_text: true,
+	                dot_alignment: 'center',
+	                dot_navigation: false,
+	                flick_animation: 'transition-slide',
+	                flick_position: 1,
+	                theme: 'dark'
+	            });
+	});
 </script>
 </html>
