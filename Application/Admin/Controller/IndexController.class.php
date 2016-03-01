@@ -15,6 +15,9 @@ class IndexController extends \Admin\Controller\Controller {
      * @author yzx
      */
     public function index(){
+        $message = new \Common\Helper\Message();
+        $msg_list = $message->listData($this->user);
+        $this->assign('list_data',$msg_list);
         $this->display();
     }
     /**

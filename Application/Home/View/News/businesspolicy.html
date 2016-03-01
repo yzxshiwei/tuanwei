@@ -99,10 +99,12 @@
      <div id="content"  class="policy" >
         <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
             <ul class="slider_bag">
-
-                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-                <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
+            	
+	            <foreach name="img" item="_v">
+	            	<if condition="$_v.img_url eq true">
+	        		<li data-background="/{{$_v.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>
+	        		</if>
+	        	</foreach>
 
             </ul>
         </div>
@@ -115,28 +117,34 @@
                      <li class="Title country">
                          <p>
 	                         <span class="newTitle">国家支持</span>
-	                         <a class="more" href="front_country.html">更多 <img src="__STATIC__/img/country.png" alt=""/></a>
+	                         <a class="more" href="{{:U('News/countryspolicy')}}">更多 <img src="__STATIC__/img/country.png" alt=""/></a>
                          </p>
                          <ul>
-                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	<foreach name="res3" item="_v">
+                         		<li><a href="{{:U('News/details',array('id'=>$_v['id']))}}"><span>{{$_v.title}}</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	</foreach>
                          </ul>
                      </li>
                      <li class="Title place">
                          <p>
 	                         <span class="newTitle">地方支持</span>
-	                         <a class="more" href="front_place.html">更多 <img src="__STATIC__/img/place.png" alt=""/></a>
+	                         <a class="more" href="{{:U('News/placespolicy')}}">更多 <img src="__STATIC__/img/place.png" alt=""/></a>
                          </p>
                          <ul>
-                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	<foreach name="res2" item="_v">
+                         		<li><a href="{{:U('News/datails',array('id'=>$_v['id']))}}"><span>{{$_v.title}}</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	</foreach>
                          </ul>
                      </li>
                      <li class="Title shcool">
                          <p>
 	                         <span class="newTitle">学校支持</span>
-	                         <a class="more" href="front_shcool.html">更多 <img src="__STATIC__/img/shcool.png" alt=""/></a>
+	                         <a class="more" href="{{:U('News/schoolspolicy')}}">更多 <img src="__STATIC__/img/shcool.png" alt=""/></a>
                          </p>
                          <ul>
-                             <li><a href=""><span>新闻新闻新未能为俄文IE我IE那我呢</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	<foreach name="res1" item="_v">
+                         		<li><a href="{{:U('News/datails',array('id'=>$_v['id']))}}"><span>{{$_v.title}}</span><img src="__STATIC__/img/country.png"/></a></li>
+                         	</foreach>
                          </ul>
                      </li>
                  </ul>
@@ -164,6 +172,23 @@
             $(this).slideUp(200);
         });
     });
+    
+    $(document).ready(function(){
+	    $('.flicker-example').flickerplate(
+            {
+                arrows: false,
+                arrows_constraint: false,
+                auto_flick: true,
+                auto_flick_delay: 10,
+                block_text: true,
+                dot_alignment: 'center',
+                dot_navigation: false,
+                flick_animation: 'transition-slide',
+                flick_position: 1,
+                theme: 'dark'
+            });
+	});
+
 </script>
 
 </html>

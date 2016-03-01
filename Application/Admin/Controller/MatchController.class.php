@@ -61,6 +61,8 @@ class MatchController extends Controller{
 					
 				    if($j_res && $p_res){
 				    	$match->commit();
+				    	$messageModel = new \Common\Model\MessageModel();
+				    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_SYSTEM, '你有比赛评审邀请');
 				    	$this->success('添加比赛成功',U('Match/matchmanage'));
 				    }else{
 				    	$match->rollback();
@@ -89,10 +91,26 @@ class MatchController extends Controller{
     public function matchmanage() {
     	
 		$matchModel = new \Common\Helper\Match();
-		$result = $matchModel->listData();
+		$result = $matchModel->listData($this->user);
 		
 		$this->assign('list_data',$result['list_data']);
 		$this->assign('Page' , $result['Page']);
+        $this->display();
+    }
+    /**
+     * 显示比赛信息
+     * 添加时间2016-3-1
+     * 
+     * @author yzx
+     */
+    public function viewmatch() {
+        $id = I('id');
+        $matchModel = new \Common\Model\MatchModel();
+        $matchProjectModel = new \Common\Model\Match_ProjectModel();
+        $list_data = $matchProjectModel->listData($id);
+        $match_data = $matchModel->where(array('id' => $id))->find();
+        $this->assign('list_data' , $list_data);
+        $this->assign('data',$match_data);
         $this->display();
     }
     /**

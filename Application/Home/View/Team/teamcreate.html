@@ -42,14 +42,16 @@
             <!--留言框-->
             <div id="messageBox">
                 <div class="messageBox">
-                    <textarea class="reason" placeholder="填写招兵买马需求以及团队联系方式:"></textarea>
-                    <input class="subBtn" type="submit" value="提交"/>
+                	<form method="post" action="{{:U('Team/teamcreate')}}">
+                		   <textarea class="reason" rows="12" required="required" maxlength="200"  name="contents" placeholder="填写招兵买马需求以及团队联系方式:"></textarea>
+                           <input class="subBtn" type="submit" value="提交"/>
+                	</form>
                 </div>
             </div>
             <div id="teamMessage">
                 <div class="teamMessage">
                     <!--团队信息-->
-                    <div class="teamBox">
+                    <!--<div class="teamBox">
                         <img class="radius" src="__STATIC__/img/ceshi.jpg"/>
                         <div class="teamZl">
                             <h4>XX团队</h4>
@@ -59,29 +61,21 @@
                             <p>联系电话：<span>15874568975</span></p>
                             <p>联系邮箱：<span>cccc@email.com</span></p>
                         </div>
-                    </div>
+                    </div>-->
                     <!--个人信息-->
-                    <div class="teamBox">
-                        <img class="radius" src="__STATIC__/img/ceshi.jpg"/>
-                        <div class="teamZl">
-                            <h4>刘明</h4>
-                            <h5>XXX专业，曾经在XXX完成XXXXXXXXXXXXXXXXXXX，对XXX极有兴趣，希望在XXX领域从事XXXX工作，XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX</h5>
-                            <p>联系人：<span>XXX</span></p>
-                            <p>联系QQ：<span>1584678594</span></p>
-                            <p>联系电话：<span>15874568975</span></p>
-                            <p>联系邮箱：<span>cccc@email.com</span></p>
-                        </div>
-                    </div>
+                    <foreach name="list_data" item="_v">
+	                    <div class="teamBox">
+	                        <img class="radius" src="__STATIC__/img/ceshi.jpg"/>
+	                        <div class="teamZl">
+	                        	<h4>{{$_v.user_name}}</h4>
+	                            <p>{{$_v.words}}</p>
+	                        </div>
+	                    </div>
+                    </foreach>
+
                     <!--分页-->
                     <div class="page">
-                        <ul>
-                            <li class="onPage"> < 上一页</li>
-                            <li class="active">1</li>
-                            <li>2</li>
-                            <li>3</li>
-                            <li>4</li>
-                            <li class="nextPage">下一页 > </li>
-                        </ul>
+                        {{$Page}}
                     </div>
                 </div>
             </div>

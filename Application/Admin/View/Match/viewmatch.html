@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <include file='Public:file'/>
+    <style>
+        .project{
+            width: 40%;
+            margin-left: 60px;
+            padding: 20px;
+            margin-bottom: 30px;
+            margin-top: -50px;
+        }
+        .project li{
+            padding: 5px;
+            margin-bottom: 5px;
+            border-bottom:1px dashed #999;
+            position: relative;
+        }
+        .project li span{
+            position: absolute;
+            right:20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="htmleaf-container">
+        <div class="container pb30">
+            <div class="clear-backend">
+                <include file='Public:navigation'/>
+
+                <!-- tab-content -->
+                <div class="tab-content">
+
+                    <div id='expert_choose' class="hide comments"></div>
+
+                    <div class='race_set_div'>
+                        <input type='file' id='f_u' name='selectFiles'/>
+                        <form action='' method='post' onsubmit="return false;">
+                            <span class='race_set_lable'>比赛名称：</span><input value="{{$data.name}}"  readonly="readonly" type='text' id='input-race-name' placeholder='比赛名称（必填）' required='required' autofocus='autofocus' />
+                            <br/>
+                            <span class='race_set_lable'>副 &nbsp;标 &nbsp;&nbsp;题 :  </span><input value="{{$data.sub_title}}" readonly="readonly" type='text' id='input-race-sub' placeholder='副标题'  />
+                            <br/>
+                            <span class='race_set_lable'>比赛时间：</span>
+                            <input readonly="readonly" value="{{$data.project_start_time|date="Y-m-d",###}}" type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' />
+                            <input readonly="readonly" value="{{$data.project_end_time|date="Y-m-d",###}}" type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
+                            <br/>
+                            <span class='race_set_lable'>比赛项目：</span>
+                            <br/>
+                            <ul class="project">
+                            	<foreach name="list_data" item="_v">
+                                	<li><a href="{{:U('Project/workreview',array('id'=>$_v['id']))}}">{{$_v.name}}{{$_v.score}}</a><span>本次得分 : <b>1</b></span></li>
+                               	</foreach>
+                            </ul>
+
+
+
+                            <button id='b_ok'>确定</button>
+                        </form>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</body>
+
+</html>

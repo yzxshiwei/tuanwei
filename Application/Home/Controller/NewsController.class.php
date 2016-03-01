@@ -8,6 +8,14 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function train(){
+    		
+    	$new = new \Common\Helper\News();
+		$where["col"] = \Common\Model\NewsModel::COL_3;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     /**
@@ -17,6 +25,15 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function details() {
+    	
+		$newModel = new \Common\Model\NewsModel;
+		
+		$nid = I("get.id","",'string');
+		$result = $newModel->where(array("id"=>$nid))->find();
+		
+        $result['content'] = htmlspecialchars_decode($result['content']);
+		
+		$this->assign("ninfo",$result);
         $this->display();
     }
     /**
@@ -26,6 +43,15 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function library() {
+		
+		
+		$new = new \Common\Helper\News();
+		$where["col"] = \Common\Model\NewsModel::COL_5;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     
@@ -86,6 +112,23 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function businesspolicy() {
+    	
+		$new = new \Common\Helper\News();
+     
+        $res3 = $new->newList(array("sub_col"=>\Common\Model\NewsModel::SUB_COL_3,"flag"=>1),NULL,NULL,11);
+		$res2 = $new->newList(array("sub_col"=>\Common\Model\NewsModel::SUB_COL_2,"flag"=>1),NULL,NULL,11);
+		$res1 = $new->newList(array("sub_col"=>\Common\Model\NewsModel::SUB_COL_1,"flag"=>1),NULL,NULL,11);
+
+		$model = new \Common\Model\NewsModel;
+		$where['top_s'] = array('elt', time());
+		$where['top_e'] = array('egt', time());
+		$where["flag"] =1;
+		$img = $model->where($where)->field("img_url")->limit(5)->select();
+				
+		$this->assign("img",$img);
+		$this->assign("res3",$res3);
+		$this->assign("res2",$res2);
+		$this->assign("res1",$res1);
         $this->display();
     }
     /**
@@ -95,6 +138,14 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function schoolspolicy() {
+    	
+		$new = new \Common\Helper\News();
+		$where["sub_col"] = \Common\Model\NewsModel::SUB_COL_1;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     /**
@@ -104,6 +155,13 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function placespolicy(){
+    	$new = new \Common\Helper\News();
+		$where["sub_col"] = \Common\Model\NewsModel::SUB_COL_2;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
     /**
@@ -113,6 +171,13 @@ class NewsController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function countryspolicy() {
+    	$new = new \Common\Helper\News();
+		$where["sub_col"] = \Common\Model\NewsModel::SUB_COL_3;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
 }

@@ -928,7 +928,8 @@ a:active {
 #match .bmApply .center {
     width: 430px;
     margin: 0 auto;
-    text-align: center; }
+    text-align: center;
+}
 #match .bmApply form p {
     text-align: left;
     font-size: 18px;

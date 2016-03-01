@@ -54,6 +54,7 @@ class NewsController extends Controller{
     public function newsmanage() {
         $news = new \Common\Helper\News();
         $result = $news->listData();
+		
         $this->assign('Page' , $result['Page']);
         $this->assign('list_data',$result['list_data']);
         $this->display();
