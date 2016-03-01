@@ -39,24 +39,19 @@
 				<center>
 					<div class="notify">
 					<!-- 消息模板 -->
+					<foreach name="list_data" key="key" item="vo">
 						<p class="note">
-							有学生想成为你的队员
-							<span class="note-a">
-								<a href="javascript:void(0)" action_id='<%=action_body["_id"]%>' onclick="action_do(this)" do="accept">同意</a>
-							</span>
-							<span class="note-a">
-								<a href="javascript:void(0)" action_id='<%=action_body["_id"]%>' onclick="action_do(this)" do="refuse">拒绝</a>
-							</span>
+							{{$vo.content}}
+							<if condition="$vo['is_sys'] eq '1'">
+								<span class="note-a">
+									<a href="{{$vo.agree_url}}">同意</a>
+								</span>
+								<span class="note-a">
+									<a href="{{$vo.refuse_url}}">拒绝</a>
+								</span>
+							</if>
 						</p>
-						<p class="note">
-							有学生想成为你的队员
-							<span class="note-a">
-								<a href="javascript:void(0)" action_id='<%=action_body["_id"]%>' onclick="action_do(this)" do="accept">同意</a>
-							</span>
-							<span class="note-a">
-								<a href="javascript:void(0)" action_id='<%=action_body["_id"]%>' onclick="action_do(this)" do="refuse">拒绝</a>
-							</span>
-						</p>
+					</foreach>
 					</div>
 				</center>
 					

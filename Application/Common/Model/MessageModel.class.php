@@ -42,6 +42,35 @@ class MessageModel extends \Common\Helper\Model{
             return array('status' => false,'msg' => '消息类型错误');
         }
     }
+  /**
+   * 发送提醒消息
+   * @param array|int $toUser
+   * @param int $fromUser
+   * @param string $type
+   * @param string $content
+   */
+    public function sendMsg($toUser,$fromUser,$type,$content){
+        $time = time();
+        if (is_array($toUser) && !empty($toUser)){
+            foreach ($toUser as $k){
+                $add_data = array();
+                $add_data['from_user'] = $fromUser;
+                $add_data['create_time'] = $time;
+                $add_data['to_user'] = $k;
+                $add_data['msg_type'] = $type;
+                $add_data['content'] = $content;
+                $this->add($add_data);
+            }
+        }else {
+            $add_data = array();
+            $add_data['from_user'] = $fromUser;
+            $add_data['create_time'] = $time;
+            $add_data['to_user'] = $toUser;
+            $add_data['msg_type'] = $type;
+            $add_data['content'] = $content;
+            $this->add($add_data);
+        }
+    }
    /**
     * 获取用户信息
     * 添加时间2016-2-24

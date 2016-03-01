@@ -34,7 +34,7 @@
 							<foreach name="list_data" item="_v">
 								<tr mid="{{$_v.id}}">
 									<td>{{$_v.id}}</td>
-									<td><a class="race_name" target="_blank" href="{{:U('Project/workreview',array('id'=>$_v['project_id']))}}">{{$_v.name}}</a></td>
+									<td><a class="race_name"  <if condition="($user.user_type eq 3) or ($user.user_type eq 4)"> href="{{:U('Project/workreview',array('id'=>$_v['project_id']))}}"</if> >{{$_v.name}}</a></td>
 									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}</a></td>
 									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}</a></td>
 									<td class="race_set">

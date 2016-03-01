@@ -3,6 +3,16 @@ namespace Common\Model;
 class JudgesModel extends \Common\Helper\Model{
 	
     protected $tableName = 'Judges';
+    const STATE_ADOPT = 1;
+    const STATE_NOE_ADOPT = 0;
+    /**
+     * 状态
+     * @var unknown
+     */
+    public $state = array(
+        self::STATE_NOE_ADOPT => '未通过',
+        self::STATE_ADOPT => '通过',
+    );
     /**
      * 添加比赛评委
      * 添加时间2016-2-26
@@ -13,7 +23,6 @@ class JudgesModel extends \Common\Helper\Model{
      * @return bool
      */
     public function addJudges($teacherid,$projectid) {
-        
 		$flag = FALSE;
 		foreach($teacherid as $_k){
 			$res = $this->add(array("project_id"=>$projectid,"judge_id"=>$_k));
@@ -24,7 +33,6 @@ class JudgesModel extends \Common\Helper\Model{
 				break;
 			}
 		}
-		
 		return $flag;
     }
 }
