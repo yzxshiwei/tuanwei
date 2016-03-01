@@ -4,7 +4,7 @@ class IndexController extends \Common\Helper\Controller {
     public function index(){
     	
 		$newModel = new \Common\Model\NewsModel;
-		$newList = $newModel->order("public_t desc")->field("id,title")->select();
+		$newList = $newModel->order("public_t desc")->field("id,title,img_url")->select();
 		
 		$teamModel = new \Common\Model\TeamModel;
 		$teamList = $teamModel->order("id desc")->limit(4)->select();

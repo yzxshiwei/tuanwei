@@ -87,15 +87,15 @@
     </div>
     <div class="ad" id="ad">
         <div class="header-ad-bag">
-                <!--  <div class="banner">
+                <!--<div class="banner">
 
                     <ul>
                         <li style="background-image: url('__STATIC__/img/wood.jpg');">This is a slide.</li>
                         <li style="background-image: url('__STATIC__/img/sunset.jpg');">This is another slide.</li>
                         <li style="background-image: url('__STATIC__/img/subway.jpg');">This is a final slide.</li>
                     </ul>
-                </div>
-                -->
+                </div>-->
+       
             <img src="__STATIC__/img/hlw+.png" alt="" height="255px">
         </div>
 
@@ -104,20 +104,15 @@
     <div class="body">
         <div class="news-body">
             <div class="news-img">
-               <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:400px;height:250px;display:inline-block;">
+                <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:400px;height:250px;display:inline-block;">
                     <ul class="slider_bag">
-                        <li data-background="" data-theme="dark" data-block-text="false">
-                        	<div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div>
-                        </li>
-                        <li data-background="" data-theme="dark" data-block-text="false">
-                        	<div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div>
-                        </li>
-                        <li data-background="" data-theme="dark" data-block-text="false">
-                        	<div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div>
-                        </li>
+                    	<foreach name="newList" item="_v">
+                    		<li data-background="/{{$_v.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>
+                    	</foreach>
                     </ul>
                 </div>
             </div>
+
             <div class="news-card">
                 
                 <foreach name="newList" item="_v">
@@ -224,6 +219,22 @@
                 $(this).slideUp(200);
             });
         });
+         $(document).ready(function()
+            {
+                $('.flicker-example').flickerplate(
+                        {
+                            arrows: false,
+                            arrows_constraint: false,
+                            auto_flick: true,
+                            auto_flick_delay: 10,
+                            block_text: true,
+                            dot_alignment: 'center',
+                            dot_navigation: false,
+                            flick_animation: 'transition-slide',
+                            flick_position: 1,
+                            theme: 'dark'
+                        });
+            });
     </script>
 </body>
 
