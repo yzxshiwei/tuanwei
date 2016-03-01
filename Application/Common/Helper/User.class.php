@@ -152,7 +152,7 @@ class User{
     public function getUserList(){
         $userModel = new \Common\Model\UsersModel();
         $count = $userModel->count();
-        $Page = new \Think\Page($count,2);
+        $Page = new \Think\Page($count,12);
         $page_show = $Page->show();
         $list_data = $userModel->limit($Page->firstRow.','.$Page->listRows)->select();
         if (!empty($list_data)){

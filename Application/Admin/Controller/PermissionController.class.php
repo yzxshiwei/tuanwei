@@ -52,10 +52,10 @@ class PermissionController extends Controller{
      * @author yzx
      */
     public function addpermission() {
+        $PermissionModel = new \Common\Model\PermissionModel();
         if (IS_POST){
             $author = I('post.author');
             $group_id = I('post.group_id',0,'intval');
-            $PermissionModel = new \Common\Model\PermissionModel();
             $result = $PermissionModel->addData($group_id, $author);
             if ($result){
                 $this->success('添加成功',U('Permission/grouplist'));
@@ -65,8 +65,21 @@ class PermissionController extends Controller{
         }else {
             $id = I("id",0,'intval');
             $groupModel = D('group');
+            $author = $PermissionModel->where(array('group_id' => $id))->select();
             $group_data = $groupModel->where(array('id'=>$id))->find();
             $permission = C('PERMISSION');
+            $user_author = array();
+            foreach ($author as $k => $v){
+                $user_author[] = $v['permission'];
+            }
+            $output_data = array();
+            foreach ($permission as $k => $v){
+                if (in_array($k, $user_author)){
+                    $permission[$k] = array('checked' =>'checked="checked"' ,'name'=>$v['name']);
+                }else {
+                    $permission[$k] = array('checked' =>'' ,'name'=>$v['name']);
+                }
+            }
             $this->assign('list_data',$permission);
             $this->assign('group_data',$group_data);
             $this->display();
