@@ -4,6 +4,7 @@ class MessageModel extends \Common\Helper\Model{
     const TYPE_SYSTEM = 'system';
     const TYPE_USER = 'user';
     const TYPE_TEAM = 'team';
+    const TYPE_JUDGES_PROJECT = 'judges_project';
     /**
      * 消息类型
      * @var array

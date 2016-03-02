@@ -98,4 +98,22 @@ class IndexController extends \Admin\Controller\Controller {
 	public function person() {
 	    $this->display();
 	}
+	/**
+	 * 同意邀请
+	 * 添加时间2016-3-2
+	 * 
+	 * @author yzx
+	 */
+	public function agree() {
+	    $id = I('id',0,'intval');
+	}
+	/**
+	 * 拒绝邀请
+	 * 添加时间2016-3-2
+	 * 
+	 * @author yzx
+	 */
+	public function refuse() {
+	    $id = I('id',0,'intval');
+	}
 }
