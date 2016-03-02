@@ -2,8 +2,8 @@ var header_list={"header_list":[
     {"first_list_href":"/index.php?m=Home&c=News&a=dynamicbusiness",
      "first_list_name":"新闻资讯",
      "second":[
+        {"second_list_href":"/index.php?m=Home&c=News&a=teamstyle","second_list_name":"创业动态"},
         {"second_list_href":"/index.php?m=Home&c=News&a=teamstyle","second_list_name":"团队风采"}
-          
      ]
     },
     {"first_list_href":"/index.php?m=Home&c=News&a=train",
