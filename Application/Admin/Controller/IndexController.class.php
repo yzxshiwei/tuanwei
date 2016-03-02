@@ -108,7 +108,7 @@ class IndexController extends \Admin\Controller\Controller {
 	    $id = I('id',0,'intval');
 	    $proid = I('proid',0,'intval');
 	    $messageModel = new \Common\Model\MessageModel();
-	    $result = $messageModel->agree($id, $proid);
+	    $result = $messageModel->agree($this->user,$id, $proid);
 	    if ($result){
 	        $this->success('已经同意');
 	    }else {

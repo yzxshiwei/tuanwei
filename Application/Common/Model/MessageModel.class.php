@@ -112,7 +112,7 @@ class MessageModel extends \Common\Helper\Model{
      * @param unknown $param
      * @return bool
      */
-    public function agree($id,$proid) {
+    public function agree($user,$id,$proid) {
         $flag = false;
 	    $judgesModel = new \Common\Model\JudgesModel();
 	    $teacherTeamModel = new \Common\Model\Teacher_TeamModel();
@@ -121,7 +121,7 @@ class MessageModel extends \Common\Helper\Model{
 	    //评委老师同意
 	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
 	        $judges_data['state'] = $judgesModel::STATE_ADOPT; 
-	        $jd_res = $judgesModel->where(array('project_id' => $proid))->save($judges_data);
+	        $jd_res = $judgesModel->where(array('project_id' => $proid,'judge_id' => $user['user_id']))->save($judges_data);
 	        if ($jd_res){
 	            $flag = $this->readMsg($id);
 	        }
@@ -129,7 +129,7 @@ class MessageModel extends \Common\Helper\Model{
 	    //指导老师同意
 	   if (self::TYPE_TEACHER_PROJECT == $message_data['msg_type']){
 	       $teacher_team_data['state'] = $teacherTeamModel::STATUS_PASS;
-	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid))->save($teacher_team_data);
+	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($teacher_team_data);
 	       if ($tt_res){
 	           $flag = $this->readMsg($id);
 	       }
@@ -137,7 +137,7 @@ class MessageModel extends \Common\Helper\Model{
 	   //团队邀请同意
 	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
 	       $team_data['state'] = $teamModel::STATE_PASS;
-	       $t_res = $teamModel->where(array('project_id' => $proid))->save($team_data);
+	       $t_res = $teamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($team_data);
 	       if ($t_res){
 	           $flag = $this->readMsg($id);
 	       }
