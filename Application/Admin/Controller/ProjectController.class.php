@@ -172,6 +172,12 @@ class ProjectController extends Controller{
 				   
 				   if($res && $return){
 				   	  $posjectModel->commit();
+				   	  //发送消息提示
+				   	  $messageModel = new \Common\Model\MessageModel();
+				   	  //发送邀请指导消息
+				   	  $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$result);
+				   	  //发送邀请学生消息
+				   	  $messageModel->sendMsg($userid, $this->user['user_id'], $messageModel::TYPE_USER_PROJECT, '你有项目邀请参加',$result);
 				   	  $this->success('创建项目成功',U('Project/projectmanage'));
 				   }else{
 				   	  $posjectModel->rollback();
