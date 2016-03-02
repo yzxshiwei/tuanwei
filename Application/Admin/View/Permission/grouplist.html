@@ -63,7 +63,9 @@
                                     <td>{{$vo.group_name}}</td>
                                     <td>
                                         <a href="{{:U('Permission/addpermission',array('id'=>$vo['id']))}}">权限</a>
-                                        <a class="delete" data-id={{$vo.id}} href="javascript:void(0);">删除</a>
+                                        <if condition="$vo['is_sys'] eq 0">
+                                        	<a class="delete" data-id={{$vo.id}} href="javascript:void(0);">删除</a>
+                                        </if>
                                     </td>
                                 </tr>
                                </foreach>

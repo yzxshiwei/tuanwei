@@ -401,7 +401,8 @@
                                     <span>{{$vo.sub_title}}</span>
                                 </p>
                                 <p class="score">
-                                    项目评分 : <b>20</b> 分
+                                		比赛名称: <b>{{$vo.m_name}}</b>
+                                    	项目评分 : <b>{{$vo.score}}</b> 分
                                     <button>通过比赛</button>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}">打开</p>
@@ -439,7 +440,9 @@
                                         </label>
                                         <div class="btn">
                                         	<input type='hidden' value='{{$vo.id}}' name="pid">
-                                            <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
+                                        	<if condition="$vo['is_captain'] eq 1">
+                                            	<input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
+                                           </if>
                                         </div>
                                     </div>
                                 </form>

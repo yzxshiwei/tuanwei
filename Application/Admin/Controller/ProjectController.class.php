@@ -62,7 +62,7 @@ class ProjectController extends Controller{
 		    }
 		}else{
 			
-			$result = $project->listData();
+			$result = $project->listData($this->user);
 	        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
 			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->select();
 
@@ -155,7 +155,7 @@ class ProjectController extends Controller{
                $post_data['sub_title'] = I('post.sub_title','','string');
                $post_data['file_url'] = $file_res['file_path'];
                $post_data['intro'] = I('post.intro','','string');
-			   
+			   $post_data['creat_id'] = $this->user['user_id'];
 			   
                $result = $posjectModel->addPorject($post_data);
                if ($result){
