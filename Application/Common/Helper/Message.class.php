@@ -14,6 +14,7 @@ class Message{
         $userModel = new \Common\Model\UsersModel();
         $where['to_user'] = $user['user_id'];
         $where['msg_type'] = array('neq','team');
+        $where['read_time'] = array('eq',0);
         $msg_list = $messageModel->where($where)->select();
         if (is_array($msg_list) && !empty($msg_list)){
             foreach ($msg_list as $k => $v){
