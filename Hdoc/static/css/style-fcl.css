@@ -1081,6 +1081,7 @@ a:active {
   border-top: 1px solid #ccc; }
 #information .content .i_des li {
   height: 170px;
+   overflow-y: scroll;
   margin-top: 40px;
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc; }
