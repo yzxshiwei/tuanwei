@@ -42,7 +42,7 @@ class TeamController extends \Common\Helper\Controller{
     	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=2 AND $timestamp < project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
     	
     	foreach ($data as $k=>&$v){
-    		$v['rules'] = substr($v['rules'],0, 150);
+    		$v['rules'] = htmlspecialchars_decode(substr($v['rules'],0, 150));
     		unset($v);
     	}
     	$img_url = $Match->field('id, cover_src')->where("cover_src is not null and state=2 AND $timestamp < project_end_time")->limit(5)->select();
