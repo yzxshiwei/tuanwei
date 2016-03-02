@@ -1081,7 +1081,6 @@ a:active {
   border-top: 1px solid #ccc; }
 #information .content .i_des li {
   height: 170px;
-    overflow-y: auto;
   margin-top: 40px;
   padding-bottom: 20px;
   border-bottom: 1px solid #ccc; }
@@ -1119,38 +1118,33 @@ a:active {
   right: 0;
   color: #49A9A5; }
 
-.page {
-  float: right;
-  margin: 22px 0px; }
-.page ul {
-  height: 20px;
-  line-height: 20px;
-  font-size: 11px;
-  color: #999999; }
-.page ul li {
-  float: left;
-  width: 20px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-right: 0; }
-.page ul li:hover{
-    cursor: pointer;
+#page_front {
+    float: right;
+    margin: 22px 0px;}
+#page_front a{
+    display: inline-block;
+    width: 25px;
+    height:25px;
+    border:1px solid #ccc;
+    color: #666;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 3px;
 }
-.page ul li:nth-child(5) {
-  border-right: 1px solid #ccc;
-  margin-right: 9px; }
-.page ul .active {
-  background-color: #49A9A5;
-  color: #fff;
-  border: 0;
-  height: 22px; }
-.page ul .onPage {
-  width: 60px;
-  border-right: 1px solid #ccc;
-  margin-right: 9px; }
-.page ul .nextPage {
-  width: 60px;
-  border-right: 1px solid #ccc; }
+#page_front span{
+    display: inline-block;
+    width: 25px;
+    height:25px;
+    border:1px solid #ccc;
+    color: #666;
+    text-align: center;
+    margin-right: 8px;
+    border-radius: 3px;
+}
+#page_front .current {
+    background-color: #49A9A5;
+    color: #fff;
+    border: 0; }
 
 #teamCreate {
   font-family: "Microsoft YaHei"; }
