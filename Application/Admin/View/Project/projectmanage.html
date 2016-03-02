@@ -368,6 +368,14 @@
             width: 80px;
             height: 30px;
         }
+        .score{
+            margin: 5px 0px 0px 18px;
+        }
+        .score button{
+            margin-left: 100px;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
     </style>
 </head>
 
@@ -391,6 +399,10 @@
                                 <p>
                                     <a href="{{:U('Project/workreview',array('id'=>$vo['id']))}}"><span>{{$vo.name}}</span></a>
                                     <span>{{$vo.sub_title}}</span>
+                                </p>
+                                <p class="score">
+                                    项目评分 : <b>20</b> 分
+                                    <button>通过</button>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}">打开</p>
                             </div>
