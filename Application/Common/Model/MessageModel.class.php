@@ -5,6 +5,8 @@ class MessageModel extends \Common\Helper\Model{
     const TYPE_USER = 'user';
     const TYPE_TEAM = 'team';
     const TYPE_JUDGES_PROJECT = 'judges_project';
+    const TYPE_TEACHER_PROJECT = 'teacher_project';
+    const TYPE_USER_PROJECT = 'user_project';
     /**
      * 消息类型
      * @var array
@@ -13,6 +15,9 @@ class MessageModel extends \Common\Helper\Model{
         self::TYPE_SYSTEM => '系统消息',
         self::TYPE_USER => '用户消息',
         self::TYPE_TEAM => '团队消息',
+        self::TYPE_JUDGES_PROJECT => '评委消息',
+        self::TYPE_TEACHER_PROJECT => '指导老师消息',
+        self::TYPE_USER_PROJECT => '团队邀请信息',
     );
     protected $tableName = 'message';
     /**
@@ -50,7 +55,7 @@ class MessageModel extends \Common\Helper\Model{
    * @param string $type
    * @param string $content
    */
-    public function sendMsg($toUser,$fromUser,$type,$content){
+    public function sendMsg($toUser,$fromUser,$type,$content,$project_id){
         $time = time();
         if (is_array($toUser) && !empty($toUser)){
             foreach ($toUser as $k){
@@ -60,6 +65,7 @@ class MessageModel extends \Common\Helper\Model{
                 $add_data['to_user'] = $k;
                 $add_data['msg_type'] = $type;
                 $add_data['content'] = $content;
+                $add_data['project_id'] = $project_id;
                 $this->add($add_data);
             }
         }else {
@@ -69,6 +75,7 @@ class MessageModel extends \Common\Helper\Model{
             $add_data['to_user'] = $toUser;
             $add_data['msg_type'] = $type;
             $add_data['content'] = $content;
+            $add_data['project_id'] = $project_id;
             $this->add($add_data);
         }
     }
@@ -83,5 +90,58 @@ class MessageModel extends \Common\Helper\Model{
     public function getMessage($user_id,$type = self::TYPE_USER) {
         $result = $this->where(array('to_user' => $user_id,'msg_type'=>$type))->select();
         return $result;
+    }
+    /**
+     * 设置消息为已读
+     * 添加时间2016-3-2
+     * 
+     * @author yzx
+     * @param int $id
+     * @return boolean
+     */
+    public function readMsg($id) {
+        $time = time();
+        $save_data['read_time'] = $time;
+        return $this->where(array('id' => $id))->save($save_data);
+    }
+    /**
+     * 同意邀请
+     * 添加时间2016-3-2
+     * 
+     * @author yzx
+     * @param unknown $param
+     * @return bool
+     */
+    public function agree($user,$id,$proid) {
+        $flag = false;
+	    $judgesModel = new \Common\Model\JudgesModel();
+	    $teacherTeamModel = new \Common\Model\Teacher_TeamModel();
+	    $teamModel = new \Common\Model\TeamModel();
+	    $message_data = $this->where(array('id' => $id))->find();
+	    //评委老师同意
+	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
+	        $judges_data['state'] = $judgesModel::STATE_ADOPT; 
+	        $jd_res = $judgesModel->where(array('project_id' => $proid,'judge_id' => $user['user_id']))->save($judges_data);
+	        if ($jd_res){
+	            $flag = $this->readMsg($id);
+	        }
+	    };
+	    //指导老师同意
+	   if (self::TYPE_TEACHER_PROJECT == $message_data['msg_type']){
+	       $teacher_team_data['state'] = $teacherTeamModel::STATUS_PASS;
+	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($teacher_team_data);
+	       if ($tt_res){
+	           $flag = $this->readMsg($id);
+	       }
+	   }
+	   //团队邀请同意
+	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
+	       $team_data['state'] = $teamModel::STATE_PASS;
+	       $t_res = $teamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($team_data);
+	       if ($t_res){
+	           $flag = $this->readMsg($id);
+	       }
+	   }
+	   return $flag;
     }
 }

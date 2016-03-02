@@ -2,6 +2,13 @@
 namespace Common\Model;
 class Teacher_TeamModel extends \Common\Helper\Model{
     protected $tableName = 'teacher_team';
+    const STATUS_PASS = 1;
+    const STATUS_NOT_PASS = 0;
+    
+    public $status = array(
+        self::STATUS_PASS => '通过邀请',
+        self::STATUS_NOT_PASS => '不通过邀请',
+    );
 	
 	/**
 	 * 添加项目的老师团队

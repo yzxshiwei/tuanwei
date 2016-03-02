@@ -14,6 +14,19 @@ class TeamModel extends \Common\Helper\Model{
      * @var 队长
      */
     const USER_TYPE_CAPTAIN = 'captain';
+    
+    const STATE_INVITE = 0;
+    const STATE_PASS = 1;
+    const STATE_NOT_PASS = 2;
+    /**
+     * 邀请状态
+     * @var unknown
+     */
+    public $state = array(
+        self::STATE_INVITE => '邀请中',
+        self::STATE_PASS => '同意',
+        self::STATE_NOT_PASS => '拒绝'
+    );
     /**
      * 添加时间2016-2-24
      * 

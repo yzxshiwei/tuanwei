@@ -44,7 +44,8 @@ class MatchController extends Controller{
 				$data["cover_src"] = $file_res1['file_path'];
 				$data["start_file_src"] = $file_res2['file_path'];
 				$data["template_src"] = $file_res3['file_path'];
-				$data["project_id"] = I('post.proid','','string');
+				$project_id = I('post.proid','','string');
+				$data["project_id"] = $project_id;
 				
 				$relust = $match->add($data);
 				
@@ -62,7 +63,7 @@ class MatchController extends Controller{
 				    if($j_res && $p_res){
 				    	$match->commit();
 				    	$messageModel = new \Common\Model\MessageModel();
-				    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_SYSTEM, '你有比赛评审邀请');
+				    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$project_id);
 				    	$this->success('添加比赛成功',U('Match/matchmanage'));
 				    }else{
 				    	$match->rollback();

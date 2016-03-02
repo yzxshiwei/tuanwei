@@ -14,12 +14,15 @@ class Message{
         $userModel = new \Common\Model\UsersModel();
         $where['to_user'] = $user['user_id'];
         $where['msg_type'] = array('neq','team');
+        $where['read_time'] = array('eq',0);
         $msg_list = $messageModel->where($where)->select();
         if (is_array($msg_list) && !empty($msg_list)){
             foreach ($msg_list as $k => $v){
-                if ($v['msg_type'] == $messageModel::TYPE_SYSTEM){
-                    $msg_list[$k]['agree_url'] = U('Index/agree',array('id'=>$v['id']));
-                    $msg_list[$k]['refuse_url'] = U('Index/refuse',array('id'=>$v['id']));
+                if ($v['msg_type'] == $messageModel::TYPE_JUDGES_PROJECT || 
+                    $v['msg_type'] == $messageModel::TYPE_TEACHER_PROJECT ||
+                    $v['msg_type'] == $messageModel::TYPE_USER_PROJECT){
+                    $msg_list[$k]['agree_url'] = U('Index/agree',array('id'=>$v['id'],'proid' => $v['project_id']));
+                    $msg_list[$k]['refuse_url'] = U('Index/refuse',array('id'=>$v['id'],'proid' => $v['project_id']));
                     $msg_list[$k]['is_sys'] = 1;
                 }else {
                     $msg_list[$k]['is_sys'] = 0;

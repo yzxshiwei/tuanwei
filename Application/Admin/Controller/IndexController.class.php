@@ -106,6 +106,14 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function agree() {
 	    $id = I('id',0,'intval');
+	    $proid = I('proid',0,'intval');
+	    $messageModel = new \Common\Model\MessageModel();
+	    $result = $messageModel->agree($this->user,$id, $proid);
+	    if ($result){
+	        $this->success('已经同意');
+	    }else {
+	        $this->error('同意失败');
+	    }
 	}
 	/**
 	 * 拒绝邀请
@@ -115,5 +123,6 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function refuse() {
 	    $id = I('id',0,'intval');
+	    $proid = I('proid',0,'intval');
 	}
 }
