@@ -1133,6 +1133,9 @@ a:active {
   text-align: center;
   border: 1px solid #ccc;
   border-right: 0; }
+.page ul li:hover{
+    cursor: pointer;
+}
 .page ul li:nth-child(5) {
   border-right: 1px solid #ccc;
   margin-right: 9px; }
