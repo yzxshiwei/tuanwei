@@ -197,7 +197,31 @@ class ProjectController extends Controller{
             $this->display();
         }
     }
-
+    /**
+     * 修改项目比赛状态
+     * 添加时间2016-3-2
+     * 
+     * @author yzx
+     */
+    public function modifystatus(){
+        $id = I('post.id',0,'intval');
+        $status = I('post.status',0,'intval');
+        $projectStatusModel = new \Common\Model\Project_StatusModel();
+        $status_data = $projectStatusModel->where(array('project_id' => $id ))->find();
+        if (empty($status_data)){
+            $this->ajaxReturn(array('sattus' => 0,'msg' => '没有该项目'));
+        }
+        if (!in_array($status, array_keys($projectStatusModel->result))){
+            $this->ajaxReturn(array('sattus' => 0,'msg' => '状态不对'));
+        }
+        $save_data['result'] = $status;
+        $result = $projectStatusModel->where(array('project_id' => $id ))->save($save_data);
+        if($result){
+           $this->ajaxReturn(array('status' => 1,'msg'=>'修改成功')); 
+        }else {
+            $this->ajaxReturn(array('sattus' => 0,'msg' => '修改失败'));
+        }
+    }
     /**
 	 * 查询项目团队成员
 	 * 添加时间 2016-2-24

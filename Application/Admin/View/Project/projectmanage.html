@@ -403,7 +403,14 @@
                                 <p class="score">
                                 		比赛名称: <b>{{$vo.m_name}}</b>
                                     	项目评分 : <b>{{$vo.score}}</b> 分
-                                    <button>通过比赛</button>
+                                    	<if condition="$user['group_id'] eq 1">
+                                    		<if condition="$vo['result'] eq 0">
+                                    		<button class="pass" data-status = "1" data-id="{{$vo.id}}">通过比赛</button>
+                                    		</if>
+                                    		<if condition="$vo['result'] eq 1">
+                                    		<button class="pass" data-status = "0" data-id="{{$vo.id}}">不通过比赛</button>
+                                    		</if>
+                                    	</if>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}">打开</p>
                             </div>
@@ -607,6 +614,26 @@
     <script>
         $(function(){
             $('.choose_s').searchableSelect();
+        });
+        $('.pass').click(function(){
+        	   var id = $(this).attr('data-id');
+        	   var status = $(this).attr('data-status');
+        	   $.ajax({
+               type:'post',
+               url:"{{:U('Project/modifystatus')}}",
+               data:{
+                   id:id,status:status
+               },
+               cache:false,
+               dataType:'json',
+               success:function(data){
+                   if(data.status = 1){
+                       window.location.reload();
+                   }else{
+                        alert(data.msg);
+                   }
+               }
+           });
         });
     </script>
 </body>
