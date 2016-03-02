@@ -54,7 +54,7 @@
     <ul class="slider_bag"> 
       	<foreach name="img_url" item="vo">
         <li data-background="{{$vo['img_url']}}" data-theme="dark" data-block-text="false">
-            <div class="flick-title"><a href="{{:U('News/details',array('id'=>$vo['id']))}}"></a></div></li>
+            <div class="flick-title"><a style="display:block;width:680px;height:378px;" href="{{:U('News/details',array('id'=>$vo['id']))}}"></a></div></li>
        </foreach>
     </ul>
 </div>
