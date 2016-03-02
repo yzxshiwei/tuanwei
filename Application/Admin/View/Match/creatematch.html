@@ -102,7 +102,7 @@
 							<br/>
 							<div id='race_expert_set_div'>
 								<input type='hidden' value='' class='dev_0' name='teacherid[]'>
-								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' te-input='0'/>
+								<input id='0_expert_class' type="text" class='race_expert' placeholder='指定评审专家' readonly="readonly" te-input='0'/>
 								<a id='expert_add' style='margin-left:18px' num='0' class='fa fa-user-plus' teacher-input='0' onclick="add_export(this)"></a>
 							</div>
 							<br/>
@@ -223,7 +223,7 @@ $(document).ready(function() {
 		var res = target.find('input.race_expert');
 		var num = res.length;
 		
-		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
+		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' readonly='readonly' type='text' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
 		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' teacher-input='0' onclick='add_export(this)''></a>" );
 		target.append( user_add );
 		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );

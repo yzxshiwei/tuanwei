@@ -52,7 +52,7 @@
                             <br/>
                             <ul class="project">
                             	<foreach name="list_data" item="_v">
-                                	<li><a href="{{:U('Project/workreview',array('id'=>$_v['id']))}}">{{$_v.name}}{{$_v.score}}</a><span>本次得分 : <b>1</b></span></li>
+                                	<li><a href="{{:U('Project/workreview',array('id'=>$_v['id']))}}">{{$_v.name}}</a><span>本次得分 : <b>{{$_v.score}}</b></span></li>
                                	</foreach>
                             </ul>
 

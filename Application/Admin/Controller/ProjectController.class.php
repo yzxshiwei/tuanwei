@@ -94,13 +94,19 @@ class ProjectController extends Controller{
     public function workreview() {
         if (IS_POST){
             $input_data = array();
-            $input_data['project_id'] = I('post.id',0,'intval');
+            $project_id = I('post.id',0,'intval');
+            $input_data['project_id'] = $project_id;
             $input_data['officer'] = $this->user['user_id'];
             $input_data['content'] = I('post.content','','string');
             $input_data['score'] = I('post.score','','intval');
             $input_data['created_time'] = time();
             $projectStatus = D('project_status');
-            $result = $projectStatus->add($input_data);
+            $old_data = $projectStatus->where(array('project_id' => $project_id))->find();
+            if (!empty($old_data)){
+                $result = $projectStatus->where(array('project_id' => $project_id))->save($input_data);
+            }else {
+                $result = $projectStatus->add($input_data);
+            }
             if ($result){
                 $this->success('评审成功',U('Project/projectmanage'));
             }else {
@@ -109,12 +115,15 @@ class ProjectController extends Controller{
         }else {
             $id = I('id',0,'intval');
             $project = new \Common\Helper\Project();
+            $projectStatusModel = new \Common\Model\Project_StatusModel();
+            $status_data = $projectStatusModel->where(array('project_id' => $id))->find();
             $result = $project->getData($id);
 			
 			$teamModel = new \Common\Model\TeamModel;
 			$field = "users.user_id,users.user_name,students.stu_card,students.college";
 			$userList = $teamModel->join("users on users.user_id=team.user_id")->join("students on students.user_id=users.user_id")->where(array("project_id"=>$id))->field($field)->select();
 
+			$this->assign('staus_data' , $status_data);
             $this->assign('ulist',$userList);
             $this->assign('result',$result);
             $this->assign('id',$id);
