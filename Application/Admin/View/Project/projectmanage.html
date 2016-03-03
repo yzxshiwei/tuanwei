@@ -426,7 +426,14 @@
                                     	</if>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}">打开</p>
-                                <p class="open2">公开</p>
+                                <if condition="$vo['is_captain'] eq 1">
+                                	<if condition="$vo['is_open'] eq 0">
+                                		<p class="open2" data-id="{{$vo.id}}">公开{{$vo['is_open']}}</p>
+                                		<else/>
+                                		<p class="open2" data-id="{{$vo.id}}">不公开</p>
+                                	</if>
+                                	
+                                </if>
                             </div>
                             <div class="content" style="clear: both;"  content-id="{{$vo.id}}">
                                 <h4 class="c_title">项目编辑</h4>
@@ -637,6 +644,25 @@
                url:"{{:U('Project/modifystatus')}}",
                data:{
                    id:id,status:status
+               },
+               cache:false,
+               dataType:'json',
+               success:function(data){
+                   if(data.status = 1){
+                       window.location.reload();
+                   }else{
+                        alert(data.msg);
+                   }
+               }
+           });
+        });
+        $('.open2').click(function(){
+        	var proid = $(this).attr('data-id');
+        	$.ajax({
+               type:'post',
+               url:"{{:U('Project/isopen')}}",
+               data:{
+                   proid:proid
                },
                cache:false,
                dataType:'json',

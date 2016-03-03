@@ -110,4 +110,11 @@ class TeamController extends \Common\Helper\Controller{
     public function occupy() {
         $this->display();
     }
+    /**
+     * 团队详情
+     */
+    public function teamDetails() {
+        echo 'sdfsdfs';die();
+        $this->display();
+    }
 }

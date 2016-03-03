@@ -162,11 +162,13 @@ class ProjectController extends Controller{
                	   
 				   //添加项目团队信息(成员)
 				   $userid = I("post.userid");
+				   $userid = array_unique($userid);
 				   $team = new \Common\Model\TeamModel;
 				   $res = $team->addTeam($result,$userid,$this->user["user_id"],true);
 				   
 				   //添加项目团队 老师信息
 				   $teach_id = I('post.teacher_id');
+				   $teach_id = array_unique($teach_id);
 				   $teachModel = new \Common\Model\Teacher_TeamModel;
 				   $return = $teachModel->addTeam($teach_id,$result,1);
 				   
@@ -264,6 +266,21 @@ class ProjectController extends Controller{
             
 			downloads($result["file_url"]);
        }
+	}
+	/**
+	 * 公开和关闭公开项目
+	 * 添加时间2016-3-3
+	 * 
+	 */
+	public function isopen(){
+	    $proid = I('post.proid',0,'intval');
+	    $projectModel = new \Common\Model\ProjectModel();
+	    $result = $projectModel->isOpen($proid);
+	    if($result['status']){
+	        $this->ajaxReturn(array('status' => 1,'msg' => $result['msg']));
+	    }else {
+	        $this->ajaxReturn(array('status' => 0,'msg' => $result['msg']));
+	    }
 	}
 	
 	
