@@ -76,7 +76,6 @@ class ProjectController extends Controller{
 				}
 				$result['list_data'][$_k]['teac_info'] = $team;
 			}
-
 			$this->assign("teacher_list",$teacher_list);
 	        $this->assign('Page' , $result['Page']);
 	        $this->assign('list_data',$result['list_data']);
