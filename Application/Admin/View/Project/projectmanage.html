@@ -96,7 +96,7 @@
             background:  rgb(0,153,153);
             border-radius: 5px;
             position: absolute;
-            right: 0;
+            right: 100px;
             bottom: 15px;
             color: #fff;
             cursor: pointer;
@@ -376,6 +376,19 @@
             padding: 2px 8px;
             border-radius: 3px;
         }
+        .activities .open2{
+            height: 30px;
+            width: 60px;
+            text-align: center;
+            line-height: 30px;
+            background:  rgb(0,153,153);
+            border-radius: 5px;
+            position: absolute;
+            right: 0;
+            bottom: 15px;
+            color: #fff;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -413,6 +426,7 @@
                                     	</if>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}">打开</p>
+                                <p class="open2">公开</p>
                             </div>
                             <div class="content" style="clear: both;"  content-id="{{$vo.id}}">
                                 <h4 class="c_title">项目编辑</h4>
