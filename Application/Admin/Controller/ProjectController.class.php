@@ -64,18 +64,20 @@ class ProjectController extends Controller{
 			
 			$result = $project->listData($this->user);
 	        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
 
 			//拼 老师 姓名与id
 			foreach($result['list_data'] as $_k=>$v){
 
-				$team = $teacTeamModel->join("users on users.user_id=teacher_team.user_id")->where(array("teacher_team.project_id"=>13))->field("users.user_id,users.user_name")->select();
-				
+				$team = $teacTeamModel->join("users on users.user_id=teacher_team.user_id")->where(array("teacher_team.project_id"=>$v['id']))->field("users.user_id,users.user_name")->select();
+                $datas = array();
 				foreach($team as $_v){
 					$result['list_data'][$_k]['u_name'] .= $_v["user_name"].",";
+					$datas[$_v["user_id"]] = $_v["user_id"];
 				}
-				$result['list_data'][$_k]['teac_info'] = $team;
+				$result['list_data'][$_k]['teac_info'] = $datas;
 			}
+
 			$this->assign("teacher_list",$teacher_list);
 	        $this->assign('Page' , $result['Page']);
 	        $this->assign('list_data',$result['list_data']);
