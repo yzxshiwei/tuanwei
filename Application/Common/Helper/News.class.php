@@ -12,7 +12,13 @@ class News{
     public function listData($where=NULL){
 
         $newsModel = new \Common\Model\NewsModel();
-        $count = $newsModel->count();
+		
+		if($where){
+			$count = $newsModel->where($where)->count();
+		}else{
+			$count = $newsModel->count();
+		}
+		
         $Page = new \Think\Page($count,3);
         $page_show = $Page->show();
 		

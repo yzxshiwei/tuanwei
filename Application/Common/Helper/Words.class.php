@@ -12,7 +12,13 @@ class Words{
     public function listData($where=NULL){
 
         $wordsModel = new \Common\Model\WordsModel();
-        $count = $wordsModel->count();
+		
+		if($where){
+			$count = $wordsModel->where($where)->count();
+		}else{
+			$count = $wordsModel->count();
+		}
+
         $Page = new \Think\Page($count,2);
         $page_show = $Page->show();
 		

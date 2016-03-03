@@ -44,7 +44,6 @@ class NewsController extends \Common\Helper\Controller{
      */
     public function library() {
 		
-		
 		$new = new \Common\Helper\News();
 		$where["col"] = \Common\Model\NewsModel::COL_5;
 		$where["flag"] =1;
