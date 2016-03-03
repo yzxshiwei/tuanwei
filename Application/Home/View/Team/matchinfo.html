@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>参加比赛</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <div id="match">
+        <!--poster-->
+        <img class="poster" src="__STATIC__/img/match.png"/>
+        <div class="matchDes">
+            <h3>比赛说明</h3>
+            <ul>
+                {{$minfo["rules"]}}
+            </ul>
+        </div>
+    </div>
+    <div id="footer" class="footer" style="margin-top: 120px">
+        <div id="f_center" style="text-align: left">
+
+        </div>
+    </div>
+</body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+</html>

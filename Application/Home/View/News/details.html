@@ -20,12 +20,7 @@
             <div class="unslider-news">
                 <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="height:388px;">
                     <ul>
-                        <li  data-background="__STATIC__/img/flicker-1.jpg">
-                        </li>
-                        <li  data-background="__STATIC__/img/flicker-2.jpg">
-                        </li>
-                        <li data-background="__STATIC__/img/flicker-3.jpg">
-                        </li>
+                        <li><img src="/{{$ninfo['img_url']}}" width="960px" height="388px" ></li>
                     </ul>
                 </div>
             </div>
@@ -47,23 +42,7 @@
     </div>
 <include file='Public:header'/>
 <include file='Public:footer'/>
-    <script>
-        $(function(){
-              $('.flicker-example').flickerplate(
-              {
-                  auto_flick 				: true,
-                  auto_flick_delay 		: 8,
-                  flick_animation 		: 'transform-slide'
-              });
-              $('.newsnav li').mouseenter(function(){
-                  $(this).find($('.dropNav')).slideDown(200);
-                  $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
-              });
-              $('.dropNav').mouseleave(function(){
-                  $(this).slideUp(200);
-              });
-	    });
-    </script>
+
     <!--ajax-->
     <script>
         //得到上传的地址
