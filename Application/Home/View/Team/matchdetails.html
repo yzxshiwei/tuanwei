@@ -66,19 +66,24 @@
         <!--报名申请-->
         <div class="bmApply">
             <div class="center">
-                <form action="">
+                <form action="{{:U('Team/matchdetails')}}" method="post">
                     <label>
                         <p>选择比赛组别：</p>
-                        <select name="">
-                            <option value=""></option>
+                        <select name="class_id">
+                        	<foreach name="packet_list" item="_v">
+                        		 <option value="{{$_v.id}}">{{$_v.class_name}}</option>
+                        	</foreach>
                         </select>
                     </label>
                     <label>
                         <p>选择比赛项目：</p>
-                        <select name="">
-                            <option value=""></option>
+                        <select name="project_id">
+                        	<foreach name="project_list" item="_v">
+                        		 <option value="{{$_v.id}}">{{$_v.name}}</option>
+                        	</foreach>
                         </select>
                     </label>
+                    <input type="hidden" name="mid" value="{{$id}}">
                     <input type="submit" value="报名申请"/>
                 </form>
             </div>
