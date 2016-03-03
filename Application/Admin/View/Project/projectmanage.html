@@ -484,7 +484,7 @@
                                         	
 	                                        <foreach name="user_data" item="_v">
 	                                            <if condition="$_v.user_id neq $userid">
-	                                            	<option value="{{$_v.user_id}}" >{{$_v.user_name}}</option>
+	                                            	<option value="{{$_v.user_id}}" class="notin_{{$_v.user_id}}" not_in="1" >{{$_v.user_name}}</option>
 	                                            </if>
 	                                    	</foreach>
 	                                    	
@@ -497,7 +497,7 @@
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">老师选择</h3>
                                     
-	                                <foreach name="teacher_list" item="vl" >
+	                                <foreach name="teacher_list" item="vl">
 	                                	<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='1' teacher_id="{{$vl.user_id}}">{{$vl.user_name}}</a>
 	                                	<input type='hidden' name='teacher_id[]' value='{{$vl.user_id}}'>
 	                                </foreach>
@@ -532,27 +532,32 @@
            //添加成员选择
            $('.sureBtn').click(function(){
                var that = $(this);
-               var user_id = $('.choose_s').val();
-	            $.ajax({
-	                type:'post',
-	                url:"{{:U('User/find_user')}}",
-	                data:{
-	                    user_id:user_id
-	                },
-	                cache:false,
-	                dataType:'json',
-	                success:function(data){
-	                	
-	                    that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
-	                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
-	                            '<div class="people_information">' +
-	                            '<h5>'+data.user_name+'</h5>' +
-	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
-	                            '</div>' +
-	                            '</div><button class="p_delete">-</button></li>');
-	                }
-	            });
-                return false;
+               var user_id = that.parent().find('.choose_s').val();
+               var not_in = that.parent().find(".notin_"+user_id).attr("not_in");
+
+               if(not_in=="1"){
+	               	$.ajax({
+			                type:'post',
+			                url:"{{:U('User/find_user')}}",
+			                data:{
+			                    user_id:user_id
+			                },
+			                cache:false,
+			                dataType:'json',
+			                success:function(data){
+			                	
+			                    that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
+			                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
+			                            '<div class="people_information">' +
+			                            '<h5>'+data.user_name+'</h5>' +
+			                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
+			                            '</div>' +
+			                            '</div><button class="p_delete">-</button></li>');
+			                }
+		            });
+		            that.parent().find(".notin_"+user_id).attr("not_in","2")
+	                return false;
+               }
            });
            $('.m_close').click(function(){
                $(this).parent().toggle();
@@ -595,7 +600,6 @@
 	               	}
                });
                
-               
                if(_this.html()=='打开'){
                     _this.html('关闭');
                     content.css('display','block');
@@ -624,11 +628,6 @@
 	               $(teacher_in).val($(teacher_in).val()+content_+",");
 	               $(e).attr("not_in","2");
                }
-
-               
-               
-               
-               
            }
     </script>
     <!--搜索-->
@@ -677,5 +676,4 @@
         });
     </script>
 </body>
-
 </html>
