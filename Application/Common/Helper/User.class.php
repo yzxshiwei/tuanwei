@@ -169,22 +169,25 @@ class User{
      * @return boolean
      */
     public function send_email($email,$content) {
-        Vendor('PHPMailer.Phpmailer');
-        $mail = new \PHPMailer();
+        Vendor('SendEmail');
         
-        $mail->IsSMTP();
-        $mail->CharSet ="UTF-8";//编码
-        $mail->Debugoutput = 'html';// 支持HTML格式
-        $mail->Host = C('MAIL_HOST');//HOST 地址
-        $mail->Port = 25;//端口
-        $mail->SMTPAuth = C('MAIL_SMTPAUTH');
-        $mail->Username = C('MAIL_USERNAME');//用户名
-        $mail->Password = C('MAIL_PASSWORD');//密码
-        $mail->SetFrom(C('MAIL_USERNAME'),'团委');//发件人地址, 发件人名称
-        $mail->AddAddress($email);//收信人地址
-        $mail->Subject = '验证码';//邮件标题
-        $mail->MsgHTML($content);
-        return $mail->Send();
+        $smtpserver = "smtp.163.com";//SMTP服务器
+    	$smtpserverport =25;//SMTP服务器端口
+    	$smtpusermail = "15884572902@163.com";//SMTP服务器的用户邮箱
+    	$smtpemailto = $email;//发送给谁
+    	$smtpuser = "15884572902@163.com";//SMTP服务器的用户帐号
+    	$smtppass = "yzx972479";//SMTP服务器的用户密码
+    	$mailtitle = '验证码';//邮件主题
+    	$mailcontent = "<h1>".$content."</h1>";//邮件内容
+    	$mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
+    	$smtp = new \smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
+    	$smtp->debug = false;//是否显示发送的调试信息
+    	$state = $smtp->sendmail($smtpemailto, $smtpusermail, $mailtitle, $mailcontent, $mailtype);
+    
+    	if($state==""){
+    		return false;
+    	}
+        return true;
     }
     /**
      * 生成邮箱验证码

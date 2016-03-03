@@ -14,7 +14,7 @@ return array(
     'MAIL_USERNAME' =>'15884572902@163.com',//你的邮箱名
     'MAIL_FROM' =>'15884572902@163.com',//发件人地址
     'MAIL_FROMNAME'=>'校团委',//发件人姓名
-    'MAIL_PASSWORD' =>'luoli972479',//邮箱密码
+    'MAIL_PASSWORD' =>'yzx972479',//邮箱密码
     'MAIL_CHARSET' =>'utf-8',//设置邮件编码
     'MAIL_ISHTML' =>TRUE, // 是否HTML格式邮件
 );

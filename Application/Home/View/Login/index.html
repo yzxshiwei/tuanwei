@@ -38,11 +38,14 @@
                 <label id="pwdTs">123</label>
                 <input class="subBtn" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
                 
-                <h5>忘记密码?</h5>
-                <p><span>电子邮箱</span><input id="wj_email" type="text" placeholder="电子邮件地址"/></p>
-                <input class="subBtn" type="button" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
+                
+            </form>
+            <form action="{{:U('User/sendcode')}}" method="post">
+            <h5>忘记密码?</h5>
+                <p><span>电子邮箱</span><input id="wj_email" name="email" type="text" placeholder="电子邮件地址"/></p>
+                <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
                 <h6>注意:</h6>
-                <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
+            <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
             </form>
         </div>
     </div>

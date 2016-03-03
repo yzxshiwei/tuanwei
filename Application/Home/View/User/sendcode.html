@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <style>
+        #team h5{
+            clear: both;
+            text-align: center;
+            color: #48AAA4;
+            margin-bottom: 50px;
+            font-size: 24px;
+        }
+        #team h6{
+            clear: both;
+            color: #48AAA4;
+            margin-bottom: 5px;
+        }
+    </style>
+</head>
+<body>
+    <!--头部-->
+<include file='Public:headerhtml'/>
+    <!--poster-->
+    <div id="team">
+        <div class="poster">
+            <div class="center"><img src="__STATIC__/img/banner-1.jpg"/></div>
+        </div>
+        <!--title-->
+        <div class="title">找回密码</div>
+        <!--content-->
+        <div class="content">
+            <form action="{{:U('User/rtepwd')}}" method="post">
+                <p><span>电子邮箱</span><input name="email" value="{{$email}}" id="email" type="text" placeholder="电子邮件地址"/></p>
+                <label id="emailTs">123</label>
+                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input name="password" id="pwd" type="password" placeholder="设置密码"/></p>
+                
+                <label id="emailTs">123</label>
+                <p><span>验&nbsp;证&nbsp;码</span><input name="code" id="pwd" type="text" placeholder="验证码"/></p>
+                
+                <label id="pwdTs">123</label>
+                <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;认" style="margin-bottom: 120px"/>
+            </form>
+        </div>
+    </div>
+    <!--footer-->
+    <div id="footer" style="clear: both">
+        <div id="f_center">
+
+        </div>
+    </div>
+    </body>
+   <include file='Public:header'/>
+	<include file='Public:footer'/>
+    <script>
+        $(function(){
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</html>

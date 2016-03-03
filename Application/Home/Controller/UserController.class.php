@@ -45,4 +45,40 @@ class UserController extends \Common\Helper\Controller{
             $this->display();
         }
     }
+    /**
+     * 发送验证码
+     * 添加时间2016-2-25
+     *
+     * @author yzx
+     */
+    public function sendcode() {
+        $email = I("post.email",'','string');
+        $user = new \Common\Helper\User();
+        $code = $user->rand_code($email);
+        $result = $user->send_email($email , $code);
+        if ($result == true){
+            $this->assign('email',$email);
+            $this->display();
+        }else {
+            $this->error('发送验证码失败，请检查邮箱是否正确');
+        }
+    }
+    /**
+     * 找回密码
+     * 添加时间2016-2-25 10:36:12
+     *
+     * @author yzx
+     */
+    public function rtepwd(){
+        $password = I('post.password','','string');
+        $code = I('post.code','','string');
+        $email = I('post.email','','string');
+        $user = new \Common\Helper\User();
+        $result = $user->updatepwd($password, $code, $email);
+        if (true){
+            $this->success('修改密码成功',U('Login/login'));
+        }else {
+            $this->error('修改失败');
+        }
+    }
 }
