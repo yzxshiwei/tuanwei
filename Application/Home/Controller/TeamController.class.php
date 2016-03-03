@@ -80,18 +80,39 @@ class TeamController extends \Common\Helper\Controller{
     	}else{
     		$projectModel = new \Common\Model\ProjectModel;
 			$packetModel = new \Common\Model\PacketModel;
+			$matchModel = new \Common\Model\MatchModel;
 			
     		$mid = I("get.id","","string");
     		$userid = $this->user["user_id"];
 			$project_list = $projectModel->where(array("creat_id"=>$userid))->field("id,name")->select();
 			$packet_list = $packetModel->where(array("project_id"=>$mid))->field("id,class_name")->select();
-			
-			$this->assign("id",$mid);
+			$minfo = $matchModel->where(array("id"=>$mid))->field("id,rules")->find();
+			$minfo["rules"] = htmlspecialchars_decode($minfo["rules"]);
+
+			$this->assign("minfo",$minfo);
 			$this->assign("project_list",$project_list);
             $this->assign("packet_list",$packet_list);
     		$this->display();
     	}
     }
+    
+	/**
+	 * 了解详情
+	 * 添加时间 2016-3-3
+	 * 
+	 * @author zlj
+	 */
+	public function matchinfo(){
+		$mid = I("get.id","","string");
+		$matchModel = new \Common\Model\MatchModel;
+		$minfo = $matchModel->where(array("id"=>$mid))->field("id,rules")->find();
+		$minfo["rules"] = htmlspecialchars_decode($minfo["rules"]);
+
+		$this->assign("minfo",$minfo);
+		$this->display();
+	}
+	
+	
     /**
      * 往期活动
      * 添加时间2016-2-16
