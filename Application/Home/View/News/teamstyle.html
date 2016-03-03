@@ -20,13 +20,14 @@
         text-decoration: underline;
         }
         .news{
-        padding-top: 10px;
+        padding: 10px;
+        	margin-bottom:30px;
+        	border:1px dashed #ccc;
         }
         .news li{
         height: 44px;
         line-height: 44px;
         color: #444;
-        border-bottom: 1px solid #ccc;
         position: relative;
         }
         .news li a{
@@ -42,6 +43,7 @@
         top:8px;
         color: rgb(154,150,149);
         }
+        
     </style>
 </head>
 <body>
@@ -50,11 +52,9 @@
 <div id="content">
 <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
     <ul class="slider_bag"> 
-      
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-        <li data-background="" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)">没有新闻</a></div></li>
-       
+      <foreach name="img_url" item="vo">
+        <li data-background="{{$vo.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="{{:U('Home/Team/teamDetails',array('project_id' => $vo['project_id']))}}"></a></div></li>
+      </foreach>
     </ul>
 </div>
          <div class="announcement">
@@ -62,19 +62,17 @@
          </div>
          <div id="n_center">
              <div class="n_content">
+             <foreach name="data" item="vo">
                  <ul class="news">
-                     <li><a href="{{:U('News/details')}}"><span>诸葛亮写给儿子的一封信，仅86字，但足以震惊60亿人...</span><img src="__STATIC__/img/country.png"/></a></li>
+                     <li><a href="{{:U('Home/Team/teamDetails',array('project_id' => $vo['project_id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
+                    <li><p>团队介绍 : {{$vo.contents}}</p></li> 
                  </ul>
+             </foreach>
              </div>
-             <div class="page" style="margin: 40px 0px">
-                 <ul>
-                     <li class="onPage"> < 上一页</li>
-                     <li class="active">1</li>
-                     <li>2</li>
-                     <li>3</li>
-                     <li>4</li>
-                     <li class="nextPage">下一页 > </li>
-                 </ul>
+             <div id="page_front" style="margin: 40px 0px">
+             	<ul>
+             	 {{$page}}
+              </ul>
              </div>
          </div>
      </div>
@@ -90,6 +88,12 @@
 <include file='Public:footer'/>
 <script>
     $(function(){
+    	  $('.flicker-example').flickerplate(
+                  {
+                      auto_flick 				: true,
+                      auto_flick_delay 		: 8,
+                      flick_animation 		: 'transform-slide'
+                  });
         $('.newsnav li').mouseenter(function(){
             $(this).find($('.dropNav')).slideDown(200);
             $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
