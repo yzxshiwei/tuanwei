@@ -28,7 +28,7 @@ class Project{
         $Page = new \Think\Page($count,12);
         $page_show = $Page->show();
         $porjectModel_l
-        ->field('p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type')
+        ->field('p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type')
         ->alias('p')
         ->join('match_project AS mp ON (p.id = mp.project_id)')
         ->join('`match` AS m ON(m.id = mp.match_id)')

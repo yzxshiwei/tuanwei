@@ -38,12 +38,12 @@
                     </if>
                     <label>
                         <h5>{{$vo.name}}</h5>
-                        <a href="{{:U('Team/matchdetails')}}" class="bmBtn">申请报名</a>
+                        <a href="{{:U('Team/matchdetails',array('id'=>$vo['id']))}}" class="bmBtn">申请报名</a>
                         <if condition="$vo.sub_title neq ''">
                         	<p>主题：{{$vo.sub_title}}</p>
                         </if>
                         <p>简介：{{$vo.rules}}...</p>
-                        <a href="front_match.html" class="for_details">了解详情</a>
+                        <a href="{{:U('Team/matchinfo',array('id'=>$vo['id']))}}" class="for_details">了解详情</a>
                     </label>
                 </li>
              </foreach>

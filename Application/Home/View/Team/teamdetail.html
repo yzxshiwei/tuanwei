@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>团队组建</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css"/>
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css"/>
+    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+    <style>
+        .news-page-body {
+            font-size: 16px;
+            color: #666666;
+            text-align: left;
+            margin-top: 60px; }
+        .news-page-body h2{
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        .news-page-body p{
+            margin-bottom: 30px;
+            text-indent: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <include file='Public:headerhtml'/>
+    <div class="news-header-cover">
+        <div class="news-header-body">
+            <h1 class="title">XXXX团队</h1>
+            <p class="writer">团队形象</p>
+
+            <div class="unslider-news">
+                <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="height:388px;">
+                    <ul>
+                        <li  data-background="img/flicker-1.jpg"></li>
+                        <li  data-background="img/flicker-2.jpg"></li>
+                        <li data-background="img/flicker-3.jpg">/li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="news-page-body">
+                <h2>团队介绍:</h2>
+                <p>
+                    外交部发言人陆慷27日就美国拉森号军舰进入中国南沙群岛有关岛礁邻近海域答记者问时说
+                    美方军舰有关行为威胁中国主权和安全利益，危及岛礁人员及设施安全，损害地区和平稳定。
+                    中方强烈敦促美方认真对待中方严正交涉，立即纠正错误。
+                </p>
+                <h2>团队成员:</h2>
+                <p>
+                    张三、李四、王二麻子
+                </p>
+            </div>
+        </div>
+    </div>
+    <!--footer-->
+    <div id="footer">
+        <div id="f_center">
+
+        </div>
+    </div>
+    <include file='Public:header'/>
+    <include file='Public:footer'/>
+    <script>
+        $(function(){
+            $('.flicker-example').flickerplate(
+                    {
+                        auto_flick 				: true,
+                        auto_flick_delay 		: 8,
+                        flick_animation 		: 'transform-slide'
+                    });
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</body>
+    <script src="js/plugin.js"></script>
+</html>

@@ -350,11 +350,9 @@
                                     <select class="choose_s">
 
                                         <foreach name="list_data" item="vo">
-                                            
                                             <if condition="$vo.user_id neq $userid">
-                                            	<option value="{{$vo.user_id}}" >{{$vo.user_name}}</option>
+                                            	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
                                             </if>
-                                    		
                                     	</foreach>
 
                                     </select>
@@ -365,11 +363,9 @@
                             <div class="mt teacherBox" add-th-dy-id="0">
                                 <b class="m_close">X</b>
                                 <h3 class="m_title">老师选择</h3>
-                                
                                 <foreach name="teacher_list" item="vo" >
                                 	<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>
                                 </foreach>
-                                
                             </div>
                         </div>
                     </div>
@@ -411,37 +407,42 @@
             }
         }
         //添加成员选择
-        $('.sureBtn').click(function(){ alert("a");
+        $('.sureBtn').click(function(){
             var that = $(this);
             var user_id = $('.choose_s').val();
+            var not_in = $('.notin_'+user_id).attr("not_in");
+            
+            if(not_in=='1'){
+	            $.ajax({
+	                type:'post',
+	                url:"{{:U('User/find_user')}}",
+	                data:{user_id:user_id},
+	                cache:false,
+	                dataType:'json',
+	                success:function(data){
+	                    that.parent().parent().parent().find('.p_team ul').append('<li uid="'+data.user_id+'"><div class="team_information">' +
+	                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
+	                            '<div class="people_information">' +
+	                            '<h5>'+data.user_name+'</h5>' +
+	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
+	                            '</div>' +
+	                            '</div><button class="p_delete">-</button></li>');
+	                }
+	            });
+	            $('.notin_'+user_id).attr("not_in","2");
+	            return false;
+            }
 
-            $.ajax({
-                type:'post',
-                url:"{{:U('User/find_user')}}",
-                data:{
-                    user_id:user_id
-                },
-                cache:false,
-                dataType:'json',
-                success:function(data){
-                	
-                    that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
-                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
-                            '<div class="people_information">' +
-                            '<h5>'+data.user_name+'</h5>' +
-                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
-                            '</div>' +
-                            '</div><button class="p_delete">-</button></li>');
-                }
-            });
-            return false;
         });
         $('.m_close').click(function(){
             $(this).parent().toggle();
         });
         //删除
         $(document).on('click','.p_delete',function(){
-            $(this).parent().remove();
+        	var trs = $(this).parent();
+        	var uid = trs.attr("uid");
+        	trs.remove();
+        	$('.notin_'+uid).attr("not_in","1");
             return false;
         });
     </script>
