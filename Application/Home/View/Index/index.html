@@ -116,7 +116,7 @@
             <div class="news-card">
                 
                 <foreach name="newList" item="_v">
-                	<span class="news-content"><a href="" >{{$_v.title}}</a></span>
+                	<span class="news-content"><a href="{{:U('News/details',array('id'=>$_v['id']))}}" >{{$_v.title}}</a></span>
                 </foreach>
                 
                 <span class="news-block">公告-新闻</span>
