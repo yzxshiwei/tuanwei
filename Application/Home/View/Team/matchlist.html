@@ -43,7 +43,7 @@
                         	<p>主题：{{$vo.sub_title}}</p>
                         </if>
                         <p>简介：{{$vo.rules}}...</p>
-                        <a href="front_match.html" class="for_details">了解详情</a>
+                        <a href="{{:U('Team/matchinfo',array('id'=>$vo['id']))}}" class="for_details">了解详情</a>
                     </label>
                 </li>
              </foreach>
