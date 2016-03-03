@@ -125,4 +125,22 @@ class IndexController extends \Admin\Controller\Controller {
 	    $id = I('id',0,'intval');
 	    $proid = I('proid',0,'intval');
 	}
+	/**
+	 * 阅读信息
+	 * 添加时间2016-3-3
+	 * 
+	 * @author yzx
+	 */
+	public function read() {
+	    $id = I("id",0,'intval');
+	    $messageModel = new \Common\Model\MessageModel();
+	    $save_data = array();
+	    $save_data['read_time'] = time();
+	    $result = $messageModel->where(array('id'=>$id))->save($save_data);
+	    if ($result){
+	        $this->success('阅读成功');
+	    }else {
+	        $this->error('阅读失败');
+	    }
+	}
 }

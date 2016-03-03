@@ -26,6 +26,7 @@ class Message{
                     $msg_list[$k]['is_sys'] = 1;
                 }else {
                     $msg_list[$k]['is_sys'] = 0;
+                    $msg_list[$k]['read_url'] = U('Index/read',array('id'=>$v['id']));
                 }
             }
         }
