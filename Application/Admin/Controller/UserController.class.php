@@ -27,12 +27,13 @@ class UserController extends Controller{
             $input_data['card_id'] = I('post.card_id',0,'intval');
             $input_data['user_type'] = I('post.user_type',0,'intval');
             $input_data['sex'] = I('post.sex',0,'intval');
-            $input_data['passwd'] = I('post.passwd',''.'string');
+            $input_data['passwd'] = I('post.password','','string');
             $input_data['college'] = I('post.college','','string');
             $input_data['user_name'] = I('post.user_name','','string');
             $input_data['nation'] = I('post.nation','','string');
             $input_data['major'] = I('post.major',0,'intval');
             $input_data['degree'] = I('post.degree',0,'intval');
+			$input_data['birth'] = I('post.birth',null,'string');
             $result = $userModel->addUser($input_data);
             if ($result['status']){
                 $this->success('注册成功',U('Index/usermanage'));
