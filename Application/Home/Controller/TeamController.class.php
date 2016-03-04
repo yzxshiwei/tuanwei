@@ -65,18 +65,26 @@ class TeamController extends \Common\Helper\Controller{
      */
     public function matchdetails() {
     	if(IS_POST){
+    		
     		$mpModel = M("match_project");
+			$matchModel = new \Common\Model\MatchModel;
 			
-    		$data = array();
-			$data["match_id"] = I("post.mid","","string");
-			$data["project_id"] = I("post.project_id","","string");
-			$data["class_id"] = I("post.class_id","","string");
-			$res = $mpModel->add($data);
-			if($res){
-				$this->success("申请成功",U('Team/matchlist'));
+			$times_info = $matchModel->where(array("id"=>$data["match_id"]))->field("sign_start_time,sign_end_time")->find();
+				if($times_info["sign_start_time"]<time() && $times_info["sign_end_time"]>time()){
+				    		$data = array();
+				$data["match_id"] = I("post.mid","","string");
+				$data["project_id"] = I("post.project_id","","string");
+				$data["class_id"] = I("post.class_id","","string");
+				$res = $mpModel->add($data);
+				if($res){
+					$this->success("申请成功",U('Team/matchlist'));
+				}else{
+					$this->error("申请失败");
+				}
 			}else{
-				$this->error("申请失败");
+				$this->error("此比赛报名时间已过");
 			}
+
     	}else{
     		$projectModel = new \Common\Model\ProjectModel;
 			$packetModel = new \Common\Model\PacketModel;
