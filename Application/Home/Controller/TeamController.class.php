@@ -39,15 +39,15 @@ class TeamController extends \Common\Helper\Controller{
     public function matchlist() {
     	$Match = M('match');
     	$timestamp = time();
-    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=2 AND $timestamp < project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=1 AND $timestamp < project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
     	
     	foreach ($data as $k=>&$v){
     		$v['rules'] = htmlspecialchars_decode(substr($v['rules'],0, 150));
     		unset($v);
     	}
-    	$img_url = $Match->field('id, cover_src')->where("cover_src is not null and state=2 AND $timestamp < project_end_time")->limit(5)->select();
+    	$img_url = $Match->field('id, cover_src')->where("cover_src is not null and state=1 AND $timestamp < project_end_time")->limit(5)->select();
     	
-    	$count = $Match->where("state=2 AND $timestamp < project_end_time")->count();
+    	$count = $Match->where("state=1 AND $timestamp < project_end_time")->count();
     	//分页
     	$page = new \Think\Page($count, 3);
     	$show = $page->show();
@@ -120,6 +120,20 @@ class TeamController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function oldactivity() {
+        $Match = M('match');
+    	$timestamp = time();
+    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=1 AND $timestamp > project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$count = $Match->where("state=1 AND $timestamp > project_end_time")->count();
+    	
+    	foreach ($data as $k=>&$v){
+    	    $v['rules'] = htmlspecialchars_decode(substr($v['rules'],0, 150));
+    	    unset($v);
+    	}
+    	//分页
+    	$page = new \Think\Page($count, 5);
+    	$show = $page->show();
+    	$this->assign('data', $data);	
+    	$this->assign('page', $show);
         $this->display();
     }
     /**
@@ -134,8 +148,29 @@ class TeamController extends \Common\Helper\Controller{
     /**
      * 团队详情
      */
-    public function teamDetails() {
-        echo 'sdfsdfs';die();
+    public function teamDails() {
+        $project_id = I('get.project_id', false,'intval');
+        if(!$project_id){
+            $this->error('页面错误');
+        }
+        
+        $Team = M('team');
+        $data = $Team->field('img_url,team_name,contents')->where(array(
+            'user_type' => 'captain',
+            'project_id' => $project_id
+        ))->select();
+        
+        $members = $Team->table('team t')->join('users u on t.user_id=u.user_id')->field('u.user_name')->where(array(
+            'project_id' => $project_id
+        ))->select();
+        
+        foreach ($members as $k => $v){
+            $names .= $v['user_name'].' '; 
+        }
+//         var_dump($data);
+//         exit;
+        $this->assign('data', $data[0]);
+        $this->assign('names', $names);
         $this->display();
     }
 }
