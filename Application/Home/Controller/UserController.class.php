@@ -76,7 +76,7 @@ class UserController extends \Common\Helper\Controller{
         $user = new \Common\Helper\User();
         $result = $user->updatepwd($password, $code, $email);
         if (true){
-            $this->success('修改密码成功',U('Login/login'));
+            $this->success('修改密码成功',U('Login/index'));
         }else {
             $this->error('修改失败');
         }
