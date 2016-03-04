@@ -16,50 +16,45 @@ class ProjectController extends Controller{
 		
 		if(IS_POST){
 
+			$posjectModel = M("project");
+		    //开启事务
+		    $posjectModel->startTrans();
+		   
+            $post_data = array();
+
 			$file_res = uploadFile('project_file');
-            if (!$file_res['status']){
-               $this->error($file_res['msg']);
-            }else {
-
-               $posjectModel = M("project");
-			   //开启事务
-			   $posjectModel->startTrans();
-			   
-               $post_data = array();
-               $post_data['name'] = I('post.name','','string');
-               $post_data['sub_title'] = I('post.sub_title','','string');
+            if ($file_res['status']){
                $post_data['file_url'] = $file_res['file_path'];
-               $post_data['intro'] = I('post.intro','','string');
-			   $pid = I("post.pid",'','string');
-			   
-			   $result = $posjectModel->where(array("id"=>$pid))->save($post_data);  
-			   if ($result){
-				   //先此项目的团队删除 再添加
-				   $userid = I("post.userid");
-				   $team = new \Common\Model\TeamModel;
+            }
+			
+            $post_data['name'] = I('post.name','','string');
+            $post_data['sub_title'] = I('post.sub_title','','string');
+            $post_data['intro'] = I('post.intro','','string');
+	        $pid = I("post.pid",'','string');
+		   
+		    $result = $posjectModel->where(array("id"=>$pid))->save($post_data);
 
-				   $team->where(array("project_id"=>$pid))->delete();
-				   $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
-				   
-				   //将项目老师 删除 再添加
-				   $teach_id = I('post.teacher_id');
-				   $teachModel = new \Common\Model\Teacher_TeamModel;
-				   
-				   $teachModel->where(array("project_id"=>$pid,"team_type"=>1))->delete();
-				   $return = $teachModel->addTeam($teach_id,$pid,1);
-				   
-				   if($res && $return){
-				   	  $posjectModel->commit();
-				   	  $this->success('更新项目成功',U('Project/projectmanage'));
-				   }else{
-				   	  $posjectModel->rollback();
-				   	  $this->error('更新项目失败');
-				   }
-               }else {
-               	   $posjectModel->rollback();
-                   $this->error('更新项目失败');
-               }
-		    }
+		    //先此项目的团队删除 再添加
+		    $userid = I("post.userid");
+	    	$team = new \Common\Model\TeamModel;
+
+		    $team->where(array("project_id"=>$pid))->delete();
+		    $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
+		   
+		    //将项目老师 删除 再添加
+		    $teach_id = I('post.teacher_id');
+		    $teachModel = new \Common\Model\Teacher_TeamModel;
+		   
+		    $teachModel->where(array("project_id"=>$pid,"team_type"=>1))->delete();
+		    $return = $teachModel->addTeam($teach_id,$pid,1);
+		   
+		    if($res || $return || $result){
+		   	   $posjectModel->commit();
+		   	   $this->success('更新项目成功',U('Project/projectmanage'));
+		    }else{
+		   	   $posjectModel->rollback();
+		   	   $this->error('更新项目失败');
+			}
 		}else{
 			
 			$result = $project->listData($this->user);

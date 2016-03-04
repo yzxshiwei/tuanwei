@@ -29,11 +29,11 @@
 							</tr>
 							<foreach name="list_data" item="vo">
 								<tr nid="{{$vo.id}}">
-									<td><p class="text_left">{{$vo.id}}</p></td>
-									<td><p class="text_left"><a class="a_news" target="_blank" href="news_review.html?id='+v.id+'">{{$vo.title}}</a></p></td>
-									<td><p class="text_left">{{$vo.col}}</p></td>
-									<td><p class="time text_left">提交时间:</br>{{$vo.public_t|date="Y-m-d",###}}</p></td>
-									<td><p class="state text_left">
+									<td><p>{{$vo.id}}</p></td>
+									<td><p><a class="a_news" target="_blank" href="news_review.html?id='+v.id+'">{{$vo.title}}</a></p></td>
+									<td><p>{{$vo.col}}</p></td>
+									<td><p class="time">提交时间:</br>{{$vo.public_t|date="Y-m-d",###}}</p></td>
+									<td><p class="state">
 										<if condition="$vo.flag eq 1"> 
 										            统一发布
 										<elseif condition="$vo.flag eq 2" /> 
