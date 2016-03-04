@@ -60,11 +60,11 @@
                 <!-- tab-content -->
                 <div class="tab-content">
                     <div class="person">
-                        <h3 class="title">个人状态页面</h3>
-                        <form action="">
+                        <h3 class="title">个人资料</h3>
+                        <form action="{{:U('m=Admin&c=Index&a=person',array('id' => $id))}}" type="post">
                             <label><span> &nbsp;&nbsp;&nbsp;用户名 : </span><input type="text"/></label>
                             <label><span>个人介绍 : </span><textarea></textarea></label>
-                            <input type="submit" value="提交"/>
+                            <input type="submit" value="确认修改"/>
                         </form>
                     </div>
                 </div>

@@ -64,7 +64,7 @@
              <div class="n_content">
              <foreach name="data" item="vo">
                  <ul class="news">
-                     <li><a href="{{:U('Home/Team/teamDetails',array('project_id' => $vo['project_id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
+                     <li><a href="{{:U('Home/Team/teamDails',array('project_id' => $vo['project_id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
                     <li><p>团队介绍 : {{$vo.contents}}</p></li> 
                  </ul>
              </foreach>

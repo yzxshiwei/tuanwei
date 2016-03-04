@@ -93,9 +93,17 @@ class IndexController extends \Admin\Controller\Controller {
 	 * 个人信息
 	 * 添加时间15:27:05
 	 * 
-	 * @author yzx
+	 * @author MuTao
 	 */
 	public function person() {
+	    $user_id = $this->user['user_id'];
+	    var_dump($this->user);
+	    exit;
+	    $Users = M('users');
+// 	    $Users->find('')
+	    if(IS_POST){
+	        
+	    }
 	    $this->display();
 	}
 	/**

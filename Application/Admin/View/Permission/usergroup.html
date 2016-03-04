@@ -59,19 +59,19 @@
                 <!-- tab-content -->
                 <div class="tab-content">
                     <div id="power_group">
-                        <h3 class="title">添加分组</h3>
+                        <h3 class="title">修改权限</h3>
                         <form action="{{:U('Permission/usergroup')}}" method="post">
                         	<input name="user_id" type="hidden" value="{{$data.user_id}}" />
                             <label><span>用户名称 : </span><input readonly="readonly" value="{{$data.user_name}}" type="text" /></label>
                             <label>
-                                <span>选择分组 : </span>
+                                <span>权限类别 : </span>
                                 <select name="group_id" >
                                 	<foreach name="gorup_list" key="key" item="vo">
                                     <option <if condition="$vo['id'] eq $data['group_id']">selected="selected"</if> value="{{$vo.id}}">{{$vo.group_name}}</option>
                                     </foreach>
                                 </select>
                             </label>
-                            <input type="submit" value="添加"/>
+                            <input type="submit" value="确认修改"/>
                         </form>
                     </div>
                 </div>

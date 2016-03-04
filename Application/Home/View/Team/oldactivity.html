@@ -22,7 +22,7 @@
                     <li data-background="__STATIC__/img/flicker-2.jpg">
                         <!--<div class="flick-title">主标题</div>-->
                         <!--<div class="flick-sub-text">副标题</div>-->
-                    </li>
+                    </li>	
                     <li data-background="__STATIC__/img/flicker-3.jpg">
                         <!--<div class="flick-title">主标题</div>-->
                         <!--<div class="flick-sub-text">副标题</div>-->
@@ -41,48 +41,22 @@
         <div class="content">
             <!--详细信息-->
             <ul class="i_des">
+            <foreach name="data" item="vo">    
                 <li>
-                    <img src=""/>
+                    <img src="{{$vo.cover_src}}"/>
                     <label>
-                        <h5>中国“互联网+”大学生创新创业大赛</h5>
-                        <p>主题：“互联网+”成就梦想，创新创业开辟未来</p>
-                        <p>简介：</p>
-                        <span>
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。
-                        </span>
-                        <a href="{{:U('Team/matchdetails')}}" class="for_details">了解详情</a>
+                        <h5>{{$vo.name}}</h5>
+                        <if condition="$vo.sub_title neq ''">
+                        	<p>主题：{{$vo.sub_title}}</p>
+                        </if>
+                        <p>简介：{{$vo.rules}}</p>
+                        <a href="{{:U('Team/matchinfo',array('id' => $vo['id']))}}" class="for_details">了解详情</a>
                     </label>
                 </li>
-                <li>
-                    <img src=""/>
-                    <label>
-                        <h5>中国“互联网+”大学生创新创业大赛</h5>
-                        <p>主题：“互联网+”成就梦想，创新创业开辟未来</p>
-                        <p>简介：</p>
-                        <span>
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。“互联网+”成就梦想，创新创业开辟未来。
-                            “互联网+”成就梦想，创新创业开辟未来。
-                        </span>
-                        <a href="{{:U('Team/matchdetails')}}" class="for_details">了解详情</a>
-                    </label>
-                </li>
+            </foreach>
             </ul>
-            <div class="page">
-                <ul>
-                    <li class="onPage"> < 上一页</li>
-                    <li class="active">1</li>
-                    <li>2</li>
-                    <li>3</li>
-                    <li>4</li>
-                    <li class="nextPage">下一页 > </li>
-                </ul>
+            <div id="page_front">
+                    {{$page}}
             </div>
         </div>
     </div>
