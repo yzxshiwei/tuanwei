@@ -31,7 +31,6 @@ class UserController extends Controller{
             $input_data['college'] = I('post.college','','string');
             $input_data['user_name'] = I('post.user_name','','string');
             $input_data['nation'] = I('post.nation','','string');
-            $input_data['birth'] = I('post.birth','','string');
             $input_data['major'] = I('post.major',0,'intval');
             $input_data['degree'] = I('post.degree',0,'intval');
             $result = $userModel->addUser($input_data);
