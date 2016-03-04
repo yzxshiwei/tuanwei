@@ -1,4 +1,42 @@
-
+        <style>
+            #left_nav {
+                background: #f0f0f0;
+                width: 200px;
+            }
+            #left_nav li{
+                height:40px;
+                line-height: 40px;
+                padding-left: 30px;
+            }
+            #left_nav li i{
+                margin-right: 10px;
+                width: 20px;
+                text-align: center;
+            }
+            #left_nav .active{
+                background: #fff;
+            }
+            #left_nav .active a{
+                color: darkseagreen;
+            }
+            /*#left_nav .active i{
+                color: darkseagreen;
+            }*/
+            
+            #left_nav .active_i{
+                color: darkseagreen;
+            }
+        </style>
+        <script>
+            $(function(){
+                $('#left_nav li').click(function(){
+                   $(this).addClass('active').siblings().removeClass('active');
+                });
+                 $('#left_nav li').click(function(){
+                    $(this).find('i').addClass('active_i').siblings().find('i').removeClass('active_i');
+                });
+            });
+        </script>
 		<div class="container pb30">
 			<div class="clear-backend">
 			<div class="avatar">
@@ -8,21 +46,29 @@
 					</a>
 				</div>
 			</div>
-
 			<!-- tab-menu -->
 			<div class="aaa"></div>
 
-			
-			<foreach name="navigation" key="key" item="vo">
-				<foreach name="user.author" key="akey" item="avo">
-					<if condition="$key eq $avo['permission']">
-						<span>
-						<a href="{{:U($vo['url'])}}">{{$vo.name}}</a>
-						</span>
-						<i class="{{$vo.ico}}"></i>
-					</if>
-				</foreach>
-			</foreach>
+                <ul id="left_nav">
+                    <foreach name="navigation" key="key" item="vo">
+                        <foreach name="user.author" key="akey" item="avo">
+                            <if condition="$key eq $avo['permission']">
+                                    <if condition="in_array($class_name,$vo['map'])">
+                                         <li class="active"><i class="{{$vo.ico}} active_i"></i>
+                                    <else />
+                                         <li><i class="{{$vo.ico}}"></i>
+                                    </if>
+                                    
+
+                                        <span >
+                                            <a href="{{:U($vo['url'])}}">{{$vo.name}}</a>
+                                        </span>
+                                    </li>
+
+                            </if>
+                        </foreach>
+                    </foreach>
+                </ul>
 			<div class='side_bar'></div>
 			
 			<!-- tab-top-bar -->
