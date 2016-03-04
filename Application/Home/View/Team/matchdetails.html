@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>参加比赛</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <div id="match">
+        <!--poster-->
+        <img class="poster" src="__STATIC__/img/match.png"/>
+        <div class="matchDes">
+            <h3>比赛说明</h3>
+            <ul>
+                {{$minfo["rules"]}}
+            </ul>
+        </div>
+        <!--报名申请--> 
+        <div class="bmApply">
+            <div class="center">
+                <form action="{{:U('Team/matchdetails')}}" method="post">
+                    <label>
+                        <p>选择比赛组别：</p>
+                        <select name="class_id">
+                        	<foreach name="packet_list" item="_v">
+                        		 <option value="{{$_v.id}}">{{$_v.class_name}}</option>
+                        	</foreach>
+                        </select>
+                    </label>
+                    <label>
+                        <p>选择比赛项目：</p>
+                        <select name="project_id">
+                        	<foreach name="project_list" item="_v">
+                        		 <option value="{{$_v.id}}">{{$_v.name}}</option>
+                        	</foreach>
+                        </select>
+                    </label>
+                    <input type="hidden" name="mid" value="{{$minfo['id']}}">
+                    <input type="submit" value="报名申请"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="footer" style="margin-top: 120px">
+        <div id="f_center" style="text-align: left">
+
+        </div>
+    </div>
+</body>
+<include file='Public:header'/>
+<include file='Public:footer'/>
+<script>
+
+    //提交比赛
+    $("#upload_works").click(function(){
+        $.ajaxFileUpload({
+                    url:"{{:U('Team/matchdetails')}}",//处理图片脚本
+                    secureuri :false,
+                    fileElementId :'upload_file',//file控件id
+                    dataType : 'json',
+                    success : function (data, status){
+                        up = {"project_id":race_id,"class":$("#class").val(),"add":data.add}
+                       $.post("backend/my-php/lee/match_enroll.php",up,function(data,success){
+                        if(success){
+                            alert("报名成功")
+                            window.location.href="./front_match_information.html"
+                        }
+
+
+                       })
+                    }
+                });
+
+
+    })
+
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+   
+</script>
+</html>
