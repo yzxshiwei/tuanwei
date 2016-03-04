@@ -16,7 +16,14 @@
             #left_nav .active{
                 background: #fff;
             }
-            #left_nav .active a,i{
+            #left_nav .active a{
+                color: darkseagreen;
+            }
+            /*#left_nav .active i{
+                color: darkseagreen;
+            }*/
+            
+            #left_nav .active_i{
                 color: darkseagreen;
             }
         </style>
@@ -24,6 +31,9 @@
             $(function(){
                 $('#left_nav li').click(function(){
                    $(this).addClass('active').siblings().removeClass('active');
+                });
+                 $('#left_nav li').click(function(){
+                    $(this).find('i').addClass('active_i').siblings().find('i').removeClass('active_i');
                 });
             });
         </script>
@@ -36,7 +46,6 @@
 					</a>
 				</div>
 			</div>
-
 			<!-- tab-menu -->
 			<div class="aaa"></div>
 
@@ -44,9 +53,13 @@
                     <foreach name="navigation" key="key" item="vo">
                         <foreach name="user.author" key="akey" item="avo">
                             <if condition="$key eq $avo['permission']">
+                                    <if condition="in_array($class_name,$vo['map'])">
+                                         <li class="active"><i class="{{$vo.ico}} active_i"></i>
+                                    <else />
+                                         <li><i class="{{$vo.ico}}"></i>
+                                    </if>
+                                    
 
-                                    <li class="active">
-                                        <i class="{{$vo.ico}}"></i>
                                         <span >
                                             <a href="{{:U($vo['url'])}}">{{$vo.name}}</a>
                                         </span>

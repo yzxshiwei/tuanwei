@@ -28,6 +28,7 @@ class Controller extends \Common\Helper\Controller{
         $this->assign('message_count' , $this->count_message);
         $this->assign('user' , $this->user);
         $this->assign('navigation',$navigation);
+		$this->assign("class_name",ACTION_NAME);
         $isAllowsLogin = $info && in_array(intval($info["user_type"]),$allows);
         if(!$isAllowsLogin && \Common\Helper\RunUser::newInstantiation()->isTourist() && IS_AJAX ){//游客AJAX
             return $this->error("请登录后在操作");

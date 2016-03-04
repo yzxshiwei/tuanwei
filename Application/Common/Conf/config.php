@@ -15,46 +15,68 @@ return array(
     "PERMISSION"=>array(
         "usermanage" => array('name'=>"人员管理",
                               'url'=>'Index/usermanage',
-                              'ico' => 'fa fa-user'),
+                              'ico' => 'fa fa-user',
+							  'map' =>array("index","usermanage","person","agree","refuse","read")
+							  ),
         
         "teammanage" => array('name' => "团队管理",
                              'url'=>'Index/teammanage',
-                             'ico' => 'fa fa-users'),
+                             'ico' => 'fa fa-users',
+							 'map' =>array("teammanage","updateteam")
+							 ),
         
         "createnews" => array('name' => "创建信息",
                               'url'=>'News/createnews',
-                              'ico' => 'fa fa-lightbulb-o'),
+                              'ico' => 'fa fa-lightbulb-o',
+							  'map' =>array("createnews")
+							  ),
         
         "creatematch" => array('name' => "创建比赛",
                                'url' => 'Match/creatematch',
-                               'ico' => 'fa  fa-graduation-cap'),
+                               'ico' => 'fa  fa-graduation-cap',
+							   'map' => array("creatematch")
+							   ),
         
         "createproject" => array('name' => "创建项目",
                                  'url' => 'Project/createproject',
-                                 'ico' => 'fa fa-bookmark-o'),
+                                 'ico' => 'fa fa-bookmark-o',
+								 'map' => array("createproject")
+								 ),
         
         "matchmanage" => array('name' => "比赛管理",
                                'url' => 'Match/matchmanage',
-                               'ico' => 'fa fa-futbol-o'),
+                               'ico' => 'fa fa-futbol-o',
+                               'map' => array("matchmanage","editmatch","viewmatch")
+							   ),
         
         "newsmanage" => array('name' => "信息管理",
                               'url' => 'News/newsmanage',
-                              'ico' => 'fa fa-cubes'),
+                              'ico' => 'fa fa-cubes',
+							  'map' =>array("newsmanage")
+							  ),
         
         "teamdiscuss" => array('name' => "团队交流",
                                'url' => 'Team/teamdiscuss',
-                               'ico' => 'fa fa-language'),
+                               'ico' => 'fa fa-language',
+							   'map' =>array("teamdiscuss")
+							   ),
         
         "projectmanage" => array('name' => "项目管理",
                                  'url' => 'Project/projectmanage',
-                                 'ico' => 'fa fa-share-alt'),
+                                 'ico' => 'fa fa-share-alt',
+								 'map' => array("projectmanage","workreview",)
+								 ),
         
         "grouplist" => array('name' => "分组列表",
                              'url' => 'Permission/grouplist',
-                             'ico' => 'fa fa-bars'),
+                             'ico' => 'fa fa-bars',
+							 'map' =>array("grouplist","addpermission","usergroup")
+							 ),
         
         "addgroup" => array('name' => "创建分组",
                             'url' => 'Permission/addgroup',
-                            'ico' => 'fa fa-suitcase')
+                            'ico' => 'fa fa-suitcase',
+							'map' =>array("addgroup")
+							)
     ),
 );
