@@ -118,7 +118,8 @@ class IndexController extends \Admin\Controller\Controller {
 	        if (!$result){
 	            $this->error('修改失败');
 	        }else {
-	            $this->success('修改成功');
+	            \Common\Helper\RunUser::newInstantiation()->signOut();
+	            $this->success('修改成功',U('Home/Login/index'));
 	        }
 	    }
 	    $this->display();
