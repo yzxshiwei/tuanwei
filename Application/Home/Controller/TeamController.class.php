@@ -70,7 +70,7 @@ class TeamController extends \Common\Helper\Controller{
 			$matchModel = new \Common\Model\MatchModel;
 			
 			$times_info = $matchModel->where(array("id"=>$data["match_id"]))->field("sign_start_time,sign_end_time")->find();
-				if($times_info["sign_start_time"]<time() && $times_info["sign_end_time"]>time()){
+			if($times_info["sign_start_time"]<time() && $times_info["sign_end_time"]>time()){
 				    		$data = array();
 				$data["match_id"] = I("post.mid","","string");
 				$data["project_id"] = I("post.project_id","","string");
