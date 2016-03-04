@@ -64,37 +64,37 @@
                         <form action="">
                             <label>
                                 <span>用户名 : </span>
-                                <input id="userName" type="text"/>
+                                <input name="user_name" value="{{$user.user_name}}" id="userName" type="text"/>
                                 <b id="name_ts"></b>
                             </label>
                             <label>
                                 <span>原密码 : </span>
-                                <input type="text"/>
+                                <input name="old_pwd" type="password"/>
                                 <b></b>
                             </label>
                             <label>
                                 <span>密 &nbsp;&nbsp;&nbsp;码 : </span>
-                                <input type="text"/>
+                                <input name="new_pwd" type="password"/>
                                 <b></b>
                             </label>
                             <label>
                                 <span>电 &nbsp;&nbsp;&nbsp;话 : </span>
-                                <input type="text"/>
+                                <input name="tel" value="{{$user.tel}}" type="text"/>
                                 <b></b>
                             </label>
                             <label>
                                 <span>生 &nbsp;&nbsp;&nbsp;日 : </span>
-                                <input type="text" name="birth" id="appDate"/>
+                                <input type="text" value="{{$user.birth}}" name="birth" id="appDate"/>
                                 <b></b>
                             </label>
                             <label>
                                 <span>民 &nbsp;&nbsp;&nbsp;族 : </span>
-                                <input type="text"/>
+                                <input name="nation" value="{{$user.nation}}" type="text"/>
                                 <b></b>
                             </label>
                             <label>
                                 <span>证件号 : </span>
-                                <input type="text"/>
+                                <input name="card_id" value="{{$user.card_id}}" type="text"/>
                                 <b></b>
                             </label>
                             <input type="submit" value="提交"/>

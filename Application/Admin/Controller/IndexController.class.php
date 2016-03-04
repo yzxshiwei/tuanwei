@@ -96,6 +96,31 @@ class IndexController extends \Admin\Controller\Controller {
 	 * @author yzx
 	 */
 	public function person() {
+		 if (IS_POST){
+	        $post_data = array();
+	        $old_pwd = I('post.old_pwd',null,'string');
+	        $new_pwd = I("post.new_pwd",null,'string');
+	        $post_data['user_name'] = I('post.user_name',null,'string');
+	        $post_data['tel'] = I('post.tel',null,'string');
+	        $post_data['birth'] = I('post.birth',null,'string');
+	        $post_data['nation'] = I('post.nation',null,'string');
+	        $post_data['card_id'] = I('post.card_id',null,'string');
+	        if ($new_pwd != null){
+	            $old_pwd = create_password($old_pwd);
+	            if ($this->user['passwd'] != $old_pwd){
+	                $this->error('原始密码错误');
+	            }else {
+	                $post_data['passwd'] = create_password($new_pwd);
+	            }
+	        }
+	        $userModel = new \Common\Model\UsersModel();
+	        $result = $userModel->where(array('user_id' => $this->user['user_id']))->save($post_data);
+	        if (!$result){
+	            $this->error('修改失败');
+	        }else {
+	            $this->success('修改成功');
+	        }
+	    }
 	    $this->display();
 	}
 	/**

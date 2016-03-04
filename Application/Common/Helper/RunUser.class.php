@@ -35,9 +35,9 @@ class RunUser{
      * @return bool|mixed
      */
     protected function _getUserId(){
-        session_start();
-        //$userId = session($this->_save_id);
-        $userId = $_SESSION[$this->_save_id];
+        //session_start();
+        $userId = session($this->_save_id);
+        //$userId = $_SESSION[$this->_save_id];
         if(!$userId || !is_numeric($userId)){
             return false;
         }
@@ -164,14 +164,14 @@ class RunUser{
      * @return bool
      */
     public function setUser($userid){
-        session_start();
+        //session_start();
         $userModel = D("Users");
         $baseInfo = $userModel->find(array("user_id"=>$userid));
         if(!$baseInfo){
             return false;
         }
-        $_SESSION[$this->_save_id] = $userid;
-        //session($this->_save_id,$userid);
+        //$_SESSION[$this->_save_id] = $userid;
+        session($this->_save_id,$userid);
         $userModel->where(array("user_id"=>$userid))->save(array("last_time"=>time(),"last_ip"=>get_client_ip()));
         return true;
     }
