@@ -35,9 +35,11 @@
         }
         .person form label input[type="text"]{
             height:40px;
+            padding-left: 10px;
         }
         .person form label textarea{
             height:100px;
+            padding: 10px;
         }
         .person form label input,textarea{
             border:1px solid #ccc;
@@ -49,6 +51,9 @@
             background: darkseagreen;
             color: #fff;
             font-size: 18px;
+        }
+        #name_ts{
+
         }
     </style>
 </head>
@@ -62,7 +67,11 @@
                     <div class="person">
                         <h3 class="title">个人状态页面</h3>
                         <form action="">
-                            <label><span> &nbsp;&nbsp;&nbsp;用户名 : </span><input type="text"/></label>
+                            <label>
+                                <span> &nbsp;&nbsp;&nbsp;用户名 : </span>
+                                <input id="userName" type="text"/>
+                                <b id="name_ts"></b>
+                            </label>
                             <label><span>个人介绍 : </span><textarea></textarea></label>
                             <input type="submit" value="提交"/>
                         </form>
@@ -74,7 +83,42 @@
     <script src="my-js/template.js"></script>
     <script src="my-js/logic.js"></script>
     <script src="my-js/root_ui/jquery.ajaxupload.js"></script>
-
+    <script>
+        $('#userName').blur(function(){
+            var this_ = $(this);
+            var this_val = this_.val();
+            if(this_val==""){
+                $('#name_ts').html('用户名不能为空,请输入!');
+                this_.css({
+                    'borderColor': '#6dcff6',
+                    'borderWidth':'2px',
+                    '-webkit-box-shadow': '0 0 8px rgba(109,207,246,.5)',
+                    '-moz-box-shadow': '0 0 8px rgba(109,207,246,.5)',
+                    'boxShadow': '0 0 8px rgba(109,207,246,.5)'
+                });
+                $('#name_ts').css({
+                    'display': 'block',
+                    'border':'1px solid #ccc',
+                    'width': '700px',
+                    'height':'35px',
+                    'line-height': '35px',
+                    'color':'red',
+                    'margin': '10px 0px 0px 68px'
+                });
+            }else{
+                $('#name_ts').html(" ");
+                $('#name_ts').css({
+                    'display': 'block',
+                    'border':'0',
+                    'width': '0',
+                    'height':'0',
+                    'line-height': '0',
+                    'color':'red',
+                    'margin': '10px 0px 0px 68px'
+                });
+            }
+        });
+    </script>
 </body>
 
 </html>
