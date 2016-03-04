@@ -537,7 +537,6 @@
                var that = $(this);
                var user_id = that.parent().find('.choose_s').val();
                var divs_id = that.parent().attr("divs_id");
-//             var not_in = that.parent().find(".notin_"+divs_id+"_"+user_id).attr("not_in");
                var not_in = $(".notin_"+divs_id+"_"+user_id).attr("not_in");
 
                if(not_in=="1"){
@@ -559,7 +558,6 @@
 			                            '</div><button class="p_delete">-</button></li>');
 			                }
 		            });
-//		            that.parent().find(".notin_"+user_id).attr("not_in","2")
                     $(".notin_"+divs_id+"_"+user_id).attr("not_in","2");
 	                return false;
                }
@@ -571,7 +569,7 @@
            $(document).on('click','.p_delete',function(){
            	   var divs_id = $(this).parent().attr("divs_id");
            	   var userid = $(this).parent().attr("userid");
-           	   $(".notin_"+divs_id+"_"+user_id).attr("not_in","2");
+               $(".notin_"+divs_id+"_"+userid).attr("not_in","1");
                $(this).parent().remove();
                return false;
            });
@@ -604,6 +602,7 @@
                           if(datas[i].user_type !=='captain'){
                              str += '</div><button class="p_delete">-</button></li>';	   
                           }
+                          $(".notin_"+divs_id+"_"+datas[i].user_id).attr("not_in","2");
                         }
                         ushow.html(str);
 	               	}
