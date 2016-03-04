@@ -29,6 +29,8 @@
             padding: 15px 30px;
             border:1px dashed #ccc;
             text-align: center;
+            width: 500px;
+            margin: 0 auto;
         }
         .person form label{
             margin-bottom: 20px;
@@ -37,13 +39,9 @@
             height:40px;
             padding-left: 10px;
         }
-        .person form label textarea{
-            height:100px;
-            padding: 10px;
-        }
-        .person form label input,textarea{
+        .person form label input{
             border:1px solid #ccc;
-            width: 700px;
+            width: 85%;
         }
         .person form input[type="submit"]{
             height:35px;
@@ -51,9 +49,6 @@
             background: darkseagreen;
             color: #fff;
             font-size: 18px;
-        }
-        #name_ts{
-
         }
     </style>
 </head>
@@ -68,11 +63,40 @@
                         <h3 class="title">个人状态页面</h3>
                         <form action="">
                             <label>
-                                <span> &nbsp;&nbsp;&nbsp;用户名 : </span>
+                                <span>用户名 : </span>
                                 <input id="userName" type="text"/>
                                 <b id="name_ts"></b>
                             </label>
-                            <label><span>个人介绍 : </span><textarea></textarea></label>
+                            <label>
+                                <span>原密码 : </span>
+                                <input type="text"/>
+                                <b></b>
+                            </label>
+                            <label>
+                                <span>密 &nbsp;&nbsp;&nbsp;码 : </span>
+                                <input type="text"/>
+                                <b></b>
+                            </label>
+                            <label>
+                                <span>电 &nbsp;&nbsp;&nbsp;话 : </span>
+                                <input type="text"/>
+                                <b></b>
+                            </label>
+                            <label>
+                                <span>生 &nbsp;&nbsp;&nbsp;日 : </span>
+                                <input type="text" name="birth" id="appDate"/>
+                                <b></b>
+                            </label>
+                            <label>
+                                <span>民 &nbsp;&nbsp;&nbsp;族 : </span>
+                                <input type="text"/>
+                                <b></b>
+                            </label>
+                            <label>
+                                <span>证件号 : </span>
+                                <input type="text"/>
+                                <b></b>
+                            </label>
                             <input type="submit" value="提交"/>
                         </form>
                     </div>
@@ -99,11 +123,11 @@
                 $('#name_ts').css({
                     'display': 'block',
                     'border':'1px solid #ccc',
-                    'width': '700px',
+                    'width': '85%',
                     'height':'35px',
                     'line-height': '35px',
                     'color':'red',
-                    'margin': '10px 0px 0px 68px'
+                    'margin': '10px 0px 0px 58px'
                 });
             }else{
                 $('#name_ts').html(" ");
@@ -117,6 +141,25 @@
                     'margin': '10px 0px 0px 68px'
                 });
             }
+        });
+    </script>
+    <!--出生日期选择-->
+    <script type="text/javascript">
+        $(function () {
+            var currYear = (new Date()).getFullYear();
+            var opt={};
+            opt.date = {preset : 'date'};
+            opt.default = {
+                theme: 'android-ics light', //皮肤样式
+                display: 'modal', //显示方式
+                mode: 'scroller', //日期选择模式
+                lang:'zh',
+                startYear:currYear - 500, //开始年份
+                endYear:currYear + 500 //结束年份
+            };
+
+            $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+
         });
     </script>
 </body>
