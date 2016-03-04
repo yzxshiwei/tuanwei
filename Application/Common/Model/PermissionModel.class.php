@@ -13,6 +13,10 @@ class PermissionModel extends \Common\Helper\Model{
      */
     public function addData($groupId,$permission) {
         if (is_array($permission)&&!empty($permission) && $groupId>0){
+            $delete_res = $this->where(array('group_id'=>$groupId))->delete();
+            if (!$delete_res){
+                return false;
+            }
             $add_data = array();
             $add_data['group_id'] = $groupId;
             foreach ($permission as $key => $val){
