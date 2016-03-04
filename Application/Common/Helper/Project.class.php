@@ -13,10 +13,10 @@ class Project{
         $porjectModel_l = $porjectModel;
         $userModel = new \Common\Model\UsersModel();
         $porjectModel->alias('p')
-        ->join('match_project AS mp ON (p.id = mp.project_id)')
-        ->join('`match` AS m ON(m.id = mp.match_id)')
-        ->join('project_status AS ps ON(p.id = ps.project_id)')
-        ->join('team as t ON(t.project_id = p.id)');
+        ->join('match_project AS mp ON (p.id = mp.project_id)','left')
+        ->join('`match` AS m ON(m.id = mp.match_id)','left')
+        ->join('project_status AS ps ON(p.id = ps.project_id)','left')
+        ->join('team as t ON(t.project_id = p.id)','left');
         if ($user['group_id'] == $userModel::TYPE_MANAGE){
             $where['mp.match_id'] = array('GT',0); 
             $porjectModel->where($where);
@@ -30,10 +30,10 @@ class Project{
         $porjectModel_l
         ->field('p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type')
         ->alias('p')
-        ->join('match_project AS mp ON (p.id = mp.project_id)')
-        ->join('`match` AS m ON(m.id = mp.match_id)')
-        ->join('project_status AS ps ON(p.id = ps.project_id)')
-        ->join('team as t ON(t.project_id = p.id)');
+        ->join('match_project AS mp ON (p.id = mp.project_id)','left')
+        ->join('`match` AS m ON(m.id = mp.match_id)','left')
+        ->join('project_status AS ps ON(p.id = ps.project_id)','left')
+        ->join('team as t ON(t.project_id = p.id)','left');
         if ($user['group_id'] == $userModel::TYPE_MANAGE){
             $where['mp.match_id'] = array('GT',0);
             $porjectModel_l->where($where);
@@ -43,6 +43,7 @@ class Project{
         }
         $result_data = $porjectModel_l->limit($Page->firstRow.','.$Page->listRows)
         ->select();
+        //print_r($porjectModel_l->getLastSql());die();
         $list_data = array();
         if (!empty($result_data)){
             foreach ($result_data as $k => $v){
