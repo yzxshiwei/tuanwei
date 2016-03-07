@@ -145,6 +145,24 @@ class TeamController extends \Common\Helper\Controller{
     public function occupy() {
         $this->display();
     }
+	
+	/**
+	 * 场地类别
+	 * 添加时间 206-03-07
+	 * @author zlj
+	 */
+	public function ground(){
+		
+		$new = new \Common\Helper\News();
+		$where["col"] = \Common\Model\NewsModel::COL_6;
+		$where["flag"] =1;
+		$result = $new->listData($where);
+
+		$this->assign('Page' , $result['Page']);
+        $this->assign('list_data' ,$result['list_data']);
+		$this->display();
+	}
+	
     /**
      * 团队详情
      */

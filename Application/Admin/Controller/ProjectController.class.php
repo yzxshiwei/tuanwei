@@ -30,7 +30,6 @@ class ProjectController extends Controller{
             $post_data['sub_title'] = I('post.sub_title','','string');
             $post_data['intro'] = I('post.intro','','string');
 	        $pid = I("post.pid",'','string');
-		   
 		    $result = $posjectModel->where(array("id"=>$pid))->save($post_data);
 
 		    //先此项目的团队删除 再添加
@@ -44,7 +43,7 @@ class ProjectController extends Controller{
 		    $teach_id = I('post.teacher_id');
 		    $teachModel = new \Common\Model\Teacher_TeamModel;
 		   
-		    $teachModel->where(array("project_id"=>$pid,"team_type"=>1))->delete();
+		    $teachModel->where(array("project_id"=>$pid,"teacher_type"=>1))->delete();
 		    $return = $teachModel->addTeam($teach_id,$pid,1);
 		   
 		    if($res || $return || $result){
