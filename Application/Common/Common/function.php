@@ -127,4 +127,12 @@ function v_dump($arr){
 	var_dump($arr);
 	echo "</pre>";
 }
-
+/**
+ * 删除文件
+ * @param unknown $file_path
+ */
+function delfile($file_path) {
+    if(!is_dir($file_path)) {
+        unlink($file_path);
+    } 
+}
