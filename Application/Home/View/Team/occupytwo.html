@@ -12,7 +12,6 @@
 <include file='Public:headerhtml'/>
     <div class="ad" id="ad">
         <div class="header-ad-bag">
-
             <img src="__STATIC__/img/19300001357244132063856219117.jpg" alt="">
         </div>
 
@@ -22,15 +21,16 @@
         <center>场地选择</center>
     </div>
     <ul class="occ_two">
-        <li><a href="">场地资料</a></li>
-        <li><a href="">场地资料vvv</a></li>
-        <li><a href="">场地资料场地资料</a></li>
-        <li><a href="">场地资料场地资料场地资料</a></li>
-        <li><a href="">场地资料场地资料场地资料</a></li>
+    	<foreach name="list_data" item="_v">
+    		<li><a href="{{:U('News/details',array('id'=>$_v['id']))}}">{{$_v.title}}</a></li>
+    	</foreach>
     </ul>
 
-
-
+     <div id="page_front" style="margin: 40px 0px">
+     	<ul>
+         	 {{$Page}}
+        </ul>
+     </div>
 
     <!--footer-->
     <div id="footer">

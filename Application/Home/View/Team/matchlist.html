@@ -38,7 +38,11 @@
                     </if>
                     <label>
                         <h5>{{$vo.name}}</h5>
-                        <a href="{{:U('Team/matchdetails',array('id'=>$vo['id']))}}" class="bmBtn">申请报名</a>
+                        
+                        <if condition="($flag eq true) and ($vo.times eq true) ">
+                        	 <a href="{{:U('Team/matchdetails',array('id'=>$vo['id']))}}" class="bmBtn">申请报名</a>
+                        </if>
+                        
                         <if condition="$vo.sub_title neq ''">
                         	<p>主题：{{$vo.sub_title}}</p>
                         </if>

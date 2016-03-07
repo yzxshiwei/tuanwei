@@ -39,11 +39,15 @@ class TeamController extends \Common\Helper\Controller{
     public function matchlist() {
     	$Match = M('match');
     	$timestamp = time();
-    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=1 AND $timestamp < project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
-    	
+    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src,sign_start_time,sign_end_time')->where("state=1")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+
     	foreach ($data as $k=>&$v){
     		$v['rules'] = htmlspecialchars_decode(substr($v['rules'],0, 150));
-    		unset($v);
+    		if($v["sign_start_time"]<time() && $v["sign_end_time"]>time()){
+    			$v["times"] = TRUE;
+    		}else{
+    			$v["times"] = FALSE;
+    		}
     	}
     	$img_url = $Match->field('id, cover_src')->where("cover_src is not null and state=1 AND $timestamp < project_end_time")->limit(5)->select();
     	
@@ -51,8 +55,11 @@ class TeamController extends \Common\Helper\Controller{
     	//分页
     	$page = new \Think\Page($count, 3);
     	$show = $page->show();
+        
+		$flag = $this->user["user_type"]==\Common\Model\UsersModel::TYPE_MANAGE?FALSE:TRUE;
 
     	$this->assign('img_url',$img_url);
+		$this->assign('flag',$flag);
     	$this->assign('data', $data);	
     	$this->assign('page', $show);
         $this->display();
@@ -64,13 +71,25 @@ class TeamController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function matchdetails() {
+    	
+    	$matchModel = new \Common\Model\MatchModel;
+    	
     	if(IS_POST){
     		$mpModel = M("match_project");
-			
+		
     		$data = array();
 			$data["match_id"] = I("post.mid","","string");
 			$data["project_id"] = I("post.project_id","","string");
 			$data["class_id"] = I("post.class_id","","string");
+			
+			$minfo = $matchModel->where(array("id"=>$data["match_id"]))->field("id,rules,sign_start_time,sign_end_time")->find();
+
+			if($minfo["sign_start_time"]>time() || $minfo["sign_end_time"]<time()){
+				$this->error("不在报名时间段");
+			}
+			if(!$data["project_id"] || !$data["class_id"]){
+				$this->error("请进行选择");
+			}
 			$res = $mpModel->add($data);
 			if($res){
 				$this->success("申请成功",U('Team/matchlist'));
@@ -80,7 +99,7 @@ class TeamController extends \Common\Helper\Controller{
     	}else{
     		$projectModel = new \Common\Model\ProjectModel;
 			$packetModel = new \Common\Model\PacketModel;
-			$matchModel = new \Common\Model\MatchModel;
+			
 			
     		$mid = I("get.id","","string");
     		$userid = $this->user["user_id"];
@@ -151,7 +170,7 @@ class TeamController extends \Common\Helper\Controller{
 	 * 添加时间 206-03-07
 	 * @author zlj
 	 */
-	public function ground(){
+	public function occupytwo(){
 		
 		$new = new \Common\Helper\News();
 		$where["col"] = \Common\Model\NewsModel::COL_6;
