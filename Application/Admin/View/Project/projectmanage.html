@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目管理</title>
   	<include file='Public:file'/>
     <style>
         .returnIndex img{
@@ -404,9 +405,8 @@
                     <div class="p_content">
                         <h3 class="title">团队项目编辑页面</h3>
                         <!--编辑项目内容-->
-                        <foreach name="list_data" key="key" item="vo">
+                        <foreach name="list_data" key="_k" item="vo">
                         <div class="activities">
-
                             <div class="ac_title">
                                 <p><img src=""/></p>
                                 <p>
@@ -425,7 +425,7 @@
                                     		</if>
                                     	</if>
                                 </p>
-                                <p class="open" open-id="{{$vo.id}}">打开</p>
+                                <p class="open" open-id="{{$vo.id}}" divs_id="{{$_k}}">打开</p>
                                 <if condition="$vo['is_captain'] eq 1">
                                 	<if condition="$vo['is_open'] eq 0">
                                 		<p class="open2" data-id="{{$vo.id}}">公开</p>
@@ -461,7 +461,7 @@
                                             <button class="p_add p_teacher" add-teacher-id="{{$vo.id}}">+
                                             
                                                  <foreach item='_ko' name='vo.teac_info'>
-                                                 	<input type='hidden' name='teacher_id[]' value='{{$_ko.user_id}}'>
+                                                 	<input type='hidden' name='teacher_id[]' value='{{$_ko}}'>
                                                  </foreach>
                                             
                                             </button>
@@ -478,13 +478,13 @@
                                 <div class="mt memberBox" add-dy-id="{{$vo.id}}">
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">成员选择</h3>
-                                    <div class="choose_m">
+                                    <div class="choose_m" divs_id="{{$_k}}" >
                                         <span>请添加成员 : </span>
                                         <select class="choose_s">
                                         	
 	                                        <foreach name="user_data" item="_v">
 	                                            <if condition="$_v.user_id neq $userid">
-	                                            	<option value="{{$_v.user_id}}" class="notin_{{$_v.user_id}}" not_in="1" >{{$_v.user_name}}</option>
+	                                            	<option value="{{$_v.user_id}}" class="notin_{{$_k}}_{{$_v.user_id}}" not_in="1" >{{$_v.user_name}}</option>
 	                                            </if>
 	                                    	</foreach>
 	                                    	
@@ -498,9 +498,13 @@
                                     <h3 class="m_title">老师选择</h3>
                                     
 	                                <foreach name="teacher_list" item="vl">
-	                                	<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='1' teacher_id="{{$vl.user_id}}">{{$vl.user_name}}</a>
-	                                	<input type='hidden' name='teacher_id[]' value='{{$vl.user_id}}'>
-	                                </foreach>
+										<if condition="$vo['teac_info'][$vl['user_id']]">
+										    <a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='2' teacher_id="{{$vl.user_id}}"> {{$vl.user_name}}</a>
+										<else />
+										    <a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='1' teacher_id="{{$vl.user_id}}"> {{$vl.user_name}}</a>
+										</if>
+										<input type='hidden' name='teacher_id[]' value='{{$vl.user_id}}'>
+									</foreach>
 	                                
                                 </div>
                             </div>
@@ -533,8 +537,9 @@
            $('.sureBtn').click(function(){
                var that = $(this);
                var user_id = that.parent().find('.choose_s').val();
-               var not_in = that.parent().find(".notin_"+user_id).attr("not_in");
-
+               var divs_id = that.parent().attr("divs_id");
+//             var not_in = that.parent().find(".notin_"+divs_id+"_"+user_id).attr("not_in");
+               var not_in = $(".notin_"+divs_id+"_"+user_id).attr("not_in");
                if(not_in=="1"){
 	               	$.ajax({
 			                type:'post',
@@ -545,8 +550,7 @@
 			                cache:false,
 			                dataType:'json',
 			                success:function(data){
-			                	
-			                    that.parent().parent().parent().find('.p_team ul').append('<li><div class="team_information">' +
+			                    that.parent().parent().parent().find('.p_team ul').append('<li divs_id="'+divs_id+'" userid="'+data.user_id+'"><div class="team_information">' +
 			                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
 			                            '<div class="people_information">' +
 			                            '<h5>'+data.user_name+'</h5>' +
@@ -555,7 +559,8 @@
 			                            '</div><button class="p_delete">-</button></li>');
 			                }
 		            });
-		            that.parent().find(".notin_"+user_id).attr("not_in","2")
+//		            that.parent().find(".notin_"+user_id).attr("not_in","2")
+                    $(".notin_"+divs_id+"_"+user_id).attr("not_in","2");
 	                return false;
                }
            });
@@ -563,31 +568,33 @@
                $(this).parent().toggle();
            });
            //删除
-           $(function(){
-               $(document).on('click','.p_delete',function(){
-                   $(this).parent().remove();
-                   return false;
-               });
+           $(document).on('click','.p_delete',function(){
+           	   var divs_id = $(this).parent().attr("divs_id");
+           	   var userid = $(this).parent().attr("userid");
+           	   $(".notin_"+divs_id+"_"+userid).attr("not_in","1");
+               $(this).parent().remove();
+               return false;
            });
            //项目编辑内容效果显示隐藏
            $('.open').click(function(){
                var _this = $(this);
                var openId =_this.attr('open-id');
                var content = $("div[content-id="+openId+"]");
-               
+               var divs_id = _this.attr('divs_id');
+
                var ushow = $(".ushow_"+openId);
                $.ajax({
 	               	type:"post",
 	               	url:"{{:U('Project/find_user')}}",
 	               	cache:false,
 	               	data:"pid="+openId,
-	               	success:function(data){ console.log(data);
+	               	success:function(data){
 	               		var datas = eval("("+data+")");
 	               		var len = datas.length;
                         var str="";
                         for(var i=0;i<len;i++){
                           
-                          str +='<li><div class="team_information">' +
+                          str +='<li divs_id="'+divs_id+'" userid="'+datas[i].user_id+'"><div class="team_information">' +
                                 '<img src="" alt=""/><input type="hidden" value="'+datas[i].user_id+'" name="userid[]">' +
                                 '<div class="people_information">' +
                                 '<h5>'+datas[i].user_name+'</h5>' +
@@ -597,6 +604,7 @@
                           if(datas[i].user_type !=='captain'){
                              str += '</div><button class="p_delete">-</button></li>';	   
                           }
+                          $(".notin_"+divs_id+"_"+datas[i].user_id).attr("not_in","2");
                         }
                         ushow.html(str);
 	               	}
