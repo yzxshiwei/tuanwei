@@ -60,6 +60,10 @@ class IndexController extends \Admin\Controller\Controller {
 		$team = new \Common\Model\TeamModel();
 		
 		if(IS_POST){
+			$data["contents"] = I("post.intro","","string");
+			$data["team_name"] = I("post.name","","string");
+			$id = I("post.id","","string");
+			
 			//开启事务
 			$team->startTrans();
 			$data = array();
@@ -67,13 +71,14 @@ class IndexController extends \Admin\Controller\Controller {
 				$file_res = Upload($_FILES['project_file']);
 				if($file_res["status"]){
 					$data["img_url"] = $file_res['file_path'];
+					//删除原先的图片
+					$img_url = $team->where(array("id"=>$id))->field("img_url")->find();
+					delfile($img_url["img_url"]);
 				}else{
 					$this->error($file_res['msg']);
 				}
 			}
-			$data["contents"] = I("post.intro","","string");
-			$data["team_name"] = I("post.name","","string");
-			$id = I("post.id","","string");
+
 			$res = $team->where(array("id"=>$id))->save($data);
 		    if($res){
 		        $team->commit();

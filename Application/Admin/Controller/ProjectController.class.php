@@ -16,6 +16,8 @@ class ProjectController extends Controller{
 		if(IS_POST){
 
 			$posjectModel = M("project");
+			
+			$pid = I("post.pid",'','string');
 		    //开启事务
 		    $posjectModel->startTrans();
 		   
@@ -24,12 +26,16 @@ class ProjectController extends Controller{
 			$file_res = uploadFile('project_file');
             if ($file_res['status']){
                $post_data['file_url'] = $file_res['file_path'];
+				
+			   //删除原先的图片
+			   $file_url = $posjectModel->where(array("id"=>$pid))->field("file_url")->find();
+			   delfile($file_url["file_url"]);
             }
 			
             $post_data['name'] = I('post.name','','string');
             $post_data['sub_title'] = I('post.sub_title','','string');
             $post_data['intro'] = I('post.intro','','string');
-	        $pid = I("post.pid",'','string');
+
 		    $result = $posjectModel->where(array("id"=>$pid))->save($post_data);
 
 		    //先此项目的团队删除 再添加

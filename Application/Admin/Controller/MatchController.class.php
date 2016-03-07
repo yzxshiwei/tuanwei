@@ -130,6 +130,9 @@ class MatchController extends Controller{
 
     	if(IS_POST){
     		
+			$mid = I("post.mid","","string");
+			$file_url = $matchModel->where(array("id"=>$mid))->field("cover_src,start_file_src,template_src")->find();
+			
     		$data = array();
 			//开启事务
 		    $matchModel->startTrans();
@@ -137,7 +140,9 @@ class MatchController extends Controller{
 			if($_FILES['selectFiles']['tmp_name']){
 				$file_res1 = Upload($_FILES['selectFiles']);
 				if($file_res1["status"]){
+					
 					$data["cover_src"] = $file_res1['file_path'];
+					delfile($file_url["cover_src"]);
 				}else{
 					$this->error($file_res1['msg']);
 				}
@@ -147,6 +152,7 @@ class MatchController extends Controller{
 				$file_res2 = Upload($_FILES['upload_template']);
 				if($file_res2["status"]){
 					$data["start_file_src"] = $file_res2['file_path'];
+					delfile($file_url["start_file_src"]);
 				}else{
 					$this->error($file_res2['msg']);
 				}
@@ -156,6 +162,7 @@ class MatchController extends Controller{
 				$file_res3 = Upload($_FILES['upload_reg_page']);
 				if($file_res3["status"]){
 					$data["template_src"] = $file_res3['file_path'];
+					delfile($file_url["template_src"]);
 				}else{
 					$this->error($file_res3['msg']);
 				}
@@ -170,7 +177,6 @@ class MatchController extends Controller{
 			$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
 			$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
 			$data["project_id"] = I('post.proid','','string');
-            $mid = I("post.mid","","string");
 
 			$relust = $matchModel->where(array("id"=>$mid))->save($data);
 			
