@@ -12,9 +12,11 @@ class IndexController extends \Common\Helper\Controller {
 		if(!$newList){
 			$newList = $newModel->where(array("flag"=>1))->order("public_t desc")->field("id,title,img_url")->limit(5)->select();
 		}
+		
 		$teamModel = new \Common\Model\TeamModel;
-		$teamList = $teamModel->order("id desc")->limit(4)->select();
-
+		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
+		$teamList = $teamModel->where(array("user_type"=>$utype))->order("id desc")->limit(4)->select();
+		
 		$this->assign("teamList",$teamList);
         $this->assign("newList",$newList);
         $this->display();

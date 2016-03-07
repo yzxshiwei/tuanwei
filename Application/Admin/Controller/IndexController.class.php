@@ -42,6 +42,9 @@ class IndexController extends \Admin\Controller\Controller {
 	public function teammanage() {
 	    $team = new \Common\Helper\Team();
 	    $result = $team->listData($this->user['user_id']);
+		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
+
+		$this->assign('utype',$utype);
 	    $this->assign('list_data',$result['list_data']);
 	    $this->assign('Page', $result['Page']);
 		$this->display();
