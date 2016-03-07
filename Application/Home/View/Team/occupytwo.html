@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>场地选择</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style.css">
+</head>
+
+<body>
+<include file='Public:headerhtml'/>
+    <div class="ad" id="ad">
+        <div class="header-ad-bag">
+
+            <img src="__STATIC__/img/19300001357244132063856219117.jpg" alt="">
+        </div>
+
+    </div>
+
+    <div class="title" style="margin-top: 5px">
+        <center>场地选择</center>
+    </div>
+    <div class="select-school">
+
+    </div>
+
+
+
+
+    <!--footer-->
+    <div id="footer">
+        <div id="f_center">
+
+        </div>
+    </div>
+    <include file='Public:header'/>
+    <include file='Public:footer'/>
+    <script>
+
+        $(function(){
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</body>
+
+</html>
