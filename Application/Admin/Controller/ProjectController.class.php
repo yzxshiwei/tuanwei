@@ -36,8 +36,8 @@ class ProjectController extends Controller{
 		    //先此项目的团队删除 再添加
 		    $userid = I("post.userid");
 	    	$team = new \Common\Model\TeamModel;
-
-		    $team->where(array("project_id"=>$pid))->delete();
+            unset($userid[array_search($this->user["user_id"],$userid)]);
+		    $team->where(array("project_id"=>$pid,"user_type"=>array("neq",\Common\Model\TeamModel::USER_TYPE_CAPTAIN)))->delete();
 		    $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
 		   
 		    //将项目老师 删除 再添加
