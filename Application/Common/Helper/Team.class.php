@@ -31,10 +31,10 @@ class Team{
         $Page_show = $Page->show();
         $result = $teamModel
         ->distinct(true)
-        ->field('p.name,team.id,u.user_name,u.create_time,team.team_name')
+        ->field('p.name,team.id,u.user_name,u.create_time,team.team_name,team.user_type')
         ->join('project as p on (team.project_id = p.id)','left')
         ->join("users as u on (team.user_id = u.user_id)",'left')
-        ->where(array('team.user_id' => $user_id,'team.user_type' => $teamModel::USER_TYPE_CAPTAIN))
+        ->where(array('team.user_id' => $user_id))
         ->limit($Page->firstRow.','.$Page->listRows)
         ->select();
         return array("Page" => $Page_show,"list_data" => $result);
