@@ -171,4 +171,28 @@ class IndexController extends \Admin\Controller\Controller {
 	        $this->error('阅读失败');
 	    }
 	}
+	
+	/**
+	 * 修改用户状态(正常或静止或删除)
+	 * 添加时间 2016-03-07
+	 * @param types string  1:正常 2禁止 0 删除
+	 * @author zlj
+	 */
+	public function user_state(){
+		if(IS_AJAX){
+			$id = I("id",0,'string');
+			$types = I("types","","string");
+			$userModel = new \Common\Model\UsersModel();
+			$res = $userModel->where(array("user_id"=>$id))->save(array("state"=>$types));
+			if($res){
+				echo 1;
+			}else{
+				echo 2;
+			}
+		}
+	}
+	
+	
+	
+	
 }

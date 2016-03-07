@@ -36,7 +36,7 @@
                                 <td class="user_set">
                                 	
                                     <if condition="$vo['user_id'] neq 1">
-                                    	<input type="checkbox" value="{{$vo.user_id}}" class="user_valid">禁止<a class="delete">删除</a>
+                                    	<input type="checkbox" value="{{$vo.user_id}}" <if condition="$vo['state'] eq 2">checked="checked"</if> class="user_valid">禁止<a class="delete">删除</a>
                                         <a href="{{:U('Permission/usergroup')}}&user_id={{$vo.user_id}}" class="">权限</a>
                                     </if>
                                 </td>
@@ -161,24 +161,50 @@
         });
         //ajax请求
        $(function(){
-            var user_valid = $('.user_valid');
-           $.ajax({
-               type:'post',
-               url:'index.php',
-               data:{
-                   user_valid:user_valid.val()
-               },
-               cache:false,
-               dataType:'json',
-               success:function(data,status){
-                   if(user_valid.is(':checked')){
-                       status = 1;
-                   }else{
-                        status = 0;
-                   }
-               }
-           });
+           
+           /*修改操作*/
+		   $(".user_valid").change(function(){
+		   	
+		   	     var ids = $(this).parents("tr").attr("id");
+		   	     var types = "";
+		   	     if($(".user_valid").prop("checked")){
+		   	     	/*禁止*/
+		   	     	types = 2;
+		   	     }else{
+		   	     	/*正常*/
+		   	     	types = 1;
+		   	     }
+
+		   	     $.ajax({
+		   	     	type:"post",
+		   	     	url:"{{:U('Index/user_state')}}",
+		   	     	data:"id="+ids+"&types="+types,
+		   	     	success:function(data){
+		   	     	}
+		   	     });
+		   });
+           
+		   $(".delete").click(function(){
+		   	     var thiss = $(this);
+		   	     var ids = thiss.parents("tr").attr("id");
+		   	     var types = "0";
+                 if(confirm("是否删除?")){
+                 	 $.ajax({
+			   	     	type:"post",
+			   	     	url:"{{:U('Index/user_state')}}",
+			   	     	data:"id="+ids+"&types="+types,
+			   	     	success:function(data){
+			   	     		if(data=='1'){
+			   	     			thiss.parents("tr").remove();
+			   	     		}else{
+			   	     			alert("操作失败,请重试");
+			   	     		}
+			   	     	}
+			   	     });
+                 }
+		   });
        });
+       
     </script>
 </body>
 

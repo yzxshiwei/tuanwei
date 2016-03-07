@@ -151,10 +151,11 @@ class User{
      */
     public function getUserList(){
         $userModel = new \Common\Model\UsersModel();
-        $count = $userModel->count();
+		$where["state"] = array("neq","0");
+        $count = $userModel->where($where)->count();
         $Page = new \Think\Page($count,12);
         $page_show = $Page->show();
-        $list_data = $userModel->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list_data = $userModel->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
         if (!empty($list_data)){
             foreach ($list_data as $k => $v){
                 $list_data[$k]['user_type'] = $userModel::$user_type[$v['user_type']];

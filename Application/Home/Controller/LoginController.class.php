@@ -44,9 +44,17 @@ class LoginController extends \Common\Helper\Controller{
         $condition["email"] = $user;
         $condition["_logic"] = "OR";
         $data = $userModel->where($condition)->find();
+		
         if(!$data || create_password($pwd) != $data["passwd"]){
             return $this->error("账号或密码错误",U("Login/index"));
         }
+		
+		if($data["state"]=='0'){
+			return $this->error("此用户不存在",U("Login/index"));
+		}elseif($data["state"]=='2'){
+			return $this->error("此用户禁止登陆",U("Login/index"));
+		}
+		
         \Common\Helper\RunUser::newInstantiation()->setUser($data["user_id"]);
         return $this->success("登录成功",U("Index/index"));
     }
