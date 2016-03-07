@@ -563,9 +563,11 @@
                $(this).parent().toggle();
            });
            //删除
-           $(document).on('click','.p_delete',function(){
-               $(this).parent().remove();
-               return false;
+           $(function(){
+               $(document).on('click','.p_delete',function(){
+                   $(this).parent().remove();
+                   return false;
+               });
            });
            //项目编辑内容效果显示隐藏
            $('.open').click(function(){
