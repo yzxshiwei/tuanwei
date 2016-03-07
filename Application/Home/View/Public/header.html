@@ -1,3 +1,9 @@
+<style>
+    .current{
+        transition: all .2s;
+        color: gray;
+    }
+</style>
 <script src="__JS__jquery.js"></script>
 <script src="__JS__register.js"></script>
 <script src="__JS__baidu.js"></script>
@@ -6,7 +12,7 @@
     <ul class="newsnav">
                 <% for(x in header_list){%>
                  <li>
-                     <a href="<%=header_list[x]['first_list_href']%>"><%=header_list[x]['first_list_name']%></a>
+                     <a class="current" href="<%=header_list[x]['first_list_href']%>"><%=header_list[x]['first_list_name']%></a>
                       <ul class="dropNav">
                      <% for (y in header_list[x]['second']){%>
                          <li><a href="<%=header_list[x]["second"][y]['second_list_href']%>"><%=header_list[x]["second"][y]['second_list_name']%></a></li>
@@ -15,6 +21,13 @@
                  </li>
                  <%}%>
              </ul>
+</script>
+<script>
+    $(function(){
+        $('.newsnav li a').click(function(){
+            $(this).addClass('current').parent().find('a').removeClass('current');
+        });
+    });
 </script>
 <script src="__JS__template.js"></script>
 <script src="__JS__flickerplate.min.js"></script>
