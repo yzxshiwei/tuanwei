@@ -804,3 +804,21 @@ a:active {
 #footer #f_center .f_content p img{
     margin-right: 29px;
 }
+.occ_two{
+    width: 960px;
+    margin: 15px auto;
+    overflow: auto;
+}
+.occ_two li{
+    height:35px;
+    line-height: 35px;
+    border-bottom:1px solid #ccc;
+    color: #666;
+    padding-left: 15px;
+}
+.occ_two li a{
+    display: block;
+    color: #666;
+    height:100%;
+    font-size: 14px;
+}
