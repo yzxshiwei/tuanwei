@@ -12,7 +12,7 @@ class ProjectController extends Controller{
         $project = new \Common\Helper\Project();
 		$userModel = D('users');
 		$teacTeamModel = M("teacher_team");
-		
+
 		if(IS_POST){
 
 			$posjectModel = M("project");
@@ -56,12 +56,11 @@ class ProjectController extends Controller{
 		}else{
 			
 			$result = $project->listData($this->user);
-	        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->select();
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
+	        $user_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER,"state"=>1))->field("user_id,user_name")->select();
 
 			//拼 老师 姓名与id
 			foreach($result['list_data'] as $_k=>$v){
-
 				$team = $teacTeamModel->join("users on users.user_id=teacher_team.user_id")->where(array("teacher_team.project_id"=>$v['id']))->field("users.user_id,users.user_name")->select();
                 $datas = array();
 				foreach($team as $_v){
@@ -70,7 +69,6 @@ class ProjectController extends Controller{
 				}
 				$result['list_data'][$_k]['teac_info'] = $datas;
 			}
-
 			$this->assign("teacher_list",$teacher_list);
 	        $this->assign('Page' , $result['Page']);
 	        $this->assign('list_data',$result['list_data']);
@@ -189,9 +187,9 @@ class ProjectController extends Controller{
            }
         }else {
             $userModel = D('users');
-            $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT))->field("user_id,user_name")->select();
+            $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();
 			
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER,"state"=>1))->field("user_id,user_name")->select();
 
 			$this->assign("teacher_list",$teacher_list);
             $this->assign("list_data",$list_data);
