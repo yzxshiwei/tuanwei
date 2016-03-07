@@ -80,6 +80,11 @@
             bottom: -26px;
             font-weight: bold;
             background-color: #FFF; }
+        .flickerplate.flicker-theme-dark .dot-navigation .dot {
+            background-color: #fff; }
+        .flickerplate.flicker-theme-dark .dot-navigation .dot.active{
+            background-color: #49A9A5;
+            border: 2px solid #fff; }
     </style>
 </head>
 <body>
@@ -204,13 +209,6 @@
 <script src="__JS__unslider.min.js"></script>
     <script>
         $(function () {
-            $('.banner').unslider(
-
-                {
-
-                    speed: 1000
-
-                });
             $('.newsnav li').mouseenter(function(){
                 $(this).find($('.dropNav')).slideDown(200);
                 $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
@@ -223,16 +221,9 @@
             {
                 $('.flicker-example').flickerplate(
                         {
-                            arrows: false,
-                            arrows_constraint: false,
-                            auto_flick: true,
-                            auto_flick_delay: 10,
-                            block_text: true,
-                            dot_alignment: 'center',
-                            dot_navigation: false,
-                            flick_animation: 'transition-slide',
-                            flick_position: 1,
-                            theme: 'dark'
+                            auto_flick 				: true,
+                            auto_flick_delay 		: 8,
+                            flick_animation 		: 'transform-slide'
                         });
             });
     </script>
