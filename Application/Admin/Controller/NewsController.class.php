@@ -85,4 +85,24 @@ class NewsController extends Controller{
 			}
 	 	 }
 	 }
+	 
+	 /**
+	  * 新闻删除
+	  */
+	 public function delNew(){
+	 	if(IS_AJAX){
+	 		$nid = I("post.nid","","string");
+			$news = M("news");
+			$img_url = $news->where(array("id"=>$nid))->field("img_url")->find();
+			$res = $news->where(array("id"=>$nid))->delete();
+			if($res){
+				delfile($img_url["img_url"]);
+				echo 1;
+			}else{
+				echo 2;
+			}
+	 	}
+	 }
+	 
+	 
 } 

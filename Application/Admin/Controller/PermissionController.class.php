@@ -115,7 +115,7 @@ class PermissionController extends Controller{
             $post_data['group_id'] = I("post.group_id",0,'intval');
             $result = $userModel->where(array('user_id' => $user_id))->save($post_data);
             if ($result){
-                $this->success('添加成功',U('Index/usermanage'));
+                $this->success('添加成功',U('Index/index'));
             }else {
                 $this->error('添加失败');
             }
