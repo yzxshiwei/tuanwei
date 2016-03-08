@@ -167,14 +167,13 @@
 		   	
 		   	     var ids = $(this).parents("tr").attr("id");
 		   	     var types = "";
-		   	     if($(".user_valid").prop("checked")){
+	            if($(this).prop("checked")){
 		   	     	/*禁止*/
 		   	     	types = 2;
 		   	     }else{
 		   	     	/*正常*/
 		   	     	types = 1;
 		   	     }
-
 		   	     $.ajax({
 		   	     	type:"post",
 		   	     	url:"{{:U('Index/user_state')}}",

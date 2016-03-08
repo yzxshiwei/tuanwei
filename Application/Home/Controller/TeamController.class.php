@@ -14,6 +14,11 @@ class TeamController extends \Common\Helper\Controller{
 			
 			$data = array();
 			$data["user_id"] = $this->user["user_id"];
+			
+			if(!$data["user_id"]){
+				$this->error("请用户先登录");
+			}
+			
 			$data["words"] = I("post.contents","","string");
 			$res = $wordsModel->add($data);
 			if($res){
@@ -76,6 +81,10 @@ class TeamController extends \Common\Helper\Controller{
     	
     	if(IS_POST){
     		$mpModel = M("match_project");
+		
+		    if(!$this->user["user_id"]){
+		    	$this->error("请用户先登录");
+		    }
 		
     		$data = array();
 			$data["match_id"] = I("post.mid","","string");
