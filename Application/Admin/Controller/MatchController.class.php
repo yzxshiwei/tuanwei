@@ -26,12 +26,11 @@ class MatchController extends Controller{
 
 			$file_res1 = Upload($_FILES['selectFiles']);
             $file_res2 = Upload($_FILES['upload_template']);
-			$file_res3 = Upload($_FILES['upload_reg_page']);
+//			$file_res3 = Upload($_FILES['upload_reg_page']);
 			
-            if (!$file_res1['status'] || !$file_res2['status'] || !$file_res3['status']){
+            if (!$file_res1['status'] || !$file_res2['status']){
                 $this->error($file_res1['msg']);
             }else {
-            	
 				$data = array();
 				$data["name"] = I('post.name','','string');
 				$data["sub_title"] = I('post.sub_title','','string');
@@ -43,9 +42,7 @@ class MatchController extends Controller{
 				$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
 				$data["cover_src"] = $file_res1['file_path'];
 				$data["start_file_src"] = $file_res2['file_path'];
-				$data["template_src"] = $file_res3['file_path'];
-				$project_id = I('post.proid','','string');
-				$data["project_id"] = $project_id;
+//				$data["template_src"] = $file_res3['file_path'];
 				
 				$relust = $match->add($data);
 				
@@ -63,7 +60,7 @@ class MatchController extends Controller{
 				    if($j_res && $p_res){
 				    	$match->commit();
 				    	$messageModel = new \Common\Model\MessageModel();
-				    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$project_id);
+				    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$relust);
 				    	$this->success('添加比赛成功',U('Match/matchmanage'));
 				    }else{
 				    	$match->rollback();
@@ -158,16 +155,15 @@ class MatchController extends Controller{
 				}
 			}
 						
-			if($_FILES['upload_reg_page']['tmp_name']){
-				$file_res3 = Upload($_FILES['upload_reg_page']);
-				if($file_res3["status"]){
-					$data["template_src"] = $file_res3['file_path'];
-					delfile($file_url["template_src"]);
-				}else{
-					$this->error($file_res3['msg']);
-				}
-			}
-			
+//			if($_FILES['upload_reg_page']['tmp_name']){
+//				$file_res3 = Upload($_FILES['upload_reg_page']);
+//				if($file_res3["status"]){
+//					$data["template_src"] = $file_res3['file_path'];
+//					delfile($file_url["template_src"]);
+//				}else{
+//					$this->error($file_res3['msg']);
+//				}
+//			}
 			$data["name"] = I('post.name','','string');
 			$data["sub_title"] = I('post.sub_title','','string');
 			$data["project_start_time"] = strtotime(I('post.race-start-date'));
@@ -176,7 +172,6 @@ class MatchController extends Controller{
 			$data["rules"] = I('post.editorValue');
 			$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
 			$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
-			$data["project_id"] = I('post.proid','','string');
 
 			$relust = $matchModel->where(array("id"=>$mid))->save($data);
 			

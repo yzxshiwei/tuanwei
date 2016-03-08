@@ -39,7 +39,7 @@
                     <label>
                         <h5>{{$vo.name}}</h5>
                         
-                        <if condition="($flag eq true) and ($vo.times eq true) ">
+                        <if condition="($flag eq true) and ($vo.times eq true) and ($user['user_id'] gt 0)">
                         	 <a href="{{:U('Team/matchdetails',array('id'=>$vo['id']))}}" class="bmBtn">申请报名</a>
                         </if>
                         
