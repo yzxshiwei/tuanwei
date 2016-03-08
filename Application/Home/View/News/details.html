@@ -45,6 +45,13 @@
 
     <!--ajax-->
     <script>
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
         //得到上传的地址
         $.getArgs = function(name){
             var list_ = window.location.search.substring(1).split("&");
