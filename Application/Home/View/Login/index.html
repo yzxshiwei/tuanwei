@@ -31,21 +31,19 @@
         <div class="title">成员登录</div>
         <!--content-->
         <div class="content">
-            <form action="{{:U('Login/login')}}" method="post">
-                <p><span>电子邮箱</span><input id="email" name="user" type="text" placeholder="电子邮件地址"/></p>
-                <label id="emailTs">123</label>
-                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" name="pwd" type="password" placeholder="密码"/></p>
-                <label id="pwdTs">123</label>
-                <input class="subBtn" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
-                
-                
+            <form id="form" action="{{:U('Login/login')}}" method="post">
+                <p><span>电子邮箱</span><input id="email" class="required" name="user" type="text" placeholder="电子邮件地址"/></p>
+                <!--<label id="emailTs">123</label>-->
+                <p><span>密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码</span><input id="pwd" class="required" name="pwd" type="password" placeholder="密码"/></p>
+                <!--<label id="pwdTs">123</label>-->
+                <input class="subBtn" id="send" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
             </form>
             <form action="{{:U('User/sendcode')}}" method="post">
-            <h5>忘记密码?</h5>
+                <h5>忘记密码?</h5>
                 <p><span>电子邮箱</span><input id="wj_email" name="email" type="text" placeholder="电子邮件地址"/></p>
                 <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
                 <h6>注意:</h6>
-            <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
+                <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
             </form>
         </div>
     </div>
@@ -59,6 +57,7 @@
 <include file='Public:header'/>
 <include file='Public:footer'/>
 <script>
+    //导航效果
     $(function(){
         $('.newsnav li').mouseenter(function(){
             $(this).find($('.dropNav')).slideDown(200);
@@ -67,6 +66,39 @@
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
         });
+    });
+    //文本框失去焦点后
+    $('#form input').blur(function(){
+        var $parent = $(this).parent();
+        $parent.find(".formtips").remove();
+        //验证邮件
+        if($(this).is('#email') ){
+            if( this.value=="" || ( this.value!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value) ) ){
+                var errorMsg = '请输入正确的E-Mail地址!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else{
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+            }
+        }
+        //验证密码
+        if( $(this).is('#pwd') ){
+            if( this.value=="" || this.value.length < 6 ){
+                var errorMsg = '请输入至少6位的用户名!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else{
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999"  class="formtips onSuccess">'+okMsg+'</label>');
+            }
+        }
+    });
+    //提交，最终验证。
+    $('#send').click(function(){
+        $("form :input.required").trigger('blur');
+        var numError = $('form .onError').length;
+        if(numError){
+            return false;
+        }
     });
 </script>
 </html>
