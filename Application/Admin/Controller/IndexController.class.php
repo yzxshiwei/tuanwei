@@ -126,7 +126,11 @@ class IndexController extends \Admin\Controller\Controller {
 	        if (!$result){
 	            $this->error('修改失败');
 	        }else {
-	            $this->success('修改成功');
+	            if ($new_pwd != null){
+	                $this->success('修改成功',U('Home/Login/index'));
+	            }else {
+	                $this->success('修改成功');
+	            }
 	        }
 	    }
 	    $this->display();
