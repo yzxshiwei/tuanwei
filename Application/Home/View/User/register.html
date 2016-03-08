@@ -20,25 +20,23 @@
     <!--content-->
     <div class="content">
         <form action="{{:U('User/register')}}" method="post">
-        <!--  
-            <div id="teamRegister">
-                <p class="teamName"><span>团队名称</span><input type="text" id="teamName" placeholder="团队名称（必填）"/></p>
-                <input type="hidden"/>
-                <label id="teamNameTs">123</label>
-                <h4>负责人注册</h4>
-            </div>
-            -->
-            <p><span>电子邮箱</span><input id="email" type="text" name="email" placeholder="电子邮件地址（必填）"/></p>
-            <label id="emailTs">123</label>
+            <!--
+                <div id="teamRegister">
+                    <p class="teamName"><span>团队名称</span><input type="text" id="teamName" placeholder="团队名称（必填）"/></p>
+                    <input type="hidden"/>
+                    <label id="teamNameTs">123</label>
+                    <h4>负责人注册</h4>
+                </div>
+                -->
+            <p><span>电子邮箱</span><input id="email" class="required" type="text" name="email" placeholder="电子邮件地址（必填）"/></p>
             <p class="zjType">
                 <span>证件类型</span>
                 <select name="card_type" id="idType">
                     <option value="1">学生证</option>
                     <option value="2">身份证</option>
                 </select>
-                <input id="idNum" name="card_id" type="text" placeholder="证件号（必填）"/>
+                <input id="idNum" class="required" name="card_id" type="text" placeholder="证件号（必填）"/>
             </p>
-            <label id="idNumTs">123</label>
             <p class="sfAttribute">
                 <span>身份属性</span>
                 <select name="user_type" class="sc" id="Identity">
@@ -53,40 +51,30 @@
                     <option value="1">男</option>
                 </select>
             </p>
-            <label>123</label>
             <p>
-	            <span>密码设置</span><input id="pwd" name="passwd" type="password" placeholder="密码（必填）"/>
+                <span>密码设置</span><input id="pwd" class="required" name="passwd" type="password" placeholder="密码（必填）"/>
             </p>
-            <label id="pwdTs">123</label>
             <p class="pwdAgain">
-            	<span>密码确认</span><input type="password" id="pwdAgain" placeholder="再次输入密码（必填）"/>
+                <span>密码确认</span><input type="password" class="required" id="pwdAgain" placeholder="再次输入密码（必填）"/>
             </p>
-            <label id="pwdAgainTs">123</label>
             <p>
-            	<span>学院/机构</span><input type="text" id="school" name="college" placeholder="所在学院或单位"/>
+                <span>学院/机构</span><input type="text" id="school" name="college" placeholder="所在学院或单位"/>
             </p>
-            <label>123</label>
             <p>
-            	<span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" name="user_name" id="name" placeholder="您的真实姓名"/>
+                <span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" name="user_name" id="name" placeholder="您的真实姓名"/>
             </p>
-            <label>123</label>
             <p class="birthDate">
-            	<span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" name="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
+                <span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" name="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
             </p>
-            <label id="birTs">123</label>
             <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span>
-            <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
-            	<foreach name="major" key="key" item="vo">
-            		<option value="{{$key}}">{{$vo}}</option>
-            	</foreach>
-            </select>
+                <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
+                    <foreach name="major" key="key" item="vo">
+                        <option value="{{$key}}">{{$vo}}</option>
+                    </foreach>
+                </select>
             </p>
-
-            <!-- <input  type="text" placeholder="您的主修专业"/></p> -->
-            <label>123</label>
             <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select></p>
-
-            <input class="subBtn" type="button" value="提交"/>
+            <input id="register" class="subBtn" type="button" value="提交"/>
         </form>
     </div>
 </div>
@@ -124,42 +112,77 @@
     });
 </script>
 <script>
-    //register ajax
-    $('.subBtn').click(function(){
-        var teamName = $('#teamName').val();//团队名称
-        var email = $('#email').val();//邮箱
-        var idType = $("#idType").find("option:selected").attr("value");//证件类型
-        var num = $('#idNum').val();//证件号
-        var Identity = $("#Identity").find("option:selected").attr("value");//身份属性
-        var sex = $(".sex").find("option:selected").attr("value");//性别
-        var pwd = $('#pwd').val();//密码
-        var school = $('#school').val();//学院或单位
-        var name = $('#name').val();//姓名
-        var nation = $('#nation').val();//民族
-        var birthday = $('#birthday').val();//出生日期
-        var major = $('#major').val();//专业
-        var degree = $('#degree').val();//学历
-        
-        var data = {
-            't_name':teamName,
-            'email':email,
-            'type':idType,
-            'num':num,
-            'identity':Identity,
-            'sex':sex,
-            'password':pwd,
-            'com':school,
-            'name':name,
-            'nation':nation,
-            'birthday':birthday,
-            'major':major,
-            'degree':degree
-        };
-        if(email == '' || idType == '' || num == '' || Identity == '' || sex == '' || pwd == '' || $('pwdAgain').val() == ''){
-            alert('您好，你还有相关信息未填写，请重新填写！');
-        }else{
-            $('form').submit();
+    //文本框失去焦点后
+    $('form input').blur(function(){
+        //身份证的正则表达式
+        var idReg = /\d{6,17}[\d|x]|\d{15}/;
+        var $parent = $(this).parent();
+        $parent.find(".formtips").remove();
+        //验证邮件
+        if($(this).is('#email') ){
+            if( this.value=="" || ( this.value!="" && !/.+@.+\.[a-zA-Z]{2,4}$/.test(this.value) ) ){
+                var errorMsg = '请输入正确的E-Mail地址!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else{
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+            }
         }
+        //验证证件
+        if($(this).is('#idNum') ){
+            if($('#idType').val() == "学生证"  ){
+                if($(this).val().length == 0){
+                    var errorMsg = '证件号不能为空!';
+                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+                }else{
+                    var okMsg = 'OK';
+                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+                }
+            }else{
+                if($(this).val().length == 0){
+                    var errorMsg = '证件号不能为空!';
+                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+                }else if(!idReg.test($(this).val())){
+                    var errorMsg = '证件格式不正确!';
+                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+                }else{
+                    var okMsg = 'OK';
+                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+                }
+            }
+        }
+        //验证密码
+        if( $(this).is('#pwd') ){
+            if( this.value=="" || this.value.length < 6 ){
+                var errorMsg = '请输入至少6位的密码!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else{
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999"  class="formtips onSuccess">'+okMsg+'</label>');
+            }
+        }
+        //二次密码
+        if( $(this).is('#pwdAgain') ){
+            if( this.value=="" || this.value.length < 6 ){
+                var errorMsg = '请输入至少6位的密码!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else if($(this).val() != $('#pwd').val()){
+                var errorMsg = '确认密码与密码输入不一致，请重新输入';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }else{
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999"  class="formtips onSuccess">'+okMsg+'</label>');
+            }
+        }
+    });
+    //提交，最终验证。
+    $('#register').click(function(){
+        $("form :input.required").trigger('blur');
+        var numError = $('form .onError').length;
+        if(numError){
+            return false;
+        }
+        alert('注册成功');
     });
 </script>
 <!--出生日期选择-->
