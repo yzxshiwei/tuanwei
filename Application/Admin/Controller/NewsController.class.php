@@ -54,7 +54,31 @@ class NewsController extends Controller{
     public function newsmanage() {
         $news = new \Common\Helper\News();
         $result = $news->listData();
-		
+
+        foreach($result["list_data"] as $_k=>$_v){
+        	switch ($_v["col"])
+			{
+			case \Common\Model\NewsModel::COL_1:
+              $result["list_data"][$_k]["col"] = "新闻主页";
+			  break;  
+			case \Common\Model\NewsModel::COL_2:
+              $result["list_data"][$_k]["col"] = "创业政策";
+			  break;
+			case \Common\Model\NewsModel::COL_3:
+              $result["list_data"][$_k]["col"] = "讲座培训";
+			  break; 
+            case \Common\Model\NewsModel::COL_4:
+              $result["list_data"][$_k]["col"] = "学院风采";
+			  break;
+			case \Common\Model\NewsModel::COL_5:
+              $result["list_data"][$_k]["col"] = "资料库";
+			  break;
+			case \Common\Model\NewsModel::COL_6:
+              $result["list_data"][$_k]["col"] = "场地类别";
+			  break;
+			}
+        }
+        
         $this->assign('Page' , $result['Page']);
         $this->assign('list_data',$result['list_data']);
         $this->display();

@@ -219,4 +219,14 @@ class TeamController extends \Common\Helper\Controller{
         $this->assign('names', $names);
         $this->display();
     }
+	
+	/**
+	 * 比赛相关文件下载
+	 */
+	public function downFile(){
+		$match = M("match");
+		$mid = I("get.mid","","string");
+		$file_url = $match->where(array("id"=>$mid))->field("start_file_src")->find();
+		downloads($file_url);
+	}
 }
