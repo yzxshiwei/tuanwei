@@ -88,6 +88,9 @@ class NewsController extends Controller{
 	 
 	 /**
 	  * 新闻删除
+	  * 添加时间2016-03-08
+	  * 
+	  * @author zlj
 	  */
 	 public function delNew(){
 	 	if(IS_AJAX){
