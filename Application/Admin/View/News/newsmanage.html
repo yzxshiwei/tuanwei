@@ -51,6 +51,7 @@
 										<else />
 										    <a class="pass race_edit">通过</a><a class="refuse race_edit">不通过</a>
 										</if>
+										<a href="javascript:;" class="rec_alss">删除</a>
 									</td>
 									
 								</tr>
@@ -101,6 +102,30 @@
                }
            });
      });
+     
+    /*删除*/
+   $(".rec_alss").click(function(){
+   	   var thiss = $(this);
+   	   var nid = thiss.parents("tr").attr("nid");
+   	   if(confirm("是否删除?")){
+   	   	   $.ajax({
+               type:'post',
+               url:"{{:U('News/delNew')}}",
+               data:"nid="+nid,
+               cache:false,
+               async:false,
+               dataType:'json',
+               success:function(data){
+               	   if(data=='1'){
+               	   	   thiss.parents("tr").remove();
+               	   }else{
+               	   	   alert("操作失败,请重试");
+               	   }
+
+               }
+           });
+   	   }
+   });
 </script>
 
 

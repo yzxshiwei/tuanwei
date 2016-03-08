@@ -12,8 +12,10 @@ class Team{
     public function teamList($user_id) {
         $teamModel = new \Common\Model\TeamModel();
         $result = $teamModel->distinct(true)
-                            ->field("p.name,team.*")->join("project as p on(team.project_id=p.id)",'left')
-                            ->where(array('user_id'=>$user_id))->select();
+                            ->field("p.name,p.id as p_id,team.*")->join("project as p on(team.project_id=p.id)",'left')
+                            ->where(array('user_id'=>$user_id))
+                            ->order('team.id')
+                            ->select();
         return $result;
     }
     /**

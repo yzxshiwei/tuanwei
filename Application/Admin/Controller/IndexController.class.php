@@ -126,7 +126,11 @@ class IndexController extends \Admin\Controller\Controller {
 	        if (!$result){
 	            $this->error('修改失败');
 	        }else {
-	            $this->success('修改成功');
+	            if ($new_pwd != null){
+	                $this->success('修改成功',U('Home/Login/index'));
+	            }else {
+	                $this->success('修改成功');
+	            }
 	        }
 	    }
 	    $this->display();
@@ -185,10 +189,13 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function user_state(){
 		if(IS_AJAX){
-			$id = I("id",0,'string');
+			$id = I("post.id",0,'string');
 			$types = I("types","","string");
 			$userModel = new \Common\Model\UsersModel();
+
 			$res = $userModel->where(array("user_id"=>$id))->save(array("state"=>$types));
+//			echo $userModel->getlastsql();
+			exit;
 			if($res){
 				echo 1;
 			}else{
