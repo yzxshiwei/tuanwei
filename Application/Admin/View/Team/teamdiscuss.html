@@ -103,7 +103,7 @@
                         <h3 class="title">团队交流页面</h3>
                         <ul class="project">
                         	<foreach name="list_data" key="key" item="vo">
-                            <li get_open-id="{{$vo.id}}">{{$vo.name}}</li>
+                            <li get_open-id="{{$vo.p_id}}">{{$vo.name}}</li>
                            </foreach>
                         </ul>
                     </div>
@@ -112,7 +112,7 @@
                         <!--输入的内容框-->
                         <div class="input_comm">
                                 <textarea id="content" placeholder="请输入交流内容"></textarea>
-                                <input type="submit" s-open-id="{{$vo.id}}" class="send" value="发送"/>
+                                <input type="submit" s-open-id="{{$vo.p_id}}" class="send" value="发送"/>
                         </div>
                         <!--显示内容-->
                         <div class="showBox">
