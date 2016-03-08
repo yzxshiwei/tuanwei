@@ -189,10 +189,13 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function user_state(){
 		if(IS_AJAX){
-			$id = I("id",0,'string');
+			$id = I("post.id",0,'string');
 			$types = I("types","","string");
 			$userModel = new \Common\Model\UsersModel();
+
 			$res = $userModel->where(array("user_id"=>$id))->save(array("state"=>$types));
+//			echo $userModel->getlastsql();
+			exit;
 			if($res){
 				echo 1;
 			}else{
