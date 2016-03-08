@@ -84,7 +84,7 @@
         //验证密码
         if( $(this).is('#pwd') ){
             if( this.value=="" || this.value.length < 6 ){
-                var errorMsg = '请输入至少6位的用户名!';
+                var errorMsg = '请输入至少6位的密码!';
                 $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
             }else{
                 var okMsg = 'OK';

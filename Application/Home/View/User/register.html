@@ -29,7 +29,7 @@
             </div>
             -->
             <p><span>电子邮箱</span><input id="email" type="text" name="email" placeholder="电子邮件地址（必填）"/></p>
-            <label id="emailTs">123</label>
+            <label id="emailTs"></label>
             <p class="zjType">
                 <span>证件类型</span>
                 <select name="card_type" id="idType">
@@ -38,7 +38,7 @@
                 </select>
                 <input id="idNum" name="card_id" type="text" placeholder="证件号（必填）"/>
             </p>
-            <label id="idNumTs">123</label>
+            <label id="idNumTs"></label>
             <p class="sfAttribute">
                 <span>身份属性</span>
                 <select name="user_type" class="sc" id="Identity">
@@ -53,27 +53,27 @@
                     <option value="1">男</option>
                 </select>
             </p>
-            <label>123</label>
+            <label></label>
             <p>
 	            <span>密码设置</span><input id="pwd" name="passwd" type="password" placeholder="密码（必填）"/>
             </p>
-            <label id="pwdTs">123</label>
+            <label id="pwdTs"></label>
             <p class="pwdAgain">
             	<span>密码确认</span><input type="password" id="pwdAgain" placeholder="再次输入密码（必填）"/>
             </p>
-            <label id="pwdAgainTs">123</label>
+            <label id="pwdAgainTs"></label>
             <p>
             	<span>学院/机构</span><input type="text" id="school" name="college" placeholder="所在学院或单位"/>
             </p>
-            <label>123</label>
+            <label></label>
             <p>
             	<span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" name="user_name" id="name" placeholder="您的真实姓名"/>
             </p>
-            <label>123</label>
+            <label></label>
             <p class="birthDate">
             	<span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" name="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
             </p>
-            <label id="birTs">123</label>
+            <label id="birTs"></label>
             <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span>
             <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
             	<foreach name="major" key="key" item="vo">
@@ -83,7 +83,7 @@
             </p>
 
             <!-- <input  type="text" placeholder="您的主修专业"/></p> -->
-            <label>123</label>
+            <label></label>
             <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select></p>
 
             <input class="subBtn" type="button" value="提交"/>
