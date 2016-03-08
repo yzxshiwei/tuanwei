@@ -44,6 +44,15 @@ class IndexController extends \Admin\Controller\Controller {
 	    $result = $team->listData($this->user['user_id']);
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 
+        $teamModel = new \Common\Model\TeamModel();
+
+        foreach($result['list_data'] as $_k=>$_v){
+        	$where["team.project_id"] = $_v["project_id"];
+			$where["team.user_type"] = $utype;
+        	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name")->where($where)->find();
+			$result['list_data'][$_k]["user_name"] = $name["user_name"];
+        }
+
 		$this->assign('utype',$utype);
 	    $this->assign('list_data',$result['list_data']);
 	    $this->assign('Page', $result['Page']);
