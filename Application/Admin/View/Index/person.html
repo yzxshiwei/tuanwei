@@ -84,7 +84,7 @@
                             </label>
                             <label>
                                 <span>生 &nbsp;&nbsp;&nbsp;日 : </span>
-                                <input type="text" value="{{$user.birth}}" name="birth" id="appDate"/>
+                                <input type="text" value="" name="birth" id="appDate"/>
                                 <b></b>
                             </label>
                             <label>
@@ -147,6 +147,8 @@
     <script type="text/javascript">
         $(function () {
             var currYear = (new Date()).getFullYear();
+            var d = new Date();
+            var str = d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
             var opt={};
             opt.date = {preset : 'date'};
             opt.default = {
@@ -158,7 +160,7 @@
                 endYear:currYear + 500 //结束年份
             };
 
-            $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+            $("#appDate").val(str).scroller('destroy').scroller($.extend(opt['date'], opt['default']));
 
         });
     </script>
