@@ -60,13 +60,13 @@ class IndexController extends \Admin\Controller\Controller {
 		$team = new \Common\Model\TeamModel();
 		
 		if(IS_POST){
+				
+			$data = array();
 			$data["contents"] = I("post.intro","","string");
 			$data["team_name"] = I("post.name","","string");
 			$id = I("post.id","","string");
-			
 			//开启事务
 			$team->startTrans();
-			$data = array();
 			if($_FILES['project_file']['tmp_name']){
 				$file_res = Upload($_FILES['project_file']);
 				if($file_res["status"]){
@@ -78,7 +78,6 @@ class IndexController extends \Admin\Controller\Controller {
 					$this->error($file_res['msg']);
 				}
 			}
-
 			$res = $team->where(array("id"=>$id))->save($data);
 		    if($res){
 		        $team->commit();
