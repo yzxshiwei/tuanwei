@@ -144,4 +144,44 @@ class MessageModel extends \Common\Helper\Model{
 	   }
 	   return $flag;
     }
+    
+	/**
+     * 拒绝邀请
+     * 添加时间2016-3-9
+     * 
+     * @author zlj
+     * @param unknown $param
+     * @return bool
+     */
+    public function deny($user,$id,$proid) {
+        $flag = false;
+	    $judgesModel = new \Common\Model\JudgesModel();
+	    $teacherTeamModel = new \Common\Model\Teacher_TeamModel();
+	    $teamModel = new \Common\Model\TeamModel();
+	    $message_data = $this->where(array('id' => $id))->find();
+	    //评委老师拒绝
+	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
+
+	        $jd_res = $judgesModel->where(array('project_id' => $proid,'judge_id' => $user['user_id']))->delete();
+	        if ($jd_res){
+	            $flag = $this->readMsg($id);
+	        }
+	    };
+	    //指导老师拒绝
+	   if (self::TYPE_TEACHER_PROJECT == $message_data['msg_type']){
+	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->delete();
+	       if ($tt_res){
+	           $flag = $this->readMsg($id);
+	       }
+	   }
+	   //团队邀请拒绝
+	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
+	       $t_res = $teamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->delete();
+	       if ($t_res){
+	           $flag = $this->readMsg($id);
+	       }
+	   }
+	   return $flag;
+    }
+	
 }

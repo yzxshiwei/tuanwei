@@ -169,6 +169,13 @@ class IndexController extends \Admin\Controller\Controller {
 	public function refuse() {
 	    $id = I('id',0,'intval');
 	    $proid = I('proid',0,'intval');
+		$messageModel = new \Common\Model\MessageModel();
+		$result = $messageModel->deny($this->user,$id, $proid);
+	    if ($result){
+	        $this->success('已经拒绝');
+	    }else {
+	        $this->error('拒绝失败');
+	    }
 	}
 	/**
 	 * 阅读信息
@@ -202,8 +209,6 @@ class IndexController extends \Admin\Controller\Controller {
 			$userModel = new \Common\Model\UsersModel();
 
 			$res = $userModel->where(array("user_id"=>$id))->save(array("state"=>$types));
-//			echo $userModel->getlastsql();
-			exit;
 			if($res){
 				echo 1;
 			}else{

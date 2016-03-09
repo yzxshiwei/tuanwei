@@ -42,7 +42,10 @@ class ProjectController extends Controller{
 		    $userid = I("post.userid");
 	    	$team = new \Common\Model\TeamModel;
             unset($userid[array_search($this->user["user_id"],$userid)]);
-		    $team->where(array("project_id"=>$pid,"user_type"=>array("neq",\Common\Model\TeamModel::USER_TYPE_CAPTAIN)))->delete();
+			
+		    $team->where(array("project_id"=>$pid,"state"=>array("neq",\Common\Model\TeamModel::STATE_PASS)))->delete();
+			
+			
 		    $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
 		   
 		    //将项目老师 删除 再添加
@@ -175,15 +178,14 @@ class ProjectController extends Controller{
 				   $teach_id = array_unique($teach_id);
 				   $teachModel = new \Common\Model\Teacher_TeamModel;
 				   $return = $teachModel->addTeam($teach_id,$result,1);
-				   
 				   if($res && $return){
 				   	  $posjectModel->commit();
 				   	  //发送消息提示
 				   	  $messageModel = new \Common\Model\MessageModel();
 				   	  //发送邀请指导消息
 				   	  $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$result);
-				   	  //发送邀请学生消息
-				   	  $messageModel->sendMsg($userid, $this->user['user_id'], $messageModel::TYPE_USER_PROJECT, '你有项目邀请参加',$result);
+				   	  //发送邀请学生消息(此方法再Messagemodel里面)
+				   	  
 				   	  $this->success('创建项目成功',U('Project/projectmanage'));
 				   }else{
 				   	  $posjectModel->rollback();
@@ -193,7 +195,7 @@ class ProjectController extends Controller{
 				   
                }else {
                	   $posjectModel->rollback();
-                   $this->error('创建项目失败2');
+                   $this->error('创建项目失败');
                }
 			   
            }
@@ -259,9 +261,10 @@ class ProjectController extends Controller{
 	 		
 	 		$pid = I("post.pid","","string");
 			$team = M("team");
-
+            $where["team.project_id"] = $pid;
+			$where["team.state"] = \Common\Model\TeamModel::STATE_PASS;
 			$field = "team.user_type,users.user_id,users.user_name,students.college,students.stu_card";
-			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where(array("team.project_id"=>$pid))->field($field)->select();
+			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where($where)->field($field)->select();
 
             echo json_encode($user_list);
 	 	}

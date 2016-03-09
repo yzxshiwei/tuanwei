@@ -66,18 +66,26 @@ class TeamModel extends \Common\Helper\Model{
         $flag = FALSE;
 		$res = true;
 		foreach($userid as $_k){
-	   	   $adduser = $this->data(array("user_id"=>$_k,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_MEMBER))->add();
-		   if($adduser){
-		   	   $flag = TRUE;
-		   }else{
-		   	   $flag = FALSE;
-			   break;
+		   
+		   $reluse = $this->where(array("user_id"=>$_k,"project_id"=>$projectid))->find();
+
+		   if(!$reluse){
+			   $adduser = $this->data(array("user_id"=>$_k,"project_id"=>$projectid,"state"=>\Common\Model\TeamModel::STATE_INVITE,"user_type"=>\Common\Model\TeamModel::USER_TYPE_MEMBER))->add();
+			   if($adduser){
+			   	   	
+			   	   $messageModel = new \Common\Model\MessageModel();
+				   $messageModel->sendMsg($_k,$memberid,$messageModel::TYPE_USER_PROJECT, '你有项目邀请参加',$projectid);
+			   	   $flag = TRUE;
+			   }else{
+			   	   $flag = FALSE;
+				   break;
+			   }
 		   }
 	    }
 		
 		//添加队长
 		if($type){   
-	        $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
+	        $res = $this->data(array("user_id"=>$memberid,"project_id"=>$projectid,"state"=>\Common\Model\TeamModel::STATE_PASS,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->add();
 		}
 
 	    if($flag && $res){
