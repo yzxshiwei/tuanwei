@@ -117,10 +117,16 @@ class ProjectController extends Controller{
             $status_data = $projectStatusModel->where(array('project_id' => $id))->find();
             $result = $project->getData($id);
 			
+			$flag = FALSE; 
+			if($this->user['user_type']==\Common\Model\UsersModel::TYPE_TEACHER){
+				$flag = TRUE;
+			}
+
 			$teamModel = new \Common\Model\TeamModel;
 			$field = "users.user_id,users.user_name,students.stu_card,students.college";
 			$userList = $teamModel->join("users on users.user_id=team.user_id")->join("students on students.user_id=users.user_id")->where(array("project_id"=>$id))->field($field)->select();
 
+            $this->assign("flag",$flag);
 			$this->assign('staus_data' , $status_data);
             $this->assign('ulist',$userList);
             $this->assign('result',$result);
