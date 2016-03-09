@@ -28,8 +28,14 @@ class Team{
      */
     public function listData($user_id) {
         $teamModel = new \Common\Model\TeamModel();
-        $count = $teamModel->count();
-        $Page = new \Think\Page($count);
+        $count = $teamModel
+	        ->distinct(true)
+	        ->field('p.name,team.id,u.user_name,team.create_time,team.team_name,team.user_type,team.project_id')
+	        ->join('project as p on (team.project_id = p.id)','left')
+	        ->join("users as u on (team.user_id = u.user_id)",'left')
+	        ->where(array('team.user_id' => $user_id))
+	        ->count();
+        $Page = new \Think\Page($count,12);
         $Page_show = $Page->show();
         $result = $teamModel
         ->distinct(true)
