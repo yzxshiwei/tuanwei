@@ -58,9 +58,8 @@ class TeamController extends \Common\Helper\Controller{
     	
     	$count = $Match->where("state=1 AND $timestamp < project_end_time")->count();
     	//分页
-    	$page = new \Think\Page($count, 3);
+    	$page = new \Think\Page($count, 5);
     	$show = $page->show();
-        
 		$flag = $this->user["user_type"]==\Common\Model\UsersModel::TYPE_MANAGE?FALSE:TRUE;
 
     	$this->assign('img_url',$img_url);
