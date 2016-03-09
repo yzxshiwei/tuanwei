@@ -33,7 +33,7 @@ class Team{
         $Page_show = $Page->show();
         $result = $teamModel
         ->distinct(true)
-        ->field('p.name,team.id,u.user_name,u.create_time,team.team_name,team.user_type,team.project_id')
+        ->field('p.name,team.id,u.user_name,team.create_time,team.team_name,team.user_type,team.project_id')
         ->join('project as p on (team.project_id = p.id)','left')
         ->join("users as u on (team.user_id = u.user_id)",'left')
         ->where(array('team.user_id' => $user_id))
