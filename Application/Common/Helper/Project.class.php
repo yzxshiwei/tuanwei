@@ -26,14 +26,25 @@ class Project{
         }
         $count =  $porjectModel->count();
         $Page = new \Think\Page($count,12);
+        $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type';
+        if ($user['group_id'] == $userModel::TYPE_TEACHER || $user['group_id'] == $userModel::TYPE_JUDGES){
+            $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result';
+        }
         $page_show = $Page->show();
         $porjectModel_l
-        ->field('p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type')
+        ->field($filed)
         ->alias('p')
         ->join('match_project AS mp ON (p.id = mp.project_id)','left')
         ->join('`match` AS m ON(m.id = mp.match_id)','left')
-        ->join('project_status AS ps ON(p.id = ps.project_id)','left')
-        ->join('team as t ON(t.project_id = p.id)','left');
+        ->join('project_status AS ps ON(p.id = ps.project_id)','left');
+        if ($user['group_id'] == $userModel::TYPE_TEACHER){
+            $porjectModel_l->join('teacher_team as t ON(t.project_id = p.id)','left');
+        }elseif($user['group_id'] == $userModel::TYPE_JUDGES) {
+            $porjectModel_l->join('judges as t ON(t.project_id = p.id)','left');
+        }else {
+            $porjectModel_l->join('team as t ON(t.project_id = p.id)','left');
+        }
+        
         if ($user['group_id'] == $userModel::TYPE_MANAGE){
             $where['mp.match_id'] = array('GT',0);
             $porjectModel_l->where($where);
