@@ -359,9 +359,16 @@
                             <div class="mt teacherBox" add-th-dy-id="0">
                                 <b class="m_close">X</b>
                                 <h3 class="m_title">老师选择</h3>
-                                <foreach name="teacher_list" item="vo" >
-                                	<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>
-                                </foreach>
+                                <!--<foreach name="teacher_list" item="vo" >-->
+                                	<!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>-->
+                                <!--</foreach>-->
+                                <div class="c_val" c-val="1">
+                                    <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
+                                    <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
+                                </div>
+                                <div class="s_btn">
+                                    <button class="teacherBtn" t-id="1">确定</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -386,22 +393,21 @@
             return false;
         });
         //选择老师
-        var teacher_select_id;
-        function add_teacher_(e){
-            var content_ = $(e).html();
-            
-            var teacher_id = $(e).attr("teacher_id");
-            var not_in = $(e).attr("not_in");
-            if(not_in=='1'){
-	            var input_teacher = "<input type='hidden' name='teacher_id[]' value='"+teacher_id+"'>";
-	            $(e).parent().parent().find(".p_right_input .p_teacher").append(input_teacher);
-	            
-	            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
-	            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
-	            $(teacher_in).val($(teacher_in).val()+content_+",");
-	            $(e).attr("not_in","2");
-            }
-        }
+//        var teacher_select_id;
+//        function add_teacher_(e){
+//            var content_ = $(e).html();
+//            var teacher_id = $(e).attr("teacher_id");
+//            var not_in = $(e).attr("not_in");
+//            if(not_in=='1'){
+//	            var input_teacher = "<input type='hidden' name='teacher_id[]' value='"+teacher_id+"'>";
+//	            $(e).parent().parent().find(".p_right_input .p_teacher").append(input_teacher);
+//
+//	            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
+//	            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
+//	            $(teacher_in).val($(teacher_in).val()+content_+",");
+//	            $(e).attr("not_in","2");
+//            }
+//        }
         //添加成员选择
         $('.sureBtn').click(function(){
             var that = $(this);
@@ -447,6 +453,24 @@
         $(function(){
             $('.choose_s').searchableSelect();
         });
+        //老师选择
+        window.onload = function() {
+            $('.teacherBtn').click(function(){
+                var values = [];
+                var t_id = $(this).attr('t-id');
+                var c_val = $('div[c-val='+t_id+']');
+                console.log(c_val.html());
+                var i_check = $(c_val.find('input'));
+                var get_t_val = $('input[get-t-id='+t_id+']');
+                for(var i=0; i<i_check.length; i++){
+                    var ck = i_check[i];
+                    if(ck.checked){ //判断复选框是否选中
+                        values.push(ck.value);
+                    }
+                }
+                get_t_val.val(values.join(","));
+            });
+        }
     </script>
 </body>
 
