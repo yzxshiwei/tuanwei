@@ -17,7 +17,7 @@ class LoginController extends \Common\Helper\Controller{
         if(!\Common\Helper\RunUser::newInstantiation()->isTourist() && IS_AJAX){
             return $this->ajaxReturn(array("status"=>0,"msg"=>"请不要重复登录"));
         }elseif(!\Common\Helper\RunUser::newInstantiation()->isTourist()){
-            return $this->redirect("Index/Index");
+            return $this->redirect("Index/index");
         }
     }
 

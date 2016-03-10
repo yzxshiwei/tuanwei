@@ -65,17 +65,17 @@ class NewsController extends \Common\Helper\Controller{
     public function dynamicbusiness() {
     	$News = M('news');
     	$timestamp = time();
-    	$dataTop = $News->field('id,img_url,title')->where("col=2 and flag=1 and $timestamp > top_s AND $timestamp < top_e")->order('public_t desc')->limit(5)->select();
-    	$count = $News->field('id,title')->where("col=2 and flag=1 and $timestamp > top_s AND $timestamp < top_e")->order('public_t desc')->limit(5)->count();
+    	$dataTop = $News->field('id,img_url,title')->where("col=4 and flag=1 and $timestamp > top_s AND $timestamp < top_e")->order('public_t desc')->limit(5)->select();
+    	$count = $News->field('id,title')->where("col=4 and flag=1 and $timestamp > top_s AND $timestamp < top_e")->order('public_t desc')->limit(5)->count();
     	
-    	$dataNormal = $News->field('id,img_url,title')->where("col=2 and flag=1 and top_s=0 and top_e=0")->order('public_t desc')->limit(5-$count)->select();
+    	$dataNormal = $News->field('id,img_url,title')->where("col=4 and flag=1 and top_s=0 and top_e=0")->order('public_t desc')->limit(5-$count)->select();
     	
     	$p = I('get.p',1,'intval');
     	
     	$data = array_merge((array)$dataTop, (array)$dataNormal);
     	
     	//分页
-    	$page = new \Think\Page(count($data),1);
+    	$page = new \Think\Page(count($data),5);
     	$show = $page->show();
     	//轮播图
     	$i = 0;
@@ -90,7 +90,7 @@ class NewsController extends \Common\Helper\Controller{
     	}
     	
     	$this->assign('page', $show);
-    	$data = array_slice($data, (--$p)*5, 1);
+    	$data = array_slice($data, (--$p)*5, 5);
     	$this->assign('img_url',$img_url);
     	$this->assign ( 'data', $data );
 		$this->display ();
