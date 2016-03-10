@@ -16,11 +16,13 @@ function create_password($passwd){
  * 上传文件
  */
 function uploadFile($file,$path='file'){
-	
-    if (! count($_FILES[$file])) {
+    $_FILES[$file];
+    if ($_FILES['size'] <= 0) {
+        
         return array(
-            'status' => false,
-            'msg' => '请上传文件'
+            'status' => true,
+            'msg' => '没有文件',
+            'file_path' =>''
         );
     }
     foreach ($_FILES as $file) {
@@ -62,10 +64,9 @@ function uploadFile($file,$path='file'){
  * 单文件上传
  */
  function Upload($upfile,$pass="file"){
-      
 	  if(!count($upfile)) {
 	       return array(
-	           'status' => false,
+	           'status' => true,
 	           'msg' => '请上传文件'
 	       );
 	   }
