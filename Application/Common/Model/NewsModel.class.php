@@ -19,7 +19,7 @@ class NewsModel extends \Common\Helper\Model{
      * 新闻栏目
      * @var unknown
      */
-    public $col = array(
+    public static  $col = array(
         self::COL_1 => '新闻主页',
         self::COL_2 => '创业政策',
         self::COL_3 => '讲座培训',

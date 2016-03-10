@@ -68,7 +68,7 @@ class NewsController extends Controller{
               $result["list_data"][$_k]["col"] = "讲座培训";
 			  break; 
             case \Common\Model\NewsModel::COL_4:
-              $result["list_data"][$_k]["col"] = "学院风采";
+              $result["list_data"][$_k]["col"] = "创业动态";
 			  break;
 			case \Common\Model\NewsModel::COL_5:
               $result["list_data"][$_k]["col"] = "资料库";
