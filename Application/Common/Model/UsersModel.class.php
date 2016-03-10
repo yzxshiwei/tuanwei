@@ -166,6 +166,8 @@ class UsersModel extends \Common\Helper\Model{
         $user_data['nation'] = $userData['nation'];
         $user_data['card_id'] = $userData['card_id'];
         $user_data['card_type'] = $userData['card_type'];
+		$user_data['group_id'] = $userData['group_id'];
+		$user_data['state'] = $userData['state'];
         $user_data['create_time'] = $time;
         $user_data['last_time'] = $time;
         $email_data = $this->where(array('email' => $userData['email']))->find();

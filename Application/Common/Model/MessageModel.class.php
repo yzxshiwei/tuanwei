@@ -7,6 +7,7 @@ class MessageModel extends \Common\Helper\Model{
     const TYPE_JUDGES_PROJECT = 'judges_project';
     const TYPE_TEACHER_PROJECT = 'teacher_project';
     const TYPE_USER_PROJECT = 'user_project';
+	const TYPE__APPLY = 'user_apply';
     /**
      * 消息类型
      * @var array
@@ -18,6 +19,7 @@ class MessageModel extends \Common\Helper\Model{
         self::TYPE_JUDGES_PROJECT => '评委消息',
         self::TYPE_TEACHER_PROJECT => '指导老师消息',
         self::TYPE_USER_PROJECT => '团队邀请信息',
+        self::TYPE__APPLY => '注册用户申请信息',
     );
     protected $tableName = 'message';
     /**
@@ -117,6 +119,7 @@ class MessageModel extends \Common\Helper\Model{
 	    $judgesModel = new \Common\Model\JudgesModel();
 	    $teacherTeamModel = new \Common\Model\Teacher_TeamModel();
 	    $teamModel = new \Common\Model\TeamModel();
+		$userModel = new \Common\Model\UsersModel();
 	    $message_data = $this->where(array('id' => $id))->find();
 	    //评委老师同意
 	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
@@ -142,6 +145,16 @@ class MessageModel extends \Common\Helper\Model{
 	           $flag = $this->readMsg($id);
 	       }
 	   }
+	   
+	   //同意注册用户申请为  投资人/指导老师/评审庄家
+	   if (self::TYPE__APPLY == $message_data['msg_type']){
+	       $team_data['state'] = $teamModel::STATE_PASS;
+	       $t_res = $userModel->where(array('user_id' => $proid))->save($team_data);
+	       if ($t_res){
+	           $flag = $this->readMsg($id);
+	       }
+	   }
+	   
 	   return $flag;
     }
     
@@ -180,6 +193,11 @@ class MessageModel extends \Common\Helper\Model{
 	       if ($t_res){
 	           $flag = $this->readMsg($id);
 	       }
+	   }
+	   
+	   //拒绝注册用户申请为  投资人/指导老师/评审庄家(不做任何操作)
+	   if (self::TYPE__APPLY == $message_data['msg_type']){
+	        $flag = $this->readMsg($id);
 	   }
 	   return $flag;
     }
