@@ -57,8 +57,7 @@ class UserController extends \Common\Helper\Controller{
         $code = $user->rand_code($email);
         $result = $user->send_email($email , $code);
         if ($result == true){
-            $this->assign('email',$email);
-            $this->display();
+            $this->success('发送邮件成功，请注意查收');
         }else {
             $this->error('发送验证码失败，请检查邮箱是否正确');
         }
@@ -70,15 +69,33 @@ class UserController extends \Common\Helper\Controller{
      * @author yzx
      */
     public function rtepwd(){
-        $password = I('post.password','','string');
-        $code = I('post.code','','string');
-        $email = I('post.email','','string');
-        $user = new \Common\Helper\User();
-        $result = $user->updatepwd($password, $code, $email);
-        if ($result){
-            $this->success('修改密码成功',U('Login/index'));
+        if (IS_POST){
+            $password = I('post.password','','string');
+            $email = I('post.email','','string');
+            $user = new \Common\Helper\User();
+            $result = $user->updatepwd($password , $email);
+            if ($result){
+                $this->success('修改密码成功',U('Login/index'));
+            }else {
+                $this->error('修改失败');
+            }
         }else {
-            $this->error('修改失败');
+            $userModel = new \Common\Model\UsersModel();
+            $sessioncode  = I('sessioncode',null,'string');
+            $email = I('email',null,'string');
+            $session_code = session($email);
+            $user_data = $userModel->where(array('email' => $email))->find();
+            if (empty($user_data)){
+                $this->error('邮箱错误',U('Login/index'));
+            }
+            if ($sessioncode == null || $email == null){
+                $this->error('参数错误',U('Login/index'));
+            }
+            if ($sessioncode != $session_code){
+                $this->error('参数错误',U('Login/index'));
+            }
+            $this->assign('email',$email);
+            $this->display();
         }
     }
 }
