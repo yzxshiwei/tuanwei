@@ -67,7 +67,8 @@ function uploadFile($file,$path='file'){
 	  if(!count($upfile)) {
 	       return array(
 	           'status' => true,
-	           'msg' => '请上传文件'
+	           'msg' => '请上传文件',
+		   'file_path' => ''
 	       );
 	   }
 	  
