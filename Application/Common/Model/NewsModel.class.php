@@ -23,7 +23,7 @@ class NewsModel extends \Common\Helper\Model{
         self::COL_1 => '新闻主页',
         self::COL_2 => '创业政策',
         self::COL_3 => '讲座培训',
-        self::COL_4 => '学院风采',
+        self::COL_4 => '创业动态',
         self::COL_5 => '资料库',
         self::COL_6 => '场地类别',
     );
