@@ -71,12 +71,12 @@ return array(
                              'url' => 'Permission/grouplist',
                              'ico' => 'fa fa-bars',
 							 'map' =>array("grouplist","addpermission","usergroup")
-							 ),
+							 )
         
-        "addgroup" => array('name' => "创建分组",
-                            'url' => 'Permission/addgroup',
-                            'ico' => 'fa fa-suitcase',
-							'map' =>array("addgroup")
-							)
+//      "addgroup" => array('name' => "创建分组",
+//                          'url' => 'Permission/addgroup',
+//                          'ico' => 'fa fa-suitcase',
+//							'map' =>array("addgroup")
+//							)
     ),
 );
