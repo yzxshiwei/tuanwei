@@ -78,13 +78,58 @@ class NewsController extends Controller{
 			  break;
 			}
         }
-        
         $this->assign('Page' , $result['Page']);
         $this->assign('list_data',$result['list_data']);
         $this->display();
 
     }
 	
+	/**
+	 * 新闻编辑
+	 * @author zlj
+	 */
+	public function newedit(){
+		$newsModel = new \Common\Model\NewsModel();
+		if(IS_POST){
+			$nid = I("post.nid","","string");
+			$input_data = array();
+			
+			if($_FILES['selectFiles']['tmp_name']){
+				$file_res1 = Upload($_FILES['selectFiles']);
+				if($file_res1["status"]){
+					
+					$input_data["img_url"] = $file_res1['file_path'];
+					$file_url = $newsModel->where(array("id"=>$nid))->field("img_url")->find();
+					delfile($file_url["img_url"]);
+				}else{
+					$this->error($file_res1['msg']);
+				}
+			}
+            $input_data['col'] = I('post.col',false,'strval'); //新闻栏目
+            $input_data['sub_col'] = $input_data['col']==2?I('post.sub_col', false, 'strval'):0; //新闻栏目子类别
+            $input_data['top_s'] = I('post.top_s', '', 'strtotime'); 
+            $input_data['top_e'] = I('post.top_e', '', 'strtotime');
+            $input_data['title'] = I('post.title', false, 'strval');
+            $input_data['subtitle'] = I('post.subtitle', '', 'strval');
+            $input_data['type'] = I('post.type', false, 'strval');
+            $input_data['source'] = I('post.source', '', 'strval'); //新闻消息来源
+            $input_data['content'] = I('post.editorValue', false, 'strval'); //新闻编辑内容
+            
+            $relust = $newsModel->where(array("id"=>$nid))->save($input_data);
+
+			if($relust){
+				$this->success("更新成功",U('News/newsmanage'));
+			}else{
+				$this->error("更新失败");
+			}
+			
+		}else{
+			$nid = I("get.nid","","string");
+			$info = $newsModel->where(array("id"=>$nid))->find();
+			$this->assign("info",$info);
+			$this->display();
+		}
+	}
 	
 	/**
 	 * 修改新闻状态

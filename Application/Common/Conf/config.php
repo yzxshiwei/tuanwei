@@ -52,7 +52,7 @@ return array(
         "newsmanage" => array('name' => "信息管理",
                               'url' => 'News/newsmanage',
                               'ico' => 'fa fa-cubes',
-							  'map' =>array("newsmanage")
+							  'map' =>array("newsmanage","newedit")
 							  ),
         
         "teamdiscuss" => array('name' => "团队交流",
