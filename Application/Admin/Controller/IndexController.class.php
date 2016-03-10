@@ -41,7 +41,14 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function teammanage() {
 	    $team = new \Common\Helper\Team();
-	    $result = $team->listData($this->user['user_id']);
+		
+		$uid = $this->user['user_id'];
+		//若是管理员 查所有团队
+		if($this->user['user_type'] == \Common\Model\UsersModel::TYPE_MANAGE){
+			$uid = NULL;
+		}
+
+	    $result = $team->listData($uid);
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 
         $teamModel = new \Common\Model\TeamModel();
@@ -52,7 +59,7 @@ class IndexController extends \Admin\Controller\Controller {
         	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name")->where($where)->find();
 			$result['list_data'][$_k]["user_name"] = $name["user_name"];
         }
-
+        $this->assign('top',$uid);
 		$this->assign('utype',$utype);
 	    $this->assign('list_data',$result['list_data']);
 	    $this->assign('Page', $result['Page']);
@@ -214,6 +221,41 @@ class IndexController extends \Admin\Controller\Controller {
 			}else{
 				echo 2;
 			}
+		}
+	}
+	
+   /**
+	 * 团队是否禁止(正常或静止或删除)
+	 * 添加时间 2016-03-07
+	 * @param types string  1:正常 2禁止 0 删除
+	 * @author zlj
+	 */
+	public function teamTops(){
+		if(IS_AJAX){
+			$id = I("post.id",0,'string');
+			$types = I("types","","string");
+			$teamModel = new \Common\Model\TeamModel();
+
+            if($types==1){
+            	$num = $teamModel->where(array("tops"=>1))->count();
+				if($num<4){
+					$res = $teamModel->where(array("id"=>$id))->save(array("tops"=>1));
+					if($res){
+						$this->ajaxReturn(array("state"=>TRUE,"msg"=>"修改成功"));
+					}else{
+						$this->ajaxReturn(array("state"=>FALSE,"msg"=>"修改失败"));
+					}
+				}else{
+					$this->ajaxReturn(array("state"=>FALSE,"msg"=>"置顶数已达上限"));
+				}
+            }else{
+            	$res = $teamModel->where(array("id"=>$id))->save(array("tops"=>0));
+				if($res){
+					$this->ajaxReturn(array("state"=>TRUE,"msg"=>"修改成功"));
+				}else{
+					$this->ajaxReturn(array("state"=>FALSE,"msg"=>"修改失败"));
+				}
+            }
 		}
 	}
 	
