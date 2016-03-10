@@ -33,33 +33,29 @@ class UserController extends \Common\Helper\Controller{
                 $input_data['user_name'] = $input_data['email'];
             }
 			
-			if(!I("post.flag","","string")){
-				if(I('post.user_type',0,'intval')!=6){
-					$input_data['state'] = 2;
-				}else{
-					$input_data['state'] = 1;
-				}
+
+			if(I('post.user_type',0,'intval')!=6){
+				$input_data['state'] = 2;
 			}else{
 				$input_data['state'] = 1;
 			}
 
+
             $result = $userModel->addUser($input_data);
             if ($result['status']){
             	
-	            if(!I("post.flag","","string")){
-	            	if($input_data['user_type']!=6){
-		            	if($input_data['user_type']==3){
-							$con = "用户:".$input_data['user_name']."申请成为指导老师";
-						}elseif($input_data['user_type']==4){
-							$con = "用户:".$input_data['user_name']."申请成为评审专家";
-						}elseif($input_data['user_type']==5){
-							$con = "用户:".$input_data['user_name']."申请成为投资人";
-						}
-						$messageModel = new \Common\Model\MessageModel();
-					    $messageModel->sendMsg(1, $result['status'], $messageModel::TYPE__APPLY, $con,$result['status']);
-	            	}
+            	if($input_data['user_type']!=6){
+	            	if($input_data['user_type']==3){
+						$con = "用户:".$input_data['user_name']."申请成为指导老师";
+					}elseif($input_data['user_type']==4){
+						$con = "用户:".$input_data['user_name']."申请成为评审专家";
+					}elseif($input_data['user_type']==5){
+						$con = "用户:".$input_data['user_name']."申请成为投资人";
+					}
+					$messageModel = new \Common\Model\MessageModel();
+				    $messageModel->sendMsg(1, $result['status'], $messageModel::TYPE__APPLY, $con,$result['status']);
+            	}
 
-				}
                 $this->success('注册成功',U('Index/index'));
             }else {
                 $this->error($result['msg']);
