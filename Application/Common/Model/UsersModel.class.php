@@ -172,6 +172,11 @@ class UsersModel extends \Common\Helper\Model{
         if (!empty($email_data)){
             return array('status'=>false,'msg'=>'邮箱已经存在');
         }
+		$card_id = $this->where(array('card_id' => $userData['card_id']))->find();
+		if (!empty($card_id)){
+            return array('status'=>false,'msg'=>'证件号已经存在');
+        }
+		
         $this->startTrans();
         $user_id = $this->add($user_data);
         if (!$user_id){
