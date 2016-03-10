@@ -74,7 +74,7 @@
                 </select>
             </p>
             <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select></p>
-            <input id="register" class="subBtn" type="button" value="提交"/>
+            <input id="register" class="subBtn" type="submit" value="提交"/>
         </form>
     </div>
 </div>
@@ -182,7 +182,6 @@
         if(numError){
             return false;
         }
-        alert('注册成功');
     });
 </script>
 <!--出生日期选择-->
