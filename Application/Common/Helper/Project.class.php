@@ -31,6 +31,7 @@ class Project{
             $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result';
         }
         $page_show = $Page->show();
+        
         $porjectModel_l
         ->field($filed)
         ->alias('p')
@@ -44,8 +45,8 @@ class Project{
         }else {
             $porjectModel_l->join('team as t ON(t.project_id = p.id)','left');
         }
-        
-        if ($user['group_id'] == $userModel::TYPE_MANAGE){
+        $where  = array();
+        if ($user['group_id'] == $userModel::TYPE_MANAGE || $user['group_id'] == $userModel::TYPE_JUDGES){
             $where['mp.match_id'] = array('GT',0);
             $porjectModel_l->where($where);
         }else {
@@ -54,7 +55,7 @@ class Project{
         }
         $result_data = $porjectModel_l->limit($Page->firstRow.','.$Page->listRows)
         ->select();
-        //print_r($porjectModel_l->getLastSql());die();
+        
         $list_data = array();
         if (!empty($result_data)){
             foreach ($result_data as $k => $v){
