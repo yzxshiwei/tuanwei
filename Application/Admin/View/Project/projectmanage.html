@@ -371,6 +371,9 @@
         }
         .score{
             margin: 5px 0px 0px 18px;
+            position: absolute;
+            left:125px;
+            top:60px;
         }
         .score button{
             margin-left: 100px;
@@ -389,6 +392,24 @@
             bottom: 15px;
             color: #fff;
             cursor: pointer;
+        }
+         .activities .open1{
+            height: 30px;
+            width: 60px;
+            text-align: center;
+            line-height: 30px;
+            background:  rgb(0,153,153);
+            border-radius: 5px;
+            position: absolute;
+            right: 200px;
+           	bottom: 15px;
+            color: #fff;
+            cursor: pointer;
+        }
+        .activities .open1 a{
+        	width: 100%;
+        	height: 100%;
+        	color: #fff;
         }
     </style>
 </head>
@@ -414,8 +435,12 @@
                                     <span>{{$vo.sub_title}}</span>
                                 </p>
                                 <p class="score">
-                                		比赛名称: <b>{{$vo.m_name}}</b>
-                                    	项目评分 : <b>{{$vo.score}}</b> 分
+                                		<span>比赛名称: <b>{{$vo.m_name}}</b></span>
+                                		
+                                		<if condition="$vo['score'] eq true">
+                                    	      <span>项目评分 : <b>{{$vo.score}}</b> 分</span>
+                                        </if>
+                                    	
                                     	<if condition="$user['group_id'] eq 1">
                                     		<if condition="$vo['result'] eq 0">
                                     		<button class="pass" data-status = "1" data-id="{{$vo.id}}">通过比赛</button>
@@ -426,6 +451,7 @@
                                     	</if>
                                 </p>
                                 <p class="open" open-id="{{$vo.id}}" divs_id="{{$_k}}">打开</p>
+                                <p class="open1"><a href="{{:U('Project/workreview',array('id'=>$vo['id']))}}">详情</a></p>
                                 <if condition="$vo['is_captain'] eq 1">
                                 	<if condition="$vo['is_open'] eq 0">
                                 		<p class="open2" data-id="{{$vo.id}}">公开</p>

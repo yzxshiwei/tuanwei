@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>项目详情</title>
 	<include file='Public:file'/>
     <style>
         .returnIndex img{
@@ -244,7 +245,7 @@
                             <div class="p_right_input">
                                 <label><span>{{$result.name}}</span></label>
                                 <label><span>{{$result.sub_title}}</span></label>
-                                <label><span>{{$result.intro}}</span></label>
+                                <label><textarea cols="115" rows="3" border-style="solid" style="border: 1px solid  #ccc;" overflow-y="visible" >{{$result.intro}}</textarea></label>
                                 <label><a href="{{:U('Project/projectDown',array('id'=>$result['id']))}}">项目下载</a></label>
                                 <label>
                                     <div class="p_team">

@@ -27,7 +27,7 @@ return array(
         "teammanage" => array('name' => "团队管理",
                              'url'=>'Index/teammanage',
                              'ico' => 'fa fa-users',
-							 'map' =>array("teammanage","updateTeam")
+							 'map' =>array("teammanage","updateteam")
 							 ),
         
         "createnews" => array('name' => "创建信息",
