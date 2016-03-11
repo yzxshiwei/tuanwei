@@ -14,7 +14,7 @@ class ProjectController extends Controller{
 		$teacTeamModel = M("teacher_team");
 
 		if(IS_POST){
-$teach_id = I('post.teacher_id');v_dump($teach_id);exit;
+
 			$posjectModel = M("project");
 			
 			$pid = I("post.pid",'','string');
