@@ -363,8 +363,8 @@
                                 	<!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>-->
                                 <!--</foreach>-->
                                 <div class="c_val" c-val="0">
-                                	<foreach name="teacher_list" item="vo" >
-                                		<input type="checkbox" name="teacher" value="{{$vo.user_id}}"  add-value="123"/><b>{{$vo.user_name}}</b>
+                                	<foreach name="teacher_list" item="vo" key="_k" >
+                                		<input type="checkbox" name="teacher" value="{{$vo.user_id}}" class="chk_{{$_k}}"  add-value="{{$vo.user_name}}"/><b>{{$vo.user_name}}</b>
                                 	</foreach>
                                 </div>
                                 <div class="s_btn">
@@ -446,11 +446,12 @@
                 var c_val = $('div[c-val='+t_id+']');
                 var i_check = $(c_val.find('input'));
                 var get_t_val = $('input[get-t-id='+t_id+']');
+
                 for(var i=0; i<i_check.length; i++){
                     var ck = i_check[i];
-                    console.log(ck)
+                    var val_name = $(".chk_"+i).attr("add-value");
                     if(ck.checked){ //判断复选框是否选中
-                        values.push(ck);
+                        values.push(val_name);
                     }
                 }
                 console.log(values);
