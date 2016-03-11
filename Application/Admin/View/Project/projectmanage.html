@@ -435,7 +435,9 @@
                                     <span>{{$vo.sub_title}}</span>
                                 </p>
                                 <p class="score">
-                                		<span>比赛名称: <b>{{$vo.m_name}}</b></span>
+                                	    <if condition="$vo['m_name'] eq true">
+                                	    	<span>比赛名称: <b>{{$vo.m_name}}</b></span>
+                                	    </if>
                                 		
                                 		<if condition="$vo['score'] eq true">
                                     	      <span>项目评分 : <b>{{$vo.score}}</b> 分</span>

@@ -219,6 +219,8 @@ class MatchController extends Controller{
 			
 			$match_info["rules"] = htmlspecialchars_decode($match_info["rules"]);
 			$prolist = $project->field("id,name")->select();
+		    
+			$match_info["start_file_src"] = explode("file/",$match_info["start_file_src"])[1];
 
 			$this->assign("prolist",$prolist);
             $this->assign("glist",$teacher_list);
