@@ -14,7 +14,7 @@ class ProjectController extends Controller{
 		$teacTeamModel = M("teacher_team");
 
 		if(IS_POST){
-
+$teach_id = I('post.teacher_id');v_dump($teach_id);exit;
 			$posjectModel = M("project");
 			
 			$pid = I("post.pid",'','string');
@@ -147,58 +147,60 @@ class ProjectController extends Controller{
     public function createproject() {
 
         if (IS_POST){
-        	
-           $file_res = uploadFile('project_file');
-           if (!$file_res['status']){
-               $this->error($file_res['msg']);
+            $teach_id = I('post.teacher_id');
+			$posjectModel = new \Common\Model\ProjectModel();
+			//开启事务
+			$posjectModel->startTrans();
+			
+		   	if($_FILES['project_file']['tmp_name']){
+				$file_res1 = Upload($_FILES['project_file']);
+				if($file_res1["status"]){
+					$data["file_url"] = $file_res1['file_path'];
+				}else{
+					$this->error($file_res1['msg']);
+				}
+			}
+
+           $post_data = array();
+           $post_data['name'] = I('post.name','','string');
+           $post_data['sub_title'] = I('post.sub_title','','string');
+           $post_data['intro'] = I('post.intro','','string');
+		   $post_data['creat_id'] = $this->user['user_id'];
+		   
+           $result = $posjectModel->addPorject($post_data);
+           if ($result){
+           	   
+			   //添加项目团队信息(成员)
+			   $userid = I("post.userid");
+			   $userid = array_unique($userid);
+			   $team = new \Common\Model\TeamModel;
+			   $res = $team->addTeam($result,$userid,$this->user["user_id"],true);
+			   
+			   //添加项目团队 老师信息
+			   $teach_id = I('post.teacher_id');
+			   $teach_id = array_unique($teach_id);
+			   $teachModel = new \Common\Model\Teacher_TeamModel;
+			   $return = $teachModel->addTeam($teach_id,$result,1);
+			   if($res && $return){
+			   	  $posjectModel->commit();
+			   	  //发送消息提示
+			   	  $messageModel = new \Common\Model\MessageModel();
+			   	  //发送邀请指导消息
+			   	  $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$result);
+			   	  //发送邀请学生消息(此方法再Messagemodel里面)
+			   	  
+			   	  $this->success('创建项目成功',U('Project/projectmanage'));
+			   }else{
+			   	  $posjectModel->rollback();
+				  
+			   	  $this->error('创建项目失败');
+			   }
+			   
            }else {
-               $posjectModel = new \Common\Model\ProjectModel();
-			   
-			   //开启事务
-			   $posjectModel->startTrans();
-			   
-               $post_data = array();
-               $post_data['name'] = I('post.name','','string');
-               $post_data['sub_title'] = I('post.sub_title','','string');
-               $post_data['file_url'] = $file_res['file_path'];
-               $post_data['intro'] = I('post.intro','','string');
-			   $post_data['creat_id'] = $this->user['user_id'];
-			   
-               $result = $posjectModel->addPorject($post_data);
-               if ($result){
-               	   
-				   //添加项目团队信息(成员)
-				   $userid = I("post.userid");
-				   $userid = array_unique($userid);
-				   $team = new \Common\Model\TeamModel;
-				   $res = $team->addTeam($result,$userid,$this->user["user_id"],true);
-				   
-				   //添加项目团队 老师信息
-				   $teach_id = I('post.teacher_id');
-				   $teach_id = array_unique($teach_id);
-				   $teachModel = new \Common\Model\Teacher_TeamModel;
-				   $return = $teachModel->addTeam($teach_id,$result,1);
-				   if($res && $return){
-				   	  $posjectModel->commit();
-				   	  //发送消息提示
-				   	  $messageModel = new \Common\Model\MessageModel();
-				   	  //发送邀请指导消息
-				   	  $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$result);
-				   	  //发送邀请学生消息(此方法再Messagemodel里面)
-				   	  
-				   	  $this->success('创建项目成功',U('Project/projectmanage'));
-				   }else{
-				   	  $posjectModel->rollback();
-					  
-				   	  $this->error('创建项目失败');
-				   }
-				   
-               }else {
-               	   $posjectModel->rollback();
-                   $this->error('创建项目失败');
-               }
-			   
+           	   $posjectModel->rollback();
+               $this->error('创建项目失败');
            }
+			   
         }else {
             $userModel = D('users');
             $list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();

@@ -336,6 +336,19 @@
                                         <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                     </div>
                                 </div>
+                            <!--老师选择弹出框-->
+                            <div class="mt teacherBox" add-th-dy-id="0">
+                                <b class="m_close">X</b>
+                                <h3 class="m_title">老师选择</h3>
+                                <div class="c_val" c-val="0">
+                                	<foreach name="teacher_list" item="vo" key="_k" >
+                                		<input type="checkbox" name="teacher_id[]" value="{{$vo.user_id}}" class="chk_{{$_k}}"  add-value="{{$vo.user_name}}"/><b>{{$vo.user_name}}</b>
+                                	</foreach>
+                                </div>
+                                <div class="s_btn">
+                                    <input type="button" value="确定" class="teacherBtn" t-id="0" > 
+                                </div>
+                            </div>
                             </form>
                             <!--成员选择弹出框-->
                             <div class="mt memberBox" add-dy-id="0">
@@ -350,25 +363,8 @@
                                             	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
                                             </if>
                                     	</foreach>
-
                                     </select>
                                     <button class="sureBtn">确定</button>
-                                </div>
-                            </div>
-                            <!--老师选择弹出框-->
-                            <div class="mt teacherBox" add-th-dy-id="0">
-                                <b class="m_close">X</b>
-                                <h3 class="m_title">老师选择</h3>
-                                <!--<foreach name="teacher_list" item="vo" >-->
-                                	<!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>-->
-                                <!--</foreach>-->
-                                <div class="c_val" c-val="0">
-                                	<foreach name="teacher_list" item="vo" key="_k" >
-                                		<input type="checkbox" name="teacher" value="{{$vo.user_id}}" class="chk_{{$_k}}"  add-value="{{$vo.user_name}}"/><b>{{$vo.user_name}}</b>
-                                	</foreach>
-                                </div>
-                                <div class="s_btn">
-                                    <button class="teacherBtn" t-id="0">确定</button>
                                 </div>
                             </div>
                         </div>
