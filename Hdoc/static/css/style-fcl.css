@@ -1117,11 +1117,34 @@ a:active {
   clear: both; }
 #information .content .i_des li label .for_details {
   display: block;
-    font-size: 16px;
   position: absolute;
   right: 0;
   color: #49A9A5; }
-
+#newList .i_title {
+    height: 60px;
+    text-align: center;
+    line-height: 60px;
+    background-color: #7ac2bd; }
+#newList .i_title h2 {
+    font-size: 30px;
+    font-weight: 500;
+    color: #fff; }
+#newList .content{
+    width: 960px;
+    font-family: "微软雅黑";
+    margin: 30px auto 0px;
+}
+#newList .content .i_des li{
+    padding: 10px 15px;
+    border-bottom: 1px dashed #ccc;
+}
+#newList .content .i_des li a{
+    color: #666;
+    font-size: 14px;
+}
+#newList .content .i_des li a:hover{
+    text-decoration: underline;
+}
 #page_front {
     float: right;
     margin: 22px 0px;}
