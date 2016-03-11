@@ -44,14 +44,15 @@ class TeamController extends \Common\Helper\Controller{
     public function matchlist() {
     	$Match = M('match');
     	$timestamp = time();
+    	$day = date("Y-m-d",$timestamp);
     	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src,sign_start_time,sign_end_time')->where("state=1")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
-    	foreach ($data as $k=>&$v){
-    		$v['rules'] = htmlspecialchars_decode(mb_substr($v['rules'],0, 150),'utf8');
-    		if($v["sign_start_time"]<time() && $v["sign_end_time"]>time()){
-    			$v["times"] = TRUE;
+    	foreach ($data as $k => $v){
+    		$data[$k]['rules'] = htmlspecialchars_decode(mb_substr($v['rules'],0, 150),'utf8');
+    		if($v["sign_start_time"] <= strtotime($day) && $v["sign_end_time"] > strtotime($day)){
+    			$data[$k]["times"] = TRUE;
     		}else{
-    			$v["times"] = FALSE;
+    			$data[$k]["times"] = FALSE;
     		}
     	}
     	$img_url = $Match->field('id, cover_src')->where("cover_src is not null and state=1 AND $timestamp < project_end_time")->limit(5)->select();
@@ -61,7 +62,6 @@ class TeamController extends \Common\Helper\Controller{
     	$page = new \Think\Page($count, 5);
     	$show = $page->show();
 		$flag = $this->user["user_type"]==\Common\Model\UsersModel::TYPE_MANAGE?FALSE:TRUE;
-
     	$this->assign('img_url',$img_url);
 		$this->assign('flag',$flag);
     	$this->assign('data', $data);	

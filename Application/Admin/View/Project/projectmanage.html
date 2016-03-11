@@ -458,10 +458,11 @@
                                         </label>
                                         <label style="clear:both;position: relative;width: 87.5%;">
                                             <input type="text" placeholder="老师" class="get_t_val" value="{{$vo.u_name}}" style="margin-top: 10px;padding-left: 15px" get-t-id="{{$vo.id}}"/>
-                                            <button class="p_add p_teacher" add-teacher-id="{{$vo.id}}">+
+                                            <button class="p_add p_teacher checs_{{$_k}}" add-teacher-id="{{$vo.id}}">+
                                             
                                                  <foreach item='_ko' name='vo.teac_info'>
-                                                 	<input type='hidden' name='teacher_id[]' value='{{$_ko}}'>
+                                                 	<!--<input type='hidden' name='teacher_id[]' value='{{$_ko}}'>-->
+                                                 	<input type='hidden' class='tur_{{$_k}}_{{$_ko}}' name='teacher_id[]' value='{{$_ko}}'>
                                                  </foreach>
                                             
                                             </button>
@@ -493,12 +494,17 @@
                                     </div>
                                 </div>
                                 <!--老师选择弹出框-->
-                                <div class="mt teacherBox" add-th-dy-id="{{$vo.id}}" pro_id="{{$vo.id}}" >
+                                <div class="mt teacherBox" add-th-dy-id="{{$vo.id}}" pro_id="{{$vo.id}}" trs_id="{{$_k}}">
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">老师选择</h3>
                                     <div class="c_val" c-val="{{$vo.id}}">
-                                        <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
-                                        <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
+                                    	<foreach name="teacher_list" item="_vo" key="_ks" >
+                                    		<if condition="$vo['teac_info'][$_vo['user_id']] eq true">
+	                                		   <input type="checkbox" name="teacher" value="{{$_vo.user_id}}" checked="checked" class="chk_{{$_k}}_{{$_vo.user_id}}"  add-value="{{$_vo.user_name}}"/><b>{{$_vo.user_name}}</b>
+	                                		<else />
+	                                		   <input type="checkbox" name="teacher" value="{{$_vo.user_id}}" class="chk_{{$_k}}_{{$_vo.user_id}}"  add-value="{{$_vo.user_name}}"/><b>{{$_vo.user_name}}</b>
+                                    		</if>
+	                                	</foreach>
                                     </div>
                                     <div class="s_btn">
                                         <button class="teacherBtn" t-id="{{$vo.id}}">确定</button>
@@ -615,27 +621,6 @@
                    content.css('display','none');
                }
            });
-           //选择老师
-//           var teacher_select_id;
-//           function add_teacher_(e){
-//               var content_ = $(e).html();
-//               var teacher_id = $(e).attr("teacher_id");
-//               var not_in = $(e).attr("not_in");
-//
-//               if(not_in=='1'){
-//               	   var pro_id = $(e).parent("div").attr("pro_id");
-//	               var input_teacher = "<input type='hidden' name='teacher_id[]' value='"+teacher_id+"'>";
-//	               $(e).parent().parent().find(".p_right_input .p_teacher").append(input_teacher);
-//
-//	//             teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
-//	//             console.log(teacher_select_id);
-//	//             var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
-//	               var teacher_in = $("input[get-t-id="+pro_id+"]")[0];
-//	//             console.log(teacher_in);
-//	               $(teacher_in).val($(teacher_in).val()+content_+",");
-//	               $(e).attr("not_in","2");
-//               }
-//           }
     </script>
     <!--搜索-->
     <script>
@@ -683,17 +668,27 @@
         });
         //老师选择
         window.onload = function() {
-            $('.teacherBtn').click(function(){
+            $('.teacherBtn').click(function(){ 
                 var values = [];
                 var t_id = $(this).attr('t-id');
+                var trs_id = $(this).parent().parent("div").attr("trs_id");      
                 var c_val = $('div[c-val='+t_id+']');
-                console.log(c_val.html());
                 var i_check = $(c_val.find('input'));
                 var get_t_val = $('input[get-t-id='+t_id+']');
+
                 for(var i=0; i<i_check.length; i++){
                     var ck = i_check[i];
+                    var userid = ck.value;
+                    
                     if(ck.checked){ //判断复选框是否选中
-                        values.push(ck.value);
+                    	if($(".tur_"+trs_id+"_"+userid).length==0){
+                    		var input_teacher = "<input type='hidden' class='tur_"+trs_id+"_"+userid+"' name='teacher_id[]' value='"+userid+"'>";
+                    	    $(".checs_"+trs_id).append(input_teacher);
+                    	}
+                    	var con = $(".chk_"+trs_id+"_"+userid).attr("add-value");
+                        values.push(con);
+                    }else{
+                    	$(".tur_"+trs_id+"_"+userid).remove();
                     }
                 }
                 get_t_val.val(values.join(","));

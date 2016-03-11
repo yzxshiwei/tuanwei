@@ -13,10 +13,15 @@ return array(
     "SESSION_AUTO_START"=>true,
     //权限
     "PERMISSION"=>array(
+        "message"    => array("name"=>"消息中心",
+                              "url"=>"Index/index",
+		                      "ico"=>"fa fa-lightbulb-o",
+		                      "map"=>array("index")
+							 ),
         "usermanage" => array('name'=>"人员管理",
                               'url'=>'Index/usermanage',
                               'ico' => 'fa fa-user',
-							  'map' =>array("index","usermanage","person","agree","refuse","read")
+							  'map' =>array("usermanage","person","agree","refuse","read")
 							  ),
         
         "teammanage" => array('name' => "团队管理",
