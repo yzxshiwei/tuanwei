@@ -47,7 +47,7 @@ class TeamController extends \Common\Helper\Controller{
     	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src,sign_start_time,sign_end_time')->where("state=1")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
     	foreach ($data as $k=>&$v){
-    		$v['rules'] = htmlspecialchars_decode(substr($v['rules'],0, 150));
+    		$v['rules'] = htmlspecialchars_decode(mb_substr($v['rules'],0, 150),'utf8');
     		if($v["sign_start_time"]<time() && $v["sign_end_time"]>time()){
     			$v["times"] = TRUE;
     		}else{
