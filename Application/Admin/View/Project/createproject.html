@@ -362,12 +362,12 @@
                                 <!--<foreach name="teacher_list" item="vo" >-->
                                 	<!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in="1" teacher_id="{{$vo.user_id}}">{{$vo.user_name}}</a>-->
                                 <!--</foreach>-->
-                                <div class="c_val" c-val="1">
+                                <div class="c_val" c-val="0">
                                     <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
                                     <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
                                 </div>
                                 <div class="s_btn">
-                                    <button class="teacherBtn" t-id="1">确定</button>
+                                    <button class="teacherBtn" t-id="0">确定</button>
                                 </div>
                             </div>
                         </div>
@@ -392,22 +392,6 @@
             teacher.toggle();
             return false;
         });
-        //选择老师
-//        var teacher_select_id;
-//        function add_teacher_(e){
-//            var content_ = $(e).html();
-//            var teacher_id = $(e).attr("teacher_id");
-//            var not_in = $(e).attr("not_in");
-//            if(not_in=='1'){
-//	            var input_teacher = "<input type='hidden' name='teacher_id[]' value='"+teacher_id+"'>";
-//	            $(e).parent().parent().find(".p_right_input .p_teacher").append(input_teacher);
-//
-//	            teacher_select_id = $(e).parent().parent().find(".p_right_input .p_teacher").attr("add-teacher-id");
-//	            var teacher_in = $("input[get-t-id="+teacher_select_id+"]")[0];
-//	            $(teacher_in).val($(teacher_in).val()+content_+",");
-//	            $(e).attr("not_in","2");
-//            }
-//        }
         //添加成员选择
         $('.sureBtn').click(function(){
             var that = $(this);
@@ -468,6 +452,7 @@
                         values.push(ck.value);
                     }
                 }
+                console.log(values);
                 get_t_val.val(values.join(","));
             });
         }
