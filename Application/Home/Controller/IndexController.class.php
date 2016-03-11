@@ -10,15 +10,17 @@ class IndexController extends \Common\Helper\Controller {
 	    $where["top_s"] = array("elt",$time);
 		$where["top_e"] = array("egt",$time);
 
+        //新闻
 		$newList = $newModel->where($where)->order("public_t desc")->field("id,title,img_url")->limit(5)->select();
-		
 		if(count($newList)<5 && count($newList)>0 ){
 			
 			$num = 5-count($newList);
 		    $newList2 = $newModel->where("(top_s > $time or top_e<$time ) and flag=1")->order("public_t desc")->field("id,title,img_url")->limit($num)->select();
 			$newList = array_merge($newList,$newList2);
+		}elseif(count($newList)!=5){
+			$newList = $newModel->where(array("flag"=>1))->order("public_t desc")->field("id,title,img_url")->limit(5)->select();
 		}
-		
+        //团队风采
 		$teamModel = new \Common\Model\TeamModel;
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 		$teamList = $teamModel->where(array("user_type"=>$utype,"tops"=>1))->order("id desc")->limit(4)->select();
@@ -28,9 +30,10 @@ class IndexController extends \Common\Helper\Controller {
 			$data["tops"] = array("neq",1); 
 			$teamList2 = $teamModel->where($data)->order("id desc")->limit($num)->select();
 			$teamList = array_merge($teamList,$teamList2);
+		}elseif(count($teamList)!=4){
+			$teamList = $teamModel->where(array("user_type"=>$utype))->order("id desc")->limit(4)->select();
 		}
-    //         var_dump($teamList);
-    //         var_dump($newList);
+		
 		$this->assign("teamList",$teamList);
         $this->assign("newList",$newList);
         $this->display();
