@@ -18,11 +18,17 @@
             <p class="writer"><span>{{$ninfo['public_t']|date="Y-m-d",###}}</span>来源<span>{{$ninfo['source']}}</span></p>
 
             <div class="unslider-news">
-                <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="height:388px;">
-                    <ul>
-                        <li><img src="/{{$ninfo['img_url']}}" width="960px" height="388px" ></li>
-                    </ul>
-                </div>
+                <php>
+		         if($ninfo['img_url']!=''):
+		         </php>
+	                <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="height:388px;">
+	                    <ul>
+			                "<li><img src=/".$ninfo['img_url']. " width='960px' height='388px' ></li>"
+	                    </ul>
+	                </div>;
+	            <php>
+                endif;
+                </php>
             </div>
 
             <div class="news-page-body">

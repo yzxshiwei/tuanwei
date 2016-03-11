@@ -118,7 +118,7 @@ class PermissionController extends Controller{
             $result = $userModel->where(array('user_id' => $user_id))->save($post_data);
             if ($result){
                 if($post_data['group_id'] == '6')
-                $student = M('student');
+                $student = M('students');
                 $data = array('user_id' => $user_id);
                 if($student->add($data)){
                     $student->commit();
@@ -128,7 +128,6 @@ class PermissionController extends Controller{
                     $student->rollback();
                     $this->error('添加失败');
                 }
-                
                 
             }else {
                 $student->rollback();
