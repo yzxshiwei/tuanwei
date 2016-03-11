@@ -58,7 +58,7 @@
                 <span>密码确认</span><input type="password" class="required" id="pwdAgain" placeholder="再次输入密码（必填）"/>
             </p>
             <p>
-                <span>学院/机构</span><input type="text" id="school" name="college" placeholder="所在学院或单位"/>
+                <span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span><input type="text" id="school" name="college" placeholder="专业"/>
             </p>
             <p>
                 <span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" name="user_name" id="name" placeholder="您的真实姓名"/>
@@ -66,7 +66,7 @@
             <p class="birthDate">
                 <span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" name="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
             </p>
-            <p><span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span>
+            <p><span>学院/机构</span>
                 <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
                     <foreach name="major" key="key" item="vo">
                         <option value="{{$key}}">{{$vo}}</option>
