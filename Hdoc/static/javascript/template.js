@@ -39,8 +39,6 @@ var header_list={"header_list":[
 
 ]};
 
-
-
 var footer_list={
     "footer_list":{
         "second":[
