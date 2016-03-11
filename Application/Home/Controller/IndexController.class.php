@@ -29,7 +29,8 @@ class IndexController extends \Common\Helper\Controller {
 			$teamList2 = $teamModel->where($data)->order("id desc")->limit($num)->select();
 			$teamList = array_merge($teamList,$teamList2);
 		}
-		
+    //         var_dump($teamList);
+    //         var_dump($newList);
 		$this->assign("teamList",$teamList);
         $this->assign("newList",$newList);
         $this->display();

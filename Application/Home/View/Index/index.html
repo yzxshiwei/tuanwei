@@ -111,9 +111,13 @@
             <div class="news-img">
                 <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:400px;height:250px;display:inline-block;">
                     <ul class="slider_bag">
-                    	<foreach name="newList" item="_v">
-                    		<li data-background="/{{$_v.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>
-                    	</foreach>
+                    	<php>
+                    		foreach($newList as $k=>$v){
+		                   		if(!is_null($v['img_url'])){
+		                   			echo '<li data-background=/"'.$v['img_url'].'"data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>';
+		                   		}
+                    		}
+                    	</php>
                     </ul>
                 </div>
             </div>
