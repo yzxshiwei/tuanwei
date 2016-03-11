@@ -55,6 +55,18 @@ class NewsController extends \Common\Helper\Controller{
     }
     
     
+    public function newsList(){
+        $News = M('news');
+        $count = $News->count();
+        $Page = new \Think\Page($count,15);
+        $show = $Page->show();
+        $data = $News->field('id ,title')->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$this->assign('data',$data);// 
+    	$this->assign('page',$show);// 
+    	$this->display(); // 输出模板
+    }
+    
+    
     /**
      * 创业动态
      * 添加时间2016-2-16

@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>新闻列表</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <!--比赛信息-->
+    <div id="information">
+        
+        <!--比赛信息标题-->
+        <div class="i_title">
+            <h2>新闻中心</h2>
+        </div>
+        <div class="content">
+            <!--详细信息-->
+            <ul class="i_des">
+            <foreach name="data" item="vo">
+                <li>
+                          <label>
+
+                        
+                        <a href="{{:U('News/details',array('id'=>$vo['id']))}}" class="for_details">{{$vo.title}}</a>
+                    </label>
+                </li>
+             </foreach>
+            </ul>
+            <div id="page_front">
+                    {{$page}}
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="footer" style="margin-top: 70px">
+        <div id="f_center" style="text-align: left">
+
+        </div>
+    </div>
+    <!--js-->
+<include file='Public:header'/>
+<include file='Public:footer'/>
+    <script>
+        $(function(){
+            $('.flicker-example').flickerplate(
+                    {
+                        auto_flick 				: true,
+                        auto_flick_delay 		: 8,
+                        flick_animation 		: 'transform-slide'
+                    });
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</body>
+</html>
