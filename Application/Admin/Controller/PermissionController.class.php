@@ -114,10 +114,24 @@ class PermissionController extends Controller{
             $user_id = I("post.user_id",0,'intval');
             $post_data['group_id'] = I("post.group_id",0,'intval');
 			$post_data['user_type'] = I("post.group_id",0,'intval');
+			$userModel->startTrans();
             $result = $userModel->where(array('user_id' => $user_id))->save($post_data);
             if ($result){
-                $this->success('添加成功',U('Index/index'));
+                if($post_data['group_id'] == '6')
+                $student = M('student');
+                $data = array('user_id' => $user_id);
+                if($student->add($data)){
+                    $student->commit();
+                    $this->success('添加成功',U('Index/index'));
+                }
+                else{
+                    $student->rollback();
+                    $this->error('添加失败');
+                }
+                
+                
             }else {
+                $student->rollback();
                 $this->error('添加失败');
             }
         }else {
