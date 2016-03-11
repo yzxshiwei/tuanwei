@@ -457,7 +457,7 @@
                                             <button class="p_add p_comm" add-id="{{$vo.id}}" style="position: relative;">+</button>
                                         </label>
                                         <label style="clear:both;position: relative;width: 87.5%;">
-                                            <input type="text" placeholder="老师" class="get_t_val" value="{{$vo.u_name}}" style="margin-top: 10px;padding-left: 15px" get-t-id="{{$vo.id}}"/>
+                                            <input type="text" placeholder="老师" class="get_t_val" readonly="readonly" value="{{$vo.u_name}}" style="margin-top: 10px;padding-left: 15px" get-t-id="{{$vo.id}}"/>
                                             <button class="p_add p_teacher checs_{{$_k}}" add-teacher-id="{{$vo.id}}">+
                                             
                                                  <foreach item='_ko' name='vo.teac_info'>

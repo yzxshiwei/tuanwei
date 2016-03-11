@@ -42,19 +42,18 @@ class ProjectController extends Controller{
 		    $userid = I("post.userid");
 	    	$team = new \Common\Model\TeamModel;
             unset($userid[array_search($this->user["user_id"],$userid)]);
-			
 		    $team->where(array("project_id"=>$pid,"state"=>array("neq",\Common\Model\TeamModel::STATE_PASS)))->delete();
-			
-			
 		    $res = $team->addTeam($pid,$userid,$this->user["user_id"],FALSE);
 		   
 		    //将项目老师 删除 再添加
 		    $teach_id = I('post.teacher_id');
 		    $teachModel = new \Common\Model\Teacher_TeamModel;
-		   
 		    $teachModel->where(array("project_id"=>$pid,"teacher_type"=>1))->delete();
 		    $return = $teachModel->addTeam($teach_id,$pid,1);
-		   
+    	    //发送消息提示,发送邀请指导消息
+	   	    $messageModel = new \Common\Model\MessageModel();
+	   	    $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$pid);
+   
 		    if($res || $return || $result){
 		   	   $posjectModel->commit();
 		   	   $this->success('更新项目成功',U('Project/projectmanage'));
