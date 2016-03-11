@@ -85,7 +85,7 @@ class MatchController extends Controller{
 			}
             
 		}else{
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_JUDGES))->field("user_id,user_name")->select();
 			$prolist = $project->field("id,name")->select();
 
 			$this->assign("prolist",$prolist);
@@ -215,7 +215,7 @@ class MatchController extends Controller{
 			
 			$judges_info = $judgesModel->join("users on user_id=judges.judge_id")->where(array("judges.project_id"=>$mid))->field("judges.judge_id,users.user_name")->select();
 			
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_JUDGES))->field("user_id,user_name")->select();
 			
 			$match_info["rules"] = htmlspecialchars_decode($match_info["rules"]);
 			$prolist = $project->field("id,name")->select();
