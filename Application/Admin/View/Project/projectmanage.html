@@ -496,20 +496,12 @@
                                 <div class="mt teacherBox" add-th-dy-id="{{$vo.id}}" pro_id="{{$vo.id}}" >
                                     <b class="m_close">X</b>
                                     <h3 class="m_title">老师选择</h3>
-	                                <!--<foreach name="teacher_list" item="vl">-->
-										<!--<if condition="$vo['teac_info'][$vl['user_id']]">-->
-										    <!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='2' teacher_id="{{$vl.user_id}}"> {{$vl.user_name}}</a>-->
-										<!--<else />-->
-										    <!--<a href="javascript:void(0)" onclick="add_teacher_(this)" not_in='1' teacher_id="{{$vl.user_id}}"> {{$vl.user_name}}</a>-->
-										<!--</if>-->
-										<!--<input type='hidden' name='teacher_id[]' value='{{$vl.user_id}}'>-->
-									<!--</foreach>-->
-                                    <div class="c_val" c-val="1">
+                                    <div class="c_val" c-val="{{$vo.id}}">
                                         <input type="checkbox" name="teacher" value="张老师"/><b>张老师</b>
                                         <input type="checkbox" name="teacher" value="王老师"/><b>王老师</b>
                                     </div>
                                     <div class="s_btn">
-                                        <button class="teacherBtn" t-id="1">确定</button>
+                                        <button class="teacherBtn" t-id="{{$vo.id}}">确定</button>
                                     </div>
                                 </div>
                             </div>
