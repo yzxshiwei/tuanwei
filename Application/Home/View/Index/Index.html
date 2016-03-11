@@ -113,8 +113,8 @@
                     <ul class="slider_bag">
                     	<php>
                     		foreach($newList as $k=>$v){
-		                   		if(!is_null($v['img_url'])){
-		                   			echo '<li data-background=/"'.$v['img_url'].'"data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>';
+		                   		if(!empty($v['img_url'])){
+		                   			echo '<li data-background="'.$v['img_url'].'" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="javascript:void(0)"></a></div></li>';
 		                   		}
                     		}
                     	</php>
