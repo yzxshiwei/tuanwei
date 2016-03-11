@@ -34,7 +34,7 @@
                                 		<input type="checkbox" <if condition="$vo.tops eq 1">checked="checked"</if> class="user_valil">置顶
                                 	</if>
                                 	<if condition="$vo['user_type'] eq $utype">
-                                	    <a href="{{:U('Index/updateTeam',array('tid'=>$vo['id']))}}">编辑</a>
+                                	    <a href="{{:U('Index/updateteam',array('tid'=>$vo['id']))}}">编辑</a>
                                         <a class="deleteteam" data-id = "{{$vo.id}}">删除</a>
                                     </if>
                                 </td>
