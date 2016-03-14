@@ -109,6 +109,7 @@ class PermissionController extends Controller{
      */
     public function usergroup() {
         $userModel = new \Common\Model\UsersModel();
+		$student = M('students');
         if (IS_POST){
             $post_data = array();
             $user_id = I("post.user_id",0,'intval');
@@ -116,24 +117,25 @@ class PermissionController extends Controller{
 			$post_data['user_type'] = I("post.group_id",0,'intval');
 			$userModel->startTrans();
             $result = $userModel->where(array('user_id' => $user_id))->save($post_data);
-            if ($result){
-                if($post_data['group_id'] == '6')
-                $student = M('students');
-                $data = array('user_id' => $user_id);
-                if($student->add($data)){
-                    $student->commit();
-                    $this->success('添加成功',U('Index/index'));
-                }
-                else{
-                    $student->rollback();
-                    $this->error('添加失败');
-                }
-                
-            }else {
-                $student->rollback();
+            if($result){
+                if($post_data['group_id'] == \Common\Model\UsersModel::TYPE_STUDENT){
+                     $data = array('user_id' => $user_id);
+	                 if($student->add($data)){
+	                    $userModel->commit();
+	                    $this->success('添加成功',U('Index/index'));
+	                 }else{
+	                    $userModel->rollback();
+	                    $this->error('添加失败');
+	                 }
+			    }else{
+			    	$userModel->commit();
+	                $this->success('添加成功',U('Index/index'));
+			    }
+            }else{
+                $userModel->rollback();
                 $this->error('添加失败');
             }
-        }else {
+        }else{
             $user_id = I('user_id',0,'intval');
             $groupModel = D('group');
             $group_list = $groupModel->select();

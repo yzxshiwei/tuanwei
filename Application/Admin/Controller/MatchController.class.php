@@ -85,7 +85,7 @@ class MatchController extends Controller{
 			}
             
 		}else{
-			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_JUDGES))->field("user_id,user_name")->select();
+			$teacher_list = $userModel->where(array('user_type'=>\Common\Model\UsersModel::TYPE_TEACHER))->field("user_id,user_name")->select();
 			$prolist = $project->field("id,name")->select();
 
 			$this->assign("prolist",$prolist);

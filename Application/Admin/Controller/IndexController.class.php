@@ -162,7 +162,7 @@ class IndexController extends \Admin\Controller\Controller {
 	    $messageModel = new \Common\Model\MessageModel();
 	    $result = $messageModel->agree($this->user,$id, $proid);
 	    if ($result){
-	        $this->success('已经同意');
+	        $this->success('已经同意',U("Index/index"));
 	    }else {
 	        $this->error('同意失败');
 	    }
