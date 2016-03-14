@@ -1293,6 +1293,7 @@ a:active {
     padding-bottom: 7px;
     margin-bottom: 28px;
     border-bottom:1px solid #fff;
+    color: #fff;
 }
 #footer #f_center .f_content a{
     display: block;
