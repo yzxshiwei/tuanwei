@@ -206,7 +206,10 @@ a:active {
     overflow: hidden;
     width: 550px;
     position: static;
-    font-weight: bold; }
+    font-weight: bold;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+}
 .news-content:first-child {
     border-top: 1px dashed #808080;
     width: 410px; }
