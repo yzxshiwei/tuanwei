@@ -124,13 +124,9 @@
 	                    <span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input type="text" style="width: 176px;" name="nation" id="nation" placeholder="您的民族"/>
 	                </p>
 	                <p class="birthDate">
-	                    <span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
+	                    <span class="birth">出生日期</span><input type="text" name="birth" class="appDate" placeholder="你的出生日期"/>
 	                    <span>入学年份</span>
-	                    <select style="width: 176px;margin-left: -5px">
-	                        <option value="2015">2015</option>
-	                        <option value="2015">2015</option>
-	                        <option value="2015">2015</option>
-	                    </select>
+                        <input type="text" name="birth" class="appDate" placeholder="你的入学年份" style="width: 176px;margin-left: -5px"/>
 	                </p>
 	                <p>
 	                    <span>身份证号</span><input type="text" id="card_id_2" name="card_id_2" placeholder="您的18位身份证号"/>
@@ -310,7 +306,7 @@
             endYear:currYear + 500 //结束年份
         };
 
-        $("#appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+        $(".appDate").val('').scroller('destroy').scroller($.extend(opt['date'], opt['default']));
 
     });
 </script>
