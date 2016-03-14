@@ -120,6 +120,8 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function person() {
 		 if (IS_POST){
+		 	$userModel = new \Common\Model\UsersModel();
+
 	        $post_data = array();
 	        $old_pwd = I('post.old_pwd',null,'string');
 	        $new_pwd = I("post.new_pwd",null,'string');
@@ -136,6 +138,14 @@ class IndexController extends \Admin\Controller\Controller {
 	                $post_data['passwd'] = create_password($new_pwd);
 	            }
 	        }
+			
+			if($post_data['card_id'] != NULL){
+				$cardid = $userModel->where(array('card_id' => $this->user['card_id']))->find();
+				if($cardid){
+					$this->error("此证件号已被注册");
+				}
+			}
+			
 	        $userModel = new \Common\Model\UsersModel();
 	        $result = $userModel->where(array('user_id' => $this->user['user_id']))->save($post_data);
 	        if (!$result){
