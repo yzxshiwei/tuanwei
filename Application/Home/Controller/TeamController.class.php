@@ -2,14 +2,15 @@
 namespace Home\Controller;
 class TeamController extends \Common\Helper\Controller{
     /**
-     * 团队组建
+	 * 队员招聘 (毛遂自荐)
+	 *
      * 添加时间2016-2-16
-     * 
      * @author yzx
      */
     public function teamcreate() {
 
 		if(IS_POST){
+			//队员招聘 (毛遂自荐)
 			$wordsModel = new \Common\Model\WordsModel;
 			
 			$data = array();
@@ -20,6 +21,7 @@ class TeamController extends \Common\Helper\Controller{
 			}
 			
 			$data["words"] = I("post.contents","","string");
+			$data["type_id"] = I("post.type_id","","string");
 			$res = $wordsModel->add($data);
 			if($res){
 				$this->success("添加成功",U('Team/teamcreate'));
@@ -28,13 +30,28 @@ class TeamController extends \Common\Helper\Controller{
 			}
 		}else{
 			$words = new \Common\Helper\Words();
-			$result = $words->listData();
+			$result = $words->listData(array("type_id"=>1));
 
 			$this->assign('Page' , $result['Page']);
 			$this->assign('list_data',$result['list_data']);
 			$this->display();
 		}
     }
+	
+	/**
+	 * 毛遂自荐
+	 * 添加时间2016-03-14
+	 * @author zlj
+	 */
+	public function createam(){
+		$words = new \Common\Helper\Words();
+		$result = $words->listData(array("type_id"=>2));
+
+		$this->assign('Page' , $result['Page']);
+		$this->assign('list_data',$result['list_data']);
+		$this->display();
+	}
+	
     /**
      * 比赛信息列表
      * 添加时间2016-2-16

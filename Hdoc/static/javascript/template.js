@@ -26,8 +26,8 @@ var header_list={"header_list":[
     {"first_list_href":"javaScript:void(0);",
         "first_list_name":"招兵买马",
         "second":[
-            {"second_list_href":"javaScript:void(0);","second_list_name":"队员招聘"},
-            {"second_list_href":"javaScript:void(0);","second_list_name":"毛遂自荐"}
+            {"second_list_href":"index.php?m=Home&c=Team&a=teamcreate","second_list_name":"队员招聘"},
+            {"second_list_href":"index.php?m=Home&c=Team&a=createam","second_list_name":"毛遂自荐"}
         ]
     },
     {"first_list_href":"index.php?m=Home&c=Team&a=matchlist",

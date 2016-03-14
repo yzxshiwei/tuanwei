@@ -36,7 +36,7 @@
         </div>
         <!--比赛信息标题-->
         <div class="i_title">
-            <h2>招兵买马 毛遂自荐</h2>
+            <h2>队员招聘</h2>
         </div>
         <div id="teamCreate">
             <!--留言框-->
@@ -44,6 +44,7 @@
                 <div class="messageBox">
                 	<form method="post" action="{{:U('Team/teamcreate')}}">
                 		   <textarea class="reason" rows="12" required="required" maxlength="200"  name="contents" placeholder="填写招兵买马需求以及团队联系方式:"></textarea>
+                		   <input type="hidden" value="1" name="type_id">
                            <input class="subBtn" type="submit" value="提交"/>
                 	</form>
                 </div>

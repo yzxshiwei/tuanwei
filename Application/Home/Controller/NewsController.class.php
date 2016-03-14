@@ -54,7 +54,9 @@ class NewsController extends \Common\Helper\Controller{
         $this->display();
     }
     
-    
+    /**
+	 * 新闻列表
+	 */
     public function newsList(){
         $News = M('news');
         $count = $News->count();

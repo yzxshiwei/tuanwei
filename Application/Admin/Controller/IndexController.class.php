@@ -140,7 +140,7 @@ class IndexController extends \Admin\Controller\Controller {
 	        }
 			
 			if($post_data['card_id'] != NULL){
-				$cardid = $userModel->where(array('card_id' => $this->user['card_id']))->find();
+				$cardid = $userModel->where(array('card_id' => $post_data['card_id'],"user_id"=>array('neq'=>$this->user['user_id'])))->find();
 				if($cardid){
 					$this->error("此证件号已被注册");
 				}
