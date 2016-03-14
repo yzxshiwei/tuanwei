@@ -246,7 +246,7 @@ a:active {
     text-align: center;
     font-size: 0px;
     min-width: 960px;
-    border-bottom: 3px solid #808080; }
+    border-bottom: 1px solid #808080; }
 .index-line .line-content {
     color: #808080;
     display: inline-block;
@@ -308,7 +308,8 @@ a:active {
     padding: 10px 20px;
     border: 2px solid #6D8D46;
     border-radius: 15px;
-    transition: all .2s; }
+    transition: all .2s;
+}
 .card:nth-child(1) .card-body-cover a:hover {
     transition: all .2s;
     background-color: #6D8D46;
@@ -322,7 +323,8 @@ a:active {
     margin-top: -29.5px;
     background-image: url(../img/icon-01.png);
     background-color: #FFF;
-    position: relative; }
+    position: relative;
+}
 .card:nth-child(2) {
     display: inline-block;
     width: 200px;
@@ -468,13 +470,13 @@ a:active {
     background-color: #FFF;
     position: relative; }
 .card:nth-child(1) .icon {
-    background-position: -55px 0px; }
+    background-position: 2px 0px; }
 .card:nth-child(2) .icon {
-    background-position: 0px 0px; }
+    background-position: -53px 1px; }
 .card:nth-child(3) .icon {
-    background-position: 55px 0px; }
-.card:nth-child(4) .icon {
     background-position: 110px 0px; }
+.card:nth-child(4) .icon {
+    background-position: 56px 0px; }
 
 .footer {
     width: 100%;
