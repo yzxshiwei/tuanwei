@@ -511,7 +511,8 @@ a:active {
 .title {
     background-color: #49A9A5;
     line-height: 40px;
-    color: #FFF; }
+    color: #FFF;
+}
 
 .school-selector {
     border: 2px solid;
