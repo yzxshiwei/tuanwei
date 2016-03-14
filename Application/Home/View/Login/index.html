@@ -18,13 +18,42 @@
             color: #48AAA4;
             margin-bottom: 5px;
         }
-        .position1{
-            position: relative;
-            left:5px;
+        .wj_bg{
+        	padding-top: 60px;
+        	padding-bottom: 45px;
+        	margin-bottom: 100px;
         }
-        .position2{
-            position: relative;
-            left:9px;
+        .wj_bg span{
+        	display: inline-block;
+		    width: 170px;
+		    height: 40px;
+		    text-align: center;
+		    line-height: 40px;
+		    color: #fff;
+		    font-size: 20px;
+		    background-color: #48aaa4;
+        }
+        .wj_bg input[type="text"]{
+        	width: 530px;
+		    height: 40px;
+		    padding-left: 20px;
+		    vertical-align: middle;
+		    border: 2px solid #ccc;
+		    margin-top: -7px;
+		    font-size: 16px;
+		    font-family: "Microsoft YaHei";
+        }
+        .wj_bg .subBtn{
+        	width: 180px;
+		    height: 55px;
+		    margin-top: 54px;
+		    margin-bottom: 95px;
+		    background-color: #48aaa4;
+		    font-size: 20px;
+		    font-family: "Microsoft YaHei";
+		    color: #fff;
+		    border: 0;
+		    float: right;
         }
     </style>
 </head>
@@ -46,14 +75,20 @@
                 <!--<label id="pwdTs">123</label>-->
                 <input class="subBtn" id="send" type="submit" value="登 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录" style="margin-bottom: 120px"/>
             </form>
-            <form action="{{:U('User/sendcode')}}" method="post">
-                <h5>忘记密码?</h5>
-                <p><span>电子邮箱</span><input id="wj_email" name="email" type="text" placeholder="电子邮件地址"/></p>
-                <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
-                <h6>注意:</h6>
-                <h6 style="margin-bottom: 120px">您的注册用户名在未通过审核前,不能使用。</h6>
-            </form>
         </div>
+        <form action="{{:U('User/sendcode')}}" method="post">
+        	<div style="width:700px;margin: 0 auto;">
+        		<h5 style="height:40px;width: 130px;background: #ECF6F6;margin: 0 auto;padding: 5px;">忘记密码?</h5>
+        	</div>
+            <div class="wj_bg" style="background: #ECF6F6;">
+            	<div style="width: 700px;margin: 0 auto;">
+            		<p><span>电子邮箱</span><input id="wj_email" name="email" type="text" placeholder="电子邮件地址"/></p>
+		            <input class="subBtn" type="submit" value="确 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定" style="margin-bottom: 30px"/>
+		            <h6>注意:</h6>
+		            <h6>您的注册用户名在未通过审核前,不能使用。</h6>
+            	</div>
+            </div>
+        </form>
     </div>
     <!--footer-->
     <div id="footer" style="clear: both">
