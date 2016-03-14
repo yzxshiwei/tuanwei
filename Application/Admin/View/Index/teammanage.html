@@ -55,21 +55,23 @@
 </body>
 <script>
 $('.deleteteam').click(function(){
-	var team_id = $(this).attr('data-id'); 
-	$.ajax({
-               type:'post',
-               url:"{{:U('Team/delete')}}",
-               data:{team_id:team_id},
-               cache:false,
-               dataType:'json',
-               success:function(data){
-                   if(data.status == 1){
-                   	window.location.reload();
-                   }else{
-                   	alert('删除失败');
-                   }
-               }
-           });
+	var team_id = $(this).attr('data-id');
+	if(confirm("是否删除?")){
+			$.ajax({
+		       type:'post',
+		       url:"{{:U('Team/delete')}}",
+		       data:{team_id:team_id},
+		       cache:false,
+		       dataType:'json',
+		       success:function(data){
+		           if(data.status == 1){
+		           	window.location.reload();
+		           }else{
+		           	alert('删除失败');
+		           }
+		       }
+		    });
+	}
 });
 
   //ajax请求
