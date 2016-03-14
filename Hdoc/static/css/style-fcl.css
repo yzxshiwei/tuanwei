@@ -1085,7 +1085,6 @@ a:active {
 #information .content .i_des li {
   height: 170px;
   margin-top: 40px;
-  padding-bottom: 20px;
   border-bottom: 1px solid #ccc; }
 #information .content .i_des li img {
   width: 250px;
@@ -1098,6 +1097,7 @@ a:active {
   text-align: left;
   font-size: 12px;
   color: #666666;
+    height: 170px;
   position: relative; }
 #information .content .i_des li label h5 {
   float: left;
@@ -1116,9 +1116,11 @@ a:active {
 #information .content .i_des li label p {
   clear: both; }
 #information .content .i_des li label .for_details {
+    font-size: 12px;
   display: block;
   position: absolute;
   right: 0;
+    bottom:24px;
   color: #49A9A5; }
 #newList .i_title {
     height: 60px;
