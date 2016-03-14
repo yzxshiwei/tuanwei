@@ -16,6 +16,53 @@
             position: relative;
             left:9px;
         }
+        #registerBox{
+            height:240px;
+            width:547px;
+            border:1px solid #48AAA4;
+            font-family: "微软雅黑";
+            position: fixed;
+            top:55%;
+            left:40%;
+            z-index: 888;
+            background: #fff;
+            display: none;
+        }
+        #registerBox h5{
+            position: relative;
+            height:40px;
+            line-height: 40px;
+            background: #48AAA4;
+            color: #fff;
+        }
+        #registerBox h5 span{
+            position: absolute;
+            left:24px;
+            font-size: 18px;
+        }
+        #registerBox h5 b{
+            position: absolute;
+            right:24px;
+            top:8px;
+            height:25px;
+            width: 25px;
+            border-radius: 25px;
+            text-align: center;
+            line-height: 25px;
+            font-size: 18px;
+            font-weight: bold;
+            background: #fff;
+            color: #48AAA4;
+        }
+        #registerBox p{
+            padding: 24px;
+            text-indent: 2em;
+            font-size: 18px;
+            color: rgb(51,51,51);
+        }
+        #registerBox ul{
+            margin-left: 40px;
+        }
     </style>
 </head>
 <body>
@@ -26,10 +73,11 @@
         <div class="center"><img src="__STATIC__/img/banner-1.jpg"/></div>
     </div>
     <!--title-->
-    <div class="title">个人注册</div>
+    <div class="title">成员注册</div>
     <!--content-->
     <div class="content">
-        <form action="{{:U('User/register')}}" method="post">
+        <p style="float: right;margin-bottom: 35px;font-size: 16px;color: rgb(102,102,102)">您是指导老师,评审专家,投资人?<span id="clickHere" style="color: rgb(72,170,164);padding-bottom: 3px;border-bottom: 1px solid #48aaa4">点击这里</span></p>
+        <form action="{{:U('User/register')}}" method="post" style="clear: both">
             <!--
                 <div id="teamRegister">
                     <p class="teamName"><span>团队名称</span><input type="text" id="teamName" placeholder="团队名称（必填）"/></p>
@@ -39,54 +87,73 @@
                 </div>
                 -->
             <p><span>电子邮箱</span><input id="email" class="required" type="text" name="email" placeholder="电子邮件地址（必填）"/></p>
-            <p class="zjType">
-                <span>证件类型</span>
-                <select name="card_type" id="idType">
-                    <option value="1">学生证</option>
-                    <option value="2">身份证</option>
-                </select>
-                <input id="idNum" class="required" name="card_id" type="text" placeholder="证件号（必填）"/>
-            </p>
-            <p class="sfAttribute">
-                <span>身份属性</span>
-                <select name="user_type" class="sc" id="Identity">
-                    <option value="6">学生个人</option>
-                    <option value="3">指导老师</option>
-                    <option value="4">评审专家</option>
-                    <option value="5">投资人</option>
-                </select>
-                <button>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</button>
-                <select name="sex" class="sex">
-                    <option value="2">女</option>
-                    <option value="1">男</option>
-                </select>
-            </p>
             <p>
                 <span>密码设置</span><input id="pwd" class="required" name="passwd" type="password" placeholder="密码（必填）"/>
             </p>
             <p class="pwdAgain">
                 <span>密码确认</span><input type="password" class="required" id="pwdAgain" placeholder="再次输入密码（必填）"/>
             </p>
-            <p>
-                <span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span><input type="text" id="school" name="college" placeholder="专业"/>
-            </p>
-            <p>
-                <span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" name="user_name" id="name" placeholder="您的真实姓名"/>
-            </p>
-            <p class="birthDate">
-                <span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input id="nation" name="nation" type="text" placeholder="您所属民族" class="mz"/><span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
-            </p>
-            <p><span>学院/机构</span>
-                <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
-                    <foreach name="major" key="key" item="vo">
-                        <option value="{{$key}}">{{$vo}}</option>
-                    </foreach>
+            <!--<p class="zjType">-->
+                <!--<span>证件类型</span>-->
+                <!--<select name="card_type" id="idType">-->
+                    <!--<option value="1">学生证</option>-->
+                    <!--<option value="2">身份证</option>-->
+                <!--</select>-->
+                <!--<input id="idNum" class="required" name="card_id" type="text" placeholder="证件号（必填）"/>-->
+            <!--</p>-->
+            <p class="sfAttribute">
+                <span>学生证号</span>
+                <input id="idNum" class="required" name="card_id" type="text" placeholder="证件号（必填" style="width: 176px;margin-left: -5px"/>
+                <button>性&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;别</button>
+                <select name="sex" class="sex" style="margin-left: -5px;width: 179px">
+                    <option value="2">女</option>
+                    <option value="1">男</option>
                 </select>
             </p>
-            <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select></p>
+            <div style="margin-top: 68px;background: #ECF6F6">
+                <p>
+                    <span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" style="width: 176px;" name="user_name" id="name" placeholder="您的真实姓名"/>
+                    <span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select style="width: 179px;" name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select>
+                </p>
+                <p>
+                    <span>手 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;机</span><input type="text" style="width: 176px;" name="tel" id="tel" placeholder="您的手机号"/>
+                    <span>民 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;族</span><input type="text" style="width: 176px;" name="nation" id="nation" placeholder="您的民族"/>
+                </p>
+                <p class="birthDate">
+                    <span class="birth">出生日期</span><input type="text" name="birth" id="appDate" placeholder="你的出生日期"/>
+                    <span>入学年份</span>
+                    <select style="width: 176px;margin-left: -5px">
+                        <option value="2015">2015</option>
+                        <option value="2015">2015</option>
+                        <option value="2015">2015</option>
+                    </select>
+                </p>
+                <p>
+                    <span>身份证号</span><input type="text" id="card_id_2" name="card_id_2" placeholder="您的18位身份证号"/>
+                </p>
+                <p><span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;院</span>
+                    <select name="major" id="major" style="width: 525px;position: relative;right:5px;">
+                        <foreach name="major" key="key" item="vo">
+                            <option value="{{$key}}">{{$vo}}</option>
+                        </foreach>
+                    </select>
+                </p>
+                <p>
+                    <span>专 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;业</span><input type="text" name="major2" id="major2" class="required" placeholder="您的第一专业全称"/>
+                </p>
+            </div>
             <input id="register" class="subBtn" type="submit" value="提交"/>
         </form>
     </div>
+</div>
+<div id="registerBox">
+    <h5><span>注意</span><b id="r_close">X</b></h5>
+    <p>如果您是指导老师、评审专家或投资人,请您联系团委XX老师,获得您的专用账号</p>
+    <ul>
+        <li>团委XXX老师</li>
+        <li>电话: <span>028-8565546546</span></li>
+        <li>邮箱: <span>XXXXX@eqwe.com</span></li>
+    </ul>
 </div>
 <!--footer-->
 <div id="footer" style="clear: both">
@@ -108,17 +175,17 @@
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
         });
-        $('#Identity').change(function(){
-            var value=$("#Identity").find("option:selected").val();
-
-            if(value == "chief"){
-                $('#teamRegister').show(300);
-                $('.title').html('团队注册')
-            }else{
-                $('#teamRegister').hide(300);
-                $('.title').html('个人注册')
-            }
-        });
+//        $('#Identity').change(function(){
+//            var value=$("#Identity").find("option:selected").val();
+//
+//            if(value == "chief"){
+//                $('#teamRegister').show(300);
+//                $('.title').html('团队注册')
+//            }else{
+//                $('#teamRegister').hide(300);
+//                $('.title').html('个人注册')
+//            }
+//        });
     });
 </script>
 <script>
@@ -126,6 +193,8 @@
     $('form input').blur(function(){
         //身份证的正则表达式
         var idReg = /\d{6,17}[\d|x]|\d{15}/;
+        //手机号的正则表达
+        var telReg =  /^(((13[0-9]{1})|(15[0-9]{1})|(18[0-9]{1}))+\d{8})$/;
         var $parent = $(this).parent();
         $parent.find(".formtips").remove();
         //验证邮件
@@ -140,26 +209,33 @@
         }
         //验证证件
         if($(this).is('#idNum') ){
-            if($('#idType').val() == "学生证"  ){
-                if($(this).val().length == 0){
-                    var errorMsg = '证件号不能为空!';
-                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
-                }else{
-                    var okMsg = 'OK';
-                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
-                }
+            if( this.value==""  ){
+                var errorMsg = '请输入学生证号!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
             }else{
-                if($(this).val().length == 0){
-                    var errorMsg = '证件号不能为空!';
-                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
-                }else if(!idReg.test($(this).val())){
-                    var errorMsg = '证件格式不正确!';
-                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
-                }else{
-                    var okMsg = 'OK';
-                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
-                }
+                var okMsg = 'OK';
+                $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
             }
+//            if($('#idType').val() == "学生证"  ){
+//                if($(this).val().length == 0){
+//                    var errorMsg = '证件号不能为空!';
+//                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+//                }else{
+//                    var okMsg = 'OK';
+//                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+//                }
+//            }else{
+//                if($(this).val().length == 0){
+//                    var errorMsg = '证件号不能为空!';
+//                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+//                }else if(!idReg.test($(this).val())){
+//                    var errorMsg = '证件格式不正确!';
+//                    $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+//                }else{
+//                    var okMsg = 'OK';
+//                    $parent.append('<label style="color: #999" class="formtips onSuccess">'+okMsg+'</label>');
+//                }
+//            }
         }
         //验证密码
         if( $(this).is('#pwd') ){
@@ -184,6 +260,20 @@
                 $parent.append('<label style="color: #999"  class="formtips onSuccess">'+okMsg+'</label>');
             }
         }
+        //手机
+        if($(this).is('#tel')){
+            if(!telReg.test($(this).val())){
+                var errorMsg = '手机号格式不正确!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }
+        }
+        //身份证
+        if($(this).is('#card_id_2')){
+            if(!idReg.test($(this).val())){
+                var errorMsg = '身份证号格式不正确!';
+                $parent.append('<label class="formtips onError">'+errorMsg+'</label>');
+            }
+        }
     });
     //提交，最终验证。
     $('#register').click(function(){
@@ -192,6 +282,12 @@
         if(numError){
             return false;
         }
+    });
+    $('#clickHere').click(function(){
+        $('#registerBox').show(300);
+    });
+    $('#r_close').click(function(){
+        $('#registerBox').hide(300);
     });
 </script>
 <!--出生日期选择-->
