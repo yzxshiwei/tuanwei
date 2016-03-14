@@ -141,8 +141,8 @@
             <ul>
             	<foreach name="teamList" item="_v">
             		<li>
-            			<a href="" class="imgs_url"><img src="/{{$_v.img_url}}"></a>
-            			<a class="title_url">{{$_v.team_name}}</a>
+            			<a href="{{:U('Team/teamDails',array('id'=>$_v['id']))}}" class="imgs_url"><img src="/{{$_v.img_url}}"></a>
+            			<a href="{{:U('Team/teamDails',array('id'=>$_v['id']))}}" class="title_url">{{$_v.team_name}}</a>
             			<p>{{$_v.contents}}</p>
             		</li>
             	</foreach>

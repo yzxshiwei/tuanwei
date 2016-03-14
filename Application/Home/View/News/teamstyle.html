@@ -53,7 +53,7 @@
 <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
     <ul class="slider_bag"> 
       <foreach name="img_url" item="vo">
-        <li data-background="{{$vo.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="{{:U('Home/Team/teamDetails',array('project_id' => $vo['project_id']))}}"></a></div></li>
+        <li data-background="{{$vo.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="{{:U('Home/Team/teamDetails',array('id' => $vo['id']))}}"></a></div></li>
       </foreach>
     </ul>
 </div>
@@ -64,7 +64,7 @@
              <div class="n_content">
              <foreach name="data" item="vo">
                  <ul class="news">
-                     <li><a href="{{:U('Home/Team/teamDails',array('project_id' => $vo['project_id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
+                     <li><a href="{{:U('Home/Team/teamDails',array('id' => $vo['id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
                     <li><p>团队介绍 : {{$vo.contents}}</p></li> 
                  </ul>
              </foreach>

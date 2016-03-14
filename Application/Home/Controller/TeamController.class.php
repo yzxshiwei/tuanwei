@@ -194,26 +194,25 @@ class TeamController extends \Common\Helper\Controller{
      * 团队详情
      */
     public function teamDails() {
-        $project_id = I('get.project_id', false,'intval');
-        if(!$project_id){
+        $id = I('get.id', false,'intval');
+        if(!$id){
             $this->error('页面错误');
         }
         
         $Team = M('team');
         $data = $Team->field('img_url,team_name,contents')->where(array(
             'user_type' => 'captain',
-            'project_id' => $project_id
+            'id' => $id
         ))->select();
         
         $members = $Team->table('team t')->join('users u on t.user_id=u.user_id')->field('u.user_name')->where(array(
-            'project_id' => $project_id
+            'id' => $id
         ))->select();
         
         foreach ($members as $k => $v){
             $names .= $v['user_name'].' '; 
         }
-//         var_dump($data);
-//         exit;
+
         $this->assign('data', $data[0]);
         $this->assign('names', $names);
         $this->display();

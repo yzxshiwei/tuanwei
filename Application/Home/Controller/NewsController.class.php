@@ -117,7 +117,7 @@ class NewsController extends \Common\Helper\Controller{
         $Team = M('team');
         $count = $Team->where(array('user_type' => 'captain'))->count();
         $page = new \Think\Page($count, 5);
-        $data = $Team->field('project_id,img_url,team_name,contents')->where(array('user_type' => 'captain'))->limit($Page->firstRow.','.$Page->listRows)->select();
+        $data = $Team->field('project_id,img_url,team_name,contents,id')->where(array('user_type' => 'captain'))->limit($Page->firstRow.','.$Page->listRows)->select();
         $show = $page->show();
         $img_url = $Team->field('project_id,img_url')->where("user_type='captain' AND img_url is not null")->limit(5)->select();
         $this->assign('data', $data);
