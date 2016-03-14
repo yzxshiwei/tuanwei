@@ -744,7 +744,10 @@ a:active {
     font-size: 20px;
     color: #666666;
     text-align: left;
-    margin-top: 60xp; }
+    margin-top: 60px;
+    height: auto;
+    overflow-y: scroll;
+}
 
 .unslider-news {
     margin-top: 45px;
