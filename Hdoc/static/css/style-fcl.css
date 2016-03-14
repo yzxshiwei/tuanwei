@@ -828,16 +828,16 @@ a:active {
 #teamRegister{
     display: none;
 }
-#team .content form p{
+#team form p{
     margin-bottom: 15px;
 }
-#team .content form p label{
+#team form p label{
     display:block;
     margin:10px 0px;
     color:red;
     margin-left: 175px;
 }
-#team .content form p span {
+#team form p span {
   display: inline-block;
   width: 170px;
   height: 40px;
@@ -846,7 +846,7 @@ a:active {
   color: #fff;
   font-size: 20px;
   background-color: #48aaa4; }
-#team .content form p input {
+#team form p input {
   width: 530px;
   height: 40px;
   padding-left: 20px;
@@ -856,7 +856,7 @@ a:active {
   font-size: 16px;
   font-family: "Microsoft YaHei";
 }
-#team .content form p select {
+#team form p select {
   height: 40px;
   border: 2px solid #ccc;
   appearance: none;
@@ -868,25 +868,26 @@ a:active {
   background: url("../img/select.png") no-repeat scroll right center transparent;
   font-size: 16px;
   font-family: "Microsoft YaHei";
-  color: #333333; }
-#team .content form p select::-ms-expand {
+  color: #333333;
+  background: #fff; }
+#team form p select::-ms-expand {
   display: none; }
-#team .content form #teamNameTs {
+#team form #teamNameTs {
   margin-bottom: 38px; }
-#team .content form h4 {
+#team form h4 {
   text-align: center;
   font-size: 30px;
   color: #48aaa4;
   margin-bottom: 34px; }
-#team .content form .zjType select {
+#team form .zjType select {
   width: 176px;
   margin-left: -4px; }
-#team .content form .zjType input {
+#team form .zjType input {
   width: 348px; }
-#team .content form .sfAttribute .sc {
+#team form .sfAttribute .sc {
   width: 176px;
   margin-left: -4px; }
-#team .content form .sfAttribute button {
+#team form .sfAttribute button {
   width: 170px;
   height: 40px;
   background-color: #48aaa4;
@@ -894,15 +895,15 @@ a:active {
   color: #fff;
   font-size: 20px;
   font-family: "Microsoft YaHei"; }
-#team .content form .sfAttribute .sex {
+#team form .sfAttribute .sex {
   width: 170px; }
-#team .content form #pwdAgainTs {
+#team form #pwdAgainTs {
   margin-bottom: 68px; }
-#team .content form .birthDate input {
+#team form .birthDate input {
   width: 177px; }
-#team .content form .birthDate .mz {
+#team form .birthDate .mz {
   margin-right: 5px; }
-#team .content form .subBtn {
+#team form .subBtn {
   width: 180px;
   height: 55px;
   margin-top: 54px;
