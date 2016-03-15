@@ -153,9 +153,9 @@ class User{
         $userModel = new \Common\Model\UsersModel();
 		$where["state"] = array("neq","0");
         $count = $userModel->where($where)->count();
-        $Page = new \Think\Page($count,12);
+        $Page = new \Think\Page($count,20);
         $page_show = $Page->show();
-        $list_data = $userModel->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+        $list_data = $userModel->where($where)->order("user_id desc")->limit($Page->firstRow.','.$Page->listRows)->select();
         if (!empty($list_data)){
             foreach ($list_data as $k => $v){
                 $list_data[$k]['user_type'] = $userModel::$user_type[$v['user_type']];
