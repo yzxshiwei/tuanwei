@@ -32,6 +32,12 @@ class MessageController extends Controller{
         $user_id = I('post.team_id',0,'intval');
         $messageModel = new \Common\Model\MessageModel();
         $rersult = $messageModel->getMessage($user_id,$messageModel::TYPE_TEAM);
+		
+		$userModel = new \Common\Model\UsersModel();
+		foreach($rersult as $_k=>$_v){
+			$imgurl = $userModel->where(array("user_id"=>$_v['from_user']))->field("img_url")->find();
+			$rersult[$_k]["img_url"] = $imgurl["img_url"];
+		}	
         $this->ajaxReturn($rersult);
     }
 }

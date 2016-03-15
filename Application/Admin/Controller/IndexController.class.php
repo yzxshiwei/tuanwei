@@ -122,14 +122,17 @@ class IndexController extends \Admin\Controller\Controller {
 		 if (IS_POST){
 		 	$userModel = new \Common\Model\UsersModel();
 
-	        $post_data = array();
-	        $old_pwd = I('post.old_pwd',null,'string');
-	        $new_pwd = I("post.new_pwd",null,'string');
-	        $post_data['user_name'] = I('post.user_name',null,'string');
-	        $post_data['tel'] = I('post.tel',null,'string');
-	        $post_data['birth'] = I('post.birth',null,'string');
-	        $post_data['nation'] = I('post.nation',null,'string');
-	        $post_data['card_id'] = I('post.card_id',null,'string');
+		 	//开启事务
+			$userModel->startTrans();
+			$post_data = array();
+			
+	        $old_pwd = I('post.old_pwd',"",'string');
+	        $new_pwd = I("post.new_pwd","",'string');
+	        $post_data['user_name'] = I('post.user_name',"",'string');
+	        $post_data['tel'] = I('post.tel',"",'string');
+	        $post_data['birth'] = I('post.birth',"",'string');
+	        $post_data['nation'] = I('post.nation',"",'string');
+	        $post_data['card_id'] = I('post.card_id',"",'string');
 	        if ($new_pwd != null){
 	            $old_pwd = create_password($old_pwd);
 	            if ($this->user['passwd'] != $old_pwd){
@@ -145,19 +148,35 @@ class IndexController extends \Admin\Controller\Controller {
 					$this->error("此证件号已被注册");
 				}
 			}
-			
-	        $userModel = new \Common\Model\UsersModel();
+
+			if($_FILES['selectFiles']['tmp_name']){
+				$file_res1 = Upload($_FILES['selectFiles']);
+				if($file_res1["status"]){
+					$post_data["img_url"] = $file_res1['file_path'];
+
+					//删除原先的图片
+			       $file_url = $userModel->where(array("user_id"=>$this->user['user_id']))->field("img_url")->find();
+			       delfile($file_url["img_url"]);
+				}else{
+					$this->error($file_res1['msg']);
+				}
+			}
+
 	        $result = $userModel->where(array('user_id' => $this->user['user_id']))->save($post_data);
 	        if (!$result){
+	        	$userModel->rollback();
 	            $this->error('修改失败');
 	        }else {
 	            if ($new_pwd != null){
-	                $this->success('修改成功',U('Home/Login/index'));
+	            	$userModel->commit();
+	                $this->success('修改成功',U('Admin/User/logout'));
 	            }else {
-	                $this->success('修改成功');
+	            	$userModel->commit();
+	                $this->success('修改成功',U("Index/usermanage"));
 	            }
 	        }
 	    }
+
 	    $this->display();
 	}
 	/**

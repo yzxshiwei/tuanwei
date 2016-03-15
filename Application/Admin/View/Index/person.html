@@ -71,7 +71,7 @@
         <div class="tab-content">
             <div class="person">
                 <h3 class="title">个人状态页面</h3>
-                <form action="{{:U('Index/person')}}" method="post">
+                <form action="{{:U('Index/person')}}" method="post" enctype="multipart/form-data">
                     <input type='file' id='f_u' name='selectFiles'/>
                     <label>
                         <span>用户名 : </span>
@@ -112,7 +112,7 @@
                         <span>头 &nbsp;&nbsp;&nbsp;像 : </span>
                         <div class='file_upload_plugin'>
                             <div id='file_upload_area' class='droppable' draggable='true'>
-                                <img class="file_img"/>
+                                <img src="{{$user.img_url}}" class="file_img"/>
                                 <a id='banner_close'>删除</a>
                                 <a class='browse'>浏览</a>
                             </div>

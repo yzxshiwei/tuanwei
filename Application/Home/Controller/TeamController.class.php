@@ -24,13 +24,19 @@ class TeamController extends \Common\Helper\Controller{
 			$data["type_id"] = I("post.type_id","","string");
 			$res = $wordsModel->add($data);
 			if($res){
-				$this->success("添加成功",U('Team/teamcreate'));
+				$this->success("添加成功");
 			}else{
 				$this->error("添加失败");
 			}
 		}else{
+			$userModel = new \Common\Model\UsersModel();	
 			$words = new \Common\Helper\Words();
 			$result = $words->listData(array("type_id"=>1));
+
+	        foreach($result['list_data'] as $_k=>$_v){
+				$imgurl = $userModel->where(array("user_id"=>$_v['user_id']))->field("img_url")->find();
+				$result['list_data'][$_k]["img_url"] = $imgurl["img_url"];
+			}
 
 			$this->assign('Page' , $result['Page']);
 			$this->assign('list_data',$result['list_data']);
@@ -45,7 +51,13 @@ class TeamController extends \Common\Helper\Controller{
 	 */
 	public function createam(){
 		$words = new \Common\Helper\Words();
+		$userModel = new \Common\Model\UsersModel();
 		$result = $words->listData(array("type_id"=>2));
+
+ 	    foreach($result['list_data'] as $_k=>$_v){
+			$imgurl = $userModel->where(array("user_id"=>$_v['user_id']))->field("img_url")->find();
+			$result['list_data'][$_k]["img_url"] = $imgurl["img_url"];
+		}
 
 		$this->assign('Page' , $result['Page']);
 		$this->assign('list_data',$result['list_data']);

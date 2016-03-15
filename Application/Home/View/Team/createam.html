@@ -66,7 +66,11 @@
                     <!--个人信息-->
                     <foreach name="list_data" item="_v">
 	                    <div class="teamBox">
-	                        <img class="radius" src="__STATIC__/img/ceshi.jpg"/>
+	                        <if condition="$_v['img_url'] eq true">
+	                    	    <img class="radius" src="{{$_v.img_url}}"/>
+	                    	<else />
+	                    	    <img class="radius" src="__STATIC__/img/ceshi.jpg"/>
+	                    	</if>
 	                        <div class="teamZl">
 	                        	<h4>{{$_v.user_name}}</h4>
 	                            <p>{{$_v.words}}</p>
