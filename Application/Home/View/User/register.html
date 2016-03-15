@@ -65,7 +65,7 @@
         }
     </style>
 </head>
-<body>
+<body onkeydown="keyLogin()">
 <include file='Public:headerhtml'/>
 <!--poster-->
 <div id="team">
@@ -283,6 +283,11 @@
             return false;
         }
     });
+    //按下enter验证input表单
+    function keyLogin(){
+        if (event.keyCode==13)  
+            document.getElementById("register").click();
+    }
     $('#clickHere').click(function(){
         $('#registerBox').show(300);
     });
