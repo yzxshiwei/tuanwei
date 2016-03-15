@@ -5,11 +5,12 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<include file='Public:file'/>
+    <include file='Public:file'/>
     <style>
         .person{
             clear: both;
             width: 830px;
+            height: auto;
             margin-left: 30px;
             padding-top: 20px;
         }
@@ -27,9 +28,9 @@
         }
         .person form{
             padding: 15px 30px;
-            border:1px dashed #ccc;
             text-align: center;
             width: 500px;
+            height: auto;
             margin: 0 auto;
         }
         .person form label{
@@ -50,119 +51,194 @@
             color: #fff;
             font-size: 18px;
         }
+        .updateImg span{
+            float: left;
+        }
+        .updateImg .file_upload_plugin{
+            float: left;
+            width: 300px;
+            margin-left: 15px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
 <body>
-    <div class="htmleaf-container">
-        <div class="container pb30">
-             <include file='Public:navigation'/>
-                <!-- tab-content -->
-                <div class="tab-content">
-                    <div class="person">
-                        <h3 class="title">个人状态页面</h3>
-                        <form action="{{:U('Index/person')}}" method="post">
-                            <label>
-                                <span>用户名 : </span>
-                                <input name="user_name" value="{{$user.user_name}}" id="userName" type="text"/>
-                                <b id="name_ts"></b>
-                            </label>
-                            <label>
-                                <span>原密码 : </span>
-                                <input name="old_pwd" type="password"/>
-                                <b></b>
-                            </label>
-                            <label>
-                                <span>密 &nbsp;&nbsp;&nbsp;码 : </span>
-                                <input name="new_pwd" type="password"/>
-                                <b></b>
-                            </label>
-                            <label>
-                                <span>电 &nbsp;&nbsp;&nbsp;话 : </span>
-                                <input name="tel" value="{{$user.tel}}" type="text"/>
-                                <b></b>
-                            </label>
-                            <label>
-                                <span>生 &nbsp;&nbsp;&nbsp;日 : </span>
-                                <input type="text" value="" name="birth" id="appDate"/>
-                                <b></b>
-                            </label>
-                            <label>
-                                <span>民 &nbsp;&nbsp;&nbsp;族 : </span>
-                                <input name="nation" value="{{$user.nation}}" type="text"/>
-                                <b></b>
-                            </label>
-                            <label>
-                                <span>证件号 : </span>
-                                <input name="card_id" value="{{$user.card_id}}" type="text"/>
-                                <b></b>
-                            </label>
-                            <input type="submit" value="提交"/>
-                        </form>
-                    </div>
-                </div>
+<div class="htmleaf-container">
+    <div class="container pb30">
+        <include file='Public:navigation'/>
+        <!-- tab-content -->
+        <div class="tab-content">
+            <div class="person">
+                <h3 class="title">个人状态页面</h3>
+                <form action="{{:U('Index/person')}}" method="post">
+                    <input type='file' id='f_u' name='selectFiles'/>
+                    <label>
+                        <span>用户名 : </span>
+                        <input name="user_name" value="{{$user.user_name}}" id="userName" type="text"/>
+                        <b id="name_ts"></b>
+                    </label>
+                    <label>
+                        <span>原密码 : </span>
+                        <input name="old_pwd" type="password"/>
+                        <b></b>
+                    </label>
+                    <label>
+                        <span>密 &nbsp;&nbsp;&nbsp;码 : </span>
+                        <input name="new_pwd" type="password"/>
+                        <b></b>
+                    </label>
+                    <label>
+                        <span>电 &nbsp;&nbsp;&nbsp;话 : </span>
+                        <input name="tel" value="{{$user.tel}}" type="text"/>
+                        <b></b>
+                    </label>
+                    <label>
+                        <span>生 &nbsp;&nbsp;&nbsp;日 : </span>
+                        <input type="text" value="" name="birth" id="appDate"/>
+                        <b></b>
+                    </label>
+                    <label>
+                        <span>民 &nbsp;&nbsp;&nbsp;族 : </span>
+                        <input name="nation" value="{{$user.nation}}" type="text"/>
+                        <b></b>
+                    </label>
+                    <label>
+                        <span>证件号 : </span>
+                        <input name="card_id" value="{{$user.card_id}}" type="text"/>
+                        <b></b>
+                    </label>
+                    <label class="updateImg">
+                        <span>头 &nbsp;&nbsp;&nbsp;像 : </span>
+                        <div class='file_upload_plugin'>
+                            <div id='file_upload_area' class='droppable' draggable='true'>
+                                <img class="file_img"/>
+                                <a id='banner_close'>删除</a>
+                                <a class='browse'>浏览</a>
+                            </div>
+                        </div>
+                    </label>
+                    <br/>
+                    <input style="clear: both" type="submit" value="提交"/>
+                </form>
             </div>
         </div>
     </div>
-    <script src="my-js/template.js"></script>
-    <script src="my-js/logic.js"></script>
-    <script src="my-js/root_ui/jquery.ajaxupload.js"></script>
-    <script>
-        $('#userName').blur(function(){
-            var this_ = $(this);
-            var this_val = this_.val();
-            if(this_val==""){
-                $('#name_ts').html('用户名不能为空,请输入!');
-                this_.css({
-                    'borderColor': '#6dcff6',
-                    'borderWidth':'2px',
-                    '-webkit-box-shadow': '0 0 8px rgba(109,207,246,.5)',
-                    '-moz-box-shadow': '0 0 8px rgba(109,207,246,.5)',
-                    'boxShadow': '0 0 8px rgba(109,207,246,.5)'
-                });
-                $('#name_ts').css({
-                    'display': 'block',
-                    'border':'1px solid #ccc',
-                    'width': '85%',
-                    'height':'35px',
-                    'line-height': '35px',
-                    'color':'red',
-                    'margin': '10px 0px 0px 58px'
-                });
-            }else{
-                $('#name_ts').html(" ");
-                $('#name_ts').css({
-                    'display': 'block',
-                    'border':'0',
-                    'width': '0',
-                    'height':'0',
-                    'line-height': '0',
-                    'color':'red',
-                    'margin': '10px 0px 0px 68px'
-                });
+</div>
+</div>
+<script src="my-js/template.js"></script>
+<script src="my-js/logic.js"></script>
+<script src="my-js/root_ui/jquery.ajaxupload.js"></script>
+<script>
+    $('#userName').blur(function(){
+        var this_ = $(this);
+        var this_val = this_.val();
+        if(this_val==""){
+            $('#name_ts').html('用户名不能为空,请输入!');
+            this_.css({
+                'borderColor': '#6dcff6',
+                'borderWidth':'2px',
+                '-webkit-box-shadow': '0 0 8px rgba(109,207,246,.5)',
+                '-moz-box-shadow': '0 0 8px rgba(109,207,246,.5)',
+                'boxShadow': '0 0 8px rgba(109,207,246,.5)'
+            });
+            $('#name_ts').css({
+                'display': 'block',
+                'border':'1px solid #ccc',
+                'width': '85%',
+                'height':'35px',
+                'line-height': '35px',
+                'color':'red',
+                'margin': '10px 0px 0px 58px'
+            });
+        }else{
+            $('#name_ts').html(" ");
+            $('#name_ts').css({
+                'display': 'block',
+                'border':'0',
+                'width': '0',
+                'height':'0',
+                'line-height': '0',
+                'color':'red',
+                'margin': '10px 0px 0px 68px'
+            });
+        }
+    });
+</script>
+<!--出生日期选择-->
+<script type="text/javascript">
+    var main_banner;
+    $(function () {
+        var currYear = (new Date()).getFullYear();
+        var str = "{{$user.birth}}";
+        var opt={};
+        opt.date = {preset : 'date'};
+        opt.default = {
+            theme: 'android-ics light', //皮肤样式
+            display: 'modal', //显示方式
+            mode: 'scroller', //日期选择模式
+            lang:'zh',
+            startYear:currYear - 500, //开始年份
+            endYear:currYear + 500 //结束年份
+        };
+
+        $("#appDate").val(str).scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+    });
+</script>
+<!--头像上传-->
+<script>
+    var main_banner;
+    var race_id;
+    $(document).ready(function(){
+        $('#file_upload_area').bind( {
+            drop: function(e) {
+
+                e.preventDefault();
+                var oe = e.originalEvent;
+                var file_list = oe.dataTransfer.files;
+                main_banner = file_list[0];
+                show_image( file_list, '#file_upload_area' );
+            },
+            dragover: function(e) {
+                e.preventDefault();
+                return true;
             }
-        });
-    </script>
-    <!--出生日期选择-->
-    <script type="text/javascript">
-        $(function () {
-            var currYear = (new Date()).getFullYear();
-            var str = "{{$user.birth}}";
-            var opt={};
-            opt.date = {preset : 'date'};
-            opt.default = {
-                theme: 'android-ics light', //皮肤样式
-                display: 'modal', //显示方式
-                mode: 'scroller', //日期选择模式
-                lang:'zh',
-                startYear:currYear - 500, //开始年份
-                endYear:currYear + 500 //结束年份
-            };
+        } );
 
-            $("#appDate").val(str).scroller('destroy').scroller($.extend(opt['date'], opt['default']));
+        $('.file_upload_plugin a.upload').click( function() {
 
-        });
-    </script>
+            if( typeof(main_banner)!='undefined' ) {
+
+                var banner = new Object();
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    banner['banner'] = $.base64( 'encode', this.result );
+                    banner['banner_name'] = main_banner.name;
+                    banner['race_id'] = race_id;
+                };
+
+                reader.readAsBinaryString( main_banner );
+            }
+        } );
+
+        $('.file_upload_plugin a.browse').click( function(e) {
+            $('#f_u').trigger('click');
+        } );
+
+        $('#f_u').change( function(e) {
+            main_banner = this.files[0];
+            show_image( this.files, '#file_upload_area');
+        } );
+
+        $('#banner_close').click( function() {
+            var target = $(this);
+            target.prev('img').attr('src','');
+            target.prev('img').css( {'width':0,'height':0} );
+            main_banner = '';
+        } );
+    });
+</script>
 </body>
 
 </html>
