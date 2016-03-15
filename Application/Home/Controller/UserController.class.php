@@ -31,6 +31,7 @@ class UserController extends \Common\Helper\Controller{
             $input_data['degree'] = I('post.degree',0,'intval');
 			$input_data['group_id'] = $input_data['user_type'];
 			$input_data['card_type'] = 2; // 2 代表身份证
+			$input_data['state'] = 1;
             if ($input_data['user_name'] == ''){
                 $input_data['user_name'] = $input_data['email'];
             }
