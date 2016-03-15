@@ -30,4 +30,15 @@
 </body>
 <include file='Public:header'/>
 <include file='Public:footer'/>
+<script>
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+    });
+</script>
 </html>
