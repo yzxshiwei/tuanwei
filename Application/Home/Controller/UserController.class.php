@@ -17,44 +17,26 @@ class UserController extends \Common\Helper\Controller{
             $userModel = new \Common\Model\UsersModel();
             $input_data = array();
             $input_data['email'] = I('post.email','','string');
-            $input_data['card_type'] = I('post.card_type','string');
-            $input_data['card_id'] = I('post.card_id',0,'intval');
-            $input_data['user_type'] = I('post.user_type',0,'intval');
+            $input_data['card_id'] = I('post.card_id',0,'string');
+			$input_data['card_degree'] = I('post.card_degree',0,'string');
+            $input_data['user_type'] = \Common\Model\UsersModel::TYPE_STUDENT;
             $input_data['sex'] = I('post.sex',0,'intval');
             $input_data['passwd'] = I('post.passwd',''.'string');
             $input_data['college'] = I('post.college','','string');
             $input_data['user_name'] = I('post.user_name','','string');
             $input_data['nation'] = I('post.nation','','string');
             $input_data['birth'] = I('post.birth','','string');
+			$input_data['enter_year'] = I('post.enter_year','','string');
             $input_data['major'] = I('post.major',0,'intval');
             $input_data['degree'] = I('post.degree',0,'intval');
 			$input_data['group_id'] = $input_data['user_type'];
+			$input_data['card_type'] = 2; // 2 代表身份证
             if ($input_data['user_name'] == ''){
                 $input_data['user_name'] = $input_data['email'];
             }
 			
-
-			if(I('post.user_type',0,'intval')!=6){
-				$input_data['state'] = 2;
-			}else{
-				$input_data['state'] = 1;
-			}
-
-
             $result = $userModel->addUser($input_data);
             if ($result['status']){
-            	
-            	if($input_data['user_type']!=6){
-	            	if($input_data['user_type']==3){
-						$con = "用户:".$input_data['user_name']."申请成为指导老师";
-					}elseif($input_data['user_type']==4){
-						$con = "用户:".$input_data['user_name']."申请成为评审专家";
-					}elseif($input_data['user_type']==5){
-						$con = "用户:".$input_data['user_name']."申请成为投资人";
-					}
-					$messageModel = new \Common\Model\MessageModel();
-				    $messageModel->sendMsg(1, $result['status'], $messageModel::TYPE__APPLY, $con,$result['status']);
-            	}
 
                 $this->success('注册成功',U('Index/index'));
             }else {

@@ -22,21 +22,27 @@ class UserController extends Controller{
         if (IS_POST){
             $userModel = new \Common\Model\UsersModel();
             $input_data = array();
+			$card_type = I('post.card_type',0,'intval');
+			
             $input_data['email'] = I('post.email','','string');
-            $input_data['card_type'] = I('post.card_type','string');
-            $input_data['card_id'] = I('post.card_id',0,'intval');
-            $input_data['user_type'] = I('post.user_type',0,'intval');
+
             $input_data['sex'] = I('post.sex',0,'intval');
             $input_data['passwd'] = I('post.password',''.'string');
             $input_data['college'] = I('post.college','','string');
             $input_data['user_name'] = I('post.user_name','','string');
             $input_data['nation'] = I('post.nation','','string');
             $input_data['major'] = I('post.major',0,'intval');
-            $input_data['degree'] = I('post.degree',0,'intval');
+			$input_data['user_type'] =  I('post.user_type',0,'string');
 			$input_data['group_id'] = $input_data['user_type'];
 			$input_data['state'] = 1;
-			
+	
+			if($card_type==1){
+				$input_data['card_id'] = I('post.card_id',0,'string');
+			}elseif($card_type==2){
+				$input_data['card_degree'] = I('post.card_id',0,'string');
+			}
             $result = $userModel->addUser($input_data);
+			
             if ($result['status']){
                 $this->success('注册成功',U('Index/usermanage'));
             }else {

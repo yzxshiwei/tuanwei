@@ -156,7 +156,7 @@ class UsersModel extends \Common\Helper\Model{
         $studentModel = new StudentsModel();
         $teachersModel = new TeachersModel();
         $user_data = array();
-        
+
         $user_data['user_name'] = $userData['user_name'];
         $user_data['user_type'] = $userData['user_type'];
         $user_data['email'] = $userData['email'];
@@ -164,20 +164,33 @@ class UsersModel extends \Common\Helper\Model{
         $user_data['sex'] = $userData['sex'];
         $user_data['birth'] = $userData['birth'];
         $user_data['nation'] = $userData['nation'];
-        $user_data['card_id'] = $userData['card_id'];
-        $user_data['card_type'] = $userData['card_type'];
+        $user_data['card_id'] = $userData['card_id']?$userData['card_id']:"";
+		$user_data['card_type'] = $userData['card_type'];
 		$user_data['group_id'] = $userData['group_id'];
 		$user_data['state'] = $userData['state'];
+		$user_data['enter_year'] = $userData['enter_year'];
+		$user_data['card_degree'] = $userData['card_degree']?$userData['card_degree']:"";
         $user_data['create_time'] = $time;
         $user_data['last_time'] = $time;
-        $email_data = $this->where(array('email' => $userData['email']))->find();
+		
+		$email_data = $this->where(array('email' => $userData['email']))->find();
         if (!empty($email_data)){
             return array('status'=>false,'msg'=>'邮箱已经存在');
         }
-		$card_id = $this->where(array('card_id' => $userData['card_id']))->find();
-		if (!empty($card_id)){
-            return array('status'=>false,'msg'=>'证件号已经存在');
-        }
+
+		if($user_data['card_degree']){
+			$card_degree = $this->where(array('card_degree' => $user_data['card_degree']))->find();
+			if(!empty($card_degree)){
+				return array('status'=>false,'msg'=>'身份证已存在');
+			}
+		}
+
+		if($userData['card_id']){
+			$card_id = $this->where(array('card_id' => $userData['card_id']))->find();
+			if (!empty($card_id)){
+	            return array('status'=>false,'msg'=>'证件号已经存在');
+	        }
+		}
 		
         $this->startTrans();
         $user_id = $this->add($user_data);
