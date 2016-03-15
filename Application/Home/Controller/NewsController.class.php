@@ -62,7 +62,10 @@ class NewsController extends \Common\Helper\Controller{
         $count = $News->count();
         $Page = new \Think\Page($count,15);
         $show = $Page->show();
-        $data = $News->where(array("flag"=>1))->field('id ,title')->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+		$where["flag"] = 1;
+		$where["col"] = array("neq",\Common\Model\NewsModel::COL_5);
+        $data = $News->where($where)->field('id ,title')->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+
     	$this->assign('data',$data);// 
     	$this->assign('page',$show);// 
     	$this->display(); // 输出模板
