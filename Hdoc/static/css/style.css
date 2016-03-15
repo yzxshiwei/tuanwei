@@ -298,17 +298,21 @@ a:active {
 .card:nth-child(1) .card-body-cover span {
     display: inline-block;
     color: #6D8D46;
-    font-size: 20px;
-    margin-top: 50px; }
+    font-size: 16px;
+    margin-top: 50px; 
+      font-family: "微软雅黑";}
 .card:nth-child(1) .card-body-cover a {
     display: inline-block;
     color: #6D8D46;
-    font-size: 20px;
-    margin-top: 30px;
-    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 48px;
+    width: 107px;
+    height: 31px;
+    line-height: 28px;
     border: 2px solid #6D8D46;
     border-radius: 6px;
     transition: all .2s;
+    font-family: "微软雅黑";
 }
 .card:nth-child(1) .card-body-cover a:hover {
     transition: all .2s;
@@ -348,17 +352,21 @@ a:active {
 .card:nth-child(2) .card-body-cover span {
     display: inline-block;
     color: #356EB7;
-    font-size: 20px;
-    margin-top: 50px; }
+    font-size: 16px;
+    margin-top: 50px; 
+    font-family: "微软雅黑";}
 .card:nth-child(2) .card-body-cover a {
     display: inline-block;
     color: #356EB7;
-    font-size: 20px;
-    margin-top: 30px;
-    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 48px;
+    width: 107px;
+    height: 31px;
+    line-height: 28px;
     border: 2px solid #356EB7;
     border-radius: 6px;
-    transition: all .2s; }
+    transition: all .2s; 
+    font-family: "微软雅黑";}
 .card:nth-child(2) .card-body-cover a:hover {
     transition: all .2s;
     background-color: #356EB7;
@@ -396,17 +404,21 @@ a:active {
 .card:nth-child(3) .card-body-cover span {
     display: inline-block;
     color: #9A529C;
-    font-size: 20px;
-    margin-top: 50px; }
+    font-size: 16px;
+    margin-top: 50px; 
+    font-family: "微软雅黑";}
 .card:nth-child(3) .card-body-cover a {
     display: inline-block;
     color: #9A529C;
-    font-size: 20px;
-    margin-top: 30px;
-    padding: 10px 20px;
+    font-size: 16px;
+    margin-top: 48px;
+    width: 107px;
+    height: 31px;
+    line-height: 28px;
     border: 2px solid #9A529C;
     border-radius: 6px;
-    transition: all .2s; }
+    transition: all .2s;
+    font-family: "微软雅黑"; }
 .card:nth-child(3) .card-body-cover a:hover {
     transition: all .2s;
     background-color: #9A529C;
@@ -444,17 +456,21 @@ a:active {
 .card:nth-child(4) .card-body-cover span {
     display: inline-block;
     color: #924357;
-    font-size: 20px;
-    margin-top: 50px; }
+    font-size: 16px;
+    margin-top: 50px;
+    font-family: "微软雅黑"; }
 .card:nth-child(4) .card-body-cover a {
     display: inline-block;
     color: #924357;
-    font-size: 20px;
-    margin-top: 30px;
-    padding: 10px 20px;
+     font-size: 16px;
+    margin-top: 48px;
+    width: 107px;
+    height: 31px;
+    line-height: 28px;
     border: 2px solid #924357;
     border-radius: 6px;
-    transition: all .2s; }
+    transition: all .2s;
+    font-family: "微软雅黑"; }
 .card:nth-child(4) .card-body-cover a:hover {
     transition: all .2s;
     background-color: #924357;
