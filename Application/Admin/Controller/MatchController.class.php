@@ -33,18 +33,6 @@ class MatchController extends Controller{
 				}
 			}
 			
-			if($_FILES['upload_template']['tmp_name']){
-				$file_res2 = Upload($_FILES['upload_template']);
-				if($file_res2["status"]){
-					$data["start_file_src"] = $file_res2['file_path'];
-				}else{
-					$this->error($file_res2['msg']);
-				}
-			}
-
-//			$file_res1 = Upload($_FILES['selectFiles']);
-//          $file_res2 = Upload($_FILES['upload_template']);
-//			$file_res3 = Upload($_FILES['upload_reg_page']);
 			$data = array();
 			$data["name"] = I('post.name','','string');
 			$data["sub_title"] = I('post.sub_title','','string');
@@ -158,25 +146,6 @@ class MatchController extends Controller{
 				}
 			}
 			
-			if($_FILES['upload_template']['tmp_name']){
-				$file_res2 = Upload($_FILES['upload_template']);
-				if($file_res2["status"]){
-					$data["start_file_src"] = $file_res2['file_path'];
-					delfile($file_url["start_file_src"]);
-				}else{
-					$this->error($file_res2['msg']);
-				}
-			}
-						
-//			if($_FILES['upload_reg_page']['tmp_name']){
-//				$file_res3 = Upload($_FILES['upload_reg_page']);
-//				if($file_res3["status"]){
-//					$data["template_src"] = $file_res3['file_path'];
-//					delfile($file_url["template_src"]);
-//				}else{
-//					$this->error($file_res3['msg']);
-//				}
-//			}
 			$data["name"] = I('post.name','','string');
 			$data["sub_title"] = I('post.sub_title','','string');
 			$data["project_start_time"] = strtotime(I('post.race-start-date'));
