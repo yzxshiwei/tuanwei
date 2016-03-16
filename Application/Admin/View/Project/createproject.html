@@ -320,7 +320,7 @@
                                     <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
                                     <label><input type="text" name="sub_title" maxlength="15"/><b>限制在15字内</b></label>
                                     <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
-                                    <label><input name="project_file" type="file"/><b>请将所有文件打包上传</b></label>
+                                    <label><input name="project_file" type="file"/><b>请打包上传(*最大20M)</b></label>
                                     <label>
                                         <div class="p_team">
                                             <ul>
@@ -357,7 +357,6 @@
                                 <div class="choose_m">
                                     <span>请添加成员 : </span>
                                     <select class="choose_s">
-
                                         <foreach name="list_data" item="vo">
                                             <if condition="$vo.user_id neq $userid">
                                             	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
@@ -404,7 +403,7 @@
 	                dataType:'json',
 	                success:function(data){
 	                    that.parent().parent().parent().find('.p_team ul').append('<li uid="'+data.user_id+'"><div class="team_information">' +
-	                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
+	                            '<img src="'+data.img_url+'" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
 	                            '<div class="people_information">' +
 	                            '<h5>'+data.user_name+'</h5>' +
 	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
