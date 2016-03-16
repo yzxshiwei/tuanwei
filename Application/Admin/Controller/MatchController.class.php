@@ -92,6 +92,13 @@ class MatchController extends Controller{
 		$matchModel = new \Common\Helper\Match();
 		$result = $matchModel->listData($this->user);
 		
+		$user_type = $this->user['user_type'];
+		$flag = FALSE;	
+		if($user_type == \Common\Model\UsersModel::TYPE_TEACHER || $user_type == \Common\Model\UsersModel::TYPE_JUDGES){
+			$flag = TRUE;
+		}
+		
+		$this->assign('flag',$flag);
 		$this->assign('list_data',$result['list_data']);
 		$this->assign('Page' , $result['Page']);
         $this->display();

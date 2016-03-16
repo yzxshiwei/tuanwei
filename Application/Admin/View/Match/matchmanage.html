@@ -28,7 +28,10 @@
 								<th width='33%'>比赛名称</th>
 								<th width='20%'>比赛时间</th>
 								<th width='20%'>报名时间</th>
-								<th class='user_set'>设置</th>
+								
+								<if condition="$flag eq false">
+								    <th class='user_set'>设置</th>
+								</if>
 							</tr>
 							
 							<foreach name="list_data" item="_v">
@@ -37,16 +40,20 @@
 									<td><a class="race_name" href="{{:U('Match/viewmatch',array('id'=>$_v['id']))}}">{{$_v.name}}</a></td>
 									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}</a></td>
 									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}</a></td>
-									<td class="race_set">
-										 <a href="{{:U('Match/editmatch',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
-										 
-										 <if condition="$_v.state eq 1">
-										      <input type="checkbox" checked="checked"  class="race_valid"/>
-										 <else />
-										      <input type="checkbox" class="race_valid"/>
-										 </if>
-									         发布<a class="race_delete">删除</a>
-									</td>
+									
+									<if condition="$flag eq false">
+										<td class="race_set">
+											 <a href="{{:U('Match/editmatch',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
+											 
+											 <if condition="$_v.state eq 1">
+											      <input type="checkbox" checked="checked"  class="race_valid"/>
+											 <else />
+											      <input type="checkbox" class="race_valid"/>
+											 </if>
+										         发布<a class="race_delete">删除</a>
+										</td>
+									</if>
+
 								</tr>
 							</foreach>
 							

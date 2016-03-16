@@ -43,6 +43,7 @@ class IndexController extends \Admin\Controller\Controller {
 	    $team = new \Common\Helper\Team();
 		
 		$uid = $this->user['user_id'];
+		$user_type = $this->user['user_type'];
 		//若是管理员 查所有团队
 		if($this->user['user_type'] == \Common\Model\UsersModel::TYPE_MANAGE){
 			$uid = NULL;
@@ -59,6 +60,13 @@ class IndexController extends \Admin\Controller\Controller {
         	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name")->where($where)->find();
 			$result['list_data'][$_k]["user_name"] = $name["user_name"];
         }
+	    
+		$flag = FALSE;	
+		if($user_type == \Common\Model\UsersModel::TYPE_TEACHER || $user_type == \Common\Model\UsersModel::TYPE_JUDGES){
+			$flag = TRUE;
+		}
+
+        $this->assign('flag',$flag);
         $this->assign('top',$uid);
 		$this->assign('utype',$utype);
 	    $this->assign('list_data',$result['list_data']);

@@ -21,7 +21,10 @@
 								<th width='30%'>团队名称</th>
 								<th width='10%'>负责人</th>
 								<th width='27%'>创建时间</th>
-								<th class='user_set'>设置</th>
+								
+								<if condition="$flag eq false">
+								   <th class='user_set'>设置</th>
+								</if>
 							</tr>
 							<foreach name="list_data" key="key" item="vo">
 							 <tr class="user_info" id="{{$vo.id}}">
@@ -29,15 +32,19 @@
                                 <td><a class="user_name" u_id="+i+" onclick="show_people_info(this)">{{$vo.team_name}}</a></td>
                                 <td><a class="user_identity">{{$vo.user_name}}</a></td>
                                 <td>{{$vo.create_time}}</td>
-                                <td class="user_set">
-                                	<if condition="$top eq false">
-                                		<input type="checkbox" <if condition="$vo.tops eq 1">checked="checked"</if> class="user_valil">置顶
-                                	</if>
-                                	<if condition="$vo['user_type'] eq $utype">
-                                	    <a href="{{:U('Index/updateteam',array('tid'=>$vo['id']))}}">编辑</a>
-                                        <a class="deleteteam" data-id = "{{$vo.id}}">删除</a>
-                                    </if>
-                                </td>
+                                
+                                <if condition="$flag eq false">
+	                                <td class="user_set">
+	                                	<if condition="$top eq false">
+	                                		<input type="checkbox" <if condition="$vo.tops eq 1">checked="checked"</if> class="user_valil">置顶
+	                                	</if>
+	                                	<if condition="$vo['user_type'] eq $utype">
+	                                	    <a href="{{:U('Index/updateteam',array('tid'=>$vo['id']))}}">编辑</a>
+	                                        <a class="deleteteam" data-id = "{{$vo.id}}">删除</a>
+	                                    </if>
+	                                </td>
+                                </if>
+                                
                             </tr>
                            </foreach>
 						</tbody>
