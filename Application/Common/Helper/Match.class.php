@@ -14,26 +14,25 @@ class Match{
         $where = array();
         $matchModel_l = $matchModel;
         $matchModel->distinct(true)
-        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id")
-        ->join("judges as j on (match.id = j.project_id)",'left');
-        if ($user['user_type'] == $userModel::TYPE_TEACHER){
-            $where['judge_id'] = $user['user_id'];
-            $matchModel->where($where);
+        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id");
+		
+        if ($user['user_type'] == $userModel::TYPE_JUDGES){
+            $where['j.judge_id'] = $user['user_id'];
+            $matchModel->join("judges as j on (match.id = j.project_id)",'left')->where($where);
         }
         $count =  $matchModel->count();
-        $Page = new \Think\Page($count,10);
+        $Page = new \Think\Page($count,12);
         $page_show = $Page->show();
         
         $matchModel_l
         ->distinct(true)
-        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id")
-        ->join("judges as j on (match.id = j.project_id)",'left')
-        ->limit($Page->firstRow.','.$Page->listRows);
-        if ($user['user_type'] == $userModel::TYPE_TEACHER){
-            $where['judge_id'] = $user['user_id'];
-            $matchModel_l->where($where);
+        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id");
+        if ($user['user_type'] == $userModel::TYPE_JUDGES){
+            $where['j.judge_id'] = $user['user_id'];
+            $matchModel_l->join("judges as j on (match.id = j.project_id)",'left')->where($where);
         }
-        $list_data =$matchModel_l->select();
+
+        $list_data =$matchModel_l->limit($Page->firstRow.','.$Page->listRows)->select();
         return array('Page' => $page_show , 'list_data' => $list_data);
     }
 }
