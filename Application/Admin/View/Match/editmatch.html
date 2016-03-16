@@ -113,8 +113,8 @@
 							<div id='race_expert_set_div'>
                                 <foreach name="jinfo" item="_vo" key="k">
                                 	<input type='hidden' value='{{$_vo.judge_id}}' class='dev_{{$k+1}}' name='teacherid[]'>
-									<input readonly id='{{$_vo.judge_id}}_expert_class' type="text" value="{{$_vo.user_name}}" class='race_expert' te-input='{{$k+1}}'/>
-									<a id='expert_add' style='margin-left:18px' num='{{$_vo.judge_id}}' class='fa fa-user-plus' teacher-input='{{$_vo.judge_id}}' onclick="add_export(this)"></a>
+									<input readonly id='{{$k+1}}_expert_class' type="text" value="{{$_vo.user_name}}" class='race_expert' te-input='{{$k+1}}'/>
+									<a id='expert_add' style='margin-left:18px' num='{{$k+1}}' class='fa fa-user-plus' teacher-input='{{$k+1}}' onclick="add_export(this)"></a>
 									
 									<if condition="$k">
 										<a style="margin-left:18px" class="fa fa-minus"></a>
@@ -136,7 +136,7 @@
 
     <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
 	<foreach item="_l" name="glist">
-		<a href="javascript:void(0)" teacher_id="{{$_l.user_id}}" onclick="add_teacher_(this)">{{$_l.user_name}}</a>
+		<a href="javascript:void(0)" teacher_id="{{$_l.user_id}}" onclick="add_teacher_(this)">{{$_l.user_name}},</a>
 	</foreach>
 
 </div>
@@ -147,8 +147,6 @@ var race_id;
 var teacher_select_id;
 function add_export(e){
 	teacher_select_id = $(e).attr("teacher-input")
-	console.log(teacher_select_id)
-
 	$(".add_teacher_card").toggle()
 	
 }
@@ -157,7 +155,7 @@ function add_teacher_(e){
 		var teacherid = $(e).attr("teacher_id");
 		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
 //		$(teacher_in).val($(teacher_in).val()+content_+",")
-        
+        console.log(teacher_select_id)
         $(".dev_"+teacher_select_id).attr("value",teacherid);
         $(teacher_in).val(content_);
 	}
@@ -245,7 +243,7 @@ $(document).ready(function() {
 		var res = target.find('input.race_expert');
 		var num = res.length+1;
 		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' readonly='readonly' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
-		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' teacher-input='0' onclick='add_export(this)''></a>" );
+		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' onclick='add_export(this)''></a>" );
 		target.append( user_add );
 		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
 		target.append( minus );
