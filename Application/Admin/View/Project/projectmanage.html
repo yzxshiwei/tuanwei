@@ -582,7 +582,7 @@
 			                dataType:'json',
 			                success:function(data){
 			                    that.parent().parent().parent().find('.p_team ul').append('<li divs_id="'+divs_id+'" userid="'+data.user_id+'"><div class="team_information">' +
-			                            '<img src="" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
+			                            '<img src="'+data.img_url+'" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
 			                            '<div class="people_information">' +
 			                            '<h5>'+data.user_name+'</h5>' +
 			                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
@@ -626,7 +626,7 @@
                         for(var i=0;i<len;i++){
                           
                           str +='<li divs_id="'+divs_id+'" userid="'+datas[i].user_id+'"><div class="team_information">' +
-                                '<img src="" alt=""/><input type="hidden" value="'+datas[i].user_id+'" name="userid[]">' +
+                                '<img src="'+datas[i].img_url+'" alt=""/><input type="hidden" value="'+datas[i].user_id+'" name="userid[]">' +
                                 '<div class="people_information">' +
                                 '<h5>'+datas[i].user_name+'</h5>' +
                                 '<p>学号:'+datas[i].stu_card+','+datas[i].college+'学院</p>' +

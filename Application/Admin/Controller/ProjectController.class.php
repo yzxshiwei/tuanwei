@@ -125,7 +125,7 @@ class ProjectController extends Controller{
 			}
 
 			$teamModel = new \Common\Model\TeamModel;
-			$field = "users.user_id,users.user_name,students.stu_card,students.college";
+			$field = "users.user_id,users.user_name,students.stu_card,students.college,users.img_url";
 			$userList = $teamModel->join("users on users.user_id=team.user_id")->join("students on students.user_id=users.user_id")->where(array("project_id"=>$id))->field($field)->select();
 
             $this->assign("flag",$flag);
@@ -264,7 +264,7 @@ class ProjectController extends Controller{
 			$team = M("team");
             $where["team.project_id"] = $pid;
 			$where["team.state"] = \Common\Model\TeamModel::STATE_PASS;
-			$field = "team.user_type,users.user_id,users.user_name,students.college,students.stu_card";
+			$field = "team.user_type,users.user_id,users.user_name,students.college,students.stu_card,users.img_url";
 			$user_list = $team->join("students on students.user_id=team.user_id")->join("users on users.user_id=team.user_id")->where($where)->field($field)->select();
 
             echo json_encode($user_list);

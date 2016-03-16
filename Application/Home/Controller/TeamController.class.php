@@ -124,8 +124,14 @@ class TeamController extends \Common\Helper\Controller{
 				$this->error("不在报名时间段");
 			}
 			if(!$data["project_id"] || !$data["class_id"]){
-				$this->error("请进行选择");
+				$this->error("请进行选择项目");
 			}
+			
+			$cun = $mpModel->where($data)->find();
+			if($cun){
+				$this->error("您已报名");
+			}
+			
 			$res = $mpModel->add($data);
 			if($res){
 				$this->success("申请成功",U('Team/matchlist'));
@@ -135,7 +141,6 @@ class TeamController extends \Common\Helper\Controller{
     	}else{
     		$projectModel = new \Common\Model\ProjectModel;
 			$packetModel = new \Common\Model\PacketModel;
-			
 			
     		$mid = I("get.id","","string");
     		$userid = $this->user["user_id"];
