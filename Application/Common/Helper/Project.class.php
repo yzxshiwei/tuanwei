@@ -25,7 +25,7 @@ class Project{
             $porjectModel->where($where);
         }
         $count =  $porjectModel->count();
-        $Page = new \Think\Page($count,12);
+        $Page = new \Think\Page($count,1);
         $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type';
         if ($user['group_id'] == $userModel::TYPE_TEACHER || $user['group_id'] == $userModel::TYPE_JUDGES){
             $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result';
@@ -70,6 +70,75 @@ class Project{
         }
         return array('Page' => $page_show , 'list_data' => $list_data);
     }
+    
+	/**
+	 * 列表
+	 */
+	public function lists(){
+		$porjectModel = new \Common\Model\ProjectModel();
+		$userModel = new \Common\Model\UsersModel();
+		
+		$porjectModel->alias('p')
+        ->join('match_project AS mp ON (p.id = mp.project_id)','left')
+        ->join('`match` AS m ON(m.id = mp.match_id)','left')
+        ->join('project_status AS ps ON(p.id = ps.project_id)','left')
+        ->join('team as t ON(t.project_id = p.id)','left');
+        if ($user['group_id'] == $userModel::TYPE_MANAGE){
+            $where['mp.match_id'] = array('GT',0); 
+            $porjectModel->where($where);
+        }else {
+            $where['t.user_id'] = array('eq',$user['user_id']);
+            $porjectModel->where($where);
+        }
+        $count =  $porjectModel->count();
+		
+        $Page = new \Think\Page($count,12);
+        $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result,t.user_type';
+        if ($user['group_id'] == $userModel::TYPE_TEACHER || $user['group_id'] == $userModel::TYPE_JUDGES){
+            $filed = 'p.is_open,p.id,p.creat_id,p.intro,p.name,p.sub_title,m.name AS m_name,m.id AS m_id,ps.score,ps.result';
+        }
+        $page_show = $Page->show();
+        $porjectModel_l
+        ->field($filed)
+        ->alias('p')
+        ->join('match_project AS mp ON (p.id = mp.project_id)','left')
+        ->join('`match` AS m ON(m.id = mp.match_id)','left')
+        ->join('project_status AS ps ON(p.id = ps.project_id)','left');
+        if ($user['group_id'] == $userModel::TYPE_TEACHER){
+            $porjectModel_l->join('teacher_team as t ON(t.project_id = p.id)','left');
+        }elseif($user['group_id'] == $userModel::TYPE_JUDGES) {
+            $porjectModel_l->join('judges as t ON(t.project_id = p.id)','left');
+        }else {
+            $porjectModel_l->join('team as t ON(t.project_id = p.id)','left');
+        }
+        $where  = array();
+        if ($user['group_id'] == $userModel::TYPE_MANAGE || $user['group_id'] == $userModel::TYPE_JUDGES){
+            $where['mp.match_id'] = array('GT',0);
+            $porjectModel_l->where($where);
+        }else {
+            $where['t.user_id'] = array('eq',$user['user_id']);
+            $porjectModel_l->where($where);
+        }
+        $result_data = $porjectModel_l->limit($Page->firstRow.','.$Page->listRows)
+        ->select();
+        
+        $list_data = array();
+        if (!empty($result_data)){
+            foreach ($result_data as $k => $v){
+                if ($v['creat_id'] == $user['user_id']){
+                    $v['is_captain'] = 1;
+                    $list_data[$v['id']] = $v;
+                }else {
+                    $v['is_captain'] = 0;
+                    $list_data[$v['id']] = $v;
+                }
+            }
+        }
+		
+		return array('Page' => $page_show , 'list_data' => $list_data);
+	}
+
+
     /**
      * 获取一条项目数据
      * 添加时间15:07:10

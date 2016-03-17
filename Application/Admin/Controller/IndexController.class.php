@@ -33,6 +33,58 @@ class IndexController extends \Admin\Controller\Controller {
         $this->assign('list_data' ,$result['list_data']);
         $this->display();
     }
+	
+	/**
+	 * 添加团队
+	 */
+	public function addteam(){
+		if(IS_POST){
+			$teamModel = new \Common\Model\TeamModel;
+			$post_data = array();
+			//开启事务
+			$teamModel->startTrans();
+
+		   	if($_FILES['project_file']['tmp_name']){
+				$file_res1 = Upload($_FILES['project_file']);
+				if($file_res1["status"]){
+					$post_data["img_url"] = $file_res1['file_path'];
+				}else{
+					$this->error($file_res1['msg']);
+				}
+			}
+			
+		    $post_data['team_name'] = I('post.name','','string');
+            $post_data['contents'] = I('post.intro','','string');
+			$post_data['user_id'] = $this->user["user_id"];
+			$post_data['user_type'] = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
+			$post_data['state'] = \Common\Model\TeamModel::STATE_PASS;
+			
+			//先添加队长
+			$res = $teamModel->data($post_data)->add();
+			if($res){
+				$teamModel->where(array("id"=>$res))->save(array("leader_id"=>$res));
+				$userid = I("post.userid");
+				$userid = array_unique($userid);
+				$result = $teamModel->teamAdd($userid,$res,$this->user["user_name"]);
+				if($result){
+					$teamModel->commit();
+			   	    $this->success('创建团队成功',U('Index/teammanage'));
+				}else{
+					$teamModel->rollback();
+				    $this->error('创建团队失败');
+				}
+			}else{
+				$teamModel->rollback();
+			   	$this->error('创建团队失败');
+			}
+		}else{
+			$userModel = D('users');
+			$list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();
+			$this->assign("list_data",$list_data);
+			$this->display();
+		}
+	}
+	
 	/**
 	 * 团队管理
 	 * 添加时间11:01:20
@@ -49,18 +101,17 @@ class IndexController extends \Admin\Controller\Controller {
 			$uid = NULL;
 		}
 
-	    $result = $team->listData($uid);
+	    $result = $team->lists($uid);
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 
         $teamModel = new \Common\Model\TeamModel();
 
         foreach($result['list_data'] as $_k=>$_v){
-        	$where["team.project_id"] = $_v["project_id"];
 			$where["team.user_type"] = $utype;
+			$where["team.leader_id"] = $_v["leader_id"];
         	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name")->where($where)->find();
 			$result['list_data'][$_k]["user_name"] = $name["user_name"];
         }
-	    
 		$flag = FALSE;	
 		if($user_type == \Common\Model\UsersModel::TYPE_TEACHER || $user_type == \Common\Model\UsersModel::TYPE_JUDGES){
 			$flag = TRUE;
@@ -84,13 +135,14 @@ class IndexController extends \Admin\Controller\Controller {
 		$team = new \Common\Model\TeamModel();
 		
 		if(IS_POST){
-				
+			v_dump($_POST);exit;
+			$team->startTrans();
 			$data = array();
 			$data["contents"] = I("post.intro","","string");
 			$data["team_name"] = I("post.name","","string");
 			$id = I("post.id","","string");
+			
 			//开启事务
-			$team->startTrans();
 			if($_FILES['project_file']['tmp_name']){
 				$file_res = Upload($_FILES['project_file']);
 				if($file_res["status"]){
@@ -102,20 +154,51 @@ class IndexController extends \Admin\Controller\Controller {
 					$this->error($file_res['msg']);
 				}
 			}
+			
 			$res = $team->where(array("id"=>$id))->save($data);
-		    if($res){
-		        $team->commit();
+
+	    	//修改团队学员
+	    	$userid = I("post.userid");
+			$userid = array_unique($userid);
+			$team->where(array("leader_id"=>$id,"state"=>array("neq"=>\Common\Model\TeamModel::STATE_PASS)))->delete();
+			$result = $team->teamAdd($userid,$id,$this->user["user_name"]);
+			if($result || $res){
+				$team->commit();
 		    	$this->success('更新团队成功',U('Index/teammanage'));
-		    }else{
-		   	    $team->rollback();
-		   	    $this->error('更新团队失败');
-		    }
+			}else{
+	   	        $team->rollback();
+	   	        $this->error('更新团队失败');
+			}
 			
 		}else{
 			$tid = I("get.tid","","string");
 			$tinfo = $team->where(array("id"=>$tid))->find();
 
+            $userModel = D('users');
+			$list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();
+			$where = array();
+			$where["leader_id"] = $tid;
+			$where["user_type"] = array("neq",\Common\Model\TeamModel::USER_TYPE_CAPTAIN);
+			$ulist = $team->where($where)->select();
+
+            $uarray = array();
+            foreach($ulist as $_k=>$_v){
+            	$field = "users.user_id,users.user_name,users.img_url,s.stu_card,s.college,s.major";
+            	$uinfo = $userModel->join("students as s on (s.user_id = users.user_id)",'left')->where(array("users.user_id"=>$_v["user_id"]))->field($field)->find();
+				
+				$uarray[$uinfo["user_id"]]["user_id"] = $uinfo["user_id"];
+				$uarray[$uinfo["user_id"]]["user_name"] = $uinfo["user_name"];
+				$uarray[$uinfo["user_id"]]["img_url"] = $uinfo["img_url"];
+				$uarray[$uinfo["user_id"]]["stu_card"] = $uinfo["stu_card"];
+				$uarray[$uinfo["user_id"]]["college"] = $uinfo["college"];
+				$uarray[$uinfo["user_id"]]["major"] = $uinfo["major"];
+            }
+
+            $this->assign("tid",$tid);
+            $this->assign("ulist",$uarray);
+			$this->assign("list_data",$list_data);
 			$this->assign("tinfo",$tinfo);
+			$this->assign("userid",$this->user["user_id"]);
 			$this->display();
 		}
 	}

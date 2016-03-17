@@ -95,7 +95,46 @@ class TeamModel extends \Common\Helper\Model{
 	    }
 	}
 
+	/**
+	 * 添加团队
+	 * 添加时间2016-3-17
+	 * @param member_name  string    队长名
+	 * @param userid     array  项目成员user表 id 
+	 * @param memberid   int    项目队长team表 id
+	 * @author zlj
+	 * @return bool
+	 */
+	public function teamAdd($userid,$memberid,$member_name){
+		
+		$messageModel = new \Common\Model\MessageModel();
+		$flag = FALSE;
+		foreach($userid as $_k){
+		   	
+		    $reluse = $this->where(array("user_id"=>$_k,"leader_id"=>$memberid))->find();
+		    if(!$reluse){
+		   	    $data = array();
+			    $data["user_id"] = $_k;
+			    $data["leader_id"] = $memberid;
+	            $data["state"] = \Common\Model\TeamModel::STATE_INVITE;
+			    $data["user_type"] = \Common\Model\TeamModel::USER_TYPE_MEMBER;
+	
+			    $adduser = $this->data($data)->add();
+			    if($adduser){
 
+				    $messageModel->sendMsg($_k,$memberid,$messageModel::TYPE_USER_PROJECT, $member_name.'邀请您参加他的团队',$memberid);
+			        $flag = TRUE;
+	   		    }else{
+			   	    $flag = FALSE;
+				    break;
+			    }
+		    }
+	    }
+		if($flag){
+	    	return TRUE;
+	    }else{
+	    	return FALSE;
+	    }
+	}
 	 
 	 
 	 

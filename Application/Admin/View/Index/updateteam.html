@@ -310,27 +310,120 @@
                         <div class="content" style="clear: both;">
                             <form action="{{:U('Index/updateteam')}}" method="post" enctype="multipart/form-data">
                                 <div class="p_left_nav">
-                                	<h6>团队名称</h6>
-                                	<h6>团队头像</h6>
-                                    <h6>团队简介</h6>
+                                    <h6>团队名称</h6>
+                                    <h6>项目副标题</h6>
+                                    <h6>项目简介</h6>
+                                    <h6>上传头像</h6>
+                                    <h6>成员组成</h6>
                                 </div>
                                 <div class="p_right_input">
-                                	<label><input type="text" name="name" value="{{$tinfo['team_name']}}" maxlength="15"/><b>限制在15字内</b></label>
-                                	<label><input name="project_file" type="file"/><b>请上传"正方形"的图片</b></label>
-                                    <label><textarea name="intro" maxlength="120">{{$tinfo['contents']}}</textarea><b>限制在120字内</b></label>
+                                    <label><input type="text" value="{{$tinfo['team_name']}}" name="name" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><input type="text" name="sub_title" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><textarea name="intro" maxlength="1000">{{$tinfo["contents"]}}</textarea><b>限制在1000字内</b></label>
+                                    <label><input name="project_file" type="file"/><b>请上传头像</b></label>
+                                    <label>
+                                        <div class="p_team">
+                                            <ul>
+                                            	<foreach name="ulist" item="_v">
+	                                            	<li uid="{{$_v['user_id']}}">
+	                                                   	 <div class="team_information"><input type="hidden" value="{{$_v['user_id']}}" name="userid[]">
+	                                                   	 	<img src="{{$_v['img_url']}}" />
+	                                                   	 		<div class="people_information">
+	                                                   	 			<h5>{{$_v["user_name"]}}</h5><p>学号:{{$_v["stu_card"]}},学院:{{$_v["college"]}},专业:{{$_v["major"]}}</p>
+		                                                        </div>
+		                                                  </div><button class="p_delete">-</button>
+	                                                </li>
+                                            	</foreach>
+                                            </ul>
+                                        </div>
+                                        <input type="hidden" name="id" value="{{$tid}}">
+                                        <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
+                                    </label>
                                     <div class="btn">
-                                    	<input type="hidden" value="{{$tinfo['id']}}" name="id">
                                         <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                     </div>
                                 </div>
                             </form>
-                            
+                            <!--成员选择弹出框-->
+                            <div class="mt memberBox" add-dy-id="0">
+                                <b class="m_close">X</b>
+                                <h3 class="m_title">成员选择</h3>
+                                <div class="choose_m">
+                                    <span>请添加成员 : </span>
+                                    <select class="choose_s">
+                                        <foreach name="list_data" item="vo">
+                                            <if condition="$ulist[$vo['user_id']] eq true">
+                                            	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="2" >{{$vo.user_name}}</option>
+                                            <else />
+                                                <option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
+                                            </if>
+                                    	</foreach>
+                                    </select>
+                                    <button class="sureBtn">确定</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <script>
+        //成员弹出框显示
+        $('.p_comm').click(function(){
+            var addId = $(this).attr('add-id');
+            var member = $("div[add-dy-id="+addId+"]");
+            member.toggle();
+            return false;
+        });
+        //老师弹出框显示
+        $('.p_teacher').click(function(){
+            var addTeacherId = $(this).attr('add-teacher-id');
+            var teacher = $("div[add-th-dy-id="+addTeacherId+"]");
+            teacher.toggle();
+            return false;
+        });
+        //添加成员选择
+        $('.sureBtn').click(function(){
+            var that = $(this);
+            var user_id = $('.choose_s').val();
+            var not_in = $('.notin_'+user_id).attr("not_in");
+            
+            if(not_in=='1'){
+	            $.ajax({
+	                type:'post',
+	                url:"{{:U('User/find_user')}}",
+	                data:{user_id:user_id},
+	                cache:false,
+	                dataType:'json',
+	                success:function(data){
+	                    that.parent().parent().parent().find('.p_team ul').append('<li uid="'+data.user_id+'"><div class="team_information">' +
+	                            '<img src="'+data.img_url+'" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
+	                            '<div class="people_information">' +
+	                            '<h5>'+data.user_name+'</h5>' +
+	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
+	                            '</div>' +
+	                            '</div><button class="p_delete">-</button></li>');
+	                }
+	            });
+	            $('.notin_'+user_id).attr("not_in","2");
+	            return false;
+            }
+
+        });
+        $('.m_close').click(function(){
+            $(this).parent().toggle();
+        });
+        //删除
+        $(document).on('click','.p_delete',function(){
+        	var trs = $(this).parent();
+        	var uid = trs.attr("uid");
+        	trs.remove();
+        	$('.notin_'+uid).attr("not_in","1");
+            return false;
+        });
+    </script>
     <!--搜索-->
     <script>
         $(function(){

@@ -14,7 +14,10 @@
 			<include file='Public:navigation'/>
 			<!-- tab-content -->
 			<div class="tab-content">
-                <a href="" style="display: inline-block;height:40px;width: 100px;text-align: center;line-height: 40px;background: #ccc;margin: 30px">添加团队</a>
+				
+				<if condition="$top eq true">
+					<a href="{{:U('Index/addteam')}}" style="display: inline-block;height:40px;width: 100px;text-align: center;line-height: 40px;background: #ccc;margin: 30px">添加团队</a>
+				</if>
 					<table class="team_table user_table hover_table">
 						<tbody>
 							<tr style='background:#aaa;color:#fff'>

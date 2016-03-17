@@ -30,7 +30,7 @@ class TeamController extends Controller{
    public function delete() {
        $temModel = new \Common\Model\TeamModel();
        $team_id = I('post.team_id',0,'intval');
-       $result = $temModel->deleteTeam($team_id);
+       $result = $temModel->where(array("leader_id"=>$team_id))->delete();
        if ($result){
            $this->ajaxReturn(array('status' => 1));
        }else {

@@ -12,7 +12,7 @@ class ProjectController extends Controller{
         $project = new \Common\Helper\Project();
 		$userModel = D('users');
 		$teacTeamModel = M("teacher_team");
-//$project->lists();
+
 		if(IS_POST){
 
 			$posjectModel = M("project");

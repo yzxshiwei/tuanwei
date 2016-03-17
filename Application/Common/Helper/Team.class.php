@@ -56,4 +56,19 @@ class Team{
         $result = $result->limit($Page->firstRow.','.$Page->listRows)->select();
         return array("Page" => $Page_show,"list_data" => $result);
     }
+    
+    /**
+	 * 团队列表
+	 */
+	public function lists($user_id=NULL){
+		$teamModel = new \Common\Model\TeamModel();
+		$field = 'team.id,team.create_time,team.team_name,team.user_type,team.leader_id,team.tops';
+        $count = $teamModel->field($field)->where(array('team.user_id' => $user_id))->count();
+	    
+        $Page = new \Think\Page($count,12);
+        $Page_show = $Page->show();
+        $result = $teamModel->field($field)->where(array('team.user_id' => $user_id))->limit($Page->firstRow.','.$Page->listRows)->select();
+
+        return array("Page" => $Page_show,"list_data" => $result);
+	}
 }
