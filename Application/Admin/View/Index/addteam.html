@@ -84,19 +84,18 @@
             font-size: 16px;
             color: rgb(102,102,102);
         }
-        .p_content .p_left_nav h6:nth-child(1),h6:nth-child(2){
+        .p_content .p_left_nav h6:nth-child(1){
             height: 42px;
             line-height: 42px;
         }
-        .p_content .p_left_nav h6:nth-child(3){
+        .p_content .p_left_nav h6:nth-child(2){
             height:180px;
         }
-        .p_content .p_left_nav h6:nth-child(4){
-            height:42px;
-            line-height: 42px;
+        .p_content .p_left_nav h6:nth-child(3){
+            height:190px;
         }
-        .p_content .p_left_nav h6:nth-child(5){
-            height:400px;
+        .p_content .p_left_nav h6:nth-child(4){
+            height:200px;
         }
         .p_content .content .p_right_input{
             float: left;
@@ -129,7 +128,7 @@
             padding: 10px;
         }
         .p_content .content .p_right_input label:nth-child(3){
-            line-height: 180px;
+            height:190px;
         }
         .p_content .content .p_right_input label input[type="file"]{
             height:42px;
@@ -206,13 +205,15 @@
             border-radius: 26px;
             background: rgb(153,153,153);
             margin-right: 15px;
+            margin-top: 7px;
         }
         .p_content .p_right_input .btn{
             width: 80%;
             text-align: center;
         }
         .p_content .p_right_input .btn input[type="submit"]{
-            margin-top: 23px;
+            margin-top: 70px;
+            margin-bottom: 20px;
             font-family: "微软雅黑";
             width: 150px;
             height: 42px;
@@ -295,6 +296,12 @@
         .teacherBox .c_val b{
             margin-right: 5px;
         }
+        .file_upload_plugin{
+            float: left;
+            width: 300px;
+            margin-left: 15px;
+            margin-bottom: 20px;
+        }
     </style>
 </head>
 
@@ -309,19 +316,26 @@
                         <!--编辑项目内容-->
                         <div class="content" style="clear: both;">
                             <form action="{{:U('Index/addteam')}}" method="post" enctype="multipart/form-data">
+                                <input type='file' id='f_u' name='selectFiles'/>
                                 <div class="p_left_nav">
                                     <h6>团队名称</h6>
-                                    <h6>项目副标题</h6>
                                     <h6>项目简介</h6>
                                     <h6>上传头像</h6>
-                                    <h6>成员组成</h6>
+                                    <h6 style="clear: both">成员组成</h6>
                                 </div>
                                 <div class="p_right_input">
                                     <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><input type="text" name="sub_title" maxlength="15"/><b>限制在15字内</b></label>
                                     <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
-                                    <label><input name="project_file" type="file"/><b>请上传头像</b></label>
                                     <label>
+                                        <div class='file_upload_plugin'>
+                                            <div id='file_upload_area' class='droppable' draggable='true'>
+                                                <img src="" class="file_img"/>
+                                                <a id='banner_close'>删除</a>
+                                                <a class='browse'>浏览</a>
+                                            </div>
+                                        </div>
+                                    </label>
+                                    <label style="clear: both">
                                         <div class="p_team">
                                             <ul>
                                             </ul>
@@ -415,6 +429,60 @@
     <script>
         $(function(){
             $('.choose_s').searchableSelect();
+        });
+    </script>
+    <!--头像上传-->
+    <script>
+        var main_banner;
+        var race_id;
+        $(document).ready(function(){
+            $('#file_upload_area').bind( {
+                drop: function(e) {
+
+                    e.preventDefault();
+                    var oe = e.originalEvent;
+                    var file_list = oe.dataTransfer.files;
+                    main_banner = file_list[0];
+                    show_image( file_list, '#file_upload_area' );
+                },
+                dragover: function(e) {
+                    e.preventDefault();
+                    return true;
+                }
+            } );
+
+            $('.file_upload_plugin a.upload').click( function() {
+
+                if( typeof(main_banner)!='undefined' ) {
+
+                    var banner = new Object();
+                    var reader = new FileReader();
+
+                    reader.onload = function() {
+                        banner['banner'] = $.base64( 'encode', this.result );
+                        banner['banner_name'] = main_banner.name;
+                        banner['race_id'] = race_id;
+                    };
+
+                    reader.readAsBinaryString( main_banner );
+                }
+            } );
+
+            $('.file_upload_plugin a.browse').click( function(e) {
+                $('#f_u').trigger('click');
+            } );
+
+            $('#f_u').change( function(e) {
+                main_banner = this.files[0];
+                show_image( this.files, '#file_upload_area');
+            } );
+
+            $('#banner_close').click( function() {
+                var target = $(this);
+                target.prev('img').attr('src','');
+                target.prev('img').css( {'width':0,'height':0} );
+                main_banner = '';
+            } );
         });
     </script>
 </body>
