@@ -88,17 +88,19 @@ class Project{
 		}elseif($user["user_type"] == $userModel::TYPE_TEACHER){
 			//指导老师
 			$where["tt.user_id"] = $user["user_id"];
-			$where["tt.teacher_type"] = $user["user_id"];
+			$where["tt.teacher_type"] = 1;
 		}elseif($user["user_type"] == $userModel::TYPE_JUDGES){
 			//评审专家
 			$where["j.judge_id"] = $user["user_id"];
+		}elseif($user["user_type"] == $userModel::TYPE_MANAGE){
+			$where["t.user_type"] = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 		}
-		
-		$where["p.team_id"] = array("neq","");
 
-		$field = "p.name,p.is_open,p.creat_id,p.sub_title,m.name as match_name,t.user_type,p.id as pid,ps.score";
+		$where["t.id"] = array("neq","");
+
+		$field = "p.name,p.is_open,p.creat_id,p.sub_title,t.user_type,p.id as pid,ps.score";
         $teamModel = $teamModel->alias('t')
-           ->join('project AS p ON (p.team_id = t.id)','left')
+           ->join('project AS p ON (p.team_id = t.leader_id)')
 		   ->join('match_project AS mp ON (p.id = mp.project_id)','left')
            ->join('`match` AS m ON(m.id = mp.match_id)','left')
 		   ->join('project_status AS ps ON(p.id = ps.project_id)','left');
@@ -109,12 +111,13 @@ class Project{
 			$teamModel = $teamModel->join('judges AS j ON (j.project_id=m.id)','left');
 		}
 		
-		$count =  $teamModel->field($field)->where($where)->count();
+		$count =  $teamModel->field($field)->where($where)->group("t.leader_id")->count();
+
         $Page = new \Think\Page($count,12);
 		$show = $Page->show();
 
         $teamModel = $teamModel->alias('t')
-           ->join('project AS p ON (p.team_id = t.id)','left')
+           ->join('project AS p ON (p.team_id = t.leader_id)')
 		   ->join('match_project AS mp ON (p.id = mp.project_id)','left')
            ->join('`match` AS m ON(m.id = mp.match_id)','left')
 		   ->join('project_status AS ps ON(p.id = ps.project_id)','left');
@@ -126,7 +129,7 @@ class Project{
 		}
 		
 		$res = $teamModel->field($field)->where($where)->group("t.leader_id")->order("p.create_time desc")->limit($Page->firstRow.','.$Page->listRows)->select();
-//echo $teamModel->getlastsql();exit;
+
         if (!empty($res)){
             foreach ($res as $k => $v){
             	if($user["user_type"] == $userModel::TYPE_MANAGE){
