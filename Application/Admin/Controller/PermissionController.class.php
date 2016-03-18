@@ -122,14 +122,14 @@ class PermissionController extends Controller{
                      $data = array('user_id' => $user_id);
 	                 if($student->add($data)){
 	                    $userModel->commit();
-	                    $this->success('添加成功',U('Index/index'));
+	                    $this->success('添加成功',U('Index/usermanage'));
 	                 }else{
 	                    $userModel->rollback();
 	                    $this->error('添加失败');
 	                 }
 			    }else{
 			    	$userModel->commit();
-	                $this->success('添加成功',U('Index/index'));
+	                $this->success('添加成功',U('Index/usermanage'));
 			    }
             }else{
                 $userModel->rollback();

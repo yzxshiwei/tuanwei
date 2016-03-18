@@ -18,6 +18,7 @@ class Match{
 		
         if ($user['user_type'] == $userModel::TYPE_JUDGES){
             $where['j.judge_id'] = $user['user_id'];
+			$where['j.state'] = \Common\Model\JudgesModel::STATE_ADOPT;
             $matchModel->join("judges as j on (match.id = j.project_id)",'left')->where($where);
         }
         $count =  $matchModel->count();
@@ -29,6 +30,7 @@ class Match{
         ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id");
         if ($user['user_type'] == $userModel::TYPE_JUDGES){
             $where['j.judge_id'] = $user['user_id'];
+			$where['j.state'] = \Common\Model\JudgesModel::STATE_ADOPT;
             $matchModel_l->join("judges as j on (match.id = j.project_id)",'left')->where($where);
         }
 

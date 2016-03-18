@@ -94,7 +94,7 @@ class Project{
 			$where["j.judge_id"] = $user["user_id"];
 		}
 		
-//		$where["t.project_id"] = array("neq","");
+		$where["p.team_id"] = array("neq","");
 
 		$field = "p.name,p.is_open,p.creat_id,p.sub_title,m.name as match_name,t.user_type,p.id as pid,ps.score";
         $teamModel = $teamModel->alias('t')
