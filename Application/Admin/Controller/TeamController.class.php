@@ -29,12 +29,21 @@ class TeamController extends Controller{
     */
    public function delete() {
        $temModel = new \Common\Model\TeamModel();
+	   $projectModel = new \Common\Model\ProjectModel();
+	   $pjModel = new \Common\Model\Project_StatusModel();
+	   $mpModel = new \Common\Model\Match_ProjectModel();
+	   $tmModel = new \Common\Model\Teacher_TeamModel();
+	   
        $team_id = I('post.team_id',0,'intval');
-       $result = $temModel->where(array("leader_id"=>$team_id))->delete();
-       if ($result){
-           $this->ajaxReturn(array('status' => 1));
-       }else {
-           $this->ajaxReturn(array('status' => 0));
-       }
+	   
+	   $pid = $projectModel->where(array("team_id"=>$team_id))->field("id")->find();
+	   
+       $temModel->where(array("leader_id"=>$team_id))->delete();
+	   $projectModel->where(array("team_id"=>$team_id))->delete();
+	   $pjModel->where(array("project_id"=>$pid["id"]))->delete();
+	   $mpModel->where(array("project_id"=>$pid["id"]))->delete();
+	   $mpModel->where(array("project_id"=>$pid["id"]))->delete();
+
+       $this->ajaxReturn(array('status' => 1));
    }
 }

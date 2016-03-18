@@ -36,6 +36,10 @@ class UserController extends Controller{
 			$input_data['group_id'] = $input_data['user_type'];
 			$input_data['state'] = 1;
 	
+	        if ($input_data['user_name'] == ''){
+                $input_data['user_name'] = $input_data['email'];
+            }
+	
 			if($card_type==1){
 				$input_data['card_id'] = I('post.card_id',0,'string');
 			}elseif($card_type==2){

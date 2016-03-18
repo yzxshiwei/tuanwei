@@ -57,6 +57,7 @@
             margin: 0px auto;
         }
         .p_content .title{
+        	margin-top: 20px;
             font-size: 18px;
             height:54px;
             line-height: 54px;
@@ -84,18 +85,19 @@
             font-size: 16px;
             color: rgb(102,102,102);
         }
-        .p_content .p_left_nav h6:nth-child(1){
+        .p_content .p_left_nav h6:nth-child(1),h6:nth-child(2){
             height: 42px;
             line-height: 42px;
         }
-        .p_content .p_left_nav h6:nth-child(2){
+        .p_content .p_left_nav h6:nth-child(3){
             height:180px;
         }
-        .p_content .p_left_nav h6:nth-child(3){
-            height:190px;
-        }
         .p_content .p_left_nav h6:nth-child(4){
-            height:200px;
+            height:42px;
+            line-height: 42px;
+        }
+        .p_content .p_left_nav h6:nth-child(5){
+            height:400px;
         }
         .p_content .content .p_right_input{
             float: left;
@@ -127,8 +129,8 @@
             margin-right: 21px;
             padding: 10px;
         }
-        .p_content .content .p_right_input label:nth-child(3){
-            height:190px;
+         .p_content .content .p_right_input label:nth-child(3){
+            line-height: 180px;
         }
         .p_content .content .p_right_input label input[type="file"]{
             height:42px;
@@ -205,21 +207,27 @@
             border-radius: 26px;
             background: rgb(153,153,153);
             margin-right: 15px;
-            margin-top: 7px;
         }
         .p_content .p_right_input .btn{
             width: 80%;
             text-align: center;
         }
         .p_content .p_right_input .btn input[type="submit"]{
-            margin-top: 70px;
-            margin-bottom: 20px;
+            margin-top: 23px;
             font-family: "微软雅黑";
             width: 150px;
             height: 42px;
             background: rgb(0,153,153);
             font-size: 18px;
             color: #fff;
+        }
+        .p_content .p_right_input select{
+            font-family: "微软雅黑";
+            width: 170px;
+            height: 42px;
+            font-size: 18px;
+            padding-left: 15px;
+            border:1px solid #ccc;
         }
         .mt{
             display: none;
@@ -296,12 +304,6 @@
         .teacherBox .c_val b{
             margin-right: 5px;
         }
-        .file_upload_plugin{
-            float: left;
-            width: 300px;
-            margin-left: 15px;
-            margin-bottom: 20px;
-        }
     </style>
 </head>
 
@@ -312,57 +314,63 @@
                 <!-- tab-content -->
                 <div class="tab-content">
                     <div class="p_content">
-                        <h3 class="title">添加团队</h3>
+                        <h3 class="title">项目编辑</h3>
                         <!--编辑项目内容-->
                         <div class="content" style="clear: both;">
-                            <form action="{{:U('Index/addteam')}}" method="post" enctype="multipart/form-data">
-                                <input type='file' id='f_u' name='selectFiles'/>
+                            <form action="{{:U('Project/editproject')}}" method="post" enctype="multipart/form-data">
                                 <div class="p_left_nav">
-                                    <h6>团队名称</h6>
+                                    <h6>项目名称</h6>
+                                    <h6>项目副标题</h6>
                                     <h6>项目简介</h6>
-                                    <h6>上传头像</h6>
-                                    <h6 style="clear: both">成员组成</h6>
+                                    <h6>上传附件</h6>
+                                    <h6>选择团队</h6>
                                 </div>
                                 <div class="p_right_input">
-                                    <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
-                                    <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
+                                    <label><input type="text" name="name" value="{{$pinfo['name']}}" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><input type="text" name="sub_title" value="{{$pinfo['sub_title']}}" maxlength="15"/><b>限制在15字内</b></label>
+                                    <label><textarea name="intro" maxlength="1000">{{$pinfo["intro"]}}</textarea><b>限制在1000字内</b></label>
+                                    <label><input name="project_file" type="file"/><b>请打包上传(*最大20M)</b></label>
                                     <label>
-                                        <div class='file_upload_plugin'>
-                                            <div id='file_upload_area' class='droppable' draggable='true'>
-                                                <img src="" class="file_img"/>
-                                                <a id='banner_close'>删除</a>
-                                                <a class='browse'>浏览</a>
-                                            </div>
-                                        </div>
+                                        <select name="tid">
+                                        	<foreach name="tlist" item="_v">
+                                        		<option value="{{$_v['id']}}" <if condition="$pinfo['team_id'] eq $_v['id']">selected="selected"</if> >{{$_v["team_name"]}}</option>
+                                        	</foreach>
+                                        </select>
                                     </label>
-                                    <label style="clear: both">
-                                        <div class="p_team">
-                                            <ul>
-                                            </ul>
-                                        </div>
-                                        <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
+                                    <label style="clear:both;position: relative;width: 87.5%;">
+                                        <input type="text" placeholder="老师" class="get_t_val" value="{{$uname}}" readonly="readonly" style="margin-top: 10px;padding-left: 15px" get-t-id="0"/>
+                                        <button class="p_add p_teacher checs_ss" add-teacher-id="0">+</button>
+                                        
+                                        <foreach item='_ko' name='zlist'>
+                                            <input type='hidden' class='tur_{{$_ko.user_id}}' name='teacher_id[]' value='{{$_ko.user_id}}'>
+                                        </foreach>
+                                        
                                     </label>
                                     <div class="btn">
                                         <input type="submit" value="保 &nbsp;&nbsp;&nbsp;&nbsp;存"/>
                                     </div>
                                 </div>
+	                            <!--老师选择弹出框-->
+	                            <div class="mt teacherBox" add-th-dy-id="0">
+	                                <b class="m_close">X</b>
+	                                <h3 class="m_title">老师选择</h3>
+	                                <div class="c_val" c-val="0">
+	                                	
+	                                	<foreach name="teacher_list" item="_vo">
+                                    		<if condition="$zlist[$_vo['user_id']] eq true">
+	                                		   <input type="checkbox" name="teacher" value="{{$_vo.user_id}}" checked="checked" class="chk_{{$_vo.user_id}}"  add-value="{{$_vo.user_name}}"/><b>{{$_vo.user_name}}</b>
+	                                		<else />
+	                                		   <input type="checkbox" name="teacher" value="{{$_vo.user_id}}" class="chk_{{$_vo.user_id}}"  add-value="{{$_vo.user_name}}"/><b>{{$_vo.user_name}}</b>
+                                    		</if>
+	                                	</foreach>
+	                                </div>
+	                                <div class="s_btn">
+	                                	<input type="hidden" name="pid" value="{{$id}}">
+	                                    <input type="button" value="确定" class="teacherBtn" t-id="0" > 
+	                                </div>
+	                            </div>
                             </form>
-                            <!--成员选择弹出框-->
-                            <div class="mt memberBox" add-dy-id="0">
-                                <b class="m_close">X</b>
-                                <h3 class="m_title">成员选择</h3>
-                                <div class="choose_m">
-                                    <span>请添加成员 : </span>
-                                    <select class="choose_s">
-                                        <foreach name="list_data" item="vo">
-                                            <if condition="$vo.user_id neq $userid">
-                                            	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
-                                            </if>
-                                    	</foreach>
-                                    </select>
-                                    <button class="sureBtn">确定</button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -371,13 +379,6 @@
     </div>
 
     <script>
-        //成员弹出框显示
-        $('.p_comm').click(function(){
-            var addId = $(this).attr('add-id');
-            var member = $("div[add-dy-id="+addId+"]");
-            member.toggle();
-            return false;
-        });
         //老师弹出框显示
         $('.p_teacher').click(function(){
             var addTeacherId = $(this).attr('add-teacher-id');
@@ -385,44 +386,9 @@
             teacher.toggle();
             return false;
         });
-        //添加成员选择
-        $('.sureBtn').click(function(){
-            var that = $(this);
-            var user_id = $('.choose_s').val();
-            var not_in = $('.notin_'+user_id).attr("not_in");
-            
-            if(not_in=='1'){
-	            $.ajax({
-	                type:'post',
-	                url:"{{:U('User/find_user')}}",
-	                data:{user_id:user_id},
-	                cache:false,
-	                dataType:'json',
-	                success:function(data){
-	                    that.parent().parent().parent().find('.p_team ul').append('<li uid="'+data.user_id+'"><div class="team_information">' +
-	                            '<img src="'+data.img_url+'" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
-	                            '<div class="people_information">' +
-	                            '<h5>'+data.user_name+'</h5>' +
-	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
-	                            '</div>' +
-	                            '</div><button class="p_delete">-</button></li>');
-	                }
-	            });
-	            $('.notin_'+user_id).attr("not_in","2");
-	            return false;
-            }
-
-        });
+        
         $('.m_close').click(function(){
             $(this).parent().toggle();
-        });
-        //删除
-        $(document).on('click','.p_delete',function(){
-        	var trs = $(this).parent();
-        	var uid = trs.attr("uid");
-        	trs.remove();
-        	$('.notin_'+uid).attr("not_in","1");
-            return false;
         });
     </script>
     <!--搜索-->
@@ -430,60 +396,33 @@
         $(function(){
             $('.choose_s').searchableSelect();
         });
-    </script>
-    <!--头像上传-->
-    <script>
-        var main_banner;
-        var race_id;
-        $(document).ready(function(){
-            $('#file_upload_area').bind( {
-                drop: function(e) {
+        //老师选择
+        window.onload = function() {
+            $('.teacherBtn').click(function(){
+                var values = [];
+                var t_id = $(this).attr('t-id');
+                var c_val = $('div[c-val='+t_id+']');
+                var i_check = $(c_val.find('input'));
+                var get_t_val = $('input[get-t-id='+t_id+']');
 
-                    e.preventDefault();
-                    var oe = e.originalEvent;
-                    var file_list = oe.dataTransfer.files;
-                    main_banner = file_list[0];
-                    show_image( file_list, '#file_upload_area' );
-                },
-                dragover: function(e) {
-                    e.preventDefault();
-                    return true;
+                for(var i=0; i<i_check.length; i++){
+                    var ck = i_check[i];
+                    var userid = ck.value;
+                    
+                    if(ck.checked){ //判断复选框是否选中
+                    	if($(".tur_"+userid).length==0){
+                    		var input_teacher = "<input type='hidden' class='tur_"+userid+"' name='teacher_id[]' value='"+userid+"'>";
+                    	    $(".checs_ss").append(input_teacher);
+                    	}
+                    	var con = $(".chk_"+userid).attr("add-value");
+                        values.push(con);
+                    }else{
+                    	$(".tur_"+userid).remove();
+                    }
                 }
-            } );
-
-            $('.file_upload_plugin a.upload').click( function() {
-
-                if( typeof(main_banner)!='undefined' ) {
-
-                    var banner = new Object();
-                    var reader = new FileReader();
-
-                    reader.onload = function() {
-                        banner['banner'] = $.base64( 'encode', this.result );
-                        banner['banner_name'] = main_banner.name;
-                        banner['race_id'] = race_id;
-                    };
-
-                    reader.readAsBinaryString( main_banner );
-                }
-            } );
-
-            $('.file_upload_plugin a.browse').click( function(e) {
-                $('#f_u').trigger('click');
-            } );
-
-            $('#f_u').change( function(e) {
-                main_banner = this.files[0];
-                show_image( this.files, '#file_upload_area');
-            } );
-
-            $('#banner_close').click( function() {
-                var target = $(this);
-                target.prev('img').attr('src','');
-                target.prev('img').css( {'width':0,'height':0} );
-                main_banner = '';
-            } );
-        });
+                get_t_val.val(values.join(","));
+            });
+        }
     </script>
 </body>
 

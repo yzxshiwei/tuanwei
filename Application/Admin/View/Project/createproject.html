@@ -57,6 +57,7 @@
             margin: 0px auto;
         }
         .p_content .title{
+        	margin-top: 20px;
             font-size: 18px;
             height:54px;
             line-height: 54px;
@@ -128,7 +129,7 @@
             margin-right: 21px;
             padding: 10px;
         }
-        .p_content .content .p_right_input label:nth-child(3){
+         .p_content .content .p_right_input label:nth-child(3){
             line-height: 180px;
         }
         .p_content .content .p_right_input label input[type="file"]{
@@ -219,6 +220,14 @@
             background: rgb(0,153,153);
             font-size: 18px;
             color: #fff;
+        }
+        .p_content .p_right_input select{
+            font-family: "微软雅黑";
+            width: 170px;
+            height: 42px;
+            font-size: 18px;
+            padding-left: 15px;
+            border:1px solid #ccc;
         }
         .mt{
             display: none;
@@ -314,7 +323,7 @@
                                     <h6>项目副标题</h6>
                                     <h6>项目简介</h6>
                                     <h6>上传附件</h6>
-                                    <h6>成员组成</h6>
+                                    <h6>选择团队</h6>
                                 </div>
                                 <div class="p_right_input">
                                     <label><input type="text" name="name" maxlength="15"/><b>限制在15字内</b></label>
@@ -322,11 +331,11 @@
                                     <label><textarea name="intro" maxlength="1000"></textarea><b>限制在1000字内</b></label>
                                     <label><input name="project_file" type="file"/><b>请打包上传(*最大20M)</b></label>
                                     <label>
-                                        <div class="p_team">
-                                            <ul>
-                                            </ul>
-                                        </div>
-                                        <button class="p_add p_comm" add-id="0" style="position: relative;">+</button>
+                                        <select name="tid">
+                                        	<foreach name="tlist" item="_v">
+                                        		<option value="{{$_v['id']}}">{{$_v["team_name"]}}</option>
+                                        	</foreach>
+                                        </select>
                                     </label>
                                     <label style="clear:both;position: relative;width: 87.5%;">
                                         <input type="text" placeholder="老师" class="get_t_val" readonly="readonly" style="margin-top: 10px;padding-left: 15px" get-t-id="0"/>
@@ -350,22 +359,7 @@
                                 </div>
                             </div>
                             </form>
-                            <!--成员选择弹出框-->
-                            <div class="mt memberBox" add-dy-id="0">
-                                <b class="m_close">X</b>
-                                <h3 class="m_title">成员选择</h3>
-                                <div class="choose_m">
-                                    <span>请添加成员 : </span>
-                                    <select class="choose_s">
-                                        <foreach name="list_data" item="vo">
-                                            <if condition="$vo.user_id neq $userid">
-                                            	<option value="{{$vo.user_id}}" class="notin_{{$vo.user_id}}" not_in="1" >{{$vo.user_name}}</option>
-                                            </if>
-                                    	</foreach>
-                                    </select>
-                                    <button class="sureBtn">确定</button>
-                                </div>
-                            </div>
+                           
                         </div>
                     </div>
                 </div>
@@ -388,34 +382,7 @@
             teacher.toggle();
             return false;
         });
-        //添加成员选择
-        $('.sureBtn').click(function(){
-            var that = $(this);
-            var user_id = $('.choose_s').val();
-            var not_in = $('.notin_'+user_id).attr("not_in");
-            
-            if(not_in=='1'){
-	            $.ajax({
-	                type:'post',
-	                url:"{{:U('User/find_user')}}",
-	                data:{user_id:user_id},
-	                cache:false,
-	                dataType:'json',
-	                success:function(data){
-	                    that.parent().parent().parent().find('.p_team ul').append('<li uid="'+data.user_id+'"><div class="team_information">' +
-	                            '<img src="'+data.img_url+'" alt=""/><input type="hidden" value="'+data.user_id+'" name="userid[]">' +
-	                            '<div class="people_information">' +
-	                            '<h5>'+data.user_name+'</h5>' +
-	                            '<p>学号:'+data.stu_card+',学院:'+data.college+',专业:'+data.major+'</p>' +
-	                            '</div>' +
-	                            '</div><button class="p_delete">-</button></li>');
-	                }
-	            });
-	            $('.notin_'+user_id).attr("not_in","2");
-	            return false;
-            }
-
-        });
+        
         $('.m_close').click(function(){
             $(this).parent().toggle();
         });
@@ -449,7 +416,6 @@
                         values.push(val_name);
                     }
                 }
-                console.log(values);
                 get_t_val.val(values.join(","));
             });
         }

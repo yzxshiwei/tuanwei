@@ -112,7 +112,6 @@ class TeamController extends \Common\Helper\Controller{
 		    if(!$this->user["user_id"]){
 		    	$this->error("请用户先登录");
 		    }
-		
     		$data = array();
 			$data["match_id"] = I("post.mid","","string");
 			$data["project_id"] = I("post.project_id","","string");
@@ -125,6 +124,10 @@ class TeamController extends \Common\Helper\Controller{
 			}
 			if(!$data["project_id"] || !$data["class_id"]){
 				$this->error("请进行选择项目");
+			}
+			
+			if($mpModel->where(array("project_id"=>$data["project_id"]))->find()){
+				$this->error("此项目已参加比赛");
 			}
 			
 			$cun = $mpModel->where($data)->find();

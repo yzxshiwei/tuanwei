@@ -12,7 +12,7 @@ class Team{
     public function teamList($user_id) {
         $teamModel = new \Common\Model\TeamModel();
         $result = $teamModel->distinct(true)
-                            ->field("p.name,p.id as p_id,team.*")->join("project as p on(team.project_id=p.id)",'left')
+                            ->field("p.name,p.id as p_id,team.*")->join("project as p on(team.id=p.team_id)",'left')
                             ->where(array('user_id'=>$user_id))
                             ->order('team.id')
                             ->select();
@@ -62,13 +62,30 @@ class Team{
 	 */
 	public function lists($user_id=NULL){
 		$teamModel = new \Common\Model\TeamModel();
-		$field = 'team.id,team.create_time,team.team_name,team.user_type,team.leader_id,team.tops';
-        $count = $teamModel->field($field)->where(array('team.user_id' => $user_id))->count();
+		$field = 'id,create_time,team_name,user_type,leader_id,tops';
+		if($user_id){
+			$teamModel = $teamModel->where(array('user_id' => $user_id));
+		}else{
+			$teamModel = $teamModel->where(array("user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->group("leader_id");
+		}
+        $count = $teamModel->field($field)->count();
 	    
         $Page = new \Think\Page($count,12);
         $Page_show = $Page->show();
-        $result = $teamModel->field($field)->where(array('team.user_id' => $user_id))->limit($Page->firstRow.','.$Page->listRows)->select();
+		if($user_id){
+			$teamModel = $teamModel->where(array('user_id' => $user_id));
+		}else{
+			$teamModel = $teamModel->where(array("user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->group("leader_id");
+		}
+        $result = $teamModel->field($field)->limit($Page->firstRow.','.$Page->listRows)->select();
 
         return array("Page" => $Page_show,"list_data" => $result);
 	}
+	
+	
+	
+	
+	
+	
+	
 }

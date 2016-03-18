@@ -140,7 +140,7 @@ class MessageModel extends \Common\Helper\Model{
 	   //团队邀请同意
 	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
 	       $team_data['state'] = $teamModel::STATE_PASS;
-	       $t_res = $teamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($team_data);
+	       $t_res = $teamModel->where(array('leader_id' => $proid,'user_id' => $user['user_id']))->save($team_data);
 	       if ($t_res){
 	           $flag = $this->readMsg($id);
 	       }

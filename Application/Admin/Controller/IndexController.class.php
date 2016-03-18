@@ -44,8 +44,8 @@ class IndexController extends \Admin\Controller\Controller {
 			//开启事务
 			$teamModel->startTrans();
 
-		   	if($_FILES['project_file']['tmp_name']){
-				$file_res1 = Upload($_FILES['project_file']);
+		   	if($_FILES['selectFiles']['tmp_name']){
+				$file_res1 = Upload($_FILES['selectFiles']);
 				if($file_res1["status"]){
 					$post_data["img_url"] = $file_res1['file_path'];
 				}else{
@@ -81,6 +81,7 @@ class IndexController extends \Admin\Controller\Controller {
 			$userModel = D('users');
 			$list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();
 			$this->assign("list_data",$list_data);
+			$this->assign("userid",$this->user["user_id"]);
 			$this->display();
 		}
 	}
@@ -93,29 +94,30 @@ class IndexController extends \Admin\Controller\Controller {
 	 */
 	public function teammanage() {
 	    $team = new \Common\Helper\Team();
-		
+		$teamModel = new \Common\Model\TeamModel();
+		$userModel = new \Common\Model\UsersModel();
 		$uid = $this->user['user_id'];
 		$user_type = $this->user['user_type'];
-		//若是管理员 查所有团队
-		if($this->user['user_type'] == \Common\Model\UsersModel::TYPE_MANAGE){
+		
+		$flag = TRUE;	
+		if($user_type == $userModel::TYPE_TEACHER || $user_type == $userModel::TYPE_JUDGES){
+			$flag = FALSE;
+		}elseif($user_type == $userModel::TYPE_MANAGE){
+			//若是管理员 查所有团队
 			$uid = NULL;
 		}
 
 	    $result = $team->lists($uid);
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 
-        $teamModel = new \Common\Model\TeamModel();
-
         foreach($result['list_data'] as $_k=>$_v){
 			$where["team.user_type"] = $utype;
 			$where["team.leader_id"] = $_v["leader_id"];
-        	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name")->where($where)->find();
+        	$name = $teamModel->join("users as u on (team.user_id = u.user_id)",'left')->field("u.user_name,team.team_name")->where($where)->find();
 			$result['list_data'][$_k]["user_name"] = $name["user_name"];
+			$result['list_data'][$_k]["team_name"] = $name["team_name"];
         }
-		$flag = FALSE;	
-		if($user_type == \Common\Model\UsersModel::TYPE_TEACHER || $user_type == \Common\Model\UsersModel::TYPE_JUDGES){
-			$flag = TRUE;
-		}
+
 
         $this->assign('flag',$flag);
         $this->assign('top',$uid);
@@ -135,7 +137,7 @@ class IndexController extends \Admin\Controller\Controller {
 		$team = new \Common\Model\TeamModel();
 		
 		if(IS_POST){
-			v_dump($_POST);exit;
+
 			$team->startTrans();
 			$data = array();
 			$data["contents"] = I("post.intro","","string");
@@ -143,8 +145,8 @@ class IndexController extends \Admin\Controller\Controller {
 			$id = I("post.id","","string");
 			
 			//开启事务
-			if($_FILES['project_file']['tmp_name']){
-				$file_res = Upload($_FILES['project_file']);
+			if($_FILES['selectFiles']['tmp_name']){
+				$file_res = Upload($_FILES['selectFiles']);
 				if($file_res["status"]){
 					$data["img_url"] = $file_res['file_path'];
 					//删除原先的图片

@@ -24,6 +24,8 @@ class MatchController extends Controller{
 			//开启事务
 		    $match->startTrans();
 
+            $data = array();
+
 			if($_FILES['selectFiles']['tmp_name']){
 				$file_res1 = Upload($_FILES['selectFiles']);
 				if($file_res1["status"]){
@@ -32,8 +34,7 @@ class MatchController extends Controller{
 					$this->error($file_res1['msg']);
 				}
 			}
-			
-			$data = array();
+
 			$data["name"] = I('post.name','','string');
 			$data["sub_title"] = I('post.sub_title','','string');
 			$data["project_start_time"] = strtotime(I('post.race-start-date','','string'));
@@ -42,9 +43,7 @@ class MatchController extends Controller{
 			$data["rules"] = I('post.editorValue');
 			$data["sign_start_time"] = strtotime(I("post.reg-start-date",'','string'));
 			$data["sign_end_time"] = strtotime(I("post.reg-end-date","","string"));
-//				$data["cover_src"] = $file_res1['file_path'];
-//				$data["start_file_src"] = $file_res2['file_path'];
-//				$data["template_src"] = $file_res3['file_path'];
+
 			$relust = $match->add($data);
 			
 			if($relust){

@@ -26,7 +26,7 @@
 								<th width='10%'>负责人</th>
 								<th width='27%'>创建时间</th>
 								
-								<if condition="$flag eq false">
+								<if condition="$flag eq true">
 								   <th class='user_set'>设置</th>
 								</if>
 							</tr>
@@ -37,7 +37,7 @@
                                 <td><a class="user_identity">{{$vo.user_name}}</a></td>
                                 <td>{{$vo.create_time}}</td>
                                 
-                                <if condition="$flag eq false">
+                                <if condition="$flag eq true">
 	                                <td class="user_set">
 	                                	<if condition="$top eq false">
 	                                		<input type="checkbox" <if condition="$vo.tops eq 1">checked="checked"</if> class="user_valil">置顶

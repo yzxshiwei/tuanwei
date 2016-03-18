@@ -312,7 +312,7 @@
                 <div class="tab-content">
                     <div class="p_content">
                         <h3 class="title">团队编辑</h3>
-                        <!--编辑项目内容-->
+                        <!--编辑项目内容-->                      
                         <div class="content" style="clear: both;">
                             <form action="{{:U('Index/updateteam')}}" method="post" enctype="multipart/form-data">
                                 <input type='file' id='f_u' name='selectFiles'/>
@@ -328,7 +328,7 @@
                                     <label>
                                         <div class='file_upload_plugin'>
                                             <div id='file_upload_area' class='droppable' draggable='true'>
-                                                <img src="" class="file_img"/>
+                                                <img src="{{$tinfo['img_url']}}" class="file_img" style="width: 300px;"/>
                                                 <a id='banner_close'>删除</a>
                                                 <a class='browse'>浏览</a>
                                             </div>
@@ -383,6 +383,7 @@
     </div>
 
     <script>
+
         //成员弹出框显示
         $('.p_comm').click(function(){
             var addId = $(this).attr('add-id');
@@ -496,11 +497,6 @@
                 main_banner = '';
             } );
         });
-        window.onload = function(){
-            $('.file_upload_plugin').css({
-                'width':'300px'
-            });
-        }
     </script>
 </body>
 

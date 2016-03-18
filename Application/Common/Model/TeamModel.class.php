@@ -48,7 +48,7 @@ class TeamModel extends \Common\Helper\Model{
         if (!is_array($one_tema) || empty($one_tema)) {
             return false;
         }
-        return $this->where(array('project_id' => $one_tema['project_id']))->delete();
+        return $this->where(array('leader_id' => $one_tema['project_id']))->delete();
     }
 	
 	/**

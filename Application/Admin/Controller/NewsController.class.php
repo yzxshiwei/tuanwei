@@ -16,11 +16,17 @@ class NewsController extends Controller{
      */
     public function createnews() {
         if(IS_POST){
-            $file_res = uploadFile('selectFiles','img');
-            if (!$file_res['status']){
-                $this->error($file_res['msg']);
-            }
-            $input_data = array();
+			$input_data = array();
+			
+			if($_FILES['selectFiles']['tmp_name']){
+				$file_res = Upload($_FILES['selectFiles']);
+				if($file_res["status"]){
+					$input_data['img_url'] = $file_res['file_path'];
+				}else{
+					$this->error($file_res['msg']);
+				}
+			}
+			
             $input_data['col'] = I('post.col',false,'strval'); //新闻栏目
             $input_data['sub_col'] = I('post.sub_col', false, 'strval'); //新闻栏目子类别
             $input_data['top_s'] = I('post.top_s', '', 'strtotime'); 
@@ -31,8 +37,7 @@ class NewsController extends Controller{
             $input_data['source'] = I('post.source', '', 'strval'); //新闻消息来源
             $input_data['content'] = I('post.editorValue', false, 'strval'); //新闻编辑内容
             $input_data['public_t'] = time();
-            $input_data['img_url'] = $file_res['file_path'];
-            
+
             $News = M('news');
             $flag = $News->add($input_data);
             if(!$flag){

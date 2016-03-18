@@ -21,7 +21,7 @@ return array(
         "usermanage" => array('name'=>"人员管理",
                               'url'=>'Index/usermanage',
                               'ico' => 'fa fa-user',
-							  'map' =>array("usermanage","person","agree","refuse","read")
+							  'map' =>array("usermanage","person","agree","refuse","read","addteam")
 							  ),
         
         "teammanage" => array('name' => "团队管理",
@@ -69,7 +69,7 @@ return array(
         "projectmanage" => array('name' => "项目管理",
                                  'url' => 'Project/projectmanage',
                                  'ico' => 'fa fa-share-alt',
-								 'map' => array("projectmanage","workreview",)
+								 'map' => array("projectmanage","workreview","editproject")
 								 ),
         
         "grouplist" => array('name' => "分组列表",
