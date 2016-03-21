@@ -125,34 +125,30 @@ class MessageModel extends \Common\Helper\Model{
 	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
 	        $judges_data['state'] = $judgesModel::STATE_ADOPT; 
 	        $jd_res = $judgesModel->where(array('project_id' => $proid,'judge_id' => $user['user_id']))->save($judges_data);
-	        if ($jd_res){
-	            $flag = $this->readMsg($id);
-	        }
+
+	        $flag = $this->readMsg($id);
 	    };
 	    //指导老师同意
 	   if (self::TYPE_TEACHER_PROJECT == $message_data['msg_type']){
 	       $teacher_team_data['state'] = $teacherTeamModel::STATUS_PASS;
 	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->save($teacher_team_data);
-	       if ($tt_res){
-	           $flag = $this->readMsg($id);
-	       }
+		   
+	       $flag = $this->readMsg($id);
 	   }
 	   //团队邀请同意
 	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
 	       $team_data['state'] = $teamModel::STATE_PASS;
 	       $t_res = $teamModel->where(array('leader_id' => $proid,'user_id' => $user['user_id']))->save($team_data);
-	       if ($t_res){
-	           $flag = $this->readMsg($id);
-	       }
+
+	       $flag = $this->readMsg($id);
 	   }
 	   
 	   //同意注册用户申请为  投资人/指导老师/评审庄家
 	   if (self::TYPE__APPLY == $message_data['msg_type']){
 	       $team_data['state'] = $teamModel::STATE_PASS;
 	       $t_res = $userModel->where(array('user_id' => $proid))->save($team_data);
-	       if ($t_res){
-	           $flag = $this->readMsg($id);
-	       }
+
+	       $flag = $this->readMsg($id);
 	   }
 	   
 	   return $flag;
@@ -176,23 +172,20 @@ class MessageModel extends \Common\Helper\Model{
 	    if (self::TYPE_JUDGES_PROJECT == $message_data['msg_type']){
 
 	        $jd_res = $judgesModel->where(array('project_id' => $proid,'judge_id' => $user['user_id']))->delete();
-	        if ($jd_res){
-	            $flag = $this->readMsg($id);
-	        }
+
+	        $flag = $this->readMsg($id);
 	    };
 	    //指导老师拒绝
 	   if (self::TYPE_TEACHER_PROJECT == $message_data['msg_type']){
 	       $tt_res = $teacherTeamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->delete();
-	       if ($tt_res){
-	           $flag = $this->readMsg($id);
-	       }
+
+	       $flag = $this->readMsg($id);
 	   }
 	   //团队邀请拒绝
 	   if (self::TYPE_USER_PROJECT == $message_data['msg_type']){
 	       $t_res = $teamModel->where(array('project_id' => $proid,'user_id' => $user['user_id']))->delete();
-	       if ($t_res){
-	           $flag = $this->readMsg($id);
-	       }
+
+	       $flag = $this->readMsg($id);
 	   }
 	   
 	   //拒绝注册用户申请为  投资人/指导老师/评审庄家(不做任何操作)
