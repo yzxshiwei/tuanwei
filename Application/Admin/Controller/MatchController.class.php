@@ -175,6 +175,9 @@ class MatchController extends Controller{
 			$p_res = $packetModel->addName($packet,$mid);
 
 		    if($j_res && $p_res){
+		    	$messageModel = new \Common\Model\MessageModel();
+			    $messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$mid);
+				
 		    	$matchModel->commit();
 		    	$this->success('修改比赛成功',U('Match/matchmanage'));
 		    }else{
