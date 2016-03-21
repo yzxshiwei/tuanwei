@@ -94,6 +94,9 @@ class Project{
 			$where["j.judge_id"] = $user["user_id"];
 		}elseif($user["user_type"] == $userModel::TYPE_MANAGE){
 			$where["t.user_type"] = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
+		}elseif($user["user_type"]==$userModel::TYPE_INVESTMENT){
+			//投资人
+			$where["p.is_open"] = 1;
 		}
 
 		$where["t.id"] = array("neq","");

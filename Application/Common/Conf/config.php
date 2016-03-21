@@ -60,11 +60,11 @@ return array(
 							  'map' =>array("newsmanage","newedit")
 							  ),
         
-        "teamdiscuss" => array('name' => "团队交流",
-                               'url' => 'Team/teamdiscuss',
-                               'ico' => 'fa fa-language',
-							   'map' =>array("teamdiscuss")
-							   ),
+//      "teamdiscuss" => array('name' => "团队交流",
+//                             'url' => 'Team/teamdiscuss',
+//                             'ico' => 'fa fa-language',
+//							   'map' =>array("teamdiscuss")
+//							   ),
         
         "projectmanage" => array('name' => "项目管理",
                                  'url' => 'Project/projectmanage',

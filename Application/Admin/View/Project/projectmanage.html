@@ -459,13 +459,13 @@
                                 </if>
                                 
                                 <p class="open1"><a href="{{:U('Project/workreview',array('id'=>$vo['pid']))}}">详情</a></p>
-                                <!--if condition="$vo['is_captain'] eq 1">
+                                <if condition="$vo['is_captain'] eq 1">
                                 	<if condition="$vo['is_open'] eq 0">
                                 		<p class="open2" data-id="{{$vo.pid}}">公开</p>
                                 		<else/>
                                 		<p class="open2" data-id="{{$vo.pid}}">不公开</p>
                                 	</if>
-                                </if-->
+                                </if>
                             </div>
                         </div>
 					</foreach>
