@@ -303,11 +303,9 @@ class IndexController extends \Admin\Controller\Controller {
 	    $proid = I('proid',0,'intval');
 	    $messageModel = new \Common\Model\MessageModel();
 	    $result = $messageModel->agree($this->user,$id, $proid);
-	    if ($result){
-	        $this->success('已经同意',U("Index/index"));
-	    }else {
-	        $this->error('同意失败');
-	    }
+
+ 	    $this->success('已经同意',U("Index/index"));
+
 	}
 	/**
 	 * 拒绝邀请
@@ -320,11 +318,7 @@ class IndexController extends \Admin\Controller\Controller {
 	    $proid = I('proid',0,'intval');
 		$messageModel = new \Common\Model\MessageModel();
 		$result = $messageModel->deny($this->user,$id, $proid);
-	    if ($result){
-	        $this->success('已经拒绝');
-	    }else {
-	        $this->error('拒绝失败');
-	    }
+	    $this->success('已经拒绝',U("Index/index"));
 	}
 	/**
 	 * 阅读信息
