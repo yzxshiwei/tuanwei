@@ -244,11 +244,12 @@ class ProjectController extends Controller{
         }
         $save_data['result'] = $status;
         $result = $projectStatusModel->where(array('project_id' => $id ))->save($save_data);
-        
-        $student_id = M("team")->where(array("project_id"=>$id,"user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->field("user_id")->find();
+		$pid = M("project")->where(array("id"=>$id))->field("team_id")->find();
+        $student_id = M("team")->where(array("id"=>$pid["team_id"]))->field("user_id")->find();
+
 		$pro_name = M("project")->where(array("id"=>$id))->field("name")->find();
 		$messageModel = new \Common\Model\MessageModel();
-		
+
 		if($status=='1'){
 			$mess = "项目".$pro_name["name"]."已通过比赛";
 		}elseif($status=='0'){
@@ -256,7 +257,7 @@ class ProjectController extends Controller{
 		}
 		
         if($result){
-           $messageModel->sendMsg($student_id, $this->user['user_id'], $messageModel::TYPE_USER, $mess,$id);
+           $messageModel->sendMsg($student_id["user_id"], $this->user['user_id'], $messageModel::TYPE_USER, $mess,$id);
            $this->ajaxReturn(array('status' => 1,'msg'=>'修改成功')); 
         }else {
            $this->ajaxReturn(array('sattus' => 0,'msg' => '修改失败'));

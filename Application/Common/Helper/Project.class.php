@@ -93,6 +93,7 @@ class Project{
 			//评审专家
 			$where["j.judge_id"] = $user["user_id"];
 		}elseif($user["user_type"] == $userModel::TYPE_MANAGE){
+			//管理员
 			$where["t.user_type"] = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 		}elseif($user["user_type"]==$userModel::TYPE_INVESTMENT){
 			//投资人
@@ -101,7 +102,7 @@ class Project{
 
 		$where["t.id"] = array("neq","");
 
-		$field = "p.name,p.is_open,p.creat_id,p.sub_title,t.user_type,p.id as pid,ps.score";
+		$field = "p.name,p.is_open,p.creat_id,p.sub_title,t.user_type,p.id as pid,ps.score,ps.result";
         $teamModel = $teamModel->alias('t')
            ->join('project AS p ON (p.team_id = t.leader_id)')
 		   ->join('match_project AS mp ON (p.id = mp.project_id)','left')
