@@ -344,7 +344,11 @@
 	                                                   	 		<div class="people_information">
 	                                                   	 			<h5>{{$_v["user_name"]}}</h5><p>学号:{{$_v["stu_card"]}},学院:{{$_v["college"]}},专业:{{$_v["major"]}}</p>
 		                                                        </div>
-		                                                  </div><button class="p_delete">-</button>
+		                                                  </div>
+		                                                  <if condition="$_v['is_flag'] neq 1">
+		                                                     <button class="p_delete">-</button>
+		                                                  </if>
+		                                                  
 	                                                </li>
                                             	</foreach>
                                             </ul>

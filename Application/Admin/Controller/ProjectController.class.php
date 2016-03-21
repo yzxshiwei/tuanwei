@@ -52,12 +52,26 @@ class ProjectController extends Controller{
 		   
 		    //将项目老师 删除 再添加
 		    $teach_id = I('post.teacher_id');
-		    $teachModel->where(array("project_id"=>$pid,"teacher_type"=>1))->delete();
-		    $return = $teachModel->addTeam($teach_id,$pid,1);
-    	    //发送消息提示,发送邀请指导消息
-	   	    $messageModel = new \Common\Model\MessageModel();
-	   	    $messageModel->sendMsg($teach_id, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$pid);
-   
+			
+			$tlist = $teachModel->where(array("project_id"=>$pid,"teacher_type"=>1))->field("user_id")->select();
+			foreach($tlist as $_k=>$_vs){
+				$tlist[$_k] = $_vs["user_id"];
+			}
+			//取差集
+			$teachid1 = array_diff($teach_id,$tlist);
+			$teachid2 = array_diff($tlist,$teach_id);
+			$result = TRUE;
+			if($teachid1){
+				$return = $teachModel->addTeam($teachid1,$pid,1);
+				//发送消息提示,发送邀请指导消息
+	   	        $messageModel = new \Common\Model\MessageModel();
+	   	        $messageModel->sendMsg($teachid1, $this->user['user_id'], $messageModel::TYPE_TEACHER_PROJECT, '你有项目指导邀请',$pid);
+			}
+			
+			foreach($teachid2 as $_t){
+				$teachModel->where(array("project_id"=>$pid,"teacher_type"=>1,"user_id"=>$_t))->delete();
+			}
+
 		    if($res || $result){
 		   	   $projectModel->commit();
 		   	   $this->success('更新项目成功',U('Project/projectmanage'));

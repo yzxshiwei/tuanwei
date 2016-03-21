@@ -156,14 +156,30 @@ class IndexController extends \Admin\Controller\Controller {
 					$this->error($file_res['msg']);
 				}
 			}
-			
 			$res = $team->where(array("id"=>$id))->save($data);
-
 	    	//修改团队学员
 	    	$userid = I("post.userid");
 			$userid = array_unique($userid);
-			$team->where(array("leader_id"=>$id,"state"=>array("neq"=>\Common\Model\TeamModel::STATE_PASS)))->delete();
-			$result = $team->teamAdd($userid,$id,$this->user["user_name"]);
+			$where["leader_id"] = $id;
+			$ulist = $team->where($where)->field("user_id")->select();
+			foreach($ulist as $_k=>$_v){
+				$ulist[$_k] = $_v["user_id"];
+			}
+			//团队 添加的差集
+			$userid1 =  array_diff($userid,$ulist);
+			//原有团队 学院  的 差集
+			$userid2 = array_diff($ulist,$userid);
+
+			foreach($userid2 as $vs){
+				//删除 userid2 的值
+				$team->where(array("leader_id"=>$id,"user_id"=>$vs))->delete();
+			}
+			$result = TRUE;
+
+			if($userid1){
+				$result = $team->teamAdd($userid1,$id,$this->user["user_name"]);
+			}
+			
 			if($result || $res){
 				$team->commit();
 		    	$this->success('更新团队成功',U('Index/teammanage'));
@@ -180,7 +196,6 @@ class IndexController extends \Admin\Controller\Controller {
 			$list_data = $userModel->where(array('user_type' => \Common\Model\UsersModel::TYPE_STUDENT,"state"=>1))->field("user_id,user_name")->select();
 			$where = array();
 			$where["leader_id"] = $tid;
-			$where["user_type"] = array("neq",\Common\Model\TeamModel::USER_TYPE_CAPTAIN);
 			$ulist = $team->where($where)->select();
 
             $uarray = array();
@@ -194,6 +209,11 @@ class IndexController extends \Admin\Controller\Controller {
 				$uarray[$uinfo["user_id"]]["stu_card"] = $uinfo["stu_card"];
 				$uarray[$uinfo["user_id"]]["college"] = $uinfo["college"];
 				$uarray[$uinfo["user_id"]]["major"] = $uinfo["major"];
+				if($_v["user_type"] == $team::USER_TYPE_CAPTAIN){
+					$uarray[$uinfo["user_id"]]["is_flag"] = 1;
+				}else{
+					$uarray[$uinfo["user_id"]]["is_flag"] = 0;
+				}
             }
 
             $this->assign("tid",$tid);
