@@ -112,16 +112,19 @@ class MatchController extends Controller{
         $id = I('id');
         $order = I('order', '', 'strval');
         if($order == ''){
-            $order = array('id' => 'DESC');
+            $order = "p.id";
         }
         else {
-            $order = array('score' => $order);
+            $order = "ps.score ".$order;
         }
+
         $matchModel = new \Common\Model\MatchModel();
         $matchProjectModel = new \Common\Model\Match_ProjectModel();
         $list_data = $matchProjectModel->listData($id, $order);
         $match_data = $matchModel->where(array('id' => $id))->find();
-        $this->assign('list_data' , $list_data);
+
+        $this->assign('list_data' , $list_data["list_data"]);
+		$this->assign('Page',$list_data["Page"]);
         $this->assign('data',$match_data);
         $this->display();
     }
