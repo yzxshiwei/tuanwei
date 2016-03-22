@@ -110,9 +110,16 @@ class MatchController extends Controller{
      */
     public function viewmatch() {
         $id = I('id');
+        $order = I('order', '', 'strval');
+        if($order == ''){
+            $order = array('id' => 'DESC');
+        }
+        else {
+            $order = array('score' => $order);
+        }
         $matchModel = new \Common\Model\MatchModel();
         $matchProjectModel = new \Common\Model\Match_ProjectModel();
-        $list_data = $matchProjectModel->listData($id);
+        $list_data = $matchProjectModel->listData($id, $order);
         $match_data = $matchModel->where(array('id' => $id))->find();
         $this->assign('list_data' , $list_data);
         $this->assign('data',$match_data);
