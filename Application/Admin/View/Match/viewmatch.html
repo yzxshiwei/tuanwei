@@ -11,7 +11,7 @@
             margin-left: 60px;
             padding: 20px;
             margin-bottom: 30px;
-            margin-top: -50px;
+            margin-top: -40px;
         }
         .project li{
             padding: 5px;
@@ -22,6 +22,19 @@
         .project li span{
             position: absolute;
             right:20px;
+        }
+        .px{
+        	display: inline-block;
+        	height:30px;
+        	width: 100px;
+        	line-height: 30px;
+        	text-align: center;
+        	border-radius: 5px;
+        	margin-right: 10px;
+        	background: rgb(0,153,153);
+        	color: #FFFFFF;
+        	float: right;
+        	margin-top: 15px;
         }
     </style>
 </head>
@@ -48,7 +61,7 @@
                             <input readonly="readonly" value="{{$data.project_start_time|date="Y-m-d",###}}" type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' />
                             <input readonly="readonly" value="{{$data.project_end_time|date="Y-m-d",###}}" type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' />
                             <br/>
-                            <span class='race_set_lable'>比赛项目：</span>
+                            <label style="display:block;width: 700px;height:60px;"><span class='race_set_lable'>比赛项目：</span><a class="px" href="javascript:void(0);" style="color: #fff;">从低到高</a><a class="px"  href="javascript:void(0);" style="color: #fff;">从高到低</a></label>
                             <br/>
                             <ul class="project">
                             	<foreach name="list_data" item="_v">
