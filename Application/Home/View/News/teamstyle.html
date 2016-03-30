@@ -125,18 +125,11 @@
 <div id="content">
     <div class="slider">
         <ul class="slider-main">
-            <li class="slider-panel">
-                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy1.jpg"></a>
-            </li>
-            <li class="slider-panel">
-                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy2.jpg"></a>
-            </li>
-            <li class="slider-panel">
-                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy3.jpg"></a>
-            </li>
-            <li class="slider-panel">
-                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy4.jpg"></a>
-            </li>
+            <foreach name="img_url" item="vo">
+            	<li class="slider-panel">
+	                <a href="{{:U('Home/Team/teamDails',array('id' => $vo['id']))}}" target="_blank"><img src="{{$vo.img_url}}"></a>
+	            </li>
+	        </foreach>
         </ul>
         <div class="slider-extra">
             <ul class="slider-nav">
@@ -181,7 +174,14 @@
 <include file='Public:header'/>
 <include file='Public:footer'/>
 <script>
+
+
+
     $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
         });
