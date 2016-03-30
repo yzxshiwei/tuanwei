@@ -5,43 +5,43 @@
     <title>团队风采</title>
     <link rel="stylesheet" href="__STATIC__/css/reset.css">
     <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
-     <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
     <style>
         #n_center{
-        clear: both;
-        width: 960px;
-        padding-top: 32px;
-        font-family: "微软雅黑";
+            clear: both;
+            width: 960px;
+            padding-top: 32px;
+            font-family: "微软雅黑";
         }
         #n_center a:hover{
-        text-decoration: underline;
+            text-decoration: underline;
         }
         #n_center span:hover{
-        text-decoration: underline;
+            text-decoration: underline;
         }
         .news{
-        padding: 10px;
-        	margin-bottom:30px;
-        	border:1px dashed #ccc;
+            padding: 10px;
+            margin-bottom:30px;
+            border:1px dashed #ccc;
         }
         .news li{
-        height: 44px;
-        line-height: 44px;
-        color: #444;
-        position: relative;
+            height: 44px;
+            line-height: 44px;
+            color: #444;
+            position: relative;
         }
         .news li a{
-        color: #666;
+            color: #666;
         }
         .news  li a span{
-        float: left;
-        color: #666;
+            float: left;
+            color: #666;
         }
         .news li a img{
-        float: right;
-        position: relative;
-        top:8px;
-        color: rgb(154,150,149);
+            float: right;
+            position: relative;
+            top:8px;
+            color: rgb(154,150,149);
         }
         .position1{
             position: relative;
@@ -51,63 +51,220 @@
             position: relative;
             left:10px;
         }
+        .slider, .slider-panel img, .slider-extra {
+            width: 690px;
+            height: 388px;
+            float: left;
+        }
+        .slider {
+            text-align: center;
+            position: relative;
+        }
+        .slider-panel, .slider-nav, .slider-pre, .slider-next {
+            position: absolute;
+            z-index: 8;
+        }
+        .slider-panel {
+            position: absolute;
+        }
+        .slider-panel img {
+            border: none;
+        }
+        .slider-extra {
+            position: relative;
+        }
+        .slider-nav {
+            margin-left: -51px;
+            position: absolute;
+            left: 15%;
+            bottom: 4px;
+        }
+        .slider-nav li {
+            background: rgb(72,170,164);
+            border-radius: 50%;
+            color: #fff;
+            cursor: pointer;
+            margin: 0 2px;
+            overflow: hidden;
+            text-align: center;
+            display: inline-block;
+            height: 12px;
+            line-height: 12px;
+            width: 12px;
+            border: 2px solid #fff;
+        }
+        .slider-nav .slider-item-selected {
+            background:#fff;
+        }
+        .slider-page a{
+            background: rgba(0, 0, 0, 0.2);
+            color: #fff;
+            text-align: center;
+            display: block;
+            font-family: "simsun";
+            font-size: 42px;
+            width: 28px;
+            height: 62px;
+            line-height: 62px;
+            margin-top: -31px;
+            position: absolute;
+            top: 50%;
+        }
+        .slider-page a:HOVER {
+            background: rgba(0, 0, 0, 0.4);
+        }
+        .slider-next {
+            left: 100%;
+            margin-left: -28px;
+        }
     </style>
 </head>
 <body>
 <include file='Public:headerhtml'/>
 <!--内容1-->
 <div id="content">
-<div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
-    <ul class="slider_bag"> 
-      <foreach name="img_url" item="vo">
-        <li data-background="{{$vo.img_url}}" data-theme="dark" data-block-text="false"><div class="flick-title"><a href="{{:U('Home/Team/teamDetails',array('id' => $vo['id']))}}"></a></div></li>
-      </foreach>
-    </ul>
-</div>
-         <div class="announcement">
-             <p>团队<br/>风采</p>
-         </div>
-         <div id="n_center">
-             <div class="n_content">
-             <foreach name="data" item="vo">
-                 <ul class="news">
-                     <li><a href="{{:U('Home/Team/teamDails',array('id' => $vo['id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
-                    <li><p>团队介绍 : {{$vo.contents}}</p></li> 
-                 </ul>
-             </foreach>
-             </div>
-             <div id="page_front" style="margin: 40px 0px">
-             	<ul>
-             	 {{$page}}
-              </ul>
-             </div>
-         </div>
-     </div>
-
-    <!--footer-->
-    <div id="footer" style="clear: both">
-        <div id="f_center">
-
+    <div class="slider">
+        <ul class="slider-main">
+            <li class="slider-panel">
+                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy1.jpg"></a>
+            </li>
+            <li class="slider-panel">
+                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy2.jpg"></a>
+            </li>
+            <li class="slider-panel">
+                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy3.jpg"></a>
+            </li>
+            <li class="slider-panel">
+                <a href="javascript:void(0);" target="_blank"><img src="__STATIC__/img/cy4.jpg"></a>
+            </li>
+        </ul>
+        <div class="slider-extra">
+            <ul class="slider-nav">
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+                <li class="slider-item"></li>
+            </ul>
+            <div class="slider-page">
+                <a class="slider-pre" href="javascript:;;"><</a>
+                <a class="slider-next" href="javascript:;;">></a>
+            </div>
         </div>
     </div>
+    <div class="announcement">
+        <p>团队<br/>风采</p>
+    </div>
+    <div id="n_center">
+        <div class="n_content">
+            <foreach name="data" item="vo">
+                <ul class="news">
+                    <li><a href="{{:U('Home/Team/teamDails',array('id' => $vo['id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
+                    <li><p>团队介绍 : {{$vo.contents}}</p></li>
+                </ul>
+            </foreach>
+        </div>
+        <div id="page_front" style="margin: 40px 0px">
+            <ul>
+                {{$page}}
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--footer-->
+<div id="footer" style="clear: both">
+    <div id="f_center">
+
+    </div>
+</div>
 </body>
 <include file='Public:header'/>
 <include file='Public:footer'/>
 <script>
     $(function(){
-    	  $('.flicker-example').flickerplate(
-                  {
-                      auto_flick 				: true,
-                      auto_flick_delay 		: 8,
-                      flick_animation 		: 'transform-slide'
-                  });
-        $('.newsnav li').mouseenter(function(){
-            $(this).find($('.dropNav')).slideDown(200);
-            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
-        });
         $('.dropNav').mouseleave(function(){
             $(this).slideUp(200);
         });
+    });
+    $(document).ready(function() {
+        var length,
+                currentIndex = 0,
+                interval,
+                hasStarted = false, //是否已经开始轮播
+                t = 5000; //轮播时间间隔
+        length = $('.slider-panel').length;
+        $('.slider-panel:not(:first)').hide();
+        $('.slider-item:first').addClass('slider-item-selected');
+        $('.slider-page').hide();
+        //鼠标上悬时显示向前、向后翻按钮,停止滑动，鼠标离开时隐藏向前、向后翻按钮，开始滑动
+        $('.slider-panel, .slider-pre, .slider-next').hover(function() {
+            stop();
+            $('.slider-page').show();
+        }, function() {
+            $('.slider-page').hide();
+            start();
+        });
+        $('.slider-item').hover(function(e) {
+            stop();
+            var preIndex = $(".slider-item").filter(".slider-item-selected").index();
+            currentIndex = $(this).index();
+            play(preIndex, currentIndex);
+        }, function() {
+            start();
+        });
+        $('.slider-pre').unbind('click');
+        $('.slider-pre').bind('click', function() {
+            pre();
+        });
+        $('.slider-next').unbind('click');
+        $('.slider-next').bind('click', function() {
+            next();
+        });
+        /**
+         * 向前翻页
+         */
+        function pre() {
+            var preIndex = currentIndex;
+            currentIndex = (--currentIndex + length) % length;
+            play(preIndex, currentIndex);
+        }
+        /**
+         * 向后翻页
+         */
+        function next() {
+            var preIndex = currentIndex;
+            currentIndex = ++currentIndex % length;
+            play(preIndex, currentIndex);
+        }
+        /**
+         * 从preIndex页翻到currentIndex页
+         * preIndex 整数，翻页的起始页
+         * currentIndex 整数，翻到的那页
+         */
+        function play(preIndex, currentIndex) {
+            $('.slider-panel').eq(preIndex).fadeOut(500)
+                    .parent().children().eq(currentIndex).fadeIn(1000);
+            $('.slider-item').removeClass('slider-item-selected');
+            $('.slider-item').eq(currentIndex).addClass('slider-item-selected');
+        }
+        /**
+         * 开始轮播
+         */
+        function start() {
+            if(!hasStarted) {
+                hasStarted = true;
+                interval = setInterval(next, t);
+            }
+        }
+        /**
+         * 停止轮播
+         */
+        function stop() {
+            clearInterval(interval);
+            hasStarted = false;
+        }
+        //开始轮播
+        start();
     });
 </script>
 <!-- 接下来是获取新闻的代码 -->
