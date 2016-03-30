@@ -20,13 +20,14 @@
             text-decoration: underline;
         }
         .news{
+            width: 100%;
             padding: 10px;
             margin-bottom:30px;
+            overflow: auto;
             border:1px dashed #ccc;
         }
         .news li{
-            height: 44px;
-            line-height: 44px;
+            margin-top: 10px;
             color: #444;
             position: relative;
         }
@@ -34,14 +35,15 @@
             color: #666;
         }
         .news  li a span{
-            float: left;
             color: #666;
         }
-        .news li a img{
+        .news  li p k{
+            width: 80px;
+            float: left;
+        }
+        .news  li p d{
             float: right;
-            position: relative;
-            top:8px;
-            color: rgb(154,150,149);
+            width: 858px;
         }
         .position1{
             position: relative;
@@ -152,7 +154,7 @@
             <foreach name="data" item="vo">
                 <ul class="news">
                     <li><a href="{{:U('Home/Team/teamDails',array('id' => $vo['id']))}}"><span>团队名称：{{$vo.team_name}}</span></a></li>
-                    <li><p>团队介绍 : {{$vo.contents}}</p></li>
+                    <li><p><k>团队介绍 : </k><d>{{$vo.contents}}</d></p></li>
                 </ul>
             </foreach>
         </div>
