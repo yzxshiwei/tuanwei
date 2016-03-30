@@ -1,63 +1,124 @@
+
 <!DOCTYPE html>
-<html>
-<head lang="en">
+<html lang="en">
+<head>
     <meta charset="UTF-8">
     <title>新闻列表</title>
     <link rel="stylesheet" href="__STATIC__/css/reset.css">
     <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
-    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+     <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+    <style>
+        #n_center{
+            clear: both;
+            width: 960px;
+            padding-top: 2px;
+            font-family: "微软雅黑";
+        }
+        #n_center a:hover{
+            text-decoration: underline;
+        }
+        #n_center span:hover{
+            text-decoration: underline;
+        }
+        .news{
+            padding-top: 10px;
+        }
+        .news li{
+            height: 44px;
+            line-height: 44px;
+            color: #444;
+            border-bottom: 1px solid #ccc;
+            position: relative;
+        }
+        .news li a{
+            color: #666;
+        }
+        .news  li a span{
+            float: left;
+            color: #666;
+        }
+        .news li a img{
+            float: right;
+            position: relative;
+            top:8px;
+            color: rgb(154,150,149);
+        }
+        .position1{
+            position: relative;
+            left:5px;
+        }
+        .position2{
+            position: relative;
+            left:10px;
+        }
+    </style>
 </head>
 <body>
-<include file='Public:headerhtml'/>
-    <!--比赛信息-->
-    <div id="newList" style="margin: 0;padding: 0">
-        
-        <!--比赛信息标题-->
-        <div class="i_title">
-            <h2>新闻中心</h2>
-        </div>
-        <div class="content">
-            <!--详细信息-->
-            <ul class="i_des">
-            <foreach name="data" item="vo">
-                <li>
-                          <label>
+ <include file='Public:headerhtml'/>
+     <!--内容1-->
+      
+<div id="content">
+<div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="left" data-theme="light" style="width:690px;height:388px;display:inline-block;">
+    <ul class="slider_bag"> 
+      	<foreach name="img_url" item="vo">
+	        <li data-background="{{$vo['img_url']}}" data-theme="dark" data-block-text="false">
+	            <div class="flick-title"><a style="display:block;width:680px;height:378px;" href="{{:U('News/details',array('id'=>$vo['id']))}}"></a></div>
+	        </li>
+       </foreach>
+    </ul>
+</div>
+      <div class="announcement">
+          <p>新闻<br/>列表</p>
+      </div>
+      <div id="n_center">
+          <div class="n_content">
+              <ul class="news">
+                  <foreach name="data" item= "vo">
+	                  <li><a href="{{:U('News/details',array('id'=>$vo['id']))}}">{{$vo.title}}</a></li>
+                  </foreach>
+              </ul>
+          </div>
+          <div id="page_front" style="margin: 40px 0px">
+              <ul>
+              {{$page}}
+              </ul>
+          </div>
+      </div>
+     </div>
+    <!--footer-->
+    <div id="footer" style="clear: both;">
+        <div id="f_center">
 
-                        
-                        <a href="{{:U('News/details',array('id'=>$vo['id']))}}" class="for_details">{{$vo.title}}</a>
-                    </label>
-                </li>
-             </foreach>
-            </ul>
-            <div id="page_front">
-                    {{$page}}
-            </div>
         </div>
     </div>
-    <div id="footer" class="footer" style="margin-top: 40px;">
-        <div id="f_center" style="text-align: left">
-
-        </div>
-    </div>
-    <!--js-->
+</body>
 <include file='Public:header'/>
 <include file='Public:footer'/>
-    <script>
-        $(function(){
+<script>
+    $(function(){
+        $('.newsnav li').mouseenter(function(){
+            $(this).find($('.dropNav')).slideDown(200);
+            $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+        });
+        $('.dropNav').mouseleave(function(){
+            $(this).slideUp(200);
+        });
+        $(document).ready(function()
+        {
             $('.flicker-example').flickerplate(
                     {
-                        auto_flick 				: true,
-                        auto_flick_delay 		: 8,
-                        flick_animation 		: 'transform-slide'
+                        arrows: false,
+                        arrows_constraint: false,
+                        auto_flick: true,
+                        auto_flick_delay: 10,
+                        block_text: true,
+                        dot_alignment: 'center',
+                        dot_navigation: false,
+                        flick_animation: 'transition-slide',
+                        flick_position: 1,
+                        theme: 'dark'
                     });
-            $('.newsnav li').mouseenter(function(){
-                $(this).find($('.dropNav')).slideDown(200);
-                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
-            });
-            $('.dropNav').mouseleave(function(){
-                $(this).slideUp(200);
-            });
         });
-    </script>
-</body>
+    });
+</script>
 </html>

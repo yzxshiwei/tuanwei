@@ -45,7 +45,13 @@ class IndexController extends \Admin\Controller\Controller {
 			$teamModel->startTrans();
 
 		   	if($_FILES['selectFiles']['tmp_name']){
+		   		
+				if($_FILES['selectFiles']["size"]>2048000){
+					$this->error("图片上传最大2M");
+				}
+
 				$file_res1 = Upload($_FILES['selectFiles']);
+				
 				if($file_res1["status"]){
 					$post_data["img_url"] = $file_res1['file_path'];
 				}else{
@@ -146,6 +152,9 @@ class IndexController extends \Admin\Controller\Controller {
 			
 			//开启事务
 			if($_FILES['selectFiles']['tmp_name']){
+				if($_FILES['selectFiles']["size"]>2048000){
+					$this->error("图片上传最大2M");
+				}
 				$file_res = Upload($_FILES['selectFiles']);
 				if($file_res["status"]){
 					$data["img_url"] = $file_res['file_path'];

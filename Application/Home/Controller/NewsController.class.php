@@ -60,12 +60,26 @@ class NewsController extends \Common\Helper\Controller{
     public function newsList(){
         $News = M('news');
         $count = $News->count();
-        $Page = new \Think\Page($count,15);
+        $Page = new \Think\Page($count,5);
         $show = $Page->show();
 		$where["flag"] = 1;
 		$where["col"] = array("neq",\Common\Model\NewsModel::COL_5);
-        $data = $News->where($where)->field('id ,title')->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+        $data = $News->where($where)->field('id,title,img_url')->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
+        $img_url = array();
+    	//轮播图
+    	$i = 0;
+    	foreach ($data as $k => $v){
+    		if($v['img_url']!= '0'){
+    			if($i == 6){
+    				break;
+    			}
+    			$img_url[$i] = array('id' => $v['id'],'img_url' => $v['img_url']);
+				$i++;
+    		}
+    	}
+
+        $this->assign('img_url',$img_url);
     	$this->assign('data',$data);// 
     	$this->assign('page',$show);// 
     	$this->display(); // 输出模板
@@ -94,6 +108,8 @@ class NewsController extends \Common\Helper\Controller{
     	//分页
     	$page = new \Think\Page(count($data),5);
     	$show = $page->show();
+		
+		$img_url = array();
     	//轮播图
     	$i = 0;
     	foreach ($data as $k => $v){
