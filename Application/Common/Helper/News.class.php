@@ -19,7 +19,7 @@ class News{
 			$count = $newsModel->count();
 		}
 		
-        $Page = new \Think\Page($count,8);
+        $Page = new \Think\Page($count,5);
         $page_show = $Page->show();
 		
 		if($where){

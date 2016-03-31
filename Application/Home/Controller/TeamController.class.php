@@ -77,7 +77,6 @@ class TeamController extends \Common\Helper\Controller{
     	$data = $Match->field('id, name, sub_title, cover_src, start_file_src,template_src,sign_start_time,sign_end_time,project_start_time,project_end_time')->where("state=1")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
 
     	foreach ($data as $k => $v){
-//			$data[$k]['rules'] = mb_substr(htmlspecialchars_decode($data[$k]['rules']), 0, 150, "utf-8");
     		if($v["sign_start_time"] <= strtotime($day) && $v["sign_end_time"] > strtotime($day)){
     			$data[$k]["times"] = TRUE;
     		}else{
@@ -185,13 +184,9 @@ class TeamController extends \Common\Helper\Controller{
     public function oldactivity() {
         $Match = M('match');
     	$timestamp = time();
-    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src, rules, template_src')->where("state=1 AND $timestamp > project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
+    	$data = $Match->field('id, name, sub_title, cover_src, start_file_src,template_src,sign_start_time,project_start_time,sign_end_time,project_end_time')->where("state=1 AND $timestamp > project_end_time")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
     	$count = $Match->where("state=1 AND $timestamp > project_end_time")->count();
-    	
-    	foreach ($data as $k=>&$v){
-			$v['rules'] = mb_substr(htmlspecialchars_decode($v['rules']), 0, 150, "utf-8");
-    	    unset($v);
-    	}
+
     	//分页
     	$page = new \Think\Page($count, 5);
     	$show = $page->show();

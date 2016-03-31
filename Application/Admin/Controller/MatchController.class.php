@@ -50,22 +50,23 @@ class MatchController extends Controller{
 				
 				$teacherid = I("post.teacherid");
                 $packet = I("post.packet");
-				//添加评委老师
-				$jugedsModel = new \Common\Model\JudgesModel;
-				$j_res = $jugedsModel->addJudges($teacherid,$relust);
-				//添加比赛组名称
-				$packetModel = new \Common\Model\PacketModel;
-				$p_res = $packetModel->addName($packet,$relust);
-				
-			    if($j_res && $p_res){
-			    	$match->commit();
+
+                if($packet[0]){
+                	//添加比赛组名称
+				    $packetModel = new \Common\Model\PacketModel;
+				    $p_res = $packetModel->addName($packet,$relust);
+                }
+
+                if($teacherid[0]){
+                	//添加评委老师
+					$jugedsModel = new \Common\Model\JudgesModel;
+					$j_res = $jugedsModel->addJudges($teacherid,$relust);
 			    	$messageModel = new \Common\Model\MessageModel();
 			    	$messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$relust);
-			    	$this->success('添加比赛成功',U('Match/matchmanage'));
-			    }else{
-			    	$match->rollback();
-			    	$this->error('添加比赛失败');
-			    }
+                }
+				
+				$match->commit();
+		    	$this->success('添加比赛成功',U('Match/matchmanage'));
 			}else{
 			    $match->rollback();
                 $this->error('添加比赛失败');
@@ -176,25 +177,22 @@ class MatchController extends Controller{
 			$teacherid = I("post.teacherid");
             $packet = I("post.packet");
 
-			//添加评委老师 
-			$judgesModel->where(array("project_id"=>$mid))->delete();
-			$j_res = $judgesModel->addJudges($teacherid,$mid);
+            if($packet[0]){
+            	//添加比赛组名称
+				$packetModel->where(array("project_id"=>$mid))->delete();
+				$p_res = $packetModel->addName($packet,$mid);
+            }
 
-			//添加比赛组名称
-			$packetModel->where(array("project_id"=>$mid))->delete();
-			$p_res = $packetModel->addName($packet,$mid);
-
-		    if($j_res && $p_res){
+            if($teacherid[0]){
+            	//添加评委老师 
+				$judgesModel->where(array("project_id"=>$mid))->delete();
+				$j_res = $judgesModel->addJudges($teacherid,$mid);
 		    	$messageModel = new \Common\Model\MessageModel();
 			    $messageModel->sendMsg($teacherid, $this->user['user_id'], $messageModel::TYPE_JUDGES_PROJECT, '你有比赛评审邀请',$mid);
-				
-		    	$matchModel->commit();
-		    	$this->success('修改比赛成功',U('Match/matchmanage'));
-		    }else{
-		    	$matchModel->rollback();
-		    	$this->error('修改比赛失败');
-		    }
-			
+            }
+
+		    $matchModel->commit();
+		    $this->success('修改比赛成功',U('Match/matchmanage'));
     	}else{
     		$mid = I("get.mid","","string");
 			
