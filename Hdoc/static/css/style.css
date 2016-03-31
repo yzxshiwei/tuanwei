@@ -14,7 +14,6 @@ a:hover {
 a:active {
     color: #FFF;
     text-decoration: none; }
-
 .footer-bag {
     width: 960px;
     display: inline-block;
@@ -116,11 +115,13 @@ a:active {
     position: relative;
     top: 15px;
     font-size: 21px; }
-
+.logo{
+    background: rgb(72,170,164);
+}
 .rAndl {
     float: right;
     position: relative;
-    top: 15px;
+    top: 20px;
     color: white;
     font-size: 18px; }
 
@@ -141,7 +142,9 @@ a:active {
     margin-right: 15px;
     width: 90px;
     text-align: center;
-    position: relative; }
+    position: relative;
+    z-index: 90;
+}
 #headerNav .navContent .newsnav li .dropNav {
     display: none;
     width: 100%;
@@ -353,7 +356,7 @@ a:active {
     display: inline-block;
     color: #356EB7;
     font-size: 16px;
-    margin-top: 50px; 
+    margin-top: 50px;
     font-family: "微软雅黑";}
 .card:nth-child(2) .card-body-cover a {
     display: inline-block;
@@ -365,7 +368,7 @@ a:active {
     line-height: 28px;
     border: 2px solid #356EB7;
     border-radius: 6px;
-    transition: all .2s; 
+    transition: all .2s;
     font-family: "微软雅黑";}
 .card:nth-child(2) .card-body-cover a:hover {
     transition: all .2s;
@@ -847,4 +850,281 @@ a:active {
     color: #666;
     height:100%;
     font-size: 14px;
+}
+
+
+
+/*==================================IE6/7/8================================兼容*/
+@media \0screen\,screen\9{
+    /*header*/
+    .logo{
+        display:block;
+        background: rgb(72,170,164);
+        float: left;
+        width: 240px;
+        height:98px;
+    }
+    .rAndl{
+        float: right;
+        position: relative;
+        top: 20px;
+        color: white;
+        font-size: 18px;
+    }
+    #headerNav .navContent .newsnav li .dropNav {
+        display: none;
+        width: 100%;
+        position: absolute;
+        left:0px;
+        top:35px;
+        text-align: center;
+        background-color: #A3D4D1;
+        z-index: 1000000000;
+        color: #fff;
+    }
+    /*首页*/
+    .news-body{
+        width:980px;
+    }
+    .card-body {
+        width: 1000px;
+    }
+    .card{
+        float: left;
+    }
+    .card:first-child{
+        margin-left: 0px;
+        display: inline-block;
+        width: 200px;
+        height: 300px;
+        border-radius: 9px;
+        border: 2px solid #6D8D46;
+        overflow: hidden;
+        position: static;
+        font-size: 0px;
+        text-align: center; }
+    .card:first-child img {
+        height: 130px;
+        width: 200px; }
+    .card:first-child .card-body-cover {
+        position: absolute;
+        height: 170px;
+        width: 196px;
+        bottom: 0px;
+        left:5px;
+        border-top: 2px solid #6D8D46;
+        text-align: center;
+    }
+    .card:first-child .card-body-cover span {
+        display: inline-block;
+        color: #6D8D46;
+        font-size: 16px;
+        margin-top: 50px;
+        font-family: "微软雅黑";}
+    .card:first-child .card-body-cover a {
+        display: inline-block;
+        color: #6D8D46;
+        font-size: 16px;
+        margin-top: 48px;
+        width: 107px;
+        height: 31px;
+        line-height: 28px;
+        border: 2px solid #6D8D46;
+        border-radius: 6px;
+        transition: all .2s;
+        font-family: "微软雅黑";
+    }
+    .card:first-child .card-body-cover a:hover {
+        transition: all .2s;
+        background-color: #6D8D46;
+        color: #FFF; }
+    .card:first-child .icon {
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid #6D8D46;
+        height: 61px;
+        width: 61px;
+        margin-top: -29.5px;
+        background-image: url(../img/icon-01.png);
+        background-color: #FFF;
+        position: relative;
+    }
+    .card:first-child .icon {
+        background-position: 2px 0px;
+    }
+    .card:first-child+.card {
+        display: inline-block;
+        width: 200px;
+        height: 300px;
+        border-radius: 9px;
+        border: 2px solid #356EB7;
+        overflow: hidden;
+        position: static;
+        font-size: 0px;
+        text-align: center; }
+    .card:first-child+.card img {
+        height: 130px;
+        width: 200px; }
+    .card:first-child+.card .card-body-cover {
+        position: absolute;
+        height: 170px;
+        width: 196px;
+        bottom: 0px;
+        left:260px;
+        border-top: 2px solid #356EB7;
+        text-align: center; }
+    .card:first-child+.card .card-body-cover span {
+        display: inline-block;
+        color: #356EB7;
+        font-size: 16px;
+        margin-top: 50px;
+        font-family: "微软雅黑";}
+    .card:first-child+.card .card-body-cover a {
+        display: inline-block;
+        color: #356EB7;
+        font-size: 16px;
+        margin-top: 48px;
+        width: 107px;
+        height: 31px;
+        line-height: 28px;
+        border: 2px solid #356EB7;
+        border-radius: 6px;
+        transition: all .2s;
+        font-family: "微软雅黑";}
+    .card:first-child+.card .card-body-cover a:hover {
+        transition: all .2s;
+        background-color: #356EB7;
+        color: #FFF; }
+    .card:first-child+.card .icon {
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid #356EB7;
+        height: 61px;
+        width: 61px;
+        margin-top: -29.5px;
+        background-image: url(../img/icon-01.png);
+        background-color: #FFF;
+        position: relative; }
+    .card:first-child+.card .icon {
+        background-position: -53px 1px; }
+    .card:first-child+.card+.card {
+        display: inline-block;
+        width: 200px;
+        height: 300px;
+        border-radius: 9px;
+        border: 2px solid #9A529C;
+        overflow: hidden;
+        position: static;
+        font-size: 0px;
+        text-align: center; }
+    .card:first-child+.card+.card img {
+        height: 130px;
+        width: 200px; }
+    .card:first-child+.card+.card .card-body-cover {
+        position: absolute;
+        height: 170px;
+        width: 196px;
+        bottom: 0px;
+        left:518px;
+        border-top: 2px solid #9A529C;
+        text-align: center; }
+    .card:first-child+.card+.card .card-body-cover span {
+        display: inline-block;
+        color: #9A529C;
+        font-size: 16px;
+        margin-top: 50px;
+        font-family: "微软雅黑";}
+    .card:first-child+.card+.card .card-body-cover a {
+        display: inline-block;
+        color: #9A529C;
+        font-size: 16px;
+        margin-top: 48px;
+        width: 107px;
+        height: 31px;
+        line-height: 28px;
+        border: 2px solid #9A529C;
+        border-radius: 6px;
+        transition: all .2s;
+        font-family: "微软雅黑"; }
+    .card:first-child+.card+.card .card-body-cover a:hover {
+        transition: all .2s;
+        background-color: #9A529C;
+        color: #FFF; }
+    .card:first-child+.card+.card .icon {
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid #9A529C;
+        height: 61px;
+        width: 61px;
+        margin-top: -29.5px;
+        background-image: url(../img/icon-01.png);
+        background-color: #FFF;
+        position: relative; }
+    .card:first-child+.card+.card .icon {
+        background-position: 110px 0px; }
+    .card:first-child+.card+.card+.card {
+        display: inline-block;
+        width: 200px;
+        height: 300px;
+        border-radius: 9px;
+        border: 2px solid #924357;
+        overflow: hidden;
+        position: static;
+        font-size: 0px;
+        text-align: center; }
+    .card:first-child+.card+.card+.card img {
+        height: 130px;
+        width: 200px; }
+    .card:first-child+.card+.card+.card .card-body-cover {
+        position: absolute;
+        height: 170px;
+        width: 196px;
+        bottom: 0px;
+        left:775px;
+        border-top: 2px solid #924357;
+        text-align: center; }
+    .card:first-child+.card+.card+.card .card-body-cover span {
+        display: inline-block;
+        color: #924357;
+        font-size: 16px;
+        margin-top: 50px;
+        font-family: "微软雅黑"; }
+    .card:first-child+.card+.card+.card .card-body-cover a {
+        display: inline-block;
+        color: #924357;
+        font-size: 16px;
+        margin-top: 48px;
+        width: 107px;
+        height: 31px;
+        line-height: 28px;
+        border: 2px solid #924357;
+        border-radius: 6px;
+        transition: all .2s;
+        font-family: "微软雅黑"; }
+    .card:first-child+.card+.card+.card .card-body-cover a:hover {
+        transition: all .2s;
+        background-color: #924357;
+        color: #FFF; }
+    .card:first-child+.card+.card+.card .icon {
+        display: inline-block;
+        border-radius: 50%;
+        border: 2px solid #924357;
+        height: 61px;
+        width: 61px;
+        margin-top: -29.5px;
+        background-image: url(../img/icon-01.png);
+        background-color: #FFF;
+        position: relative; }
+    .card:first-child+.card+.card+.card .icon {
+        background-position: 56px 0px; }
+    /*footer*/
+    #footer #f_center{
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+    #footer #f_center .f_main:first-child ul{
+        width: 227px;
+        margin: 0;
+    }
 }

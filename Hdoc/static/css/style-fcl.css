@@ -68,7 +68,8 @@ a:active {
   vertical-align: bottom;
   height: 30px;
   width: 135px;
-  background: #FFF; }
+  background: #FFF;
+}
 
 .header-nav {
   float: right; }
@@ -1305,4 +1306,45 @@ a:active {
 }
 #footer #f_center .f_content p img{
     margin-right: 29px;
+}
+
+
+/*==================================IE6/7/8================================兼容*/
+@media \0screen\,screen\9{
+    /*header*/
+    .logo{
+        display:block;
+        background: rgb(72,170,164);
+        float: left;
+        width: 240px;
+        height:98px;
+    }
+    .rAndl{
+        float: right;
+        position: relative;
+        top: 20px;
+        color: white;
+        font-size: 18px;
+    }
+    #headerNav .navContent .newsnav li .dropNav {
+        display: none;
+        width: 100%;
+        position: absolute;
+        left:0px;
+        top:35px;
+        text-align: center;
+        background-color: #A3D4D1;
+        z-index: 1000000000;
+        color: #fff;
+    }
+    /*footer*/
+    #footer #f_center{
+        width: 1000px;
+        margin: 0 auto;
+        padding-top: 40px;
+    }
+    #footer #f_center .f_main:first-child ul{
+        width: 227px;
+        margin: 0;
+    }
 }

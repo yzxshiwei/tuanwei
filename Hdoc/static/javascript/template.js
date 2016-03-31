@@ -47,11 +47,6 @@ var footer_list={
             {"second_list_href":"javascript:void(0);","second_list_name":"关于我们"},
             {"second_list_href":"javascript:void(0);","second_list_name":"四川大学"},
             {"second_list_href":"javascript:void(0);","second_list_name":"学堂在线"}
-        ],
-        "third":[
-            {"third_list_href":"javascript:void(0);","third_list_name":"36氪/关注互联网创业"},
-            {"third_list_href":"javascript:void(0);","third_list_name":"清华X-LAB"},
-            {"third_list_href":"javascript:void(0);","third_list_name":"四川省科学技术厅"}
         ]
     }
 
