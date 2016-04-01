@@ -12,10 +12,10 @@ class Match{
         $matchModel = new \Common\Model\MatchModel();
         $userModel = new \Common\Model\UsersModel();
         $where = array();
+		$field = "match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id,match.project_end_time,match.sign_end_time";
         $matchModel_l = $matchModel;
         $matchModel->distinct(true)
-        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id");
-		
+        ->field($field);
         if ($user['user_type'] == $userModel::TYPE_JUDGES){
             $where['j.judge_id'] = $user['user_id'];
 			$where['j.state'] = \Common\Model\JudgesModel::STATE_ADOPT;
@@ -27,7 +27,7 @@ class Match{
         
         $matchModel_l
         ->distinct(true)
-        ->field("match.id,match.name,match.project_start_time,match.sign_start_time,match.state,match.project_id");
+        ->field($field);
         if ($user['user_type'] == $userModel::TYPE_JUDGES){
             $where['j.judge_id'] = $user['user_id'];
 			$where['j.state'] = \Common\Model\JudgesModel::STATE_ADOPT;
