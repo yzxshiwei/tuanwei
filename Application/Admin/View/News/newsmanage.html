@@ -23,7 +23,7 @@
 								<th width='5%'>id</th>
 								<th width='33%'>标题</th>
 								<th width='20%'>栏目</th>
-								<th width='20%'>时间</th>
+								<th width='20%'>提交时间</th>
 								<th class='user_set'>操作</th>
 							</tr>
 							<foreach name="list_data" item="vo">
@@ -31,7 +31,7 @@
 									<td><p>{{$vo.id}}</p></td>
 									<td><p><a class="a_news">{{$vo.title}}</a></p></td>
 									<td><p>{{$vo.col}}</p></td>
-									<td><p class="time">提交时间:</br>{{$vo.public_t|date="Y-m-d",###}}</p></td>
+									<td><p class="time">{{$vo.public_t|date="Y-m-d",###}}</p></td>
 									
 									<td class="op team_set">
 										<if condition="$vo.flag eq 1">
