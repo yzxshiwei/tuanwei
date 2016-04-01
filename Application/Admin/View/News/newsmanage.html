@@ -20,11 +20,10 @@
 					<table class="user_table hover_table">
 						<tbody>
 							<tr style='background:#aaa;color:#fff'>
-								<th width='10%'>id</th>
-								<th width='35%'>标题</th>
-								<th width='15%'>栏目</th>
-								<th width='15%'>时间</th>
-								<th width='10%' class='user_set'>状态</th>
+								<th width='5%'>id</th>
+								<th width='33%'>标题</th>
+								<th width='20%'>栏目</th>
+								<th width='20%'>时间</th>
 								<th class='user_set'>操作</th>
 							</tr>
 							<foreach name="list_data" item="vo">
@@ -33,28 +32,16 @@
 									<td><p><a class="a_news">{{$vo.title}}</a></p></td>
 									<td><p>{{$vo.col}}</p></td>
 									<td><p class="time">提交时间:</br>{{$vo.public_t|date="Y-m-d",###}}</p></td>
-									<td><p class="state">
-										<if condition="$vo.flag eq 1"> 
-										            统一发布
-										<elseif condition="$vo.flag eq 2" /> 
-										            拒绝发布
-										<else />
-										             待处理
-										</if>
-									</p></td>
 									
 									<td class="op team_set">
-										<if condition="$vo.flag eq 2"> 
-										    <a class="pass race_edit">通过</a>
-										<elseif condition="$vo.flag eq 1" /> 
-										    <a class="refuse race_edit">不通过</a>
-										<else />
-										    <a class="pass race_edit">通过</a><a class="refuse race_edit">不通过</a>
-										</if>
+										<if condition="$vo.flag eq 1">
+										      <input type="checkbox" checked="checked"  class="race_valid"/>
+										 <else />
+										      <input type="checkbox" class="race_valid"/>
+										</if>发布
 										<a href="{{:U('News/newedit',array('nid'=>$vo['id']))}}">编辑</a>
 										<a href="javascript:;" class="rec_alss">删除</a>
 									</td>
-									
 								</tr>
 							</foreach>
 						</tbody>
@@ -69,41 +56,29 @@
 </div>
 
 <script>
-     /*通过操作*/
-    $('.pass').click(function(){
-    	  var thiss = $(this);
-     	  var nid = thiss.parent().parent("tr").attr("nid");
-          $.ajax({
-               type:'post',
-               url:"{{:U('News/new_flag')}}",
-               data:"nid="+nid+"&type_new=1",
-               cache:false,
-               async:false,
-               dataType:'json',
-               success:function(data){
-               	   window.location.reload();
-               }
-           });
-    });
 
-     /*不通过操作*/
-    $('.refuse').on('click',function(){
-          
-     	  var thiss = $(this);
-     	  var nid = thiss.parent().parent("tr").attr("nid");
-          $.ajax({
-               type:'post',
-               url:"{{:U('News/new_flag')}}",
-               data:"nid="+nid+"&type_new=2",
-               cache:false,
-               async:false,
-               dataType:'json',
-               success:function(data){
-               	   window.location.reload();
-               }
-           });
-     });
-     
+  /*发布操作*/
+   $(".race_valid").change(function(){
+   	
+   	     var mid = $(this).parents("tr").attr("nid");
+   	     var types = "";
+   	     if($(this).prop("checked")){
+   	     	/*发布*/
+   	     	types = 1;
+   	     }else{
+   	     	/*不发布*/
+   	     	types = 2;
+   	     }
+   	     $.ajax({
+   	     	type:"post",
+   	     	url:"{{:U('News/new_flag')}}",
+   	     	data:"nid="+mid+"&type_new="+types,
+   	     	success:function(data){
+   	     	}
+   	     });
+   	     
+   });
+
     /*删除*/
    $(".rec_alss").click(function(){
    	   var thiss = $(this);

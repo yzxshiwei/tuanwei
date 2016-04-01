@@ -40,17 +40,15 @@
 									<td><a class="race_name" href="{{:U('Match/viewmatch',array('id'=>$_v['id']))}}">{{$_v.name}}</a></td>
 									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}——{{$_v.project_end_time|date="Y-m-d",###}}</a></td>
 									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}——{{$_v.sign_end_time|date="Y-m-d",###}}</a></td>
-									
 									<if condition="$flag eq false">
 										<td class="race_set">
-											 <a href="{{:U('Match/editmatch',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
-											 
 											 <if condition="$_v.state eq 1">
 											      <input type="checkbox" checked="checked"  class="race_valid"/>
 											 <else />
 											      <input type="checkbox" class="race_valid"/>
-											 </if>
-										         发布<a class="race_delete">删除</a>
+											 </if> 发布
+										   <a href="{{:U('Match/editmatch',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
+										   <a class="race_delete">删除</a>
 										</td>
 									</if>
 
@@ -62,15 +60,10 @@
 				    <div id="page_div">
                         {{$Page}}
                     </div>
-				
 			</div>
 		</div>
 	</div>
-	
-	
 </div>
-
-
 <script>
     
     /*删除操作*/
