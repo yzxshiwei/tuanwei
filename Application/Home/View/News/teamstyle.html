@@ -120,6 +120,18 @@
             left: 100%;
             margin-left: -28px;
         }
+        @media \0screen\,screen\9{
+            .slider {
+                text-align: left;
+            }
+            .slider-nav{
+                position: absolute;
+                bottom: 15px;
+            }
+            .slider-item{
+                float: left;
+            }
+        }
     </style>
 </head>
 <body>
@@ -177,9 +189,6 @@
 <include file='Public:header'/>
 <include file='Public:footer'/>
 <script>
-
-
-
     $(function(){
         $('.newsnav li').mouseenter(function(){
             $(this).find($('.dropNav')).slideDown(200);

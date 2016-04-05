@@ -68,7 +68,6 @@ a:active {
   vertical-align: bottom;
   height: 30px;
   width: 135px;
-  background: #FFF;
 }
 
 .header-nav {
@@ -832,6 +831,10 @@ a:active {
 #team form p{
     margin-bottom: 24px;
 }
+#team .wjPwd{
+    width: 700px;
+    margin: 0 auto;
+}
 #team form p label{
     display:block;
     margin:10px 0px;
@@ -1334,7 +1337,7 @@ a:active {
         top:35px;
         text-align: center;
         background-color: #A3D4D1;
-        z-index: 1000000000;
+        z-index: 100000000000;
         color: #fff;
     }
     /*footer*/
@@ -1346,5 +1349,43 @@ a:active {
     #footer #f_center .f_main:first-child ul{
         width: 227px;
         margin: 0;
+    }
+    /*新闻类型页面*/
+    .flicker-example{
+        float: left;
+    }
+    #content .announcement {
+        float: right;
+        width: 250px;
+        height: 203px;
+        text-align: center;
+        background-color: #49A9A5;
+    }
+    #team .content{
+        width: 730px;
+    }
+    #team .content form p span{
+        display: inline-block;
+        height:45px;
+    }
+    #team .wjPwd{
+        width: 730px;
+    }
+    #team .wjPwd p span{
+        display: inline-block;
+        height:45px;
+    }
+    #team form p span{
+        display: inline-block;
+        height:45px;
+    }
+    #team form .sfAttribute button{
+        height:45px;
+        position: relative;
+        top:6px;
+    }
+    #team form p select{
+        border:1px solid red;
+        padding: 20px 0px;
     }
 }

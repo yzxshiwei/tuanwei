@@ -15,7 +15,7 @@
         <!--轮播-->
         <div class="unslider-news">
             <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="center" data-theme="light" style="max-height:350px;width:100%">
-                <ul>
+                <ul class="carousel">
                     <li data-background="__STATIC__/img/hlw+.png">
                         <!--<div class="flick-title">主标题</div>-->
                         <!--<div class="flick-sub-text">副标题</div>-->
@@ -101,12 +101,22 @@
 <include file='Public:footer'/>
     <script>
         $(function(){
-            $('.flicker-example').flickerplate(
-                    {
-                        auto_flick 				: true,
-                        auto_flick_delay 		: 8,
-                        flick_animation 		: 'transform-slide'
-                    });
+            $(document).ready(function()
+            {
+                $('.flicker-example').flickerplate(
+                        {
+                            arrows: false,
+                            arrows_constraint: false,
+                            auto_flick: true,
+                            auto_flick_delay: 10,
+                            block_text: true,
+                            dot_alignment: 'center',
+                            dot_navigation: true,
+                            flick_animation: 'transition-slide',
+                            flick_position: 1,
+                            theme: 'dark'
+                        });
+            });
             $('.newsnav li').mouseenter(function(){
                 $(this).find($('.dropNav')).slideDown(200);
                 $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
@@ -115,6 +125,7 @@
                 $(this).slideUp(200);
             });
         });
+       
     </script>
 </body>
 </html>

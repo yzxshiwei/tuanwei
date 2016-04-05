@@ -8,19 +8,98 @@
 	<include file='Public:file'/>
 
 	<style>
-.add_teacher_card{
-	width: 300px;
-	height:300px;
-	position:fixed;
-	top:45%;
-	left: 45%;
-	z-index:2000;
-	background-color: white;
-	border:1px solid gray;
-	border-radius: 4px;
-	padding: 10px;
-
-}
+        .add_teacher_card{
+            width: 300px;
+            height:300px;
+            position:fixed;
+            top:45%;
+            left: 45%;
+            z-index:2000;
+            background-color: white;
+            border:1px solid gray;
+            border-radius: 4px;
+            padding: 10px;
+        }
+        .fpProject{
+            padding: 3px 7px;
+            background: #0E6EB8;
+            color: #fff;
+            margin-left: 15px;
+            border-radius:4px;
+            font-size: 14px;
+        }
+        #expert_add{
+            color: #0E6EB8;
+        }
+        #projectBox{
+            display: none;
+            position: fixed;
+            top:40%;
+            left:45%;
+            background: #fff;
+            z-index: 10000000;
+            width: 400px;
+            border:1px solid #ccc;
+        }
+        #projectBox .title{
+            height:40px;
+            background: #C9CACA;
+            padding-left: 20px;
+        }
+        #projectBox table{
+            clear: both;
+            width: 100%;
+        }
+        #projectBox table td{
+            padding-left: 20px;
+            margin: 10px 0px;
+        }
+        #projectBox .box table tr:last-child td{
+            padding-bottom: 20px;
+        }
+        #projectBox table td input{
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        #projectBox table td span{
+            color: #0E6EB8;
+        }
+        #projectBox .title h3{
+            float: left;
+            line-height: 40px;
+        }
+        #projectBox .title .closeProject{
+            float: right;
+            margin-right: 20px;
+            height:20px;
+            width:20px;
+            line-height: 20px;
+            text-align: center;
+            border-radius: 20px;
+            background: #fff;
+            font-size: 12px;
+            cursor: pointer;
+            position: relative;
+            top:10px;
+        }
+        #projectBox table td span b{
+            margin-right: 5px;
+            font-weight: 500;
+            color: #999;
+            vertical-align: middle;
+        }
+        .box_btn{
+            float: right;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            padding: 3px 8px;
+            background: #0E6EB8;
+            color: #fff;
+            border-radius: 4px;
+        }
+        #race_expert_set_div{
+            width: 900px;
+        }
 	</style>
 </head>
 
@@ -50,19 +129,6 @@
 							<input type='date' id='input-race-time1' name='race-start-date' placeholder='比赛开始时间（必填）' required='required' value="{{$minfo.project_start_time|date='Y-m-d',###}}" />
 							<input type='date' id='input-race-time2' name='race-end-date' placeholder='比赛结束时间（必填）' required='required' value="{{$minfo.project_end_time|date='Y-m-d',###}}" />
 							<br/>
-						<!--	<span class='race_set_lable'>选择项目 : </span>
-	                            <select name="proid" style="margin-left: 5px;width:120px;border-radius: 3px">
-	                            	
-	                            	<foreach item="_v" name="prolist">
-	                            		<if condition="$minfo['project_id'] eq $_v['id']">
-	                            		    <option value="{{$_v.id}}" selected="selected" >{{$_v.name}}</option>
-	                            		<else />
-	                            		    <option value="{{$_v.id}}" >{{$_v.name}}</option>
-	                            		</if>
-	                            	</foreach>
-	                            	
-	                            </select>
-                            <br/>-->
 							<p class='race_set_lable'>首页banner</p>
 							<div class='file_upload_plugin'>
 								<div id='file_upload_area' class='droppable' draggable='true'>
@@ -82,9 +148,6 @@
 							<input type='date' id='input-reg-time1' name='reg-start-date' value="{{$minfo.sign_start_time|date='Y-m-d',###}}" placeholder='报名开始时间' />
 							<input type='date' id='input-reg-time2' name='reg-end-date' value="{{$minfo.sign_end_time|date='Y-m-d',###}}" placeholder='报名结束时间' />
 							<br/>
-							<!--<p class='race_set_lable'>比赛首页模板上传</p>
-							<input type='file' name='upload_reg_page' />
-							<br/>-->
 							
 							<span class='race_set_lable'>比赛分组</span><a id='race_add_group' class='fa fa-plus'></a>
 							<br/>
@@ -115,7 +178,8 @@
                                 	<input type='hidden' value='{{$_vo.judge_id}}' class='dev_{{$k+1}}' name='teacherid[]'>
 									<input readonly id='{{$k+1}}_expert_class' type="text" value="{{$_vo.user_name}}" class='race_expert' te-input='{{$k+1}}'/>
 									<a id='expert_add' style='margin-left:18px' num='{{$k+1}}' class='fa fa-user-plus' teacher-input='{{$k+1}}' onclick="add_export(this)"></a>
-									
+                                    <button type="button" class="fpProject" project-id="0">分配项目</button>
+
 									<if condition="$k">
 										<a style="margin-left:18px" class="fa fa-minus"></a>
 									</if>
@@ -123,265 +187,338 @@
 							</div>
 							<br/>
 							<input type="hidden" name="mid" value="{{$minfo.id}}">
-							<button id='b_ok'>确定</button>
+							<button id='b_ok'>提交</button>
 						</form>
 					</div>
 				
 			</div>
 		</div>
 	</div>
-	
-</div>
-<div class="add_teacher_card" style="display:none">
 
-    <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
-	<foreach item="_l" name="glist">
-		<a href="javascript:void(0)" teacher_id="{{$_l.user_id}}" onclick="add_teacher_(this)">{{$_l.user_name}},</a>
-	</foreach>
+    <div class="add_teacher_card" style="display:none">
 
-</div>
+        <p id="close" style="position: absolute;right: 5px;margin-bottom: 15px;background: #999;width:20px;height:20px;border-radius: 20px;color: #fff;text-align: center;line-height: 20px;">X</p>
+        <foreach item="_l" name="glist">
+            <a href="javascript:void(0)" teacher_id="{{$_l.user_id}}" onclick="add_teacher_(this)">{{$_l.user_name}},</a>
+        </foreach>
 
-<script>
-var main_banner;
-var race_id;
-var teacher_select_id;
-function add_export(e){
-	teacher_select_id = $(e).attr("teacher-input")
-	$(".add_teacher_card").toggle()
-	
-}
-function add_teacher_(e){
-		var content_ = $(e).html();
-		var teacherid = $(e).attr("teacher_id");
-		var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
-//		$(teacher_in).val($(teacher_in).val()+content_+",")
-        console.log(teacher_select_id)
-        $(".dev_"+teacher_select_id).attr("value",teacherid);
-        $(teacher_in).val(content_);
-	}
+    </div>
+    <!--项目弹出框-->
+    <div id="projectBox" project-box-id="1">
+        <div id="innovate" class="box">
+            <div class="title">
+                <h3>创新组项目</h3>
+                <p class="closeProject">X</p>
+            </div>
+            <table>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                </tr>
+            </table>
+        </div>
+        <div id="startProject" class="box">
+            <div class="title">
+                <h3>创业组项目</h3>
+            </div>
+            <table>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox"/><span>智农助手</span></td>
+                    <td><input type="checkbox"/><span>XXXXXXX</span></td>
+                </tr>
+            </table>
+        </div>
+        <button class="box_btn">确定</button>
+    </div>
+    <script>
+    var main_banner;
+    var race_id;
+    var teacher_select_id;
+    function add_export(e){
+        teacher_select_id = $(e).attr("teacher-input")
+        $(".add_teacher_card").toggle()
 
-$(document).ready(function() {
-	
-	UE.getEditor('editor');
-	race_id = 'race_' + $.now();
-	
-	$('#file_upload_area').bind( {
-		drop: function(e) {
-		
-			e.preventDefault();
-			var oe = e.originalEvent;
-			var file_list = oe.dataTransfer.files;
-			main_banner = file_list[0];
-			show_image( file_list, '#file_upload_area' );
-		},
-		dragover: function(e) {
-			e.preventDefault();
-			return true;
-		}
-	} );
+    }
+    function add_teacher_(e){
+            var content_ = $(e).html();
+            var teacherid = $(e).attr("teacher_id");
+            var teacher_in = $("input[te-input="+teacher_select_id+"]")[0]
+    //		$(teacher_in).val($(teacher_in).val()+content_+",")
+            console.log(teacher_select_id)
+            $(".dev_"+teacher_select_id).attr("value",teacherid);
+            $(teacher_in).val(content_);
+        }
 
-	$('.file_upload_plugin a.upload').click( function() {
-		
-		if( typeof(main_banner)!='undefined' ) {
-		
-			var banner = new Object();
-			var reader = new FileReader();
-			
-			reader.onload = function() {
-				banner['banner'] = $.base64( 'encode', this.result );
-				banner['banner_name'] = main_banner.name;
-				banner['race_id'] = race_id;
-				$.post( 'my-php/root_ui/add_race.php', banner, function() { alert('banner 上传成功'); } );	
-			};	
-			
-			reader.readAsBinaryString( main_banner );
-		}
-	} );
-	
-	$('.file_upload_plugin a.browse').click( function(e) {
-		$('#f_u').trigger('click');
-		console.log("upload_click")
-	} );
-	
-	$('#f_u').change( function(e) {	
-		main_banner = this.files[0];
-		show_image( this.files, '#file_upload_area');
-	} );
-		
-	$('#banner_close').click( function() {
-		var target = $(this);
-		target.prev('img').attr('src','');
-		target.prev('img').css( {'width':0,'height':0} );
-		main_banner = '';
-	} );
+    $(document).ready(function() {
 
-	$('#race_add_group').click( function() {
-		var target = $('.race_group_div');
-		var num = target.children('input[type=text]').size();
-		target.append( $("<input type='text' class='race_group' name='packet[]' placeholder='分组"+(num+1)+"' required='required' />") );
-		var del = $( "<a class='fa fa-minus race-group-del'></a>" );
-		target.append( del );
-		
-		del.click( function() {
-			var target = $( this );
-			target.prev('input[type=text]').remove();
-			target.remove();			
-		} );
-	} );
-	
-	$(".race-group-del").click( function() {
-		var target = $( this );
-		target.prev('input[type=text]').remove();
-		target.remove();			
-	} );
+        UE.getEditor('editor');
+        race_id = 'race_' + $.now();
 
-	$('#race_expert_num_add').click( function() {
-		$(".add_teacher_card").hide()
+        $('#file_upload_area').bind( {
+            drop: function(e) {
 
-		var target = $('#race_expert_set_div');
-		
-		var res = target.find('input.race_expert');
-		var num = res.length+1;
-		target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' readonly='readonly' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
-		var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' onclick='add_export(this)''></a>" );
-		target.append( user_add );
-		var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
-		target.append( minus );
-		
-		var inputs = target.children('input[type=text]');
-		$("#amount").attr("value",inputs.size())
-		$('#race_expert_num').html( inputs.size() );
-		
-		// user_add.click( function(e) {
-		// 	var div = $('#expert_choose');
-		// 	div.css( 'top', e.pageY-100 );
-		// 	div.toggleClass( 'hide' );
-		// 	div.attr( 'num', $(this).attr('num') );
-		// } );
-		
-		minus.click( function() {
-			var target = $( this );
-			target.prev('a.fa-user-plus' ).remove();
-			target.prev('input[type=text]').remove();
-			target.remove();
-			$(".dev_"+num).remove();
-			var inputs = $('#race_expert_set_div').children('input[type=text]');
-			$("#amount").attr("value",inputs.size())
-			$('#race_expert_num').html( inputs.size() );
-		} );
-	} );
-	
-	$(".fa-minus").click( function() {
-		var target = $( this );
-		target.prev('a.fa-user-plus' ).remove();
-		target.prev('input[type=text]').remove();
-		target.remove();
-		var num = $('#race_expert_set_div').find('input.race_expert').length;
-		$(".dev_"+num).remove();
-		var inputs = $('#race_expert_set_div').children('input[type=text]');
-		$("#amount").attr("value",inputs.size())
-		$('#race_expert_num').html( inputs.size() );
-	} );
-	
-	// 上传新建的比赛信息
-	$('#b_ok').click( function() {
-		var data = new Object();
-	
-		data['race_id'] = race_id;
-		data['name'] = $('#input-race-name').val();
-		data["sub_title"] = $("#input-race-sub").val();
-		data['r_st'] = $('#input-race-time1').val();
-		data['r_et'] = $('#input-race-time2').val();
-		
-		if( data['name']=='' || data['r_st']=='' || data['r_et']=='' ) {
-			alert( '请完善比赛信息' );
-			return;
-		}
-		
-		data['s_st'] = $('#input-reg-time1').val();
-		data['s_et'] = $('#input-reg-time2').val();
+                e.preventDefault();
+                var oe = e.originalEvent;
+                var file_list = oe.dataTransfer.files;
+                main_banner = file_list[0];
+                show_image( file_list, '#file_upload_area' );
+            },
+            dragover: function(e) {
+                e.preventDefault();
+                return true;
+            }
+        } );
 
-		var rg = $('input.race_group');
-		data['class'] = '[';//WTF?!!!
-		$.each( rg, function(i, v) {
-			data['class'] += '"' + $(v).val() + '",';
-		} );
-		data['class'] = data['class'].substring( 0, data['class'].length-1) + ']';
-		
-		var re = $('input.race_expert');
-		data['review'] = '[';
-		$.each( re, function(i, v) {
-			if (!$(v).prop('uid')) return true;
-			
-			var mstr = $(v).prop('uid').split( ',' );
-			data['review'] += '[';
-			$.each( mstr, function(i2,v2) {
-				data['review'] += '"' + v2 + '",';
-			} );
-			data['review'] = data['review'].substring( 0, data['review'].length-1) + '],';
-		} );
-		data['review'] = data['review'].substring( 0, data['review'].length-1)  + ']';
-			
-		// 先上传比赛基本信息
-		$.post( 'my-php/root_ui/add_race.php', data, function() {
-			// 再单独上传 banner
-			var banner = new Object();
-			if( typeof(main_banner)!='undefined' ) {
-				var reader = new FileReader();
-				reader.onload = function() {
-					banner['banner'] = $.base64( 'encode', this.result );
-					banner['banner_name'] = main_banner.name;
-					banner['race_id'] = data['race_id'];
-					$.post( 'my-php/root_ui/add_race.php', banner );	
-				};	
-				reader.readAsBinaryString( main_banner );
-			}
-			
-			// 单独上传rule
-			var rule = new Object();
-			rule['rule'] = UE.getEditor('editor').getContent();
-			rule['race_id'] = data['race_id'];
-			$.post( 'my-php/root_ui/add_race.php', rule );
-			
-			// 单独上传比赛用表格数据
-			var chart_f = $('input[name=upload_template]')[0].files[0];
-			if( chart_f ) {
-				var reader = new FileReader();
-				reader.onload = function() {
-					var chart = new Object();
-					chart['race_id'] = data['race_id'];
-					chart['chart'] = $.base64( 'encode', this.result );
-					chart['chart_name'] = chart_f.name;
-					$.post( 'my-php/root_ui/add_race.php', chart );	
-				};
-				reader.readAsBinaryString( chart_f );
-			}
-			
-			// 单独上传比赛展示界面
-			var temp_f = $('input[name=upload_template]')[0].files[0];
-			if( temp_f ) {
-			var reader = new FileReader();
-				reader.onload = function() {
-					var temp = new Object();
-					temp['race_id'] = data['race_id'];
-					temp['template'] = $.base64( 'encode', this.result );
-					$.post( 'my-php/root_ui/add_race.php', temp );	
-				};
-				reader.readAsBinaryString( temp_f );
-			}
-			
-			alert( '比赛创建成功' );
-			location.reload()
-		} );	
-	} );
-	
-} );
+        $('.file_upload_plugin a.upload').click( function() {
 
-$('#close').click(function(){
-    $(this).parent().toggle();
-});
+            if( typeof(main_banner)!='undefined' ) {
 
-</script>
+                var banner = new Object();
+                var reader = new FileReader();
+
+                reader.onload = function() {
+                    banner['banner'] = $.base64( 'encode', this.result );
+                    banner['banner_name'] = main_banner.name;
+                    banner['race_id'] = race_id;
+                    $.post( 'my-php/root_ui/add_race.php', banner, function() { alert('banner 上传成功'); } );
+                };
+
+                reader.readAsBinaryString( main_banner );
+            }
+        } );
+
+        $('.file_upload_plugin a.browse').click( function(e) {
+            $('#f_u').trigger('click');
+            console.log("upload_click")
+        } );
+
+        $('#f_u').change( function(e) {
+            main_banner = this.files[0];
+            show_image( this.files, '#file_upload_area');
+        } );
+
+        $('#banner_close').click( function() {
+            var target = $(this);
+            target.prev('img').attr('src','');
+            target.prev('img').css( {'width':0,'height':0} );
+            main_banner = '';
+        } );
+
+        $('#race_add_group').click( function() {
+            var target = $('.race_group_div');
+            var num = target.children('input[type=text]').size();
+            target.append( $("<input type='text' class='race_group' name='packet[]' placeholder='分组"+(num+1)+"' required='required' />") );
+            var del = $( "<a class='fa fa-minus race-group-del'></a>");
+            target.append( del );
+
+            del.click( function() {
+                var target = $( this );
+                target.prev('input[type=text]').remove();
+                target.remove();
+            } );
+        } );
+
+        $(".race-group-del").click( function() {
+            var target = $( this );
+            target.prev('input[type=text]').remove();
+            target.remove();
+        } );
+
+        $('#race_expert_num_add').click( function() {
+            $(".add_teacher_card").hide();
+
+            var target = $('#race_expert_set_div');
+
+            var res = target.find('input.race_expert');
+            var num = res.length+1;
+            target.append( $("<input type='hidden' value='' class='dev_"+num+"' name='teacherid[]'><input id='"+num+"_expert_class' type='text' readonly='readonly' class='race_expert' placeholder='指定评审专家' te-input='"+num+"' />") );
+            var user_add = $( "<a style='margin-left:18px' num='"+num+"' class='fa fa-user-plus' teacher-input='"+num+"' onclick='add_export(this)''></a>" );
+            target.append( user_add );
+            var minus = $( "<a style='margin-left:18px' class='fa fa-minus'></a>" );
+            target.append( minus );
+            target.append("<button type='button' class='fpProject' project-id='1'>分配项目</button>");
+
+            var inputs = target.children('input[type=text]');
+            $("#amount").attr("value",inputs.size());
+            $('#race_expert_num').html( inputs.size() );
+
+            // user_add.click( function(e) {
+            // 	var div = $('#expert_choose');
+            // 	div.css( 'top', e.pageY-100 );
+            // 	div.toggleClass( 'hide' );
+            // 	div.attr( 'num', $(this).attr('num') );
+            // } );
+
+            minus.click( function() {
+                var target = $( this );
+                target.prev('a.fa-user-plus' ).remove();
+                target.prev('input[type=text]').remove();
+                target.next(".fpProject").remove();
+                target.remove();
+                $(".dev_"+num).remove();
+                var inputs = $('#race_expert_set_div').children('input[type=text]');
+                $("#amount").attr("value",inputs.size());
+                $('#race_expert_num').html( inputs.size() );
+            } );
+        } );
+
+        $(".fa-minus").click( function() {
+            var target = $( this );
+            target.prev('a.fa-user-plus' ).remove();
+            target.prev('input[type=text]').remove();
+            target.remove();
+            var num = $('#race_expert_set_div').find('input.race_expert').length;
+            $(".dev_"+num).remove();
+            var inputs = $('#race_expert_set_div').children('input[type=text]');
+            $("#amount").attr("value",inputs.size())
+            $('#race_expert_num').html( inputs.size() );
+        } );
+
+        // 上传新建的比赛信息
+        $('#b_ok').click( function() {
+            var data = new Object();
+
+            data['race_id'] = race_id;
+            data['name'] = $('#input-race-name').val();
+            data["sub_title"] = $("#input-race-sub").val();
+            data['r_st'] = $('#input-race-time1').val();
+            data['r_et'] = $('#input-race-time2').val();
+
+            if( data['name']=='' || data['r_st']=='' || data['r_et']=='' ) {
+                alert( '请完善比赛信息' );
+                return;
+            }
+
+            data['s_st'] = $('#input-reg-time1').val();
+            data['s_et'] = $('#input-reg-time2').val();
+
+            var rg = $('input.race_group');
+            data['class'] = '[';//WTF?!!!
+            $.each( rg, function(i, v) {
+                data['class'] += '"' + $(v).val() + '",';
+            } );
+            data['class'] = data['class'].substring( 0, data['class'].length-1) + ']';
+
+            var re = $('input.race_expert');
+            data['review'] = '[';
+            $.each( re, function(i, v) {
+                if (!$(v).prop('uid')) return true;
+
+                var mstr = $(v).prop('uid').split( ',' );
+                data['review'] += '[';
+                $.each( mstr, function(i2,v2) {
+                    data['review'] += '"' + v2 + '",';
+                } );
+                data['review'] = data['review'].substring( 0, data['review'].length-1) + '],';
+            } );
+            data['review'] = data['review'].substring( 0, data['review'].length-1)  + ']';
+
+            // 先上传比赛基本信息
+            $.post( 'my-php/root_ui/add_race.php', data, function() {
+                // 再单独上传 banner
+                var banner = new Object();
+                if( typeof(main_banner)!='undefined' ) {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        banner['banner'] = $.base64( 'encode', this.result );
+                        banner['banner_name'] = main_banner.name;
+                        banner['race_id'] = data['race_id'];
+                        $.post( 'my-php/root_ui/add_race.php', banner );
+                    };
+                    reader.readAsBinaryString( main_banner );
+                }
+
+                // 单独上传rule
+                var rule = new Object();
+                rule['rule'] = UE.getEditor('editor').getContent();
+                rule['race_id'] = data['race_id'];
+                $.post( 'my-php/root_ui/add_race.php', rule );
+
+                // 单独上传比赛用表格数据
+                var chart_f = $('input[name=upload_template]')[0].files[0];
+                if( chart_f ) {
+                    var reader = new FileReader();
+                    reader.onload = function() {
+                        var chart = new Object();
+                        chart['race_id'] = data['race_id'];
+                        chart['chart'] = $.base64( 'encode', this.result );
+                        chart['chart_name'] = chart_f.name;
+                        $.post( 'my-php/root_ui/add_race.php', chart );
+                    };
+                    reader.readAsBinaryString( chart_f );
+                }
+
+                // 单独上传比赛展示界面
+                var temp_f = $('input[name=upload_template]')[0].files[0];
+                if( temp_f ) {
+                var reader = new FileReader();
+                    reader.onload = function() {
+                        var temp = new Object();
+                        temp['race_id'] = data['race_id'];
+                        temp['template'] = $.base64( 'encode', this.result );
+                        $.post( 'my-php/root_ui/add_race.php', temp );
+                    };
+                    reader.readAsBinaryString( temp_f );
+                }
+
+                alert( '比赛创建成功' );
+                location.reload()
+            } );
+        } );
+
+    } );
+
+    $('#close').click(function(){
+        $(this).parent().toggle();
+    });
+    $(document).on('click','.fpProject',function(){
+        var project_id = $(this).attr("project-id");
+        var project_show_id = $("div[project-box-id="+project_id+"]");
+        console.log(project_show_id);
+        project_show_id.toggle();
+    });
+    $('.closeProject').click(function(){
+        $(this).parent().parent().parent().toggle();
+    });
+    $('.box_btn').click(function(){
+        $("#projectBox").toggle();
+    });
+    </script>
 </body>
 
 </html>

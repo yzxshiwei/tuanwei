@@ -64,6 +64,23 @@
         #registerBox ul{
             margin-left: 40px;
         }
+        .r_input{
+            width: 700px;margin: 0 auto;
+        }
+        .r_input1{
+            width: 700px;margin: 0 auto;
+        }
+        @media \0screen\,screen\9{
+            .r_input{
+                width: 730px;margin: 0 auto;
+            }
+            .r_input .sfAttribute select{
+                border:1px solid red;
+            }
+            .r_input1{
+                width: 760px;margin: 0 auto;
+            }
+        }
     </style>
 </head>
 <body onkeydown="keyLogin()">
@@ -86,7 +103,7 @@
                     <h4>负责人注册</h4>
                 </div>
                 -->
-            <div style="width: 700px;margin: 0 auto;">
+            <div class="r_input">
             	<p style="float: right;margin-top:34px;margin-bottom:35px;font-size: 16px;color: rgb(102,102,102)">您是指导老师,评审专家,投资人?<span id="clickHere" style="color: rgb(72,170,164);height:auto;border-bottom: 1px solid #48aaa4;background: #fff;width: auto;font-size: 16px;">点击这里</span></p>
             	<p style="clear: both;"><span>电子邮箱</span><input id="email" class="required" type="text" name="email" placeholder="电子邮件地址（必填）"/></p>
 	            <p>
@@ -115,7 +132,7 @@
             </div>
            
             <div style="margin-top: 68px;background: #ECF6F6;padding: 34px 0px;">
-            	<div style="width: 700px;margin: 0 auto;">
+            	<div class="r_input1">
             		<p>
 	                    <span>姓 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;名</span><input type="text" style="width: 176px;" name="user_name" id="name" placeholder="您的真实姓名"/>
 	                    <span>学 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;历</span><select style="width: 179px;" name="degree" id="degree" style="width: 530px;"><foreach name="degree" key="key" item="vo"><option value="{{$key}}">{{$vo}}</option></foreach></select>
