@@ -15,7 +15,7 @@ return array(
     "PERMISSION"=>array(
         "message"    => array("name"=>"消息中心",
                               "url"=>"Index/index",
-		                      "ico"=>"fa fa-lightbulb-o",
+		                      "ico"=>"message",
 		                      "map"=>array("index")
 							 ),
         "usermanage" => array('name'=>"人员管理",
@@ -32,38 +32,38 @@ return array(
         
         "createnews" => array('name' => "创建信息",
                               'url'=>'News/createnews',
-                              'ico' => 'fa fa-lightbulb-o',
+                              'ico' => 'createinformation',
 							  'map' =>array("createnews")
 							  ),
        "newsmanage" => array('name' => "信息管理",
                               'url' => 'News/newsmanage',
-                              'ico' => 'fa fa-cubes',
+                              'ico' => 'management',
 							  'map' =>array("newsmanage","newedit")
 							  ),
         "creatematch" => array('name' => "创建比赛",
                                'url' => 'Match/creatematch',
-                               'ico' => 'fa  fa-graduation-cap',
+                               'ico' => 'creatematch',
 							   'map' => array("creatematch")
 							   ),
         "matchmanage" => array('name' => "比赛管理",
                                'url' => 'Match/matchmanage',
-                               'ico' => 'fa fa-futbol-o',
+                               'ico' => 'match',
                                'map' => array("matchmanage","editmatch","viewmatch")
 							   ),
         "createproject" => array('name' => "创建项目",
                                  'url' => 'Project/createproject',
-                                 'ico' => 'fa fa-bookmark-o',
+                                 'ico' => 'project',
 								 'map' => array("createproject")
 								 ),
         "projectmanage" => array('name' => "项目管理",
                                  'url' => 'Project/projectmanage',
-                                 'ico' => 'fa fa-share-alt',
+                                 'ico' => 'project',
 								 'map' => array("projectmanage","workreview","editproject")
 								 ),
         
         "grouplist" => array('name' => "权限分配",
                              'url' => 'Permission/grouplist',
-                             'ico' => 'fa fa-bars',
+                             'ico' => 'authority',
 							 'map' =>array("grouplist","addpermission","usergroup")
 							 )
 
