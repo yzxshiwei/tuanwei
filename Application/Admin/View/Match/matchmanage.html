@@ -6,7 +6,35 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>比赛管理</title>
 	<include file='Public:file'/>
-	
+    <style>
+        .search{
+            float: right;
+            margin-top: 20px;
+            margin-right: 70px;
+            margin-bottom: 15px;
+            border:1px solid #ccc;
+            width: 600px;
+            height:35px;
+            padding:0;
+        }
+        .search input{
+            width: 89.9%;
+            height:100%;
+            position: relative;
+            bottom:1px;
+            margin: 0;
+            border:0;
+        }
+        .search button{
+            width: 60px;
+            height:100%;
+            line-height: 35px;
+            background: #0E6EB8;
+        }
+        .search button img{
+            vertical-align: middle;
+        }
+    </style>
 </head>
 
 <body>
@@ -17,9 +45,9 @@
 
 			<!-- tab-content -->
 			<div class="tab-content">
-				
-				
-					<a id='race_refresh' class='page'>刷新</a>
+
+
+                    <div class="search"><input type="text"/><button><img src="__STATICBK__/images/search.png" alt=""/></button></div>
 					
 					<table class="race_table user_table hover_table">
 						<tbody>

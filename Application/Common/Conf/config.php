@@ -20,13 +20,13 @@ return array(
 							 ),
         "usermanage" => array('name'=>"人员管理",
                               'url'=>'Index/usermanage',
-                              'ico' => 'fa fa-user',
+                              'ico' => 'person',
 							  'map' =>array("usermanage","person","agree","refuse","read","addteam")
 							  ),
         
         "teammanage" => array('name' => "团队管理",
                              'url'=>'Index/teammanage',
-                             'ico' => 'fa fa-users',
+                             'ico' => 'teamimg',
 							 'map' =>array("teammanage","updateteam")
 							 ),
         
@@ -52,12 +52,12 @@ return array(
 							   ),
         "createproject" => array('name' => "创建项目",
                                  'url' => 'Project/createproject',
-                                 'ico' => 'project',
+                                 'ico' => 'createproject',
 								 'map' => array("createproject")
 								 ),
         "projectmanage" => array('name' => "项目管理",
                                  'url' => 'Project/projectmanage',
-                                 'ico' => 'project',
+                                 'ico' => 'projectimg',
 								 'map' => array("projectmanage","workreview","editproject")
 								 ),
         
