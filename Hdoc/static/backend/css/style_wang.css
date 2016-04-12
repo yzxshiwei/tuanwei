@@ -271,8 +271,8 @@ table.user_table{width:100%;border-spacing:0 16px}
 		table.user_table td.user_set a{margin-left:20px}
 		table.user_table input[type=checkbox]{position:relative;top:2px;width:14px;height:14px;margin-right:6px;}
 		
-		.tool_bar{font-size:18px;background:#fff;height:42px;line-height:42px;margin-bottom:10px}
-		.tool_bar > a{font-size:20px;margin-left:78%}
+		.tool_bar{font-size:18px;background:#fff;height:42px;line-height:42px;margin-bottom:10px;float: left;margin-left: 300px;margin-top: 20px}
+		.tool_bar > a{font-size:20px;}
 		a.page{cursor:pointer;font-size:10px;margin-left:0;margin-right:1em;position:relative;float:right}
 		
 		.tool_bar span{position:relative;left:30%}
@@ -352,7 +352,7 @@ table.user_table{width:100%;border-spacing:0 16px}
 		.login_div select{width:100px;font-family:"Microsoft Yahei";position:relative;margin-left:-4px;border:1px solid #ccc;padding:10px;height:44px;border-radius:0}
 		#input-id{width:236px}
 		
-		.login_div button{margin-left:175px;background-color:#524769;cursor:pointer;color:#fff;width:120px;height:44px}	
+		.login_div button{margin-left:175px;background-color:#93B9C6;cursor:pointer;color:#fff;width:120px;height:44px}
 		.login_div button:hover{border-color:#204d74;background-color:#286090}
 		
 		.login_div i.fa{position:absolute;top:10px;right:10px}
