@@ -149,7 +149,7 @@ class User{
      * @author yzx
      * @return multitype:string Ambigous <mixed, boolean, string, NULL, multitype:, unknown, object>
      */
-    public function getUserList(){
+    public function getUserList($where=NULL){
         $userModel = new \Common\Model\UsersModel();
 		$where["state"] = array("neq","0");
         $count = $userModel->where($where)->count();

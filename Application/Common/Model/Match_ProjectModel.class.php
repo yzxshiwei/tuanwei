@@ -19,7 +19,7 @@ class Match_ProjectModel extends \Common\Helper\Model{
         ->order($order)
         ->count();
 		
-        $Page = new \Think\Page($count,1);
+        $Page = new \Think\Page($count,10);
         $page_show = $Page->show();
 		
 		$result = $this->field("p.name,p.id,match_project.match_id,ps.score")

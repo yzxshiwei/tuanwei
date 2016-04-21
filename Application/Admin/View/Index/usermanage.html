@@ -29,7 +29,7 @@
         .search button{
             width: 60px;
             height:100%;
-            line-height: 35px;
+            line-height: 33px;
             background: #0E6EB8;
         }
         .search button img{
@@ -47,7 +47,11 @@
                     <div class='tool_bar'>
                         <a title='增加用户' class='a_user_add'><i class='fa fa-user-plus'></i>点击增加用户</a>
                     </div>
-                    <div class="search"><input type="text"/><button><img src="__STATICBK__/images/search.png" alt=""/></button></div>
+                    <div class="search">
+                        <form action="{{:U('Index/usermanage')}}" method="get">
+                            <input type="text" name="uname" <if condition="$keyword eq true">value="{{$keyword}}"</if> /><button><img src="__STATICBK__/images/search.png" alt=""/></button>
+                        </form>
+                    </div>
                     <table class="user_table hover_table">
                         <tbody>
                             <tr style='background:#aaa;color:#fff'>

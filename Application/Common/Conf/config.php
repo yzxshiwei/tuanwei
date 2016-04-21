@@ -2,7 +2,7 @@
 return array(
 	//'配置项'=>'配置值'
     'LOAD_EXT_CONFIG'=>"db",
-    "URL_MODEL"=>0,
+    "URL_MODEL"=>1,
     "TMPL_L_DELIM"=>"{{",
     "TMPL_R_DELIM"=>"}}",
     "TMPL_PARSE_STRING"=>array(

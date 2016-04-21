@@ -2,48 +2,7 @@
 namespace Home\Controller;
 class IndexController extends \Common\Helper\Controller {
     public function index(){
-    	
-//		ini_set('memory_limit',"1024M");
-//		
-//		$his = M("his_data");
-//		
-//		$t1 = microtime(true);
 		
-		
-//		$his->startTrans();
-//		$where["log_date"] = array("between",array("2015-01-01","2016-03-10"));
-//		$info = $his->where($where)->field("id,time")->limit(900000)->select();
-//		echo $his->getlastsql();
-//		foreach($info as $v){
-//			$data["log_time"] = date("Y-m-d H:i:s",$v["time"]);
-//			$data["log_date"] = date("Y-m-d",$v["time"]);
-//			$his->where(array("id"=>$v["id"]))->save($data);
-//		}
-//		$his->commit();
-
-
-
-//
-//
-//$t2 = microtime(true);
-//echo '耗时'.round($t2-$t1,3).'秒';
-
-
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-//		exit;
 		$newModel = new \Common\Model\NewsModel;
 		
 		$where["flag"] = 1;

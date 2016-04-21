@@ -27,10 +27,18 @@ class IndexController extends \Admin\Controller\Controller {
      * @author yzx
      */
     public function usermanage() {
+    	$keyword = I("get.uname","","string");
+
+    	if($keyword){
+    	    $where["user_name"] = array("like","%".$keyword."%");
+    	}else{
+            $where = NULL;
+    	}
         $user = new \Common\Helper\User();
-        $result = $user->getUserList();
+        $result = $user->getUserList($where);
         $this->assign('Page' , $result['Page']);
         $this->assign('list_data' ,$result['list_data']);
+        $this->assign('keyword',$keyword);
         $this->display();
     }
 	
@@ -112,8 +120,15 @@ class IndexController extends \Admin\Controller\Controller {
 			//若是管理员 查所有团队
 			$uid = NULL;
 		}
+        //关键字搜索
+        $keyword = I("get.mname","","string");
+    	if($keyword){
+    	    $where["team_name"] = array("like","%".$keyword."%");
+    	}else{
+            $where = NULL;
+    	}
 
-	    $result = $team->lists($uid);
+	    $result = $team->lists($uid,$where);
 		$utype = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
 
         foreach($result['list_data'] as $_k=>$_v){
@@ -124,12 +139,12 @@ class IndexController extends \Admin\Controller\Controller {
 			$result['list_data'][$_k]["team_name"] = $name["team_name"];
         }
 
-
         $this->assign('flag',$flag);
         $this->assign('top',$uid);
 		$this->assign('utype',$utype);
 	    $this->assign('list_data',$result['list_data']);
 	    $this->assign('Page', $result['Page']);
+	    $this->assign('keyword',$keyword);
 		$this->display();
 	}
 	

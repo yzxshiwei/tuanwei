@@ -60,23 +60,26 @@ class Team{
     /**
 	 * 团队列表
 	 */
-	public function lists($user_id=NULL){
+	public function lists($user_id=NULL,$where=NULL){
 		$teamModel = new \Common\Model\TeamModel();
 		$field = 'id,create_time,team_name,user_type,leader_id,tops';
+        $where["id"] = array("neq",0);
 		if($user_id){
-			$teamModel = $teamModel->where(array('user_id' => $user_id));
+            $where['user_id'] = $user_id;
 		}else{
-			$teamModel = $teamModel->where(array("user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->group("leader_id");
-		}
+            $where['user_type'] = \Common\Model\TeamModel::USER_TYPE_CAPTAIN;
+			$teamModel = $teamModel->where($where)->group("leader_id");
+		}        
         $count = $teamModel->field($field)->count();
 	    
         $Page = new \Think\Page($count,12);
         $Page_show = $Page->show();
+
 		if($user_id){
-			$teamModel = $teamModel->where(array('user_id' => $user_id));
-		}else{
-			$teamModel = $teamModel->where(array("user_type"=>\Common\Model\TeamModel::USER_TYPE_CAPTAIN))->group("leader_id");
-		}
+            $teamModel = $teamModel->where($where);
+        }else{
+            $teamModel = $teamModel->where($where)->group("leader_id");
+        }
         $result = $teamModel->field($field)->limit($Page->firstRow.','.$Page->listRows)->select();
 
         return array("Page" => $Page_show,"list_data" => $result);
