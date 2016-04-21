@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="renderer" content="webkit|ie-comp|ie-stand"><!--默认360浏览器内核为webkit-->
+    <title>资金申请</title>
+    <link rel="stylesheet" href="__STATIC__/css/reset.css">
+    <link rel="stylesheet" href="__STATIC__/css/style-fcl.css">
+    <link href="__STATIC__/css/flickerplate.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+<include file='Public:headerhtml'/>
+    <!--比赛信息-->
+    <div id="information">
+        <!--轮播-->
+        <div class="unslider-news">
+            <div class="flicker-example" data-auto-flick-delay="6" data-dot-alignment="center" data-theme="light" style="max-height:350px;width:100%">
+                <ul>
+                <foreach name="img_url" item="vo">
+                    <li data-background="{{$vo.cover_src}}">
+                        <!--<div class="flick-title">主标题</div>-->
+                        <!--<div class="flick-sub-text">副标题</div>-->
+                    </li>
+                </foreach>
+                </ul>
+            </div>
+        </div>
+        <!--比赛信息标题-->
+        <div class="i_title">
+            <h2>比赛信息一览</h2>
+        </div>
+        <div class="content">
+            <!--详细信息-->
+            <ul class="i_des">
+            <foreach name="data" item="vo">
+                <li>
+                	<if condition="$vo.cover_src neq ''">
+                    	<img src="{{$vo.cover_src}}"/>
+                    </if>
+                    <label>
+                        <h5>{{$vo.name}}</h5>
+                        <if condition="$vo.sub_title neq ''">
+                        	<p>主题：{{$vo.sub_title}}</p>
+                        </if>
+                        <p>报名时间：{{$vo.sign_start_time|date="Y-m-d",###}}——{{$vo.sign_end_time|date="Y-m-d",###}}</p>
+                        <p>比赛时间：{{$vo.project_start_time|date="Y-m-d",###}}——{{$vo.project_end_time|date="Y-m-d",###}}</p>
+                        <a href="{{:U('Team/matchinfo',array('id'=>$vo['id']))}}" class="for_details">了解详情</a>
+                    </label>
+                </li>
+             </foreach>
+            </ul>
+            <div id="page_front">
+                    {{$page}}
+            </div>
+        </div>
+    </div>
+    <div id="footer" class="footer" style="margin-top: 70px">
+        <div id="f_center" style="text-align: left">
+
+        </div>
+    </div>
+    <!--js-->
+<include file='Public:header'/>
+<include file='Public:footer'/>
+    <script>
+        $(function(){
+            $('.flicker-example').flickerplate(
+                    {
+                        auto_flick 				: true,
+                        auto_flick_delay 		: 8,
+                        flick_animation 		: 'transform-slide'
+                    });
+            $('.newsnav li').mouseenter(function(){
+                $(this).find($('.dropNav')).slideDown(200);
+                $(this).find($('.dropNav')).parent().siblings().find($('ul')).slideUp(200);
+            });
+            $('.dropNav').mouseleave(function(){
+                $(this).slideUp(200);
+            });
+        });
+    </script>
+</body>
+</html>
