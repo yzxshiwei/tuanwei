@@ -44,7 +44,7 @@
                         </if>
                         <p>报名时间：{{$vo.sign_start_time|date="Y-m-d",###}}——{{$vo.sign_end_time|date="Y-m-d",###}}</p>
                         <p>比赛时间：{{$vo.project_start_time|date="Y-m-d",###}}——{{$vo.project_end_time|date="Y-m-d",###}}</p>
-                        <a href="{{:U('Team/matchinfo',array('id'=>$vo['id']))}}" class="for_details">了解详情</a>
+                        <a href="{{:U('Funds/fundsinfo',array('id'=>$vo['id']))}}" class="for_details">了解详情</a>
                     </label>
                 </li>
              </foreach>

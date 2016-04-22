@@ -60,12 +60,18 @@ return array(
                                  'ico' => 'projectimg',
 								 'map' => array("projectmanage","workreview","editproject")
 								 ),
+
+        "teamdiscuss" => array('name' => "资金申请",
+                            'url' => 'Funds/fundsmanage',
+                            'ico' => 'createinformation',
+                 'map' =>array("createfunds","editfunds","fundsmanage")
+                 ),
         
         "grouplist" => array('name' => "权限分配",
                              'url' => 'Permission/grouplist',
                              'ico' => 'authority',
-							 'map' =>array("grouplist","addpermission","usergroup")
-							 )
+							   'map' =>array("grouplist","addpermission","usergroup")
+							   )
 
 //      "teamdiscuss" => array('name' => "团队交流",
 //                             'url' => 'Team/teamdiscuss',

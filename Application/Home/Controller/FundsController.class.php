@@ -7,7 +7,7 @@ class FundsController extends \Common\Helper\Controller {
      * @return [type] [description]
      */
 	public function funds(){
-        $Match = M('match');
+        $Match = M('funds');
     	$timestamp = time();
     	$day = date("Y-m-d",$timestamp);
     	$data = $Match->field('id, name, sub_title, cover_src, start_file_src,template_src,sign_start_time,sign_end_time,project_start_time,project_end_time')->where("state=1")->order('id desc')->limit($Page->firstRow.','.$Page->listRows)->select();
@@ -31,4 +31,20 @@ class FundsController extends \Common\Helper\Controller {
     	$this->assign('page', $show);
         $this->display();
 	}
+
+    /**
+     * 了解详情
+     * 添加时间 2016-3-3
+     * 
+     * @author zlj
+     */
+    public function fundsinfo(){
+        $mid = I("get.id","","string");
+        $matchModel = new \Common\Model\FundsModel;
+        $minfo = $matchModel->where(array("id"=>$mid))->field("id,rules")->find();
+        $minfo["rules"] = htmlspecialchars_decode($minfo["rules"]);
+
+        $this->assign("minfo",$minfo);
+        $this->display();
+    }
 }

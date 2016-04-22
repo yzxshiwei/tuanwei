@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>资金申请管理</title>
+	<include file='Public:file'/>
+    <style>
+        .search{
+            float: right;
+            margin-top: 20px;
+            margin-right: 70px;
+            margin-bottom: 15px;
+            border:1px solid #ccc;
+            width: 600px;
+            height:35px;
+            padding:0;
+        }
+        .search input{
+            width: 89.9%;
+            height:100%;
+            position: relative;
+            bottom:1px;
+            margin: 0;
+            border:0;
+        }
+        .search button{
+            width: 60px;
+            height:100%;
+            line-height: 35px;
+            background: #0E6EB8;
+        }
+        .search button img{
+            vertical-align: middle;
+        }
+    </style>
+</head>
+
+<body>
+	<div class="htmleaf-container">
+	
+		<div class="container pb30">
+			<include file='Public:navigation'/>
+
+			<!-- tab-content -->
+			<div class="tab-content">
+
+
+                    <!-- <div class="search"><input type="text"/><button><img src="__STATICBK__/images/search.png" alt=""/></button></div> -->
+
+                    <a href="{{:U('Funds/createfunds')}}" style="display: inline-block;height:40px;width: 100px;text-align: center;line-height: 40px;background: #ccc;margin: 30px">创建资金申请</a>
+					
+					<table class="race_table user_table hover_table">
+						<tbody>
+							<tr style='background:#aaa;color:#fff'>
+								<th width='5%'>ID</th>
+								<th width='33%'>申请标题</th>
+								<th width='20%'>比赛时间</th>
+								<th width='20%'>报名时间</th>
+								
+								<if condition="$flag eq false">
+								    <th class='user_set'>设置</th>
+								</if>
+							</tr>
+							
+							<foreach name="list_data" item="_v">
+								<tr mid="{{$_v.id}}">
+									<td>{{$_v.id}}</td>
+									<td><a class="race_name" href="javascript:;">{{$_v.name}}</a></td>
+									<td><a class="race_time">{{$_v.project_start_time|date="Y-m-d",###}}——{{$_v.project_end_time|date="Y-m-d",###}}</a></td>
+									<td><a class="race_stime">{{$_v.sign_start_time|date="Y-m-d",###}}——{{$_v.sign_end_time|date="Y-m-d",###}}</a></td>
+									<if condition="$flag eq false">
+										<td class="race_set">
+											 <if condition="$_v.state eq 1">
+											      <input type="checkbox" checked="checked"  class="race_valid"/>
+											 <else />
+											      <input type="checkbox" class="race_valid"/>
+											 </if> 发布
+										   <a href="{{:U('Funds/editfunds',array('mid'=>$_v['id']))}}" class="race_edit">编辑</a>
+										   <a class="race_delete">删除</a>
+										</td>
+									</if>
+
+								</tr>
+							</foreach>
+							
+						</tbody>
+					</table>
+				    <div id="page_div">
+                        {{$Page}}
+                    </div>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    
+    /*删除操作*/
+	$('.race_delete').click( function() {
+	    var t = $(this).parents('tr');
+	    var mid = t.attr('mid');
+		$.ajax({
+			type:"post",
+			url:"{{:U('Funds/delFunds')}}",
+			cache:false,
+			data:"mid="+mid,
+			success:function(data){
+				if(data=='1'){
+					t.remove();
+				}else{
+					alert("操作失败,请重新操作！");
+				}
+			}
+		})
+		
+	} );
+
+    /*发布操作*/
+   $(".race_valid").change(function(){
+   	
+   	     var mid = $(this).parents("tr").attr("mid");
+   	     var types = "";
+   	     if($(this).prop("checked")){
+   	     	/*发布*/
+   	     	types = 1;
+   	     }else{
+   	     	/*不发布*/
+   	     	types = 2;
+   	     }
+   	     $.ajax({
+   	     	type:"post",
+   	     	url:"{{:U('Funds/updateState')}}",
+   	     	data:"mid="+mid+"&types="+types,
+   	     	success:function(data){
+   	     	}
+   	     });
+   	     
+   });
+	
+</script>
+
+
+</body>
+
+</html>

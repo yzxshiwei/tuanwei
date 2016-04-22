@@ -36,6 +36,9 @@ var header_list={"header_list":[
             {"second_list_href":"index.php?m=Home&c=Team&a=oldactivity","second_list_name":"往期活动"}
 
         ]
+    },
+    {"first_list_href":"index.php?m=Home&c=Funds&a=funds",
+        "first_list_name":"资金申请",
     }
 
 
