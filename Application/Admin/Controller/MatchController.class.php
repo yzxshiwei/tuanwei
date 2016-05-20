@@ -241,7 +241,7 @@ class MatchController extends Controller{
 			//删除比赛信息
 			$res1 = $matchModel->where(array("id"=>$mid))->delete();
 			
-			if($res1 && $res2 && $res3){
+			if($res1){
 				$matchModel->commit();
 				echo 1;
 			}else{
