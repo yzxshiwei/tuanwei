@@ -107,6 +107,14 @@
                 border-bottom: 1px solid #fff;
             }
         }
+        #carousel{
+            height:210px;
+        }
+        #carousel .dot {
+            background-color: #fff; }
+        #carousel .dot .active{
+            background-color: #49A9A5;
+            border: 2px solid #fff; }
     </style>
 </head>
 <body>
@@ -114,16 +122,18 @@
     </div>
     <div class="ad" id="ad">
         <div class="header-ad-bag">
-                <!--<div class="banner">
-
-                    <ul>
-                        <li style="background-image: url('__STATIC__/img/wood.jpg');">This is a slide.</li>
-                        <li style="background-image: url('__STATIC__/img/sunset.jpg');">This is another slide.</li>
-                        <li style="background-image: url('__STATIC__/img/subway.jpg');">This is a final slide.</li>
-                    </ul>
-                </div>-->
-       
-            <a href="http://www.scucxh.com/index.php?m=Home&c=Team&a=matchinfo&id=13" target="_blank"><img src="__STATIC__/img/hlw+.png" alt="" height="255px"></a>
+            <div class="flicker-example" id="carousel" data-auto-flick-delay="6" data-dot-alignment="center" data-theme="light">
+                <ul>
+                    <li data-background="__STATIC__/img/hlw+.png">
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-2.jpg">
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-3.jpg">
+                    </li>
+                    <li data-background="__STATIC__/img/flicker-3.jpg">
+                    </li>
+                </ul>
+            </div>
         </div>
 
     </div>
@@ -167,11 +177,6 @@
             			<p>{{$_v.contents|mb_substr=0,92,'utf-8'}} </p>
             		</li>
             	</foreach>
-                <!--<li>
-                    <a href=""><img src="__STATIC__/img/sw_team1.jpg"/></a>
-                    <h3>实唯团队</h3>
-                    <p>实唯团队组建于 2014年,在创业实践类竞赛中,其项目“成都实唯物联网科技有限公司智农助手项目运营报告”荣获银奖。</p>
-                </li>-->
 
             </ul>
         </div>
@@ -243,15 +248,22 @@
                 $(this).slideUp(200);
             });
         });
-         $(document).ready(function()
-            {
-                $('.flicker-example').flickerplate(
-                        {
-                            auto_flick 				: true,
-                            auto_flick_delay 		: 8,
-                            flick_animation 		: 'transform-slide'
-                        });
-            });
+        $(document).ready(function()
+        {
+            $('.flicker-example').flickerplate(
+                    {
+                        arrows: false,
+                        arrows_constraint: false,
+                        auto_flick: true,
+                        auto_flick_delay: 10,
+                        block_text: true,
+                        dot_alignment: 'center',
+                        dot_navigation: true,
+                        flick_animation: 'transition-slide',
+                        flick_position: 1,
+                        theme: 'dark'
+                    });
+        });
     </script>
 </body>
 
