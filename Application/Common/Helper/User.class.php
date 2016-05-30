@@ -174,14 +174,17 @@ class User{
         $houst= $_SERVER['HTTP_HOST'];
         $url = U('Home/User/rtepwd',array('sessioncode' => $content,'email' => $email));
         $href = $houst.$url;
-        $smtpserver = "smtp.163.com";//SMTP服务器
-    	$smtpserverport =25;//SMTP服务器端口
-    	$smtpusermail = "15884572902@163.com";//SMTP服务器的用户邮箱
-    	$smtpemailto = $email;//发送给谁
-    	$smtpuser = "15884572902@163.com";//SMTP服务器的用户帐号
-    	$smtppass = "yzx972479";//SMTP服务器的用户密码
-    	$mailtitle = '验证码';//邮件主题
-    	$mailcontent = "<a href= ".$href.">"."点击地址修改密码如果无法点击请复制地址在浏览器打开".$href."</a>";//邮件内容
+
+        $smtpserver = C("STMP_SERVER");//SMTP服务器
+        $smtpserverport = C("STMP_SERVER_PORT");//SMTP服务器端口
+        $smtpusermail = C("STMP_USER_MAIL");//SMTP服务器的用户邮箱
+        $smtpemailto = $email;//发送给谁
+        $smtpuser = C("STMP_USER");//SMTP服务器的用户帐号
+        $smtppass = C("STMP_PWD"); //SMTP服务器的用户密码
+        $mailtitle = '验证码';//邮件主题
+
+        $mailcontent = "点击地址修改密码如果无法点击请复制地址在浏览器打开：<a href='http://".$href."' target='_blank' >".$href."</a>";
+        //邮件内容
     	$mailtype = "HTML";//邮件格式（HTML/TXT）,TXT为文本邮件
     	$smtp = new \smtp($smtpserver,$smtpserverport,true,$smtpuser,$smtppass);//这里面的一个true是表示使用身份验证,否则不使用身份验证.
     	$smtp->debug = false;//是否显示发送的调试信息
