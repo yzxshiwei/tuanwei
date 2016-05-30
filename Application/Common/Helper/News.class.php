@@ -19,13 +19,13 @@ class News{
 			$count = $newsModel->count();
 		}
 		
-        $Page = new \Think\Page($count,5);
+        $Page = new \Think\Page($count,15);
         $page_show = $Page->show();
 		
 		if($where){
-			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
+			$list_data = $newsModel->order("public_t desc")->limit($Page->firstRow.','.$Page->listRows)->where($where)->select();
 		}else{
-			$list_data = $newsModel->limit($Page->firstRow.','.$Page->listRows)->select();
+			$list_data = $newsModel->order("public_t desc")->limit($Page->firstRow.','.$Page->listRows)->select();
 		}
 
         return array('Page' => $page_show , 'list_data' => $list_data);
