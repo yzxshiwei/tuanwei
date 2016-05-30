@@ -99,19 +99,21 @@
 	    var t = $(this).parents('tr');
 	    var mid = t.attr('mid');
 		
-		$.ajax({
-			type:"post",
-			url:"{{:U('Match/delMatch')}}",
-			cache:false,
-			data:"mid="+mid,
-			success:function(data){
-				if(data=='1'){
-					t.remove();
-				}else{
-					alert("操作失败,请重新操作！");
+		if(confirm("确认删除?")){
+			$.ajax({
+				type:"post",
+				url:"{{:U('Match/delMatch')}}",
+				cache:false,
+				data:"mid="+mid,
+				success:function(data){
+					if(data=='1'){
+						t.remove();
+					}else{
+						alert("操作失败,请重新操作！");
+					}
 				}
-			}
-		})
+			})
+		}
 		
 	} );
 
