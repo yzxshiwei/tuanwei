@@ -102,7 +102,7 @@ class Project{
 
 		$where["t.id"] = array("neq","");
 
-		$field = "p.name,p.is_open,p.creat_id,p.sub_title,t.user_type,p.id as pid,ps.score,ps.result";
+		$field = "p.name,p.is_open,p.creat_id,p.sub_title,t.user_type,t.img_url,p.id as pid,ps.score,ps.result";
         $teamModel = $teamModel->alias('t')
            ->join('project AS p ON (p.team_id = t.leader_id)')
 		   ->join('match_project AS mp ON (p.id = mp.project_id)','left')

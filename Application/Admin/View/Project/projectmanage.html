@@ -460,7 +460,7 @@
                         <foreach name="list_data" key="_k" item="vo">
                         <div class="activities">
                             <div class="ac_title">
-                                <p><img src=""/></p>
+                                <p><img src="{{$vo.img_url}}"/></p>
                                 <p>
                                     <a href="{{:U('Project/workreview',array('id'=>$vo['pid']))}}"><span>{{$vo.name}}</span></a>
                                     <span>{{$vo.sub_title}}</span>
